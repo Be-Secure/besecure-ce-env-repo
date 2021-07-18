@@ -1,2 +1,3 @@
 Be-Secure/BeSman-env-repo/env1,0.0.1
-sriksdev/javaSpringdev/env,0.0.1
+Be-Secure/javaSpringdev/env,0.0.1
+Be-Secure/javaSpringsec/env,0.0.1

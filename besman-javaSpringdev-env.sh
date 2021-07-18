@@ -2,7 +2,7 @@
 
 export BESMAN_JAVASPRINGDEV_WORKDIR="/tmp/javaSpringdev"
 export BESMAN_JAVASPRINGDEV_SERVICE="https://raw.githubusercontent.com/"
-export BESMAN_JAVASPRINGDEV_NAMESPACE="sriksdev"
+export BESMAN_JAVASPRINGDEV_NAMESPACE="Be-Secure"
 export BESMAN_JAVASPRINGDEV_REPO="bes-tool-scripts"
 
 
