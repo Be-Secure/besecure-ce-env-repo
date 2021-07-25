@@ -1,19 +1,17 @@
 #!/bin/bash
 
-export BESMAN_JAVASPRINGSEC_WORKDIR="/tmp/javaSpringsec"
-export BESMAN_JAVASPRINGSEC_SERVICE="https://raw.githubusercontent.com/"
-export BESMAN_JAVASPRINGSEC_NAMESPACE="Be-Secure"
-export BESMAN_JAVASPRINGSEC_REPO="bes-tool-scripts"
+
+export BESMAN_SERVICE="https://raw.githubusercontent.com/"
+export BESMAN_NAMESPACE="sriksdev"
+export BESMAN_ENV_REPO="BeSman-env-repo"
+export BESMAN_TOOLS_REPO="bes-tool-scripts"
 
 
-function __besman_install_javaSpringsec-env
+
+function setup_config
 {
-    echo "Installing javaSpringsec-env.."
-    echo "Preparing Temp Directory..."
 
-    mkdir -p $BESMAN_JAVASPRINGSEC_WORKDIR
-    chmod -R 755 $BESMAN_JAVASPRINGSEC_WORKDIR
-    rm -rf ${BESMAN_JAVASPRINGSEC_WORKDIR}/*
+    BESMAN_ENV="$1"
 
     echo "Looking for curl..."
     if [ -z $(which curl) ]; then
@@ -23,55 +21,79 @@ function __besman_install_javaSpringsec-env
         echo " so installing curl on your system "
         sudo apt install -y curl
     fi
-    
-    echo "Downloading and Installing Required Tools ..."
-    
-    for i in maven artifact Selenium sonarQube zap_tool ; do
-      echo $i
-      curl -S "${BESMAN_JAVASPRINGSEC_SERVICE}${BESMAN_JAVASPRINGSEC_NAMESPACE}/${BESMAN_JAVASPRINGSEC_REPO}/main/${i}.sh" -o "${BESMAN_JAVASPRINGSEC_WORKDIR}/${i}.sh"
 
-     chmod +x "${BESMAN_JAVASPRINGSEC_WORKDIR}/${i}.sh"
-     
-     sudo sh "${BESMAN_JAVASPRINGSEC_WORKDIR}/${i}.sh"
+    export BESMAN_ENV_CACHEDIR="`dirname ${BASH_SOURCE[0]}`/cache";
+    echo "Preparing Temp Directory..."
+    echo "Temp Directory: ${BESMAN_ENV_CACHEDIR}"
+
+    mkdir -p $BESMAN_ENV_CACHEDIR
+    chmod -R 755 $BESMAN_ENV_CACHEDIR
+    rm -rf ${BESMAN_ENV_CACHEDIR}/*
+
+    echo "Downloading Required Config ..."
+
+    curl -S "${BESMAN_SERVICE}${BESMAN_NAMESPACE}/${BESMAN_ENV_REPO}/master/${BESMAN_ENV}.config" -o "${BESMAN_ENV_CACHEDIR}/${BESMAN_ENV}.config"
+
+    if [ $? -ne 0 ]; then
+        echo "\e[1;31m  Unable to Download Config.  Exiting!!... \e[0m"
+        return 1;
+    fi 
+
+    chmod +r "${BESMAN_ENV_CACHEDIR}/${BESMAN_ENV}.config"
+
+
+    echo "Downloading Required Tools ..."
+
+    for i in `cat "${BESMAN_ENV_CACHEDIR}/${BESMAN_ENV}.config"|grep -v "^#"|grep -v "^\s*$"|xargs` ; do
+        echo $i
+        curl -S "${BESMAN_SERVICE}${BESMAN_NAMESPACE}/${BESMAN_TOOLS_REPO}/main/${i}.sh" -o "${BESMAN_ENV_CACHEDIR}/${i}.sh"
+
+        chmod +x "${BESMAN_ENV_CACHEDIR}/${i}.sh"
+
     done 
 
+}
 
+function __besman_install_javaSpringsec-env
+{
+    echo "Installing ${1}..."
 
-    echo "Environment javaSpringsec-env installed successfully."
-    
+    setup_config ${1} 
+
+    if [ $? -eq 0 ]; then
+        echo "Installing Required Tools ..."
+
+        for i in `cat "${BESMAN_ENV_CACHEDIR}/${BESMAN_ENV}.config"|grep -v "^#"|grep -v "^\s*$"|xargs` ; do
+            echo $i
+            sudo sh "${BESMAN_ENV_CACHEDIR}/${i}.sh"
+        done 
+    fi 
+
+    unset BESMAN_ENV_CACHEDIR
+
+    echo "Environment ${1} installed successfully."    
 }
 
 function __besman_uninstall_javaSpringsec-env
 {
-    echo "Uninstalling javaSpringsec-env.."
+    echo "Uninstalling ${1}.."
 
-echo "Preparing Temp Directory..."
+    setup_config ${1} 
 
-    mkdir -p $BESMAN_JAVASPRINGSEC_WORKDIR
-    chmod -R 755 $BESMAN_JAVASPRINGSEC_WORKDIR
-    rm -rf ${BESMAN_JAVASPRINGSEC_WORKDIR}/*
+    if [ $? -eq 0 ]; then
 
-    echo "Looking for curl..."
-    if [ -z $(which curl) ]; then
-        echo "Not found."
-        echo ""
-        echo "======================================================================================================"
-        echo " so installing curl on your system "
-        sudo apt install -y curl
-    fi
-    
-    echo "Removing Installed Tools ..."
-    
-    for i in maven artifact Selenium sonarQube zap_tool ; do
-      echo $i
-      curl -S "${BESMAN_JAVASPRINGSEC_SERVICE}${BESMAN_JAVASPRINGSEC_NAMESPACE}/${BESMAN_JAVASPRINGSEC_REPO}/main/${i}.sh" -o "${BESMAN_JAVASPRINGSEC_WORKDIR}/${i}.sh"
+        echo "Uninstalling Required Tools ..."
 
-     chmod +x "${BESMAN_JAVASPRINGSEC_WORKDIR}/${i}.sh"
-     
-     sudo sh "${BESMAN_JAVASPRINGSEC_WORKDIR}/${i}.sh" --uninstall
-    done 
+        for i in `cat "${BESMAN_ENV_CACHEDIR}/${BESMAN_ENV}.config"|grep -v "^#"|grep -v "^\s*$"|xargs` ; do
+            echo $i
 
+            sudo sh "${BESMAN_ENV_CACHEDIR}/${i}.sh" --uninstall
 
-    echo "Environment javaSpringsec-env uninstalled successfully."
+        done 
 
+    fi 
+
+    unset BESMAN_ENV_CACHEDIR
+
+    echo "Environment ${1} uninstalled successfully."
 }
