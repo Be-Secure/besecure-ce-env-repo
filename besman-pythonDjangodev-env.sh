@@ -57,7 +57,7 @@ function setup_config
 
 }
 
-function __besman_install_javaSpringdev-env
+function __besman_install_pythonDjangodev-env
 {
     echo "Installing ${1}..."
 
@@ -77,7 +77,7 @@ function __besman_install_javaSpringdev-env
     echo "Environment ${1} installed successfully."    
 }
 
-function __besman_uninstall_javaSpringdev-env
+function __besman_uninstall_pythonDjangodev-env
 {
     echo "Uninstalling ${1}.."
 

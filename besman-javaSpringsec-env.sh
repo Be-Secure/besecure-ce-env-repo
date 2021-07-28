@@ -2,7 +2,7 @@
 
 
 export BESMAN_SERVICE="https://raw.githubusercontent.com/"
-export BESMAN_NAMESPACE="sriksdev"
+export BESMAN_NAMESPACE="Be-Secure"
 export BESMAN_ENV_REPO="BeSman-env-repo"
 export BESMAN_TOOLS_REPO="bes-tool-scripts"
 
@@ -30,21 +30,23 @@ function setup_config
     chmod -R 755 $BESMAN_ENV_CACHEDIR
     rm -rf ${BESMAN_ENV_CACHEDIR}/*
 
-    echo "Downloading Required Config ..."
+    if [ ! -f "${HOME}/${BESMAN_ENV}.config" ]; then
+        echo "Downloading Required Config ..."
 
-    curl -S "${BESMAN_SERVICE}${BESMAN_NAMESPACE}/${BESMAN_ENV_REPO}/master/${BESMAN_ENV}.config" -o "${BESMAN_ENV_CACHEDIR}/${BESMAN_ENV}.config"
+        curl -S "${BESMAN_SERVICE}${BESMAN_NAMESPACE}/${BESMAN_ENV_REPO}/master/${BESMAN_ENV}.config" -o "${HOME}/${BESMAN_ENV}.config"
 
-    if [ $? -ne 0 ]; then
+        if [ $? -ne 0 ]; then
         echo "\e[1;31m  Unable to Download Config.  Exiting!!... \e[0m"
         return 1;
-    fi 
+        fi 
+    fi
 
-    chmod +r "${BESMAN_ENV_CACHEDIR}/${BESMAN_ENV}.config"
+    chmod +r "${HOME}/${BESMAN_ENV}.config"
 
 
     echo "Downloading Required Tools ..."
 
-    for i in `cat "${BESMAN_ENV_CACHEDIR}/${BESMAN_ENV}.config"|grep -v "^#"|grep -v "^\s*$"|xargs` ; do
+    for i in `cat "${HOME}/${BESMAN_ENV}.config"|grep -v "^#"|grep -v "^\s*$"|xargs` ; do
         echo $i
         curl -S "${BESMAN_SERVICE}${BESMAN_NAMESPACE}/${BESMAN_TOOLS_REPO}/main/${i}.sh" -o "${BESMAN_ENV_CACHEDIR}/${i}.sh"
 
@@ -63,7 +65,7 @@ function __besman_install_javaSpringsec-env
     if [ $? -eq 0 ]; then
         echo "Installing Required Tools ..."
 
-        for i in `cat "${BESMAN_ENV_CACHEDIR}/${BESMAN_ENV}.config"|grep -v "^#"|grep -v "^\s*$"|xargs` ; do
+        for i in `cat "${HOME}/${BESMAN_ENV}.config"|grep -v "^#"|grep -v "^\s*$"|xargs` ; do
             echo $i
             sudo sh "${BESMAN_ENV_CACHEDIR}/${i}.sh"
         done 
@@ -84,7 +86,7 @@ function __besman_uninstall_javaSpringsec-env
 
         echo "Uninstalling Required Tools ..."
 
-        for i in `cat "${BESMAN_ENV_CACHEDIR}/${BESMAN_ENV}.config"|grep -v "^#"|grep -v "^\s*$"|xargs` ; do
+        for i in `cat "${HOME}/${BESMAN_ENV}.config"|grep -v "^#"|grep -v "^\s*$"|xargs` ; do
             echo $i
 
             sudo sh "${BESMAN_ENV_CACHEDIR}/${i}.sh" --uninstall
