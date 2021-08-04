@@ -1,5 +1,5 @@
 Be-Secure/BeSman-env-repo/env1,0.0.1
-Be-Secure/javaSpringdev/env,0.0.1
-Be-Secure/javaSpringsec/env,0.0.1
-Be-Secure/pythonDjangodev/env,0.0.1
-Be-Secure/pythonDjangosec/env,0.0.1
+Be-Secure/BeSman-env-repo/javaSpringdev-env,0.0.1
+Be-Secure/BeSman-env-repo/javaSpringsec-env,0.0.1
+Be-Secure/BeSman-env-repo/pythonDjangodev-env,0.0.1
+Be-Secure/BeSman-env-repo/pythonDjangosec-env,0.0.1
