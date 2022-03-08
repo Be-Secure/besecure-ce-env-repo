@@ -8,14 +8,15 @@ function __besman_install_DLTGeneric-env {
         export BESMAN_BLOCKCHAIN_ENV_ROOT=$HOME/.besman_blockchain_env
     fi
 
+    packages=(python3 python3-pip nodejs npm)
+
     __besman_echo_yellow "[+] Checking Requirements ...."
-	__besman_checkInstallation python3 python3-pip nodejs npm
+	__besman_checkInstallation "${packages[@]}"
 
 	__besman_echo_yellow "[+] Checking solc installation ....."
 	sudo add-apt-repository ppa:ethereum/ethereum
 	sudo apt-get update
 	__besman_checkInstallation solc
-   
 }
 
 
@@ -44,9 +45,9 @@ function __besman_check_npmPackage_installation {
     done
 }
 
-
-
-
+# TO-DO :
+# - Add functions for Update, uninstall, upgrade will update later
+# - Create seperate file/variable for packages to be installed
 
 
  # __besman_echo_yellow "
