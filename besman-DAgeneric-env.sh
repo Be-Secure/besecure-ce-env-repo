@@ -17,6 +17,8 @@ function __besman_install_DLTGeneric-env {
 	sudo add-apt-repository ppa:ethereum/ethereum
 	sudo apt-get update
 	__besman_checkInstallation solc
+
+    unset "${packages[@]}"
 }
 
 
