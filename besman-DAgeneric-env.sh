@@ -1,6 +1,6 @@
 #!/bin/bash
 
-function __besman_install_DLTGeneric-env {
+function __besman_install_DAGeneric-env {
     local environment=$environment
     local version=$version
     
