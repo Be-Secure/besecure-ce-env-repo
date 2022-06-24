@@ -1,6 +1,6 @@
 #!/bin/bash
 
-function __besman_install_lf-java-RT
+function __besman_install_lf-java-RT-env
 {
     # local oah_command role_path playbook
 
