@@ -6,3 +6,4 @@ Be-Secure/BeSman-env-repo/pythonDjangosec-env,0.0.1
 asa1997/BeSman-env-repo/drupal-RT-env,0.0.1
 asa1997/BeSman-env-repo/fastjson-RT-env,0.0.1
 asa1997/BeSman-env-repo/fastjson-BT-env,0.0.1
+asa1997/BeSman-env-repo/lf-java-RT-env,0.0.1
