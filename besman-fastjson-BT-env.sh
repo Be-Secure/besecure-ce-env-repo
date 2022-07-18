@@ -18,7 +18,7 @@ function __besman_install_fastjson-BT-env
     repo=fastjson
     clone_path=$HOME
     __besman_gh_clone $namespace $repo $clone_path
-    unset playbook
+    unset playbook repo namespace clone_path
 }
 
 function __besman_uninstall_fastjson-BT-env
