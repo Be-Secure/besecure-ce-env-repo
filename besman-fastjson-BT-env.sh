@@ -5,7 +5,7 @@ function __besman_install_fastjson-BT-env
     local playbook repo namespace clone_path
     __besman_check_for_ansible || return 1
     __besman_check_for_gh || return 1
-    namespace=Be-Secure
+    namespace=asa1997
     __besman_gh_auth "$namespace"
     playbook=$HOME/besman-trigger-fastjson-BT-roles.yml
     export BESMAN_ANSIBLE_ROLE_PATH=$HOME/tmp
@@ -29,20 +29,30 @@ function __besman_uninstall_fastjson-BT-env
     [[ -f $BESMAN_ANSIBLE_ROLE_PATH/requirements.yml ]] && rm $BESMAN_ANSIBLE_ROLE_PATH/requirements.yml
     rm -rf $BESMAN_ANSIBLE_ROLE_PATH/ansible-role-bes-*
     [[ -f $HOME/fastjson ]] && rm -rf $HOME/fastjson
+    [[ -f $playbook ]] && rm $playbook
     unset BESMAN_ANSIBLE_GALAXY_ROLES BESMAN_ANSIBLE_ROLE_PATH playbook 
 }
 
-# function __besman_update_fastjson-BT-env
-# {
-# # TODO
-# }
+function __besman_update_fastjson-BT-env
+{
+    local playbook
+    playbook=$HOME/besman-trigger-fastjson-BT-roles.yml
+    __besman_run_ansible_playbook_extra_vars "$playbook" "bes_command=update role_path=$BESMAN_ANSIBLE_ROLE_PATH" || return 1
+    unset playbook
+}
 
-# function __besman_validate_fastjson-BT-env
-# {
-    #TODO
-# }
+function __besman_validate_fastjson-BT-env
+{
+    local playbook
+    playbook=$HOME/besman-trigger-fastjson-BT-roles.yml
+    __besman_run_ansible_playbook_extra_vars "$playbook" "bes_command=validate role_path=$BESMAN_ANSIBLE_ROLE_PATH" || return 1
+    unset playbook
+}
 
-# function __besman_reset_fastjson-BT-env
-# {
-    
-# }
+function __besman_reset_fastjson-BT-env
+{
+    local playbook
+    playbook=$HOME/besman-trigger-fastjson-BT-roles.yml
+    __besman_run_ansible_playbook_extra_vars "$playbook" "bes_command=reset role_path=$BESMAN_ANSIBLE_ROLE_PATH" || return 1
+    unset playbook
+}
