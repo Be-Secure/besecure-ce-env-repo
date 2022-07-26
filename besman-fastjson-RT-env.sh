@@ -30,7 +30,7 @@ function __besman_uninstall_fastjson-RT-env
 #     rm -rf $BESMAN_ANSIBLE_ROLE_PATH/ansible-role-oah-*
     [[ -f $HOME/fastjson ]] && rm -rf $HOME/fastjson
 #     [[ -f $playbook ]] && rm $playbook
-    unset BESMAN_ANSIBLE_GALAXY_ROLES BESMAN_ANSIBLE_ROLE_PATH playbook 
+#     unset BESMAN_ANSIBLE_GALAXY_ROLES BESMAN_ANSIBLE_ROLE_PATH playbook 
 }
 
 function __besman_update_fastjson-RT-env
