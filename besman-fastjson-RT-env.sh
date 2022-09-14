@@ -26,11 +26,11 @@ function __besman_uninstall_fastjson-RT-env
     local playbook 
     playbook=$HOME/besman-trigger-fastjson-RT-roles.yml
     __besman_run_ansible_playbook_extra_vars "$playbook" "bes_command=remove role_path=$BESMAN_ANSIBLE_ROLE_PATH" || return 1
-    [[ -f $BESMAN_ANSIBLE_ROLE_PATH/requirements.yml ]] && rm $BESMAN_ANSIBLE_ROLE_PATH/requirements.yml
-    rm -rf $BESMAN_ANSIBLE_ROLE_PATH/ansible-role-oah-*
+#     [[ -f $BESMAN_ANSIBLE_ROLE_PATH/requirements.yml ]] && rm $BESMAN_ANSIBLE_ROLE_PATH/requirements.yml
+#     rm -rf $BESMAN_ANSIBLE_ROLE_PATH/ansible-role-oah-*
     [[ -f $HOME/fastjson ]] && rm -rf $HOME/fastjson
-    [[ -f $playbook ]] && rm $playbook
-    unset BESMAN_ANSIBLE_GALAXY_ROLES BESMAN_ANSIBLE_ROLE_PATH playbook 
+#     [[ -f $playbook ]] && rm $playbook
+#     unset BESMAN_ANSIBLE_GALAXY_ROLES BESMAN_ANSIBLE_ROLE_PATH playbook 
 }
 
 function __besman_update_fastjson-RT-env
@@ -46,6 +46,11 @@ function __besman_validate_fastjson-RT-env
     local playbook
     playbook=$HOME/besman-trigger-fastjson-RT-roles.yml
     __besman_run_ansible_playbook_extra_vars "$playbook" "bes_command=validate role_path=$BESMAN_ANSIBLE_ROLE_PATH" || return 1
+   if [[ -d $HOME/fastjson ]]; then
+        __besman_echo_green "Fastjson found"
+   else
+        __besman_echo_red "Fastjson not found"
+   fi
     unset playbook
 }
 
