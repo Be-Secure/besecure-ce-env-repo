@@ -16,8 +16,8 @@ function __besman_install_fastjson-BT-env
     [[ "$?" -eq 1 ]] && __besman_create_ansible_playbook "$playbook" "$BESMAN_ANSIBLE_GALAXY_ROLES"
     __besman_run_ansible_playbook_extra_vars "$playbook" "bes_command=install role_path=$BESMAN_ANSIBLE_ROLE_PATH" || return 1
     repo=fastjson
-    clone_path=$HOME
-    __besman_gh_clone $namespace $repo $clone_path
+    clone_path=$HOME/fastjson
+    [[ ! -d $clone_path ]] && __besman_gh_clone alibaba $repo $clone_path
     unset playbook repo namespace clone_path
 }
 
@@ -25,12 +25,12 @@ function __besman_uninstall_fastjson-BT-env
 {
     local playbook 
     playbook=$HOME/besman-trigger-fastjson-BT-roles.yml
-    __besman_run_ansible_playbook_extra_vars "$playbook" "bes_command=remove role_path=$BESMAN_ANSIBLE_ROLE_PATH" || return 1
-    [[ -f $BESMAN_ANSIBLE_ROLE_PATH/requirements.yml ]] && rm $BESMAN_ANSIBLE_ROLE_PATH/requirements.yml
-    rm -rf $BESMAN_ANSIBLE_ROLE_PATH/ansible-role-oah-*
+    __besman_run_ansible_playbook_extra_vars "$playbook" "bes_command=remove role_path=$HOME/tmp" || return 1
+    #[[ -f $BESMAN_ANSIBLE_ROLE_PATH/requirements.yml ]] && rm $BESMAN_ANSIBLE_ROLE_PATH/requirements.yml
+    #rm -rf $BESMAN_ANSIBLE_ROLE_PATH/ansible-role-oah-*
     [[ -f $HOME/fastjson ]] && rm -rf $HOME/fastjson
-    [[ -f $playbook ]] && rm $playbook
-    unset BESMAN_ANSIBLE_GALAXY_ROLES BESMAN_ANSIBLE_ROLE_PATH playbook 
+    #[[ -f $playbook ]] && rm $playbook
+    #unset BESMAN_ANSIBLE_GALAXY_ROLES BESMAN_ANSIBLE_ROLE_PATH playbook 
 }
 
 function __besman_update_fastjson-BT-env
@@ -45,7 +45,7 @@ function __besman_validate_fastjson-BT-env
 {
     local playbook
     playbook=$HOME/besman-trigger-fastjson-BT-roles.yml
-    __besman_run_ansible_playbook_extra_vars "$playbook" "bes_command=validate role_path=$BESMAN_ANSIBLE_ROLE_PATH" || return 1
+    __besman_run_ansible_playbook_extra_vars "$playbook" "bes_command=validate role_path=$HOME/tmp" || return 1
     unset playbook
 }
 
