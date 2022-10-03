@@ -1,4 +1,4 @@
-name: Release Be-Secure CE Environment Repository
+name: Release BeSman Environment Repository
 on:
   push:
     # Sequence of  patterns matched against refs/tags
