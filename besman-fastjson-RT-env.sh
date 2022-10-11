@@ -6,6 +6,7 @@ function __besman_install_fastjson-RT-env
     __besman_check_for_ansible || return 1
     __besman_check_for_gh || return 1
     namespace=Be-Secure
+    __besman_check_github_id || return 1
     __besman_gh_auth "$BESMAN_USER_NAMESPACE" || return 1
     playbook=$HOME/besman-trigger-fastjson-RT-roles.yml
     export BESMAN_ANSIBLE_ROLE_PATH=$HOME/tmp
