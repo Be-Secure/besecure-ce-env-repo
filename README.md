@@ -2,6 +2,13 @@
 
 The repository contains environment scripts for projects tracked by [Be-Secure](https://github.com/Be-Secure) community.
 
+# Available environments.
+
+1. [Fastjson RT/BT environments](https://github.com/Be-Secure/besecure-ce-env-repo/tree/master/fastjson/0.0.1)
+2. [Java Spring RT/BT environments](https://github.com/Be-Secure/besecure-ce-env-repo/tree/master/javaSpring/0.0.1)
+3. [Python Django RT/BT environments](https://github.com/Be-Secure/besecure-ce-env-repo/tree/master/pythonDjango/0.0.1)
+4. [BeSman dev environment](BeSman/0.0.1/besman-BeSman-dev-env.sh)
+
 # Usage
 
 The environment scripts are executed using [BeSman](https://github.com/Be-Secure/BeSman.
@@ -47,4 +54,4 @@ The environment scripts are executed using [BeSman](https://github.com/Be-Secure
 6. You can follow besman commands to execute the environment script.
 
 
-   
+  
