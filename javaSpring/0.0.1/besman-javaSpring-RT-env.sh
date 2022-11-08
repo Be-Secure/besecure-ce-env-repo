@@ -30,10 +30,10 @@ function setup_config
     chmod -R 755 $BESMAN_ENV_CACHEDIR
     rm -rf ${BESMAN_ENV_CACHEDIR}/*
 
-    if [ ! -f "${HOME}/${BESMAN_ENV}.config" ]; then
+    if [ ! -f "${HOME}/besman-${BESMAN_ENV}.config" ]; then
         echo "Downloading Required Config ..."
 
-        curl -S "${BESMAN_SERVICE}${BESMAN_NAMESPACE}/${BESMAN_ENV_REPO}/master/${BESMAN_ENV}.config" -o "${HOME}/${BESMAN_ENV}.config"
+        curl -S "${BESMAN_SERVICE}${BESMAN_NAMESPACE}/${BESMAN_ENV_REPO}/master/besman-${BESMAN_ENV}.config" -o "${HOME}/besman-${BESMAN_ENV}.config"
 
         if [ $? -ne 0 ]; then
         echo "\e[1;31m  Unable to Download Config.  Exiting!!... \e[0m"
@@ -41,12 +41,12 @@ function setup_config
         fi 
     fi
 
-    chmod +r "${HOME}/${BESMAN_ENV}.config"
+    chmod +r "${HOME}/besman-${BESMAN_ENV}.config"
 
 
     echo "Downloading Required Tools ..."
 
-    for i in `cat "${HOME}/${BESMAN_ENV}.config"|grep -v "^#"|grep -v "^\s*$"|xargs` ; do
+    for i in `cat "${HOME}/besman-${BESMAN_ENV}.config"|grep -v "^#"|grep -v "^\s*$"|xargs` ; do
         echo $i
         curl -S "${BESMAN_SERVICE}${BESMAN_NAMESPACE}/${BESMAN_TOOLS_REPO}/main/${i}.sh" -o "${BESMAN_ENV_CACHEDIR}/${i}.sh"
 
@@ -65,7 +65,7 @@ function __besman_install_javaSpringsec-env
     if [ $? -eq 0 ]; then
         echo "Installing Required Tools ..."
 
-        for i in `cat "${HOME}/${BESMAN_ENV}.config"|grep -v "^#"|grep -v "^\s*$"|xargs` ; do
+        for i in `cat "${HOME}/besman-${BESMAN_ENV}.config"|grep -v "^#"|grep -v "^\s*$"|xargs` ; do
             echo $i
             sudo sh "${BESMAN_ENV_CACHEDIR}/${i}.sh"
         done 
@@ -86,7 +86,7 @@ function __besman_uninstall_javaSpringsec-env
 
         echo "Uninstalling Required Tools ..."
 
-        for i in `cat "${HOME}/${BESMAN_ENV}.config"|grep -v "^#"|grep -v "^\s*$"|xargs` ; do
+        for i in `cat "${HOME}/besman-${BESMAN_ENV}.config"|grep -v "^#"|grep -v "^\s*$"|xargs` ; do
             echo $i
 
             sudo sh "${BESMAN_ENV_CACHEDIR}/${i}.sh" --uninstall
