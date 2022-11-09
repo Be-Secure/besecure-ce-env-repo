@@ -23,7 +23,7 @@ The environment scripts are executed using [BeSman](https://github.com/Be-Secure
 4. The environments can be installed now.
 5. To install, run the below command.
    
-   `$ bes install -env <namespace>/<repo name>/<environment> -V 0.0.1`
+   `$ bes install -env <namespace>/<repo name>/<environment> -V <version>`
 
 # Create your environment repository.
 
