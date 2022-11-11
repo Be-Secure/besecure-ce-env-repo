@@ -48,6 +48,7 @@ The environment scripts are executed using [BeSman](https://github.com/Be-Secure
 4. Create a list.txt file and make and entry of the environment in the below format.
    
    `<namespace>/<repo name>/<environment name>,<version1>,<version2>..`
+   
    `<namespace>/<repo name>/<environment name>,<version1>,<version2>..`
 
 ## Updating BeSman list
