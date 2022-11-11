@@ -4,10 +4,23 @@ The repository contains environment scripts for projects tracked by [Be-Secure](
 
 # Available environments.
 
-1. [Fastjson RT/BT environments](https://github.com/Be-Secure/besecure-ce-env-repo/tree/master/fastjson/0.0.1)
-2. [Java Spring RT/BT environments](https://github.com/Be-Secure/besecure-ce-env-repo/tree/master/javaSpring/0.0.1)
-3. [Python Django RT/BT environments](https://github.com/Be-Secure/besecure-ce-env-repo/tree/master/pythonDjango/0.0.1)
-4. [BeSman dev environment](BeSman/0.0.1/besman-BeSman-dev-env.sh)
+## RT Environments
+
+1. [Fastjson](fastjson/0.0.1/besman-fastjson-RT-env.sh)
+2. [Java Spring](javaSpring/0.0.1/besman-javaSpring-RT-env.sh)
+3. [Python Django](pythonDjango/0.0.1/besman-pythonDjango-RT-env.sh)
+4. [Skywalking](skywalking/0.0.1/besman-skywalking-RT-env.sh)
+
+## BT Environments
+
+1. [Fastjson](fastjson/0.0.1/besman-fastjson-BT-env.sh)
+2. [Java Spring](javaSpring/0.0.1/besman-javaSpring-BT-env.sh)
+3. [Python Django](pythonDjango/0.0.1/besman-pythonDjango-BT-env.sh)
+4. [Skywalking](skywalking/0.0.1/besman-skywalking-BT-env.sh)
+
+## Dev Environments
+
+1. [BeSman](BeSman/0.0.1/besman-BeSman-dev-env.sh)
 
 # Usage
 
