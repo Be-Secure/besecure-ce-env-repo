@@ -24,7 +24,7 @@ The repository contains environment scripts for projects tracked by [Be-Secure](
 
 # Usage
 
-The environment scripts are executed using [BeSman](https://github.com/Be-Secure/BeSman.
+The environment scripts are executed using [BeSman](https://github.com/Be-Secure/BeSman).
 
 1. Install BeSman utility by following the instructions [here](https://github.com/Be-Secure/BeSman#readme).
 2. Run the below command to update the local list of environments.
