@@ -27,7 +27,7 @@ function __besman_uninstall_skywalking-BT-env
     local playbook 
     playbook=$HOME/besman-trigger-skywalking-BT-roles.yml
     __besman_run_ansible_playbook_extra_vars "$playbook" "bes_command=remove role_path=$HOME/tmp" || return 1
-    [[ -f $HOME/skywalking ]] && rm -rf $HOME/skywalking
+    [[ -d $HOME/skywalking ]] && rm -rf $HOME/skywalking
 }
 
 function __besman_update_skywalking-BT-env
