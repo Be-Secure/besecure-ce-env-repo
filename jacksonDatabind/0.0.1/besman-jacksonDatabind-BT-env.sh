@@ -21,3 +21,11 @@ function __besman_install_jacksonDatabind-BT-env
     [[ ! -d $clone_path ]] && __besman_gh_clone "$namespace" "$repo" "$clone_path"
     unset playbook repo namespace clone_path
 }
+
+function __besman_uninstall_fastjson-BT-env
+{
+    local playbook 
+    playbook=$HOME/besman-trigger-jacksonDatabind-BT-roles.yml
+    __besman_run_ansible_playbook_extra_vars "$playbook" "bes_command=remove role_path=$HOME/tmp" || return 1
+    [[ -d $HOME/jackson-databind ]] && rm -rf $HOME/jackson-databind
+}
