@@ -21,3 +21,41 @@ function __besman_install_jacksonDatabind-RT-env
     [[ ! -d $clone_path ]] && __besman_gh_clone "$namespace" "$repo" "$clone_path"
     unset playbook repo namespace clone_path
 }
+
+function __besman_uninstall_jacksonDatabind-RT-env
+{
+    local playbook
+    playbook=$HOME/besman-trigger-jacksonDatabind-RT-roles.yml
+    __besman_run_ansible_playbook_extra_vars "$playbook" "bes_command=remove role_path=$BESMAN_ANSIBLE_ROLE_PATH" || return 1
+    [[ -d $HOME/jackson-databind ]] && rm -rf $HOME/jackson-databind
+}
+
+function __besman_update_jacksonDatabind-RT-env
+{
+    local playbook
+    playbook=$HOME/besman-trigger-jacksonDatabind-RT-roles.yml
+    __besman_run_ansible_playbook_extra_vars "$playbook" "bes_command=update role_path=$BESMAN_ANSIBLE_ROLE_PATH" || return 1
+    unset playbook
+}
+
+function __besman_validate_jacksonDatabind-RT-env
+{
+    local playbook
+    playbook=$HOME/besman-trigger-jacksonDatabind-RT-roles.yml
+    __besman_run_ansible_playbook_extra_vars "$playbook" "bes_command=validate role_path=$BESMAN_ANSIBLE_ROLE_PATH" || return 1
+   if [[ -d $HOME/jackson-databind ]]; then
+        __besman_echo_green "jackson-databind found"
+   else
+        __besman_echo_red "jackson-databind not found"
+   fi
+    unset playbook
+}
+
+function __besman_reset_jacksonDatabind-RT-env
+{
+    local playbook
+    playbook=$HOME/besman-trigger-jacksonDatabind-RT-roles.yml
+    __besman_run_ansible_playbook_extra_vars "$playbook" "bes_command=reset role_path=$BESMAN_ANSIBLE_ROLE_PATH" || return 1
+    unset playbook
+}
+
