@@ -6,5 +6,5 @@ Be-Secure/besecure-ce-env-repo/pythonDjango-RT-env,0.0.1
 Be-Secure/besecure-ce-env-repo/fastjson-RT-env,0.0.1
 Be-Secure/besecure-ce-env-repo/fastjson-BT-env,0.0.1
 Be-Secure/besecure-ce-env-repo/BeSman-dev-env,0.0.1
-pramit-d/besecure-ce-env-repo/zaproxy-RT-env,0.0.1
-pramit-d/besecure-ce-env-repo/zaproxy-BT-env,0.0.1
+Be-Secure/besecure-ce-env-repo/zaproxy-RT-env,0.0.1
+Be-Secure/besecure-ce-env-repo/zaproxy-BT-env,0.0.1
