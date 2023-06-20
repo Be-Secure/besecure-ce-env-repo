@@ -10,7 +10,7 @@ function __besman_install_zaproxy-RT-env
     __besman_gh_auth "$BESMAN_USER_NAMESPACE" || return 1
     playbook=$HOME/besman-trigger-zaproxy-RT-roles.yml
     export BESMAN_ANSIBLE_ROLE_PATH=$HOME/tmp
-    export BESMAN_ANSIBLE_GALAXY_ROLES=Be-Secure/ansible-role-bes-java:Be-Secure/ansible-role-oah-eclipse:Be-Secure/ansible-role-oah-docker:Be-Secure/ansible-role-oah-sonarQube:Be-Secure/ansible-role-oah-sbomGenerator
+    export BESMAN_ANSIBLE_GALAXY_ROLES=pramit-d/ansible-role-bes-java:Be-Secure/ansible-role-oah-eclipse:Be-Secure/ansible-role-oah-gradle:Be-Secure/ansible-role-oah-docker:Be-Secure/ansible-role-oah-sonarQube:Be-Secure/ansible-role-oah-sbomGenerator:Be-Secure/ansible-role-oah-fossology
     __besman_update_requirements_file
     __besman_ansible_galaxy_install_roles_from_requirements
     __besman_check_for_trigger_playbook "$playbook"
