@@ -1,0 +1,11 @@
+---
+BESMAN_ORG: Be-Secure
+BESMAN_OSSP: zaproxy
+BESMAN_OSSP_CLONE_PATH: $HOME/$BESMAN_OSSP
+BESMAN_ANSIBLE_ROLES_PATH: $BESMAN_DIR/tmp/$BESMAN_OSSP/roles
+BESMAN_ANSIBLE_ROLES: Be-Secure/ansible-role-bes-java:Be-Secure/ansible-role-oah-eclipse:Be-Secure/ansible-role-oah-gradle:Be-Secure/ansible-role-oah-docker:Be-Secure/ansible-role-oah-sonarQube:Be-Secure/ansible-role-oah-sbomGenerator:Be-Secure/ansible-role-oah-fossology
+BESMAN_OSS_TRIGGER_PLAYBOOK_PATH: $BESMAN_DIR/tmp/$BESMAN_OSSP
+BESMAN_OSS_TRIGGER_PLAYBOOK: besman-$BESMAN_OSSP-RT-trigger-playbook.yaml
+BESMAN_DISPLAY_SKIPPED_ANSIBLE_HOSTS: false
+# Please add other variables as well as ansible variables here
+openjdk_version: 11
