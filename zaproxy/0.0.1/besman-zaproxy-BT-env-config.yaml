@@ -9,3 +9,9 @@ BESMAN_OSS_TRIGGER_PLAYBOOK: besman-$BESMAN_OSSP-BT-trigger-playbook.yaml
 BESMAN_DISPLAY_SKIPPED_ANSIBLE_HOSTS: false
 # Please add other variables as well as ansible variables here
 openjdk_version: 11
+vagrant_home: /home/vagrant
+java_tmp: "{{ home_dir }}/java_tmp"
+gradle_version: 8.1.1
+eclipse_req_packages: snapd
+eclipse_tmp: "{{ home_dir }}/eclipse_tmp"
+eclipse_pin_fav: true
