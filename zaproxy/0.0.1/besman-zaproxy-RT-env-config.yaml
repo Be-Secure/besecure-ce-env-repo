@@ -9,3 +9,55 @@ BESMAN_OSS_TRIGGER_PLAYBOOK: besman-$BESMAN_OSSP-RT-trigger-playbook.yaml
 BESMAN_DISPLAY_SKIPPED_ANSIBLE_HOSTS: false
 # Please add other variables as well as ansible variables here
 openjdk_version: 11
+vagrant_home: /home/vagrant
+java_tmp: "{{ home_dir }}/java_tmp"
+gradle_version: 8.1.1
+eclipse_req_packages: snapd
+eclipse_tmp: "{{ home_dir }}/eclipse_tmp"
+eclipse_pin_fav: true
+sonar_download_url: "https://binaries.sonarsource.com/Distribution/sonarqube"
+release_link: https://github.com/opensbom-generator/spdx-sbom-generator/releases/download/v0.0.15
+latest: spdx-sbom-generator-v0.0.15-linux-amd64.tar.gz
+fossology_repo_url: https://github.com/fossology/fossology
+fossology_repo_dest: /home/arun/fossology
+fosslogy_install_from_docker: true
+fossology_install_from_source: false
+# 'ce' - Community Edition or 'ee' Enterprise Edition
+docker_edition: 'ce'
+docker_package: "docker-{{ docker_edition }}"
+docker_package_state: present
+
+# Services
+docker_service_state: started
+docker_service_enabled: true
+docker_restart_handler_state: restarted
+
+# Docker Compose options.
+docker_install_compose: true
+docker_compose_version: "1.26.0"
+docker_compose_url: https://github.com/docker/compose/releases/download/{{ docker_compose_version }}/docker-compose-Linux-x86_64
+docker_compose_path: /usr/local/bin/docker-compose
+
+# Docker repo URL.
+docker_repo_url: https://download.docker.com/linux
+
+# Used only for Debian/Ubuntu. Switch 'stable' to 'nightly' if needed.
+docker_apt_release_channel: stable
+docker_apt_arch: amd64
+docker_apt_repository: "deb [arch={{ docker_apt_arch }}] {{ docker_repo_url }}/{{ ansible_distribution | lower }} {{ ansible_distribution_release }} {{ docker_apt_release_channel }}"
+docker_apt_ignore_key_error: true
+docker_apt_gpg_key: "{{ docker_repo_url }}/{{ ansible_distribution | lower }}/gpg"
+
+# Docker daemon options as a dict
+docker_daemon_options: {}
+docker_uninstall_items:
+  - docker
+  - docker-engine
+  - docker-ce
+  - docker-ce-cli
+  - containerd.io
+  - docker-compose-plugin
+
+docker_files:
+  - /var/lib/docker
+  - /var/lib/containerd
