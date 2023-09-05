@@ -10,3 +10,4 @@ Be-Secure/besecure-ce-env-repo/zaproxy-RT-env,0.0.1
 Be-Secure/besecure-ce-env-repo/zaproxy-BT-env,0.0.1
 Be-Secure/besecure-ce-env-repo/jacksonDatabind-BT-env,0.0.1
 Be-Secure/besecure-ce-env-repo/jacksonDatabind-RT-env,0.0.1
+Be-Secure/besecure-ce-env-repo/hwc_api-BT-env,0.0.1
