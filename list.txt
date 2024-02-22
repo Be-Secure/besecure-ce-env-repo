@@ -14,4 +14,9 @@ Be-Secure/besecure-ce-env-repo/jacksonDatabind-RT-env,0.0.1
 Be-Secure/besecure-ce-env-repo/hwc_api-BT-env,0.0.1
 Be-Secure/besecure-ce-env-repo/newrelic-java-agent-BT-env,0.0.1
 Be-Secure/besecure-ce-env-repo/newrelic-java-agent-RT-env,0.0.1
+<<<<<<< HEAD
 >>>>>>> c855cf5 (added BT & RT env for newrelic-java-agent)
+=======
+Be-Secure/besecure-ce-env-repo/opencti-BT-env,0.0.1
+Be-Secure/besecure-ce-env-repo/opencti-RT-env,0.0.1
+>>>>>>> 6df95f0 (BR-RT environment for opencti project & added packagemanager and IDE for newrelic-java-agent)
