@@ -3,9 +3,14 @@ BESMAN_ORG: Be-Secure
 BESMAN_OSSP: newrelic-java-agent
 BESMAN_OSSP_CLONE_PATH: $HOME/$BESMAN_OSSP
 BESMAN_ANSIBLE_ROLES_PATH: $BESMAN_DIR/tmp/$BESMAN_OSSP/roles
-BESMAN_ANSIBLE_ROLES: Be-Secure/ansible-role-bes-java
+BESMAN_ANSIBLE_ROLES: Be-Secure/ansible-role-bes-java,Be-Secure/ansible-role-oah-gradle,Be-Secure/ansible-role-oah-eclipse
 BESMAN_OSS_TRIGGER_PLAYBOOK_PATH: $BESMAN_DIR/tmp/$BESMAN_OSSP
 BESMAN_OSS_TRIGGER_PLAYBOOK: besman-$BESMAN_OSSP-java-trigger-playbook.yaml
 BESMAN_DISPLAY_SKIPPED_ANSIBLE_HOSTS: false
 # Please add other variables as well as ansible variables here
 openjdk_version: 8
+java_tmp: "{{ home_dir }}/java_tmp"
+gradle_version: 7.2
+eclipse_req_packages: snapd
+eclipse_tmp: "{{ home_dir }}/eclipse_tmp"
+eclipse_pin_fav: true
