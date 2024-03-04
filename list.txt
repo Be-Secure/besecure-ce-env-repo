@@ -2,18 +2,8 @@ Be-Secure/besecure-ce-env-repo/fastjson-RT-env,0.0.1
 Be-Secure/besecure-ce-env-repo/fastjson-BT-env,0.0.1
 Be-Secure/besecure-ce-env-repo/zaproxy-RT-env,0.0.1
 Be-Secure/besecure-ce-env-repo/zaproxy-BT-env,0.0.1
-<<<<<<< HEAD
 Be-Secure/besecure-ce-env-repo/fastjson-RT-env,0.0.2
 Be-Secure/besecure-ce-env-repo/HWC-API-BT-env,0.0.1
 Be-Secure/besecure-ce-env-repo/jackson-databind-RT-env,0.0.1
 Be-Secure/besecure-ce-env-repo/jackson-databind-BT-env,0.0.1
 Be-Secure/besecure-ce-env-repo/lettuce-BT-env,0.0.1
-=======
-Be-Secure/besecure-ce-env-repo/jacksonDatabind-BT-env,0.0.1
-Be-Secure/besecure-ce-env-repo/jacksonDatabind-RT-env,0.0.1
-Be-Secure/besecure-ce-env-repo/hwc_api-BT-env,0.0.1
-Be-Secure/besecure-ce-env-repo/newrelic-java-agent-BT-env,0.0.1
-Be-Secure/besecure-ce-env-repo/newrelic-java-agent-RT-env,0.0.1
-Be-Secure/besecure-ce-env-repo/opencti-BT-env,0.0.1
-Be-Secure/besecure-ce-env-repo/opencti-RT-env,0.0.1
->>>>>>> 0de428a (BR-RT environment for opencti project & added packagemanager and IDE for newrelic-java-agent)
