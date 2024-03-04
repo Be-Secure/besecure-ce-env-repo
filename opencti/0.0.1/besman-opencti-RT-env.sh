@@ -1,8 +1,7 @@
 #!/bin/bash
 
-function __besman_install_opencti-RT-env
-{
-    
+function __besman_install_opencti-RT-env {
+
     __besman_check_for_gh || return 1
     __besman_check_github_id || return 1
     __besman_check_for_ansible || return 1
@@ -17,13 +16,22 @@ function __besman_install_opencti-RT-env
         __besman_gh_clone "$BESMAN_ORG" "$BESMAN_OSSP" "$BESMAN_OSSP_CLONE_PATH"
     fi
     # Please add the rest of the code here for installation
-       # opencti-dev environment script
-    echo "1 ------- opencti dev modules setup..."
+
+    # opencti-dev environment script
+    echo -e "\nopencti dev modules setup start..."
     #!/bin/bash
+
+    #------------------------------------------------------------------------------------------
+    # Check if Docker is installed
+    if ! command -v docker &>/dev/null; then
+        install_docker
+    else
+        echo -e "\nDocker is already there to use."
+    fi
 
     # Function to install Docker
     install_docker() {
-        echo "Installing Docker..."
+        echo -e "\nInstalling Docker..."
         # Update package index
         sudo apt update
         # Install dependencies
@@ -39,26 +47,10 @@ function __besman_install_opencti-RT-env
         sudo apt install -y docker-ce docker-ce-cli containerd.io
         # Add current user to Docker group
         sudo usermod -aG docker $USER
-        echo "Docker installed successfully."
+        echo -e "\nDocker installed successfully.\n"
     }
 
-    # Check if Docker is installed
-    if ! command -v docker &>/dev/null; then
-        install_docker
-    else
-        echo "Docker is already there to use."
-    fi
-
-    # Function to stop and remove a container if it's running
-    stop_and_remove_container() {
-        local container_name=$1
-        if docker ps -a --format '{{.Names}}' | grep -q "$container_name"; then
-            echo "Stopping and removing existing $container_name container..."
-            docker stop "$container_name" &>/dev/null
-            docker rm "$container_name" &>/dev/null
-        fi
-    }
-
+    #------------------------------------------------------------------------------------------
     # Stop and remove existing containers if they are already running
     stop_and_remove_container "opencti-dev-redis"
     stop_and_remove_container "opencti-dev-redis-insight"
@@ -68,17 +60,36 @@ function __besman_install_opencti-RT-env
     stop_and_remove_container "opencti-dev-rabbitmq"
     stop_and_remove_container "opencti-dev-jaegertracing"
 
-    # Now start the containers
+    # Function to stop and remove a container if it's running
+    stop_and_remove_container() {
+        local container_name=$1
+        if docker ps -a --format '{{.Names}}' | grep -q "$container_name"; then
+            echo -e "\nStopping and removing existing $container_name container..."
+            docker stop "$container_name" &>/dev/null
+            docker rm "$container_name" &>/dev/null
+        fi
+    }
+
+    #------------------------------------------------------------------------------------------
+    # Now pull the images and start the containers
+    # Define variables to store image tags
+    global REDIS_IMAGE="redis:7.2.4"
+    global REDIS_INSIGHT_IMAGE="redislabs/redisinsight:latest"
+    global ELASTICSEARCH_IMAGE="docker.elastic.co/elasticsearch/elasticsearch:8.12.0"
+    global KIBANA_IMAGE="docker.elastic.co/kibana/kibana:8.12.0"
+    global MINIO_IMAGE="minio/minio:latest"
+    global RABBITMQ_IMAGE="rabbitmq:3.12-management"
+    global JAEGERT_IMAGE="jaegertracing/all-in-one:latest"
     # Starting Redis
-    echo "Starting Redis..."
-    docker run -d --name opencti-dev-redis -p 6379:6379 redis:7.2.4
+    echo -e "\nStarting Redis..."
+    docker run -d --name opencti-dev-redis -p 6379:6379 $REDIS_IMAGE
 
     # Starting Redis Insight
-    echo "Starting Redis Insight..."
-    docker run -d --name opencti-dev-redis-insight -p 8001:8001 redislabs/redisinsight:latest
+    echo -e "\nStarting Redis Insight..."
+    docker run -d --name opencti-dev-redis-insight -p 8001:8001 $REDIS_INSIGHT_IMAGE
 
     # Starting Elasticsearch
-    echo "Starting Elasticsearch..."
+    echo -e "\nStarting Elasticsearch..."
     docker run -d --name opencti-dev-elasticsearch \
         -p 9200:9200 -p 9300:9300 \
         -v esdata:/usr/share/elasticsearch/data \
@@ -88,47 +99,47 @@ function __besman_install_opencti-RT-env
         -e "xpack.security.enabled=false" \
         -e "ES_JAVA_OPTS=-Xms2G -Xmx2G" \
         --ulimit memlock=-1:-1 --ulimit nofile=65536:65536 \
-        docker.elastic.co/elasticsearch/elasticsearch:8.12.0
+        $ELASTICSEARCH_IMAGE
 
     # Starting Kibana
-    echo "Starting Kibana..."
+    echo -e "\nStarting Kibana..."
     docker run -d --name opencti-dev-kibana \
         -p 5601:5601 \
         -e "ELASTICSEARCH_HOSTS=http://localhost:9200" \
         --link opencti-dev-elasticsearch:elasticsearch \
-        docker.elastic.co/kibana/kibana:8.12.0
+        $KIBANA_IMAGE
 
     # Starting Minio
-    echo "Starting Minio..."
+    echo -e "\nStarting Minio..."
     docker run -d --name opencti-dev-minio \
         -p 9000:9000 -p 9001:9001 -p 35300:35300 \
         -e "MINIO_ROOT_USER=ChangeMe" \
         -e "MINIO_ROOT_PASSWORD=ChangeMe" \
-        minio/minio:latest server /data --console-address ":9001"
+        $MINIO_IMAGE server /data --console-address ":9001"
 
     # Starting RabbitMQ
-    echo "Starting RabbitMQ..."
+    echo -e "\nStarting RabbitMQ..."
     docker run -d --name opencti-dev-rabbitmq \
         -p 5672:5672 -p 15672:15672 \
-        rabbitmq:3.12-management
+        $RABBITMQ_IMAGE
 
     # Starting Jaeger Tracing
-    echo "Starting Jaeger Tracing..."
+    echo -e "\nStarting Jaeger Tracing..."
     docker run -d --name opencti-dev-jaegertracing \
         -p 16686:16686 -p 4318:4318 \
-        jaegertracing/all-in-one:latest
+        $JAEGERT_IMAGE
 
-    echo "All services started successfully!"
+    echo -e "\nAll services started successfully!"
 
-    echo "1 ------- dev-module setup completed."
-    print "/n"
+    echo -e "\ndev-module setup completed."
 
-    echo "2 ------- graphql setup...."
+    #------------------------------------------------------------------------------------------
+    echo -e "\ngraphql setup start...."
     #!/bin/bash
 
     # Check if Yarn is installed
     if ! command -v yarn &>/dev/null; then
-        echo "Yarn is not installed. Installing Yarn..."
+        echo -e "\nYarn is not installed. Installing Yarn..."
         # Add Yarn repository key
         curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
         # Add Yarn repository
@@ -150,10 +161,10 @@ function __besman_install_opencti-RT-env
     # Start GraphQL server
     yarn start &
 
-    echo "2 ------- graphql setup completed...."
-    print "/n"
+    echo -e "graphql setup completed....\n"
 
-    echo "3 ------- worker setup...."
+    #------------------------------------------------------------------------------------------
+    echo -e "\nworker setup start...."
     #!/bin/bash
 
     # Check if Python is installed
@@ -179,10 +190,10 @@ function __besman_install_opencti-RT-env
     # Start the worker
     python3 worker.py &
 
-    echo "3 ------- worker setup completed...."
-    print "/n"
+    echo -e "worker setup completed....\n"
 
-    echo "4 ------- front-end setup...."
+    #------------------------------------------------------------------------------------------
+    echo -e "\nfront-end setup start....\n"
     #!/bin/bash
 
     # Check if Yarn is installed
@@ -214,13 +225,14 @@ function __besman_install_opencti-RT-env
     sleep 30 # Wait for the server to start (you may adjust the duration if needed)
     firefox http://localhost:4000
 
-    echo "OpenCTI Frontend is now running!"
-    echo "4 ------- front-end setup completed...."
-    print "/n"
+    echo -e "\nfront-end setup completed...."
+
+    echo -e "\nopencti local setup completed.\n"
+
+    #------------------------------------------------------------------------------------------
 }
 
-function __besman_uninstall_opencti-RT-env
-{
+function __besman_uninstall_opencti-RT-env {
     __besman_check_for_trigger_playbook "$BESMAN_OSS_TRIGGER_PLAYBOOK_PATH/$BESMAN_OSS_TRIGGER_PLAYBOOK"
     [[ "$?" -eq 1 ]] && __besman_create_ansible_playbook
     __besman_run_ansible_playbook_extra_vars "$BESMAN_OSS_TRIGGER_PLAYBOOK_PATH/$BESMAN_OSS_TRIGGER_PLAYBOOK" "bes_command=remove role_path=$BESMAN_ANSIBLE_ROLES_PATH" || return 1
@@ -232,10 +244,51 @@ function __besman_uninstall_opencti-RT-env
     fi
     # Please add the rest of the code here for uninstallation
 
+    # Stop and remove existing containers if they are already running
+    stop_and_remove_container "opencti-dev-redis"
+    stop_and_remove_container "opencti-dev-redis-insight"
+    stop_and_remove_container "opencti-dev-elasticsearch"
+    stop_and_remove_container "opencti-dev-kibana"
+    stop_and_remove_container "opencti-dev-minio"
+    stop_and_remove_container "opencti-dev-rabbitmq"
+    stop_and_remove_container "opencti-dev-jaegertracing"
+
+    # Function to stop and remove a container if it's running
+    stop_and_remove_container() {
+        local container_name=$1
+        if docker ps -a --format '{{.Names}}' | grep -q "$container_name"; then
+            echo -e "\nStopping and removing existing $container_name container..."
+            docker stop "$container_name" &>/dev/null
+            docker rm "$container_name" &>/dev/null
+        fi
+    }
+
+    # Remove Docker images
+    docker rmi $REDIS_IMAGE $REDIS_INSIGHT_IMAGE $ELASTICSEARCH_IMAGE $KIBANA_IMAGE $MINIO_IMAGE $RABBITMQ_IMAGE $JAEGERT_IMAGE
+
+    # Remove Docker package
+    sudo apt purge docker-ce docker-ce-cli containerd.io
+
+    # Remove user from Docker group (if needed)
+    sudo deluser $USER docker
+
+    # Remove packages
+    sudo apt remove docker-ce docker-ce-cli containerd.io
+
+    # Uninstall Yarn
+    sudo apt purge yarn
+
+    # Remove Yarn repository file
+    sudo rm /etc/apt/sources.list.d/yarn.list
+
+    # Update package index
+    sudo apt update
+
+    echo -e "\nUninstallation completed successfully.\n"
+
 }
 
-function __besman_update_opencti-RT-env
-{
+function __besman_update_opencti-RT-env {
     __besman_check_for_trigger_playbook "$BESMAN_OSS_TRIGGER_PLAYBOOK_PATH/$BESMAN_OSS_TRIGGER_PLAYBOOK"
     [[ "$?" -eq 1 ]] && __besman_create_ansible_playbook
     __besman_run_ansible_playbook_extra_vars "$BESMAN_OSS_TRIGGER_PLAYBOOK_PATH/$BESMAN_OSS_TRIGGER_PLAYBOOK" "bes_command=update role_path=$BESMAN_ANSIBLE_ROLES_PATH" || return 1
@@ -243,17 +296,102 @@ function __besman_update_opencti-RT-env
 
 }
 
-function __besman_validate_opencti-RT-env
-{
+function __besman_validate_opencti-RT-env {
     __besman_check_for_trigger_playbook "$BESMAN_OSS_TRIGGER_PLAYBOOK_PATH/$BESMAN_OSS_TRIGGER_PLAYBOOK"
     [[ "$?" -eq 1 ]] && __besman_create_ansible_playbook
     __besman_run_ansible_playbook_extra_vars "$BESMAN_OSS_TRIGGER_PLAYBOOK_PATH/$BESMAN_OSS_TRIGGER_PLAYBOOK" "bes_command=validate role_path=$BESMAN_ANSIBLE_ROLES_PATH" || return 1
     # Please add the rest of the code here for validate
 
+    # Check if Docker is installed
+    if ! command -v docker &>/dev/null; then
+        echo "Error: Docker is not installed."
+        exit 1
+    else
+        echo -e "Docker is installed"
+    fi
+
+    # Function to check if a Docker image exists
+    check_docker_image() {
+        local image_name=$1
+        if ! docker image inspect "$image_name" &>/dev/null; then
+            echo "Error: Docker image $image_name not found."
+            exit 1
+        else
+            echo -e "Docker image $image_name is installed"
+        fi
+    }
+
+    # Function to check if a Docker container exists
+    check_docker_container() {
+        local container_name=$1
+        if ! docker ps -a --format '{{.Names}}' | grep -q "$container_name"; then
+            echo "Error: Docker container $container_name not found."
+            exit 1
+        else
+            echo -e "Docker container $container_name is available"
+        fi
+    }
+
+    # Check if Docker images exist
+    check_docker_image "$REDIS_IMAGE"
+    check_docker_image "$REDIS_INSIGHT_IMAGE"
+    check_docker_image "$ELASTICSEARCH_IMAGE"
+    check_docker_image "$KIBANA_IMAGE"
+    check_docker_image "$MINIO_IMAGE"
+    check_docker_image "$RABBITMQ_IMAGE"
+    check_docker_image "$JAEGERT_IMAGE"
+
+    # Check if Docker containers exist
+    check_docker_container "opencti-dev-redis"
+    check_docker_container "opencti-dev-redis-insight"
+    check_docker_container "opencti-dev-elasticsearch"
+    check_docker_container "opencti-dev-kibana"
+    check_docker_container "opencti-dev-minio"
+    check_docker_container "opencti-dev-rabbitmq"
+    check_docker_container "opencti-dev-jaegertracing"
+
+    echo "All Docker images and containers are available."
+
+    # Function to check if Python 3 is installed
+    check_python3() {
+        if ! command -v python3 &>/dev/null; then
+            echo "Error: Python 3 is not installed."
+            exit 1
+        else
+            echo -e "Python3 is installed"
+        fi
+    }
+
+    # Function to check if Pip is installed
+    check_pip() {
+        if ! command -v pip &>/dev/null; then
+            echo "Error: Pip is not installed."
+            exit 1
+        else
+            echo -e "Pip is installed"
+        fi
+    }
+
+    # Function to check if Yarn is installed
+    check_yarn() {
+        if ! command -v yarn &>/dev/null; then
+            echo "Error: Yarn is not installed."
+            exit 1
+        else
+            echo -e "Yarn is installed"
+        fi
+    }
+
+    # Call functions to check for Yarn, Python 3, and Pip
+    check_python3
+    check_pip
+    check_yarn
+
+    echo "All required tools are available."
+
 }
 
-function __besman_reset_opencti-RT-env
-{
+function __besman_reset_opencti-RT-env {
     __besman_check_for_trigger_playbook "$BESMAN_OSS_TRIGGER_PLAYBOOK_PATH/$BESMAN_OSS_TRIGGER_PLAYBOOK"
     [[ "$?" -eq 1 ]] && __besman_create_ansible_playbook
     __besman_run_ansible_playbook_extra_vars "$BESMAN_OSS_TRIGGER_PLAYBOOK_PATH/$BESMAN_OSS_TRIGGER_PLAYBOOK" "bes_command=reset role_path=$BESMAN_ANSIBLE_ROLES_PATH" || return 1
