@@ -21,7 +21,8 @@ function __besman_install_fastjson-RT-env
         __besman_echo_white "The clone path already contains dir names $BESMAN_ARTIFACT_NAME"
     else
         __besman_gh_clone "$BESMAN_ORG" "$BESMAN_ARTIFACT_NAME" "$BESMAN_ARTIFACT_DIR"
-        git checkout -b "$BESMAN_ARTIFACT_VERSION"_tavoss 1.2.24
+        cd "$BESMAN_ARTIFACT_DIR" && git checkout -b "$BESMAN_ARTIFACT_VERSION"_tavoss 1.2.24
+        cd "$HOME"
     fi
 
     if [[ -d $BESMAN_ASSESSMENT_DATASTORE_DIR ]] 
