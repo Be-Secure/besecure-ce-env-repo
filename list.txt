@@ -10,3 +10,4 @@ Be-Secure/besecure-ce-env-repo/jacksonDatabind-BT-env,0.0.1
 Be-Secure/besecure-ce-env-repo/jacksonDatabind-RT-env,0.0.1
 Be-Secure/besecure-ce-env-repo/tomcat-BT-env,0.0.1
 
+Be-Secure/besecure-ce-env-repo/fastjson-RT-env,0.0.2
