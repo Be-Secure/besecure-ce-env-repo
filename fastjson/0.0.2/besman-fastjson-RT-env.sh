@@ -2,9 +2,6 @@
 
 function __besman_install_fastjson-RT-env
 {
-    __besman_echo_yellow "############################################"
-    __besman_echo_yellow "$BESMAN_ORG"
-    return 0
     __besman_check_for_gh || return 1 # Checks if GitHub CLI is present or not.
     __besman_check_github_id || return 1 # checks whether the user github id has been populated or not under BESMAN_USER_NAMESPACE 
     __besman_gh_auth || return 1
