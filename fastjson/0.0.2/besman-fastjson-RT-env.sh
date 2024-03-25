@@ -2,9 +2,9 @@
 
 function __besman_install_fastjson-RT-env
 {
-    __besman_check_for_gh || return 1 # Checks if GitHub CLI is present or not.
+    __besman_check_vcs_exist || return 1 # Checks if GitHub CLI is present or not.
     __besman_check_github_id || return 1 # checks whether the user github id has been populated or not under BESMAN_USER_NAMESPACE 
-    __besman_gh_auth || return 1
+    __besman_check_vcs_auth || return 1
     __besman_check_for_ansible || return 1 # Checks if ansible is installed or not.
     
     # Requirements file is used to list the required ansible roles. The data for requirements file comes from BESMAN_ANSIBLE_ROLES env var.
@@ -22,7 +22,7 @@ function __besman_install_fastjson-RT-env
         __besman_echo_white "The clone path already contains dir names $BESMAN_ARTIFACT_NAME"
     else
         __besman_echo_white "Cloning source code repo from $BESMAN_USER_NAMESPACE/$BESMAN_ARTIFACT_NAME"
-        __besman_gh_clone "$BESMAN_USER_NAMESPACE" "$BESMAN_ARTIFACT_NAME" "$BESMAN_ARTIFACT_DIR" || return 1
+        __besman_repo_clone "$BESMAN_USER_NAMESPACE" "$BESMAN_ARTIFACT_NAME" "$BESMAN_ARTIFACT_DIR" || return 1
         cd "$BESMAN_ARTIFACT_DIR" && git checkout -b "$BESMAN_ARTIFACT_VERSION"_tavoss 1.2.24
         cd "$HOME"
     fi
@@ -32,7 +32,7 @@ function __besman_install_fastjson-RT-env
         __besman_echo_white "Assessment datastore found at $BESMAN_ASSESSMENT_DATASTORE_DIR"
     else
         __besman_echo_white "Cloning assessment datastore from $BESMAN_USER_NAMESPACE/besecure-assessment-datastore"
-        __besman_gh_clone "$BESMAN_USER_NAMESPACE" "besecure-assessment-datastore" "$BESMAN_ASSESSMENT_DATASTORE_DIR" || return 1
+        __besman_repo_clone "$BESMAN_USER_NAMESPACE" "besecure-assessment-datastore" "$BESMAN_ASSESSMENT_DATASTORE_DIR" || return 1
 
     fi
     # Please add the rest of the code here for installation
