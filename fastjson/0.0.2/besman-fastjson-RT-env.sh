@@ -6,7 +6,7 @@ function __besman_install_fastjson-RT-env
     __besman_check_github_id || return 1 # checks whether the user github id has been populated or not under BESMAN_USER_NAMESPACE 
     __besman_check_vcs_auth || return 1
     __besman_check_for_ansible || return 1 # Checks if ansible is installed or not.
-    
+    __besman_create_roles_config_file
     # Requirements file is used to list the required ansible roles. The data for requirements file comes from BESMAN_ANSIBLE_ROLES env var.
     # This function updates the requirements file from BESMAN_ANSIBLE_ROLES env var.
     __besman_update_requirements_file 
