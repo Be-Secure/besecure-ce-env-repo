@@ -22,7 +22,7 @@ BESMAN_ARTIFACT_VERSION: 1.2.24 #Enter the version of the artifact here. #***
 BESMAN_ARTIFACT_URL: https://github.com/Be-Secure/fastjson #***
 
 #BESMAN_ENV_NAME - This variable stores the name of the environment file.
-BESMAN_ENV_NAME: fastjson-RT-env #***
+BESMAN_ENV_NAME: fastjson-BT-env #***
 
 # BESMAN_ARTIFACT_DIR - The path where you wish to clone the source code of the artifact under assessment.
 # If you wish to change the clone path, provide the complete path.
@@ -49,14 +49,14 @@ BESMAN_ANSIBLE_ROLES_PATH: $BESMAN_DIR/tmp/$BESMAN_ARTIFACT_NAME/roles #***
 # BESMAN_ANSIBLE_ROLES - The list of tools you wish to install. The tools are installed using ansible roles.
 # To get the list of ansible roles run 
 #   $ bes list --role
-BESMAN_ANSIBLE_ROLES: Be-Secure/ansible-role-bes-java,Be-Secure/ansible-role-oah-maven,Be-Secure/ansible-role-oah-sbomGenerator #add the roles here. format - <Github id>/<repo name>,<Github id>/<repo name>,<Github id>/<repo name>,... #***
+BESMAN_ANSIBLE_ROLES: Be-Secure/ansible-role-bes-java,Be-Secure/ansible-role-oah-maven,Be-Secure/ansible-role-oah-eclipse #add the roles here. format - <Github id>/<repo name>,<Github id>/<repo name>,<Github id>/<repo name>,... #***
 
 # BESMAN_ARTIFACT_TRIGGER_PLAYBOOK_PATH - sets the path of the playbook with which we run the ansible roles.
 # Default path is ~/.besman/tmp/<artifact name dir>/
 BESMAN_ARTIFACT_TRIGGER_PLAYBOOK_PATH: $BESMAN_DIR/tmp/$BESMAN_ARTIFACT_NAME #***
 
 #BESMAN_ARTIFACT_TRIGGER_PLAYBOOK - Name of the trigger playbook which runs the ansible roles.
-BESMAN_ARTIFACT_TRIGGER_PLAYBOOK: besman-$BESMAN_ARTIFACT_NAME-RT-trigger-playbook.yaml #***
+BESMAN_ARTIFACT_TRIGGER_PLAYBOOK: besman-$BESMAN_ARTIFACT_NAME-BT-trigger-playbook.yaml #***
 
 # BESMAN_DISPLAY_SKIPPED_ANSIBLE_HOSTS - If the users likes to display all the skipped steps, set it to true.
 # Default value is false
