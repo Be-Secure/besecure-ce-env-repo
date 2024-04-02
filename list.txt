@@ -14,3 +14,4 @@ Be-Secure/besecure-ce-env-repo/tomcat-BT-env,0.0.1
 Be-Secure/besecure-ce-env-repo/fastjson-RT-env,0.0.2
 Be-Secure/besecure-ce-env-repo/hwc_api-BT-env,0.0.1
 
+Be-Secure/besecure-ce-env-repo/HWC-API-BT-env,0.0.1
