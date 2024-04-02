@@ -1,4 +1,3 @@
-Be-Secure/besecure-ce-env-repo/template-env,0.0.1
 Be-Secure/besecure-ce-env-repo/javaSpring-BT-env,0.0.1
 Be-Secure/besecure-ce-env-repo/javaSpring-RT-env,0.0.1
 Be-Secure/besecure-ce-env-repo/pythonDjango-BT-env,0.0.1
