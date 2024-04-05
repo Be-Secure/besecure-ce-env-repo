@@ -75,8 +75,8 @@ function __besman_install {
         sudo apt update
         # Install Yarn
         sudo apt install yarn -y
-    else 
-        echo "yarn is already there to use." 
+    else
+        echo "yarn is already there to use."
     fi
 
     # Check if Python is installed
@@ -84,7 +84,7 @@ function __besman_install {
         echo "Python is not installed. Installing Python..."
         sudo apt update
         sudo apt install python3 -y
-    else 
+    else
         echo "Python is already there to use."
     fi
 
@@ -93,9 +93,66 @@ function __besman_install {
         echo "pip is not installed. Installing pip..."
         sudo apt update
         sudo apt install python3-pip -y
-    else 
+    else
         echo "pip is already there is use."
     fi
+
+
+    echo "creating and setting-up sonarqube docker container for sonarqube scan"
+    if [ "$(docker ps -aq -f name=sonarqube-env)" ]; then
+        # If a container exists, stop and remove it
+        echo "Removing existing container 'sonarqube-env'..."
+        docker stop sonarqube-env
+        docker rm --force sonarqube-env
+    fi
+
+    # create sonarqube docker image and container - env setup
+    docker create --name sonarqube-env -p 9000:9000 sonarqube
+
+    # create fossology docker image and container - env setup
+    # Check if a container with the name "fossology-env" already exists
+    echo "creating and setting-up fossology docker container for fossology scan"
+    if [ "$(docker ps -aq -f name=fossology-env)" ]; then
+        # If a container exists, stop and remove it
+        echo "Removing existing container 'fossology-env'..."
+        docker stop fossology-env
+        docker rm --force fossology-env
+    fi
+
+    # Create a new container
+    echo "Creating new container 'fossology-env'..."
+    docker create --name fossology-env -p 8081:80 fossology/fossology
+
+    ## criticality_score - env setup
+    # snap is required for go installation
+    echo "installing snap ..."
+    if ! [ -x "$(command -v snap)" ]; then
+        sudo apt update
+        sudo apt install snapd
+    else
+        echo "snap is already available"
+    fi
+
+    # go is required to install criticality_score
+    echo "installing go ..."
+    if ! [ -x "$(command -v go)" ]; then
+        sudo snap install --classic --channel=1.21/stable go
+        export GOPATH=$HOME/go
+        export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
+    else
+        echo "go is already available"
+    fi
+
+    # criticality_score is require to perform the action
+    echo -e "installing criticality_score ..."
+    if ! [ -x "$(command -v criticality_score)" ]; then
+        go install github.com/ossf/criticality_score/cmd/criticality_score@latest
+        echo -e "criticality_score is installed\n"
+    else
+        echo "criticality_score is already available"
+    fi
+
+    ## setup snyk using yarn
 
     echo -e "\nopencti RT env installation is complete"
 }
