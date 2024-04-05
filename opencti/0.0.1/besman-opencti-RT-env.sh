@@ -2,6 +2,9 @@
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> a52779c (updated opencti RT env with correct versioning - 0.0.1)
 function __besman_install {
 
     __besman_check_vcs_exist || return 1   # Checks if GitHub CLI is present or not.
@@ -38,6 +41,7 @@ function __besman_install {
     fi
 
     # Please add the rest of the code here for installation
+<<<<<<< HEAD
 =======
 function __besman_install_opencti-RT-env
 {
@@ -80,6 +84,11 @@ function __besman_install_opencti-RT-env {
     # Function to install Docker
     install_docker() {
         echo -e "\nInstalling Docker..."
+=======
+    # Function to install Docker
+    install_docker() {
+        echo "Installing Docker..."
+>>>>>>> a52779c (updated opencti RT env with correct versioning - 0.0.1)
         # Update package index
         sudo apt update
         # Install dependencies
@@ -96,6 +105,9 @@ function __besman_install_opencti-RT-env {
         # Add current user to Docker group
         sudo usermod -aG docker $USER
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> a52779c (updated opencti RT env with correct versioning - 0.0.1)
         echo "Docker installed successfully."
     }
 
@@ -106,6 +118,7 @@ function __besman_install_opencti-RT-env {
         echo "Docker is already there to use."
     fi
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
     # Function to stop and remove a container if it's running
@@ -212,6 +225,11 @@ function __besman_install_opencti-RT-env {
     # Check if Yarn is installed
     if ! command -v yarn &>/dev/null; then
         echo -e "\nYarn is not installed. Installing Yarn..."
+=======
+    # Check if Yarn is installed
+    if ! command -v yarn &>/dev/null; then
+        echo "Yarn is not installed. Installing Yarn..."
+>>>>>>> a52779c (updated opencti RT env with correct versioning - 0.0.1)
         # Add Yarn repository key
         curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
         # Add Yarn repository
@@ -221,10 +239,14 @@ function __besman_install_opencti-RT-env {
         # Install Yarn
         sudo apt install yarn -y
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> a52779c (updated opencti RT env with correct versioning - 0.0.1)
     else 
         echo "yarn is already there to use." 
     fi
 
+<<<<<<< HEAD
 =======
     fi
 
@@ -246,16 +268,23 @@ function __besman_install_opencti-RT-env {
     #!/bin/bash
 
 >>>>>>> 0de428a (BR-RT environment for opencti project & added packagemanager and IDE for newrelic-java-agent)
+=======
+>>>>>>> a52779c (updated opencti RT env with correct versioning - 0.0.1)
     # Check if Python is installed
     if ! command -v python3 &>/dev/null; then
         echo "Python is not installed. Installing Python..."
         sudo apt update
         sudo apt install python3 -y
 <<<<<<< HEAD
+<<<<<<< HEAD
     else 
         echo "Python is already there to use."
 =======
 >>>>>>> 0de428a (BR-RT environment for opencti project & added packagemanager and IDE for newrelic-java-agent)
+=======
+    else 
+        echo "Python is already there to use."
+>>>>>>> a52779c (updated opencti RT env with correct versioning - 0.0.1)
     fi
 
     # Check if pip is installed
@@ -264,6 +293,9 @@ function __besman_install_opencti-RT-env {
         sudo apt update
         sudo apt install python3-pip -y
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> a52779c (updated opencti RT env with correct versioning - 0.0.1)
     else 
         echo "pip is already there is use."
     fi
@@ -291,6 +323,7 @@ function __besman_update {
     __besman_check_for_trigger_playbook "$BESMAN_ARTIFACT_TRIGGER_PLAYBOOK_PATH/$BESMAN_ARTIFACT_TRIGGER_PLAYBOOK"
     [[ "$?" -eq 1 ]] && __besman_create_ansible_playbook
     __besman_run_ansible_playbook_extra_vars "$BESMAN_ARTIFACT_TRIGGER_PLAYBOOK_PATH/$BESMAN_ARTIFACT_TRIGGER_PLAYBOOK" "bes_command=update role_path=$BESMAN_ANSIBLE_ROLES_PATH" || return 1
+<<<<<<< HEAD
 =======
     fi
 
@@ -406,16 +439,22 @@ function __besman_update_opencti-RT-env {
     [[ "$?" -eq 1 ]] && __besman_create_ansible_playbook
     __besman_run_ansible_playbook_extra_vars "$BESMAN_OSS_TRIGGER_PLAYBOOK_PATH/$BESMAN_OSS_TRIGGER_PLAYBOOK" "bes_command=update role_path=$BESMAN_ANSIBLE_ROLES_PATH" || return 1
 >>>>>>> 0de428a (BR-RT environment for opencti project & added packagemanager and IDE for newrelic-java-agent)
+=======
+>>>>>>> a52779c (updated opencti RT env with correct versioning - 0.0.1)
     # Please add the rest of the code here for update
 
 }
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> a52779c (updated opencti RT env with correct versioning - 0.0.1)
 function __besman_validate {
     __besman_check_for_trigger_playbook "$BESMAN_ARTIFACT_TRIGGER_PLAYBOOK_PATH/$BESMAN_ARTIFACT_TRIGGER_PLAYBOOK"
     [[ "$?" -eq 1 ]] && __besman_create_ansible_playbook
     __besman_run_ansible_playbook_extra_vars "$BESMAN_ARTIFACT_TRIGGER_PLAYBOOK_PATH/$BESMAN_ARTIFACT_TRIGGER_PLAYBOOK" "bes_command=validate role_path=$BESMAN_ANSIBLE_ROLES_PATH" || return 1
+<<<<<<< HEAD
 =======
 function __besman_validate_opencti-RT-env
 {
@@ -519,10 +558,17 @@ function __besman_validate_opencti-RT-env {
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+=======
+    # Please add the rest of the code here for validate
+
+}
+
+>>>>>>> a52779c (updated opencti RT env with correct versioning - 0.0.1)
 function __besman_reset {
     __besman_check_for_trigger_playbook "$BESMAN_ARTIFACT_TRIGGER_PLAYBOOK_PATH/$BESMAN_ARTIFACT_TRIGGER_PLAYBOOK"
     [[ "$?" -eq 1 ]] && __besman_create_ansible_playbook
     __besman_run_ansible_playbook_extra_vars "$BESMAN_ARTIFACT_TRIGGER_PLAYBOOK_PATH/$BESMAN_ARTIFACT_TRIGGER_PLAYBOOK" "bes_command=reset role_path=$BESMAN_ANSIBLE_ROLES_PATH" || return 1
+<<<<<<< HEAD
 =======
 function __besman_reset_opencti-RT-env
 {
@@ -533,6 +579,8 @@ function __besman_reset_opencti-RT-env {
     [[ "$?" -eq 1 ]] && __besman_create_ansible_playbook
     __besman_run_ansible_playbook_extra_vars "$BESMAN_OSS_TRIGGER_PLAYBOOK_PATH/$BESMAN_OSS_TRIGGER_PLAYBOOK" "bes_command=reset role_path=$BESMAN_ANSIBLE_ROLES_PATH" || return 1
 >>>>>>> 0de428a (BR-RT environment for opencti project & added packagemanager and IDE for newrelic-java-agent)
+=======
+>>>>>>> a52779c (updated opencti RT env with correct versioning - 0.0.1)
     # Please add the rest of the code here for reset
 
 }
