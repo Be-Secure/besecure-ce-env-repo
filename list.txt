@@ -7,7 +7,4 @@ Be-Secure/besecure-ce-env-repo/jacksonDatabind-RT-env,0.0.1
 Be-Secure/besecure-ce-env-repo/hwc_api-BT-env,0.0.1
 Be-Secure/besecure-ce-env-repo/newrelic-java-agent-BT-env,0.0.1
 Be-Secure/besecure-ce-env-repo/newrelic-java-agent-RT-env,0.0.1
-Be-Secure/besecure-ce-env-repo/opencti-BT-env,0.0.1
-Be-Secure/besecure-ce-env-repo/opencti-RT-env,0.0.1
-Be-Secure/besecure-ce-env-repo/opencti-RT-env,0.0.2
-Be-Secure/besecure-ce-env-repo/opencti-RT-env,0.0.3
+Be-Secure/besecure-ce-env-repo/opencti-RT-env,0.0.4
