@@ -190,4 +190,4 @@ In this environment script, you will have to right all the required steps to ins
 2. [zaproxy](zaproxy/0.0.1/besman-zaproxy-BT-env.sh)
 3. [jackson-databind](jackson-databind/0.0.1/besman-jackson-databind-BT-env.sh)
 4. [HWC_API](HWC-API/0.0.1/besman-HWC-API-BT-env.sh)
-1. [lettuce](lettuce/0.0.1/besman-lettuce-BT-env.sh)
+5. [lettuce](lettuce/0.0.1/besman-lettuce-BT-env.sh)
