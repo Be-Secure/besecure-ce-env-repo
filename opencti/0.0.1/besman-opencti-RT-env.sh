@@ -313,7 +313,6 @@ function __besman_install_opencti-RT-env {
         echo "pip is already there is use."
     fi
 
-
     echo "creating and setting-up sonarqube docker container for sonarqube scan"
     if [ "$(docker ps -aq -f name=sonarqube-env)" ]; then
         # If a container exists, stop and remove it
@@ -385,6 +384,124 @@ function __besman_uninstall {
     fi
 
     # Please add the rest of the code here for uninstallation
+
+    # Function to stop and remove Docker containers
+    stop_and_remove_containers() {
+        echo "Stopping and removing Docker containers..."
+        # Stop and remove sonarqube-env container if it exists
+        if [ "$(docker ps -aq -f name=sonarqube-env)" ]; then
+            echo "Stopping and removing container 'sonarqube-env'..."
+            docker stop sonarqube-env
+            docker rm --force sonarqube-env
+        fi
+        # Stop and remove fossology-env container if it exists
+        if [ "$(docker ps -aq -f name=fossology-env)" ]; then
+            echo "Stopping and removing container 'fossology-env'..."
+            docker stop fossology-env
+            docker rm --force fossology-env
+        fi
+        echo "Docker containers stopped and removed successfully."
+    }
+
+    # Function to uninstall Docker
+    uninstall_docker() {
+        echo "Uninstalling Docker..."
+        # Stop and remove Docker containers
+        stop_and_remove_containers
+        # Remove Docker Engine
+        sudo apt purge -y docker-ce docker-ce-cli containerd.io
+        # Remove Docker GPG key
+        sudo rm -rf /usr/share/keyrings/docker-archive-keyring.gpg
+        # Remove Docker repository
+        sudo rm -f /etc/apt/sources.list.d/docker.list
+        # Remove current user from Docker group
+        sudo deluser $USER docker
+        echo "Docker uninstalled successfully."
+    }
+
+    # Function to uninstall Yarn
+    uninstall_yarn() {
+        echo "Uninstalling Yarn..."
+        # Remove Yarn repository
+        sudo rm -f /etc/apt/sources.list.d/yarn.list
+        # Remove Yarn repository key
+        sudo apt-key del 'Yarn Repository'
+        # Remove Yarn
+        sudo apt purge -y yarn
+        echo "Yarn uninstalled successfully."
+    }
+
+    # Function to uninstall Python and pip
+    uninstall_python() {
+        echo "Uninstalling Python and pip..."
+        # Remove Python
+        sudo apt purge -y python3
+        # Remove pip
+        sudo apt purge -y python3-pip
+        echo "Python and pip uninstalled successfully."
+    }
+
+    # Function to uninstall criticality_score
+    uninstall_criticality_score() {
+        echo "Uninstalling criticality_score..."
+        # Remove criticality_score
+        sudo rm -rf $GOPATH/bin/criticality_score
+        echo "criticality_score uninstalled successfully."
+    }
+
+    # Function to uninstall go
+    uninstall_go() {
+        echo "Uninstalling go..."
+        # Remove go
+        sudo snap remove go
+        echo "Go uninstalled successfully."
+    }
+
+    # Function to uninstall snap
+    uninstall_snap() {
+        echo "Uninstalling snap..."
+        # Remove snap
+        sudo apt purge -y snapd
+        echo "Snap uninstalled successfully."
+    }
+
+    # Check if Docker is installed
+    if command -v docker &>/dev/null; then
+        uninstall_docker
+    fi
+
+    # Check if Yarn is installed
+    if command -v yarn &>/dev/null; then
+        uninstall_yarn
+    fi
+
+    # Check if Python is installed
+    if command -v python3 &>/dev/null; then
+        uninstall_python
+    fi
+
+    # Check if pip is installed
+    if command -v pip3 &>/dev/null; then
+        echo "Uninstalling pip..."
+        sudo apt purge -y python3-pip
+        echo "pip uninstalled successfully."
+    fi
+
+    # Check if criticality_score is installed
+    if command -v criticality_score &>/dev/null; then
+        uninstall_criticality_score
+    fi
+
+    # Check if go is installed
+    if command -v go &>/dev/null; then
+        uninstall_go
+    fi
+
+    # Check if snap is installed
+    if command -v snap &>/dev/null; then
+        uninstall_snap
+    fi
+
     echo "opencti RT env un-installation is complete"
 
 }
@@ -630,6 +747,107 @@ function __besman_validate_opencti-RT-env {
 <<<<<<< HEAD
 =======
     # Please add the rest of the code here for validate
+
+    #!/bin/bash
+
+    # Function to validate Docker installation
+    validate_docker() {
+        if ! command -v docker &>/dev/null; then
+            echo "Docker is not installed."
+            return 1
+        fi
+    }
+
+    # Function to validate Docker containers
+    validate_docker_containers() {
+        # Validate sonarqube-env container
+        if ! docker ps -a --format '{{.Names}}' | grep -q 'sonarqube-env'; then
+            echo "Docker container 'sonarqube-env' is not running."
+            return 1
+        fi
+        # Validate fossology-env container
+        if ! docker ps -a --format '{{.Names}}' | grep -q 'fossology-env'; then
+            echo "Docker container 'fossology-env' is not running."
+            return 1
+        fi
+    }
+
+    # Function to validate Yarn installation
+    validate_yarn() {
+        if ! command -v yarn &>/dev/null; then
+            echo "Yarn is not installed."
+            return 1
+        fi
+    }
+
+    # Function to validate Python installation
+    validate_python() {
+        if ! command -v python3 &>/dev/null; then
+            echo "Python is not installed."
+            return 1
+        fi
+    }
+
+    # Function to validate pip installation
+    validate_pip() {
+        if ! command -v pip3 &>/dev/null; then
+            echo "pip is not installed."
+            return 1
+        fi
+    }
+
+    # Function to validate snap installation
+    validate_snap() {
+        if ! command -v snap &>/dev/null; then
+            echo "snap is not installed."
+            return 1
+        fi
+    }
+
+    # Function to validate go installation
+    validate_go() {
+        if ! command -v go &>/dev/null; then
+            echo "go is not installed."
+            return 1
+        fi
+    }
+
+    # Function to validate criticality_score installation
+    validate_criticality_score() {
+        if ! command -v criticality_score &>/dev/null; then
+            echo "criticality_score is not installed."
+            return 1
+        fi
+    }
+
+    # Main validation function
+    validate_environment() {
+        # Array to store error messages
+        declare -a errors
+
+        # Validate all components and store errors
+        validate_docker || errors+=("Docker")
+        validate_docker_containers || errors+=("Docker containers")
+        validate_yarn || errors+=("Yarn")
+        validate_python || errors+=("Python")
+        validate_pip || errors+=("pip")
+        validate_snap || errors+=("snap")
+        validate_go || errors+=("go")
+        validate_criticality_score || errors+=("criticality_score")
+
+        # Check if any error message is present
+        if [ ${#errors[@]} -eq 0 ]; then
+            echo "All requirements satisfied. Environment is set up successfully."
+        else
+            echo "Some requirements are not satisfied. Please install the following:"
+            for error in "${errors[@]}"; do
+                echo "- $error"
+            done
+        fi
+    }
+
+    # Run validation
+    validate_environment
 
 }
 
