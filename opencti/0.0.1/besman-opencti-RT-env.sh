@@ -351,7 +351,7 @@ function __besman_install_opencti-RT-env {
     # go is required to install criticality_score
     echo "installing go ..."
     if ! [ -x "$(command -v go)" ]; then
-        sudo snap install --classic --channel=1.21/stable go
+        sudo snap install go --classic
         export GOPATH=$HOME/go
         export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
     else
@@ -361,7 +361,7 @@ function __besman_install_opencti-RT-env {
     # criticality_score is require to perform the action
     echo -e "installing criticality_score ..."
     if ! [ -x "$(command -v criticality_score)" ]; then
-        go install github.com/ossf/criticality_score/cmd/criticality_score@latest
+        go install github.com/ossf/criticality_score/v2/cmd/criticality_score@latest
         echo -e "criticality_score is installed\n"
     else
         echo "criticality_score is already available"
