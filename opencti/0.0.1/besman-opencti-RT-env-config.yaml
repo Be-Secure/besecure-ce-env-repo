@@ -16,7 +16,7 @@ BESMAN_ARTIFACT_TYPE: project
 BESMAN_ARTIFACT_NAME: opencti #***
 
 # BESMAN_ARTIFACT_VERSION - version of the artifact under assessment.
-BESMAN_ARTIFACT_VERSION: #Enter the version of the artifact here. #***
+BESMAN_ARTIFACT_VERSION: 5.12.29 #Enter the version of the artifact here. #***
 
 # BESMAN_ARTIFACT_URL - Source code url of the artifact under assessment.
 BESMAN_ARTIFACT_URL: https://github.com/Be-Secure/opencti #***
