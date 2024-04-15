@@ -1,8 +1,3 @@
----
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> a52779c (updated opencti RT env with correct versioning - 0.0.1)
 # If you wish to update the default configuration values, copy this file and place it under your home dir, under the same name.
 # These variables are used to drive the installation of the environment script.
 # The variables that start with BESMAN_ are converted to environment vars.
@@ -65,25 +60,3 @@ BESMAN_ARTIFACT_TRIGGER_PLAYBOOK: besman-$BESMAN_ARTIFACT_NAME-RT-trigger-playbo
 # BESMAN_DISPLAY_SKIPPED_ANSIBLE_HOSTS - If the users likes to display all the skipped steps, set it to true.
 # Default value is false
 BESMAN_DISPLAY_SKIPPED_ANSIBLE_HOSTS: false #***
-
-
-# The default values of the ansible roles will be present in their respective repos.
-# You can go to https://github.com/Be-Secure/<repo of the ansible role>/blob/main/defaults/main.yml.
-# If you wish to change the default values copy the variable from the https://github.com/Be-Secure/<repo of the ansible role>/blob/main/defaults/main.yml
-# and paste it here and change the value.
-# Format is <variable name>: <value> 
-# Eg: openjdk_version: 11
-<<<<<<< HEAD
-=======
-BESMAN_ORG: Be-Secure
-BESMAN_OSSP: opencti
-BESMAN_OSSP_CLONE_PATH: $HOME/$BESMAN_OSSP
-BESMAN_ANSIBLE_ROLES_PATH: $BESMAN_DIR/tmp/$BESMAN_OSSP/roles
-BESMAN_ANSIBLE_ROLES: Be-Secure/ansible-role-oah-vscode, Be-Secure/ansible-role-oah-docker
-BESMAN_OSS_TRIGGER_PLAYBOOK_PATH: $BESMAN_DIR/tmp/$BESMAN_OSSP
-BESMAN_OSS_TRIGGER_PLAYBOOK: besman-$BESMAN_OSSP-RT-trigger-playbook.yaml
-BESMAN_DISPLAY_SKIPPED_ANSIBLE_HOSTS: false
-# Please add other variables as well as ansible variables here
->>>>>>> 0de428a (BR-RT environment for opencti project & added packagemanager and IDE for newrelic-java-agent)
-=======
->>>>>>> a52779c (updated opencti RT env with correct versioning - 0.0.1)
