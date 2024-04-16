@@ -37,6 +37,7 @@ function __besman_install
 
     fi
     # Please add the rest of the code here for installation
+    source ~/.bashrc
 }
 
 function __besman_uninstall
