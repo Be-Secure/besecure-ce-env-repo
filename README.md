@@ -181,13 +181,16 @@ In this environment script, you will have to right all the required steps to ins
 ## RT Environments
 
 1. [Fastjson](fastjson/0.0.1/besman-fastjson-RT-env.sh)
-2. [zaproxy](zaproxy/0.0.1/besman-zaproxy-RT-env.sh)
-3. [jackson-databind](jackson-databind/0.0.1/besman-jackson-databind-RT-env.sh)
+2. [jackson-databind](jackson-databind/0.0.1/besman-jackson-databind-RT-env.sh)
+3. [opencti](opencti/0.0.1/besman-opencti-RT-env.sh)
+4. [zaproxy](zaproxy/0.0.1/besman-zaproxy-RT-env.sh)
+
 
 ## BT Environments
 
 1. [Fastjson](fastjson/0.0.1/besman-fastjson-BT-env.sh)
-2. [zaproxy](zaproxy/0.0.1/besman-zaproxy-BT-env.sh)
-3. [jackson-databind](jackson-databind/0.0.1/besman-jackson-databind-BT-env.sh)
-4. [HWC_API](HWC-API/0.0.1/besman-HWC-API-BT-env.sh)
+2. [HWC_API](HWC-API/0.0.1/besman-HWC-API-BT-env.sh)
+3. [jackson-core](jackson-core/0.0.1/besman-jackson-core-BT-env.sh)
+4. [jackson-databind](jackson-databind/0.0.1/besman-jackson-databind-BT-env.sh)
 5. [lettuce](lettuce/0.0.1/besman-lettuce-BT-env.sh)
+6. [zaproxy](zaproxy/0.0.1/besman-zaproxy-BT-env.sh)
