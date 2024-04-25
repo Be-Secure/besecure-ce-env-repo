@@ -1,4 +1,4 @@
-Be-Secure/besecure-ce-env-repo/fastjson-RT-env,0.0.1
+e-Secure/besecure-ce-env-repo/fastjson-RT-env,0.0.1
 Be-Secure/besecure-ce-env-repo/fastjson-BT-env,0.0.1
 Be-Secure/besecure-ce-env-repo/zaproxy-RT-env,0.0.1
 Be-Secure/besecure-ce-env-repo/zaproxy-BT-env,0.0.1
@@ -11,4 +11,6 @@ Be-Secure/besecure-ce-env-repo/lettuce-BT-env,0.0.1
 
 
 Be-Secure/besecure-ce-env-repo/opencti-RT-env,0.0.1
+
+Be-Secure/besecure-ce-env-repo/jackson-core-BT-env,0.0.1
 
