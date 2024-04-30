@@ -2,6 +2,9 @@
 
 Thank you for contributing your time and expertise to the BeSman Environment Repo. This document provides guidance on environments contribution recommended practices. It covers what we're looking for in order to help set expectations and help you get the most out of participation in this project.
 
+This repo contains scripts which BeSman uses to set-up environments for projects/ml models...The repo is maintained by Be-Secure Community and the owners of BeSman.
+Eventhough this is a separate repo, it has a close coupling with BeSman. All the bugs and enhancements for the environment repo will be maintained in the [issue](https://github.com/Be-Secure/BeSman/issues) section of BeSman.
+
 # Code of Conduct
 
 This project adheres to the Contributor Covenant code of [conduct](https://github.com/Be-Secure/BeSman/blob/master/CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code.
