@@ -24,7 +24,7 @@ First, the easiest way to get started is to make fixes or improvements to the do
 You can check the documentations in below links to get a feel of what we are doing,
 
 - [Be-Secure ecosystem](https://be-secure.github.io/Be-Secure/).
-- [BeSman Readme]([./README.md](https://github.com/Be-Secure/BeSman)).
+- [BeSman]([./README.md](https://github.com/Be-Secure/BeSman)).
 - [BeSman environment repo](./README.md).
 - [BeSman Playbook repo](https://github.com/Be-Secure/besecure-playbooks-store).
 
@@ -74,7 +74,7 @@ Even with everyone making their best effort to be responsive, it can be time-con
 
 The following checks run when a PR is opened:
 
-1. Contributor License Agreement (CLA): If this is your first contribution to BeSman you will be asked to sign the CLA.
+1. Contributor License Agreement (CLA): If this is your first contribution to Be-Secure environment repo, you will be asked to sign the CLA.
 2. Checks: Some automated checks are triggered to verify whether the contents in the pr follow our [guidelines](./checklist.md) and linting.
 
 # Contributing Steps
@@ -108,7 +108,7 @@ Here we discuss the branching and release strategy for our projects. It ensures 
 1. **Feature Development**:
 
     - Create a feature branch off `develop` for each new feature or bug fix.
-    - Name the branch descriptively (e.g., `environment/project name/env type`).
+    - Name the branch descriptively (e.g., `env/project name/env type`).
     - Implement the changes in the feature branch.
 
 2. **Pull Requests**:
@@ -133,7 +133,7 @@ Here we discuss the branching and release strategy for our projects. It ensures 
 
 1. **Branch Naming**:
 
-    - Use meaningful names for branches (e.g., `environment/project name/env type`).
+    - Use meaningful names for branches (e.g., `env/project name/env type`).
 
 2. **Pull Requests**:
 
