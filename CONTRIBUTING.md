@@ -160,5 +160,5 @@ When submitting a new environment script, ensure that the following requirements
 4. The initial version of the environment file should be set to `0.0.1`.
 5. A new version of the environment script will be treated as a distinct environment script.
 6. Ensure that environment scripts include all the required [lifecycle functions](./README.md#lifecycle-functions-of-besman-environment-scripts).
-Include all necessary tool configurations that users should be aware of at the bottom of the configuration file.
+7. Include all necessary tool configurations that users should be aware of at the bottom of the configuration file.
 
