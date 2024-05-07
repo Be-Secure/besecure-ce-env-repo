@@ -149,3 +149,16 @@ Here we discuss the branching and release strategy for our projects. It ensures 
 
     - Discuss major changes or architectural decisions with the community.
     - Communicate any delays or blockers promptly.
+
+# Requirements for Submitting a New Environment
+
+When submitting a new environment script, ensure that the following requirements are fulfilled:
+
+1. Each environment script must be accompanied by its configuration file.
+2. The mandatory fields in the configuration file must not be left empty.
+3. Update the [list.txt](./list.txt) file with the environment in the format <namespace>/<repo name>/<environment name>,<version>.
+4. The initial version of the environment file should be set to `0.0.1`.
+5. A new version of the environment script will be treated as a distinct environment script.
+6. Ensure that environment scripts include all the required [lifecycle functions](./README.md#lifecycle-functions-of-besman-environment-scripts).
+7. Include all necessary tool configurations that users should be aware of at the bottom of the configuration file.
+
