@@ -2,10 +2,44 @@
 
 function __besman_install
 {
-    echo "--------------------------------------------"
+    echo "------------------------------------------------------"
     echo "Starting CounterFit Installation..."
-    echo "--------------------------------------------"
-    
+    echo "------------------------------------------------------"
+    install_counterfit
+    echo "-------------------------------------------------------"
+    echo "CounterFit environment installation completed!"
+    echo "-------------------------------------------------------"
+    bash
+}
+
+function __besman_uninstall
+{   
+    echo "-------------------------------------------------------"
+    echo "Starting CounterFit Uninstallation..."
+    echo "-------------------------------------------------------"
+    uninstall_counterfit
+    echo "-------------------------------------------------------"
+    echo "CounterFit environment uninstallation completed!"
+    echo "-------------------------------------------------------"
+    bash
+}
+
+function __besman_update
+{
+    echo "No update available."
+}
+
+function __besman_validate
+{
+    echo "Validate method not implemented yet."
+}
+
+function __besman_reset
+{       
+    echo "Reset method not implemented yet."
+}
+
+function install_counterfit() {
     sudo apt-get install libgl1-mesa-glx libegl1-mesa libxrandr2 libxrandr2 libxss1 libxcursor1 libxcomposite1 libasound2 libxi6 libxtst6
     echo "Checking for Anaconda..."
     if command -v conda &> /dev/null; then
@@ -21,60 +55,43 @@ function __besman_install
     fi
     eval "$(conda shell.bash hook)"
     echo "Creating conda environment 'counterfit'..."
-    conda create -y -n counterfit python=3.8
+    conda update -c conda-forge --all -y
+    conda create --yes -n counterfit python=3.8.0
     echo "Activating conda environment 'counterfit'..."
-    source activate counterfit
-
+    conda activate counterfit
     echo "Cloning the CounterFit repository..."
-    git clone --single-branch --branch dist https://github.com/pramit-d/counterfit
+    git clone --single-branch --branch develop https://github.com/Be-Secure/counterfit.git
     cd counterfit
     echo "Installing Python packages from requirements.txt..."
     pip install -r requirements.txt
-    python -c "import nltk;  nltk.download('stopwords')"
     echo "Installing CounterFit tool..."
     pip install -e .
-    bash
+    python -c "import nltk;  nltk.download('stopwords')"
 }
 
-function __besman_uninstall
-{   
-       echo "--------------------------------------------"
-    echo "Starting CounterFit Uninstallation..."
-    echo "--------------------------------------------"
+function uninstall_counterfit(){
+    AUTO_DELETE=${1:-false}
     echo "Removing Anaconda distribution..."
+    conda activate
+    conda init --reverse --all
     rm -rf anaconda3
     rm -rf ~/anaconda3
     sudo rm -rf /opt/anaconda3
     rm -rf .conda .art .keras nltk_data
-    read -p "${bold}Do you want to remove the directory 'counterfit'? (y/n): " response
-    if [[ "$response" == "y" || "$response" == "Y" || "$response" == "Yes" || "$response" == "yes" ]]; then
-        if rm -rf $HOME/counterfit; then
-            echo "Directory 'counterfit' has been removed."
-        else
-            echo "Failed to remove the directory 'counterfit'."
-        fi
+    
+    if [ "$AUTO_DELETE" = true ]; then
+        echo "Removing the directory 'counterfit'..."
+        rm -rf $HOME/counterfit && echo "Directory 'counterfit' has been removed." || echo "Failed to remove the directory 'counterfit'."
     else
-        echo "Skipping the removal of 'counterfit' directory..."
+        read -p "${bold}Do you want to remove the directory 'counterfit'? (y/n): " response
+        if [[ "$response" == "y" || "$response" == "Y" || "$response" == "Yes" || "$response" == "yes" ]]; then
+            if rm -rf $HOME/counterfit; then
+                echo "Directory 'counterfit' has been removed."
+            else
+                echo "Failed to remove the directory 'counterfit'."
+            fi
+        else
+            echo "Skipping the removal of 'counterfit' directory..."
+        fi
     fi
-    echo "-------------------------------------------------------"
-    echo "CounterFit environment uninstallation completed!"
-    echo "-------------------------------------------------------"
-    bash
 }
-
-function __besman_update
-{
-    echo "Update"
-}
-
-function __besman_validate
-{
-    echo "Validate"
-}
-
-function __besman_reset
-{
-    echo "Reset"
-}
-
-__besman_install
