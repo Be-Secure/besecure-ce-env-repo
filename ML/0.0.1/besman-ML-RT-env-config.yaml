@@ -44,8 +44,14 @@ BESMAN_ASSESSMENT_DATASTORE_URL: https://github.com/Be-Secure/besecure-ml-assess
 # BESMAN_COUNTERFIT_URL - The remote repo from CounterFit will be installed.
 BESMAN_COUNTERFIT_URL: https://github.com/Be-Secure/counterfit.git
 
+# BESMAN_WATCHTOWER_URL - The remote repo from watchtower will be installed.
+BESMAN_WATCHTOWER_URL: https://github.com/bosch-aisecurity-aishield/watchtower.git
+
 # BESMAN_COUNTERFIT_BRANCH - The remote repo branch
 BESMAN_COUNTERFIT_BRANCH: develop
+
+# BESMAN_WATCHTOWER_BRANCH - The remote repo branch
+BESMAN_WATCHTOWER_TAG: v1.0.0
 
 # BESMAN_COUNTERFIT_LOCAL_PATH - Path of counterfit dir in user system.
 BESMAN_COUNTERFIT_LOCAL_PATH: $HOME/counterfit

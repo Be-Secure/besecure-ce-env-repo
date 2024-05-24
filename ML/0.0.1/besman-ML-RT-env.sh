@@ -6,9 +6,16 @@ function __besman_install
     echo "Starting CounterFit Installation..."
     echo "------------------------------------------------------"
     install_counterfit
-    echo "-------------------------------------------------------"
+    echo "------------------------------------------------------"
     echo "CounterFit environment installation completed!"
-    echo "-------------------------------------------------------"
+    echo "------------------------------------------------------"
+    echo "------------------------------------------------------"
+    echo "Starting Watchtower Installation..."
+    echo "------------------------------------------------------"
+    install_watchtower
+    echo "------------------------------------------------------"
+    echo "Watchtower environment installation completed!"
+    echo "------------------------------------------------------"
     if [[ -d $BESMAN_ASSESSMENT_DATASTORE_DIR ]] 
     then
         __besman_echo_white "ML Assessment datastore found at $BESMAN_ASSESSMENT_DATASTORE_DIR"
@@ -28,6 +35,13 @@ function __besman_uninstall
     uninstall_counterfit
     echo "-------------------------------------------------------"
     echo "CounterFit environment uninstallation completed!"
+    echo "-------------------------------------------------------"
+    echo "-------------------------------------------------------"
+    echo "Starting Watchtower Uninstallation..."
+    echo "-------------------------------------------------------"
+    uninstall_watchtower
+    echo "-------------------------------------------------------"
+    echo "Watchtower environment uninstallation completed!"
     echo "-------------------------------------------------------"
     bash
 }
@@ -69,12 +83,11 @@ function install_counterfit() {
     conda activate counterfit
     echo "Cloning the CounterFit repository..."
     git clone --single-branch --branch $BESMAN_COUNTERFIT_BRANCH $BESMAN_COUNTERFIT_URL $BESMAN_COUNTERFIT_LOCAL_PATH
-    cd counterfit
     echo "Installing Python packages from requirements.txt..."
-    pip install -r requirements.txt
+    pip install -r $BESMAN_COUNTERFIT_LOCAL_PATH/requirements.txt
     echo "Installing CounterFit tool..."
-    pip install -e .
-    python -c "import nltk;  nltk.download('stopwords')"
+    pip install -e $BESMAN_COUNTERFIT_LOCAL_PATH
+    python -c "import nltk;  nltk.download('stopwords')" && conda deactivate
 }
 
 function uninstall_counterfit(){
@@ -88,18 +101,73 @@ function uninstall_counterfit(){
     rm -rf .conda .art .keras nltk_data
     
     if [ "$AUTO_DELETE" = true ]; then
-        echo "Removing the directory 'counterfit'..."
+        echo "Removing the directory '$BESMAN_COUNTERFIT_LOCAL_PATH'..."
         rm -rf $BESMAN_COUNTERFIT_LOCAL_PATH && echo "Directory 'counterfit' has been removed." || echo "Failed to remove the directory 'counterfit'."
     else
-        read -p "${bold}Do you want to remove the directory 'counterfit'? (y/n): " response
+        read -p "${bold}Do you want to remove the directory '$BESMAN_COUNTERFIT_LOCAL_PATH'? (y/n): " response
         if [[ "$response" == "y" || "$response" == "Y" || "$response" == "Yes" || "$response" == "yes" ]]; then
             if rm -rf $BESMAN_COUNTERFIT_LOCAL_PATH; then
-                echo "Directory 'counterfit' has been removed."
+                echo "Directory '$BESMAN_COUNTERFIT_LOCAL_PATH' has been removed."
             else
-                echo "Failed to remove the directory 'counterfit'."
+                echo "Failed to remove the directory '$BESMAN_COUNTERFIT_LOCAL_PATH'."
             fi
         else
-            echo "Skipping the removal of 'counterfit' directory..."
+            echo "Skipping the removal of '$BESMAN_COUNTERFIT_LOCAL_PATH' directory..."
         fi
+    fi
+}
+
+function install_watchtower(){
+    command_exists() {
+        command -v "$1" >/dev/null 2>&1
+    }
+
+    if ! command_exists python3; then
+        echo "Python3 is not installed. Installing Python3..."
+        sudo apt-get update
+        sudo apt-get install -y python3
+    fi
+
+    if ! command_exists git; then
+        echo "Git is not installed. Installing Git..."
+        sudo apt-get install -y git
+    fi
+
+    if ! python3 -m venv --help > /dev/null 2>&1; then
+        echo "venv module is not available. Installing python3-venv..."
+        sudo apt-get install -y python3-venv
+    fi
+
+    echo "Creating a virtual environment watchtower_env..."
+    python3 -m venv $HOME/watchtower_env
+
+    echo "Activating watchtower_env..."
+    source $HOME/watchtower_env/bin/activate
+
+    echo "Cloning the Watchtower repository..."
+    if [ ! -d "$HOME/watchtower/" ]; then
+        git clone --branch $BESMAN_WATCHTOWER_TAG --depth 1 $BESMAN_WATCHTOWER_URL $HOME/watchtower/
+    fi
+
+    echo "Installing Watchtower dependencies..."
+    pip install -r $HOME/watchtower/src/requirements.txt
+
+    echo "Downloading the spaCy language model..."
+    python3 -m spacy download en_core_web_lg
+}
+
+function uninstall_watchtower(){
+    echo "Removing watchtower_env..."
+    if [ -d "$HOME/watchtower_env" ]; then
+        rm -rf $HOME/watchtower_env
+    else
+        echo "watchtower_env not found."
+    fi
+
+    echo "Removing the Watchtower repository..."
+    if [ -d "$HOME/watchtower/" ]; then
+        rm -rf $HOME/watchtower/
+    else
+        echo "Watchtower repository directory not found."
     fi
 }
