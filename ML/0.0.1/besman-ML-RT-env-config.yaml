@@ -8,23 +8,23 @@
 #*** - These variables should not be removed, nor left empty.
 
 # BESMAN_ARTIFACT_TYPE - project/ml model/training dataset
-BESMAN_ARTIFACT_TYPE: # project/ml model/training dataset #***
+BESMAN_ARTIFACT_TYPE: ml model
 
 # BESMAN_ARTIFACT_NAME - name of the artifact under assessment.
-BESMAN_ARTIFACT_NAME: ml_assessment-env #***
+#BESMAN_ARTIFACT_NAME: ML #***
 
 # BESMAN_ARTIFACT_VERSION - version of the artifact under assessment.
-BESMAN_ARTIFACT_VERSION: #Enter the version of the artifact here. #***
+#BESMAN_ARTIFACT_VERSION: #Enter the version of the artifact here. #***
 
 # BESMAN_ARTIFACT_URL - Source code url of the artifact under assessment.
-BESMAN_ARTIFACT_URL: https://github.com/Be-Secure/ml_assessment-env #***
+#BESMAN_ARTIFACT_URL: https://github.com/Be-Secure/ML #***
 
 #BESMAN_ENV_NAME - This variable stores the name of the environment file.
-BESMAN_ENV_NAME: ml_assessment-env #***
+BESMAN_ENV_NAME: ML-RT-env #***
 
 # BESMAN_ARTIFACT_DIR - The path where you wish to clone the source code of the artifact under assessment.
 # If you wish to change the clone path, provide the complete path.
-BESMAN_ARTIFACT_DIR: $HOME/$BESMAN_ARTIFACT_NAME #***
+#BESMAN_ARTIFACT_DIR: $HOME/$BESMAN_ARTIFACT_NAME #***
 
 # BESMAN_TOOL_PATH - The path where we download the assessment and other required tools during installation.
 BESMAN_TOOL_PATH: /opt #***
@@ -36,8 +36,16 @@ BESMAN_LAB_TYPE: Organization #***
 BESMAN_LAB_NAME: Be-Secure #***
 
 # BESMAN_ASSESSMENT_DATASTORE_DIR - This is the local dir where we store the assessment reports. Default is home.
-BESMAN_ASSESSMENT_DATASTORE_DIR: $HOME/besecure-assessment-datastore #***
+BESMAN_ASSESSMENT_DATASTORE_DIR: $HOME/besecure-ml-assessment-datastore #***
 
 # BESMAN_ASSESSMENT_DATASTORE_URL - The remote repo where we store the assessment reports.
-BESMAN_ASSESSMENT_DATASTORE_URL: https://github.com/Be-Secure/besecure-assessment-datastore #***
+BESMAN_ASSESSMENT_DATASTORE_URL: https://github.com/Be-Secure/besecure-ml-assessment-datastore #***
 
+# BESMAN_COUNTERFIT_URL - The remote repo from CounterFit will be installed.
+BESMAN_COUNTERFIT_URL: https://github.com/Be-Secure/counterfit.git
+
+# BESMAN_COUNTERFIT_BRANCH - The remote repo branch
+BESMAN_COUNTERFIT_BRANCH: develop
+
+# BESMAN_COUNTERFIT_LOCAL_PATH - Path of counterfit dir in user system.
+BESMAN_COUNTERFIT_LOCAL_PATH: $HOME/counterfit

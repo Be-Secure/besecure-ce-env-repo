@@ -9,6 +9,14 @@ function __besman_install
     echo "-------------------------------------------------------"
     echo "CounterFit environment installation completed!"
     echo "-------------------------------------------------------"
+    if [[ -d $BESMAN_ASSESSMENT_DATASTORE_DIR ]] 
+    then
+        __besman_echo_white "ML Assessment datastore found at $BESMAN_ASSESSMENT_DATASTORE_DIR"
+    else
+        __besman_echo_white "Cloning ML assessment datastore from $BESMAN_USER_NAMESPACE/besecure-ml-assessment-datastore"
+        __besman_repo_clone "$BESMAN_USER_NAMESPACE" "besecure-ml-assessment-datastore" "$BESMAN_ASSESSMENT_DATASTORE_DIR" || return 1
+
+    fi
     bash
 }
 
@@ -60,7 +68,7 @@ function install_counterfit() {
     echo "Activating conda environment 'counterfit'..."
     conda activate counterfit
     echo "Cloning the CounterFit repository..."
-    git clone --single-branch --branch develop https://github.com/Be-Secure/counterfit.git
+    git clone --single-branch --branch $BESMAN_COUNTERFIT_BRANCH $BESMAN_COUNTERFIT_URL $BESMAN_COUNTERFIT_LOCAL_PATH
     cd counterfit
     echo "Installing Python packages from requirements.txt..."
     pip install -r requirements.txt
@@ -81,11 +89,11 @@ function uninstall_counterfit(){
     
     if [ "$AUTO_DELETE" = true ]; then
         echo "Removing the directory 'counterfit'..."
-        rm -rf $HOME/counterfit && echo "Directory 'counterfit' has been removed." || echo "Failed to remove the directory 'counterfit'."
+        rm -rf $BESMAN_COUNTERFIT_LOCAL_PATH && echo "Directory 'counterfit' has been removed." || echo "Failed to remove the directory 'counterfit'."
     else
         read -p "${bold}Do you want to remove the directory 'counterfit'? (y/n): " response
         if [[ "$response" == "y" || "$response" == "Y" || "$response" == "Yes" || "$response" == "yes" ]]; then
-            if rm -rf $HOME/counterfit; then
+            if rm -rf $BESMAN_COUNTERFIT_LOCAL_PATH; then
                 echo "Directory 'counterfit' has been removed."
             else
                 echo "Failed to remove the directory 'counterfit'."
