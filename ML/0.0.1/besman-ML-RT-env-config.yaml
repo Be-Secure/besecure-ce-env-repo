@@ -55,3 +55,14 @@ BESMAN_WATCHTOWER_TAG: v1.0.0
 
 # BESMAN_COUNTERFIT_LOCAL_PATH - Path of counterfit dir in user system.
 BESMAN_COUNTERFIT_LOCAL_PATH: $HOME/counterfit
+
+# BESMAN_REPO_TYPE - Type of repo user want to scan using watchtower [options: github, huggingface]
+BESMAN_REPO_TYPE: "github"
+
+# BESMAN_REPO_URL - model repo url for watchtower execution
+BESMAN_REPO_URL: "https://github.com/asa1997/bes-image-classification" 
+
+BESMAN_BRANCH_NAME: "main"          
+BESMAN_DEPTH_VAL: "1"             
+BESMAN_ARTIFACT_NAME: "bes-image-classification"
+BESMAN_WATCHTOWER_PATH: "$HOME/watchtower"
