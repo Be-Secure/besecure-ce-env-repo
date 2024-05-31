@@ -53,5 +53,28 @@ BESMAN_COUNTERFIT_BRANCH: develop
 # BESMAN_WATCHTOWER_BRANCH - The remote repo branch
 BESMAN_WATCHTOWER_TAG: v1.0.0
 
+# BESMAN_WATCHTOWER_PATH - watchtower tool path in user system
+BESMAN_WATCHTOWER_PATH: "$HOME/watchtower" # it is the default path, don't change it until required
+
 # BESMAN_COUNTERFIT_LOCAL_PATH - Path of counterfit dir in user system.
 BESMAN_COUNTERFIT_LOCAL_PATH: $HOME/counterfit
+
+
+### watchtower execution variables
+### ------------------------------
+
+# BESMAN_REPO_TYPE - Type of repo user want to scan using watchtower [options: github, huggingface]
+#BESMAN_REPO_TYPE: "github/huggingface"
+
+# BESMAN_REPO_URL - model repo url for watchtower execution [github / huggingface url]
+BESMAN_REPO_URL: "" 
+
+# BESMAN_BRANCH_NAME - branch name of BESMAN_REPO_URL for watchtower execution (applicable fir GitHub URL only)
+BESMAN_BRANCH_NAME: "main"  
+
+# BESMAN_DEPTH_VAL - default value is 1 (applicable fir GitHub URL only)
+BESMAN_DEPTH_VAL: "1"    
+
+# BESMAN_ARTIFACT_NAME - the ML model user wants to scan
+#BESMAN_ARTIFACT_NAME: ""
+
