@@ -88,6 +88,7 @@ function install_counterfit() {
     echo "Installing CounterFit tool..."
     pip install -e $BESMAN_COUNTERFIT_LOCAL_PATH
     python -c "import nltk;  nltk.download('stopwords')" && conda deactivate
+    conda config --set auto_activate_base false
 }
 
 function uninstall_counterfit(){
