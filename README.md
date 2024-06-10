@@ -191,7 +191,7 @@ To set it run,
 
     $ bes set BESMAN_USER_NAMESPACE <id>
 
-`Note: It is assumed that the source code repo as well as the assessment datastore repo has been forked to your namespace before you install an environment`
+`Note: It is assumed that the source code repo as well as the assessment datastore repo has been forked to your namespace before you install an environment. Make sure you have git configured in your system for a seamless experience.`
 
 ## 3. List environments
 
