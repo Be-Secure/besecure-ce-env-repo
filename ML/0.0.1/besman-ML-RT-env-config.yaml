@@ -8,7 +8,7 @@
 #*** - These variables should not be removed, nor left empty.
 
 # Project/ml model/training dataset
-BESMAN_ARTIFACT_TYPE: ml model
+BESMAN_ARTIFACT_TYPE: model
 
 # Name of the artifact under assessment.
 #BESMAN_ARTIFACT_NAME: ML #***
