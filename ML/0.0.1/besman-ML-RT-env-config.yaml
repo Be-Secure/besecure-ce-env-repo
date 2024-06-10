@@ -19,7 +19,7 @@ BESMAN_ARTIFACT_TYPE: model
 # Source code url of the artifact under assessment.
 #BESMAN_ARTIFACT_URL: https://github.com/Be-Secure/ML #***
 
-#BESMAN_ENV_NAME - This variable stores the name of the environment file.
+# This variable stores the name of the environment file.
 BESMAN_ENV_NAME: ML-RT-env #***
 
 # The path where you wish to clone the source code of the artifact under assessment.
