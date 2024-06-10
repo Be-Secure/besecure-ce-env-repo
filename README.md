@@ -205,12 +205,14 @@ From the list of environments (from list command) choose the environment you wis
 
     $ bes install -env <environment name> -V <version>
 
-`Note`: Each environment has a configuration file with it. If you wish to edit some environment configuration then run,
+### 4.1 Edit environment configuration 
 
-    1. Check if you have a file under your home directory under the name - besman-<environment name>-config.yaml.
-    2. If not then download the config file by editing the url below and executing the command
-       $ wget -P $HOME https://raw.githubusercontent.com/$BESMAN_ENV_REPOS/$BESMAN_ENV_REPO_BRANCH/<artifact name>/<artifact version>/besman-<environment name>-config.yaml
-    3. Open the file besman-<environment name>-config.yaml in an editor.
+Each environment has a configuration file with it. If you wish to edit some environment configuration then run,
+
+1. Check if you have a file under your home directory under the name - `besman-<environment name>-config.yaml`.
+2. If not then download the config file by editing the url below and executing the command
+    `$ wget -P $HOME https://raw.githubusercontent.com/$BESMAN_ENV_REPOS/$BESMAN_ENV_REPO_BRANCH/<artifact name>/<artifact version>/besman-<environment name>-config.yaml`
+3. Open the file `besman-<environment name>-config.yaml` in an editor.
     
 
 ## 5. Uninstall an environment
