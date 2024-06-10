@@ -11,13 +11,13 @@
 BESMAN_ARTIFACT_TYPE: model
 
 # Name of the artifact under assessment.
-#BESMAN_ARTIFACT_NAME: ML #***
+BESMAN_ARTIFACT_NAME: ""
 
 # Version of the artifact under assessment.
-#BESMAN_ARTIFACT_VERSION: #Enter the version of the artifact here. #***
+BESMAN_ARTIFACT_VERSION: ""
 
 # Source code url of the artifact under assessment.
-#BESMAN_ARTIFACT_URL: https://github.com/Be-Secure/ML #***
+BESMAN_ARTIFACT_URL: ""
 
 # This variable stores the name of the environment file.
 BESMAN_ENV_NAME: ML-RT-env #***
