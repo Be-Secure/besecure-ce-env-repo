@@ -176,6 +176,61 @@ In this environment script, you will have to right all the required steps to ins
         
     }
 
+
+# Usage
+
+## 1. Install BeSman
+
+Install BeSman cli by referring this [link](https://github.com/Be-Secure/BeSman?tab=readme-ov-file#installation).
+
+## 2. Set your GitHub/GitLab id
+
+The environment will use the variable `BESMAN_USER_NAMESPACE` to clone the source code repo and assessment datastore repo from your namespace.
+
+To set it run,
+
+    $ bes set BESMAN_USER_NAMESPACE <id>
+
+`Note: It is assumed that the source code repo as well as the assessment datastore repo has been forked to your namespace before you install an environment. Make sure you have git configured in your system for a seamless experience.`
+
+## 3. List environments
+
+BeSman has a set of available environments. To get it, run the below command.
+
+    $ bes list -env
+
+## 4. Install an environment
+
+From the list of environments (from list command) choose the environment you wish to install.
+
+    $ bes install -env <environment name> -V <version>
+
+### 4.1 Edit environment configuration 
+
+Each environment has a configuration file with it. If you wish to edit some environment configuration then run,
+
+1. Check if you have a file under your home directory under the name - `besman-<environment name>-config.yaml`.
+2. If not then download the config file by editing the url below and executing the command
+    `$ wget -P $HOME https://raw.githubusercontent.com/$BESMAN_ENV_REPOS/$BESMAN_ENV_REPO_BRANCH/<artifact name>/<artifact version>/besman-<environment name>-config.yaml`
+3. Open the file `besman-<environment name>-config.yaml` in an editor.
+    
+
+## 5. Uninstall an environment
+
+To uninstall an environment run the below command,
+
+    $ bes uninstall -env <environment name> -V <version>
+
+## 6. Other commands
+
+You can get the complete list of commands using 
+
+    $ bes help
+
+For more info regarding a command,
+
+    $ bes help <command>
+
 # Available environments.
 
 ## RT Environments
@@ -184,13 +239,15 @@ In this environment script, you will have to right all the required steps to ins
 2. [jackson-databind](jackson-databind/0.0.1/besman-jackson-databind-RT-env.sh)
 3. [opencti](opencti/0.0.1/besman-opencti-RT-env.sh)
 4. [zaproxy](zaproxy/0.0.1/besman-zaproxy-RT-env.sh)
+5. [ML Assessment](ML/0.0.1/besman-ML-RT-env.sh)
 
 
 ## BT Environments
 
 1. [Fastjson](fastjson/0.0.1/besman-fastjson-BT-env.sh)
-2. [HWC_API](HWC-API/0.0.1/besman-HWC-API-BT-env.sh)
+2. [HWC-API](HWC-API/0.0.1/besman-HWC-API-BT-env.sh)
 3. [jackson-core](jackson-core/0.0.1/besman-jackson-core-BT-env.sh)
 4. [jackson-databind](jackson-databind/0.0.1/besman-jackson-databind-BT-env.sh)
 5. [lettuce](lettuce/0.0.1/besman-lettuce-BT-env.sh)
 6. [zaproxy](zaproxy/0.0.1/besman-zaproxy-BT-env.sh)
+7. [druid](druid/0.0.1/besman-druid-BT-env.sh)

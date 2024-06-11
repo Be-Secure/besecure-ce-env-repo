@@ -24,7 +24,7 @@ BESMAN_ENV_NAME: ML-RT-env
 
 # The path where you wish to clone the source code of the artifact under assessment.
 # If you wish to change the clone path, provide the complete path.
-#BESMAN_ARTIFACT_DIR: $HOME/$BESMAN_ARTIFACT_NAME #***
+#BESMAN_ARTIFACT_DIR: $HOME/$BESMAN_ARTIFACT_NAME
 
 # The path where we download the assessment and other required tools during installation.
 BESMAN_TOOL_PATH: /opt #***
