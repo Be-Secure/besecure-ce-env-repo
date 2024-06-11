@@ -148,7 +148,7 @@ function install_watchtower(){
 
     echo "Cloning the Watchtower repository..."
     if [ ! -d "$HOME/watchtower/" ]; then
-        git clone --branch $BESMAN_WATCHTOWER_TAG --depth 1 $BESMAN_WATCHTOWER_URL $HOME/watchtower/
+        git clone --branch $BESMAN_WATCHTOWER_VERSION --depth 1 $BESMAN_WATCHTOWER_URL $HOME/watchtower/
     fi
 
     echo "Installing Watchtower dependencies..."
