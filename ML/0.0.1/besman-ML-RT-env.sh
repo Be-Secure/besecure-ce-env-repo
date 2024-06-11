@@ -2,6 +2,7 @@
 
 function __besman_install
 {
+    __besman_check_github_id || return 1
     echo "------------------------------------------------------"
     echo "Starting CounterFit Installation..."
     echo "------------------------------------------------------"
