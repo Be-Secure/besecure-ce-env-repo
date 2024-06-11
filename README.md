@@ -213,6 +213,7 @@ Each environment has a configuration file with it. If you wish to edit some envi
     `$ wget -P $HOME https://raw.githubusercontent.com/$BESMAN_ENV_REPOS/$BESMAN_ENV_REPO_BRANCH/<artifact name>/<artifact version>/besman-<environment name>-config.yaml`
 
 3. Open the file `besman-<environment name>-config.yaml` in an editor.
+4. Run the `install` command and BeSman will use this configuration for your environment.
 
 ### 4.2 Install command
 
