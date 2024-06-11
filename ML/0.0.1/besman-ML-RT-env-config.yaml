@@ -20,7 +20,7 @@ BESMAN_ARTIFACT_VERSION: ""
 BESMAN_ARTIFACT_URL: ""
 
 # This variable stores the name of the environment file.
-BESMAN_ENV_NAME: ML-RT-env #***
+BESMAN_ENV_NAME: ML-RT-env
 
 # The path where you wish to clone the source code of the artifact under assessment.
 # If you wish to change the clone path, provide the complete path.
@@ -54,7 +54,7 @@ BESMAN_COUNTERFIT_BRANCH: develop
 BESMAN_WATCHTOWER_TAG: v1.0.0
 
 # Watchtower tool path in user system
-BESMAN_WATCHTOWER_PATH: "$HOME/watchtower" # it is the default path, don't change it until required
+BESMAN_WATCHTOWER_PATH: "$HOME/watchtower" # It is the default path, don't change it until required
 
 # Path of counterfit dir in user system.
 BESMAN_COUNTERFIT_LOCAL_PATH: $HOME/counterfit
@@ -63,16 +63,16 @@ BESMAN_COUNTERFIT_LOCAL_PATH: $HOME/counterfit
 ### Watchtower execution variables
 ### ------------------------------
 
-# Type of repo user want to scan using Watchtower [options: github, huggingface]
+# Type of repo user wants to scan using Watchtower [options: github, huggingface]
 BESMAN_TARGET_REPO_TYPE: ""
 
 # Model repo url for watchtower execution [github / huggingface url]
-BESMAN_TARGET_REPO_URL: "" 
+BESMAN_TARGET_REPO_URL: ""
 
 # Branch name of target repo for watchtower execution (applicable for GitHub only)
-BESMAN_TARGET_BRANCH_NAME: "main"  
+BESMAN_TARGET_BRANCH_NAME: "main"
 
-# Default value is 1 (applicable fir GitHub URL only)
-BESMAN_TARGET_DEPTH_VAL: "1"    
+# Default value is 1 (applicable for GitHub only)
+BESMAN_TARGET_DEPTH_VAL: "1"
 
 
