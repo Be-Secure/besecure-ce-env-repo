@@ -201,19 +201,24 @@ BeSman has a set of available environments. To get it, run the below command.
 
 ## 4. Install an environment
 
-From the list of environments (from list command) choose the environment you wish to install.
-
-    $ bes install -env <environment name> -V <version>
-
-### 4.1 Edit environment configuration 
+### 4.1 Edit environment configuration(optional)
 
 Each environment has a configuration file with it. If you wish to edit some environment configuration then run,
 
+`IMPORTANT: If you are using a common environment to assess multiple artifacts, you will have to do this step.`
+
 1. Check if you have a file under your home directory under the name - `besman-<environment name>-config.yaml`.
-2. If not then download the config file by editing the url below and executing the command
+2. If not, then download the config file by editing the url below and executing the command
+   
     `$ wget -P $HOME https://raw.githubusercontent.com/$BESMAN_ENV_REPOS/$BESMAN_ENV_REPO_BRANCH/<artifact name>/<artifact version>/besman-<environment name>-config.yaml`
+
 3. Open the file `besman-<environment name>-config.yaml` in an editor.
-    
+
+### 4.2 Install command
+
+From the list of environments (from list command) choose the environment you wish to install.
+
+    $ bes install -env <environment name> -V <version>
 
 ## 5. Uninstall an environment
 
