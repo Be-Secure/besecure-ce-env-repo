@@ -15,7 +15,7 @@ BESMAN_ARTIFACT_TYPE: project
 BESMAN_ARTIFACT_NAME: opencti
 
 # Version of the artifact under assessment.
-BESMAN_ARTIFACT_VERSION: 5.12.29 #Enter the version of the artifact here.
+BESMAN_ARTIFACT_VERSION: 5.12.29
 
 # Source code url of the artifact under assessment.
 BESMAN_ARTIFACT_URL: https://github.com/Be-Secure/opencti
@@ -47,7 +47,8 @@ BESMAN_ANSIBLE_ROLES_PATH: $BESMAN_DIR/tmp/$BESMAN_ARTIFACT_NAME/roles
 
 # The list of tools you wish to install. The tools are installed using ansible roles.# To get the list of ansible roles run 
 #   $ bes list --role
-BESMAN_ANSIBLE_ROLES: Be-Secure/ansible-role-oah-maven #add the roles here. format - <Github id>/<repo name>,<Github id>/<repo name>,<Github id>/<repo name>,...
+ #add the roles here. format - <Github id>/<repo name>,<Github id>/<repo name>,<Github id>/<repo name>,...
+BESMAN_ANSIBLE_ROLES: Be-Secure/ansible-role-oah-maven
 
 # Sets the path of the playbook with which we run the ansible roles.
 # Default path is ~/.besman/tmp/<artifact name dir>/
