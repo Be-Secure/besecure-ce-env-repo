@@ -78,17 +78,17 @@ function install_counterfit() {
     fi
     eval "$(conda shell.bash hook)"
     echo "Creating conda environment 'counterfit'..."
-    conda update -c conda-forge --all -y
+    conda update conda -y
     conda create --yes -n counterfit python=3.8.0
     echo "Activating conda environment 'counterfit'..."
     conda activate counterfit
     echo "Cloning the CounterFit repository..."
     git clone --single-branch --branch $BESMAN_COUNTERFIT_BRANCH $BESMAN_COUNTERFIT_URL $BESMAN_COUNTERFIT_LOCAL_PATH
     echo "Installing Python packages from requirements.txt..."
-    pip install -r $BESMAN_COUNTERFIT_LOCAL_PATH/requirements.txt
+    python3 -m pip install -r $BESMAN_COUNTERFIT_LOCAL_PATH/requirements.txt
     echo "Installing CounterFit tool..."
-    pip install -e $BESMAN_COUNTERFIT_LOCAL_PATH
-    python -c "import nltk;  nltk.download('stopwords')" && conda deactivate
+    python3 -m pip install -e $BESMAN_COUNTERFIT_LOCAL_PATH
+    python3 -c "import nltk;  nltk.download('stopwords')" && conda deactivate
     conda config --set auto_activate_base false
 }
 
