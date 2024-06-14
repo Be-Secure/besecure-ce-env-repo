@@ -17,11 +17,18 @@ function __besman_install
     echo "------------------------------------------------------"
     echo "Watchtower environment installation completed!"
     echo "------------------------------------------------------"
+    echo "------------------------------------------------------"
+    echo "Starting Cosign Installation..."
+    echo "------------------------------------------------------"
+    install_cosign
+    echo "------------------------------------------------------"
+    echo "Cosign environment installation completed!"
+    echo "------------------------------------------------------"
     if [[ -d $BESMAN_ASSESSMENT_DATASTORE_DIR ]] 
     then
-        __besman_echo_white "ML Assessment datastore found at $BESMAN_ASSESSMENT_DATASTORE_DIR"
+        __besman_echo_white "Classic model Assessment datastore found at $BESMAN_ASSESSMENT_DATASTORE_DIR"
     else
-        __besman_echo_white "Cloning ML assessment datastore from $BESMAN_USER_NAMESPACE/besecure-ml-assessment-datastore"
+        __besman_echo_white "Cloning classic model assessment datastore from $BESMAN_USER_NAMESPACE/besecure-ml-assessment-datastore"
         __besman_repo_clone "$BESMAN_USER_NAMESPACE" "besecure-ml-assessment-datastore" "$BESMAN_ASSESSMENT_DATASTORE_DIR" || return 1
 
     fi
@@ -43,6 +50,13 @@ function __besman_uninstall
     uninstall_watchtower
     echo "-------------------------------------------------------"
     echo "Watchtower environment uninstallation completed!"
+    echo "-------------------------------------------------------"
+    echo "-------------------------------------------------------"
+    echo "Starting Cosign Uninstallation..."
+    echo "-------------------------------------------------------"
+    uninstall_cosign
+    echo "-------------------------------------------------------"
+    echo "Cosign environment uninstallation completed!"
     echo "-------------------------------------------------------"
     bash
 }
@@ -171,5 +185,21 @@ function uninstall_watchtower(){
         rm -rf $HOME/watchtower/
     else
         echo "Watchtower repository directory not found."
+    fi
+}
+
+function install_cosign(){
+    if [[ -z $(which cosign) ]];then
+          LATEST_VERSION=$(curl https://api.github.com/repos/sigstore/cosign/releases/latest | grep tag_name | cut -d : -f2 | tr -d "v\", ")
+          curl --silent -O -L "https://github.com/sigstore/cosign/releases/latest/download/cosign_${LATEST_VERSION}_amd64.deb" 2>&1>/dev/null
+          sudo dpkg -i cosign_${LATEST_VERSION}_amd64.deb 2>&1>/dev/null
+	  [[ -f  cosign_${LATEST_VERSION}_amd64.deb ]] && rm -rf cosign_${LATEST_VERSION}_amd64.deb
+    fi
+}
+
+function uninstall_cosign(){
+    if [[ ! -z $(which cosign 2>&1>/dev/null) ]];then
+       sudo apt purge cosign
+       sudo apt autoremove
     fi
 }
