@@ -36,44 +36,45 @@ function __besman_install {
 
     # Please add the rest of the code here for installation
 
+    detect_container_runtime() {
 
-    # Check if Container Runtime is installed
+            # Check if Container Runtime is installed
 
-    echo -e "\n Looking for Container runtime.."
+            echo -e "\n Looking for Container runtime.."
 
-    export container_runtime=""
+            export container_runtime=""
 
-    if command -v podman &>/dev/null; then
-         echo -e "\n PODMAN Detected. "
-         export Container_runtime="podman"
+            if command -v podman &>/dev/null; then
+                echo -e "\n PODMAN Detected. "
+                export Container_runtime="podman"
 
-         # Installing PODMAN in Linux
+                # Installing PODMAN in Linux
 
-        if podman info 2>&1 | grep -q "Error: unable to connect to Podman"; then
-                echo -e "\n PODMAN needs to be initialised. Initializing.."
+                if podman info 2>&1 | grep -q "Error: unable to connect to Podman"; then
+                        echo -e "\n PODMAN needs to be initialised. Initializing.."
 
-                podman machine start podman-machine-default
-                podman machine init
-                sleep 30
+                        podman machine start podman-machine-default
+                        podman machine init
+                        sleep 30
 
-                while true; do
-                    if podman info 2>&1 | grep -q "Machine init complete"; then
-                        echo -e "\n Podman is Ready ! \n"
-                        break
-                    fi
-                    sleep 1
-                done
+                        while true; do
+                            if podman info 2>&1 | grep -q "Machine init complete"; then
+                                echo -e "\n Podman is Ready ! \n"
+                                break
+                            fi
+                            sleep 1
+                        done
 
-        fi
+                fi
 
-    elif command -v docker &>/dev/null; then
-        echo -e "\n Docker is  Detected. "
-        export Container_runtime="docker"
-    else
-        echo -e "\n No Container Runtime detected. Installing a Container Runtime !"
-        install_container_runtime
-    fi
-
+            elif command -v docker &>/dev/null; then
+                echo -e "\n Docker is  Detected. "
+                export Container_runtime="docker"
+            else
+                echo -e "\n No Container Runtime detected. Installing a Container Runtime !"
+                install_container_runtime
+            fi
+    }
 
     # Install Container Runtime 
 
