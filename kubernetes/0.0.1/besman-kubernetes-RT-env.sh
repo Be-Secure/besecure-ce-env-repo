@@ -20,7 +20,7 @@ function __besman_install {
     if [[ -d $BESMAN_ARTIFACT_DIR ]]; then
         __besman_echo_white "The clone path already contains dir names $BESMAN_ARTIFACT_NAME"
     else
-        __besman_echo_white "Cloning source code repo from $BESMAN_USER_NAMESPACE/$BESMAN_ARTIFACT_NAME"
+          "Cloning source code repo from $BESMAN_USER_NAMESPACE/$BESMAN_ARTIFACT_NAME"
         __besman_repo_clone "$BESMAN_USER_NAMESPACE" "$BESMAN_ARTIFACT_NAME" "$BESMAN_ARTIFACT_DIR" || return 1
         cd "$BESMAN_ARTIFACT_DIR" && git checkout -b "$BESMAN_ARTIFACT_VERSION"_tavoss "$BESMAN_ARTIFACT_VERSION"
         cd "$HOME"
@@ -36,22 +36,22 @@ function __besman_install {
 
     # Please add the rest of the code here for installation
 
-    detect_container_runtime() {
+    __besman_detect_container_runtime() {
 
             # Check if Container Runtime is installed
 
-            echo -e "\n Looking for Container runtime.."
+            __besman_echo_white  "\n Looking for Container runtime.."
 
             export container_runtime=""
 
             if command -v podman &>/dev/null; then
-                echo -e "\n PODMAN Detected. "
+                __besman_echo_white  "\n PODMAN Detected. "
                 export Container_runtime="podman"
 
                 # Installing PODMAN in Linux
 
                 if podman info 2>&1 | grep -q "Error: unable to connect to Podman"; then
-                        echo -e "\n PODMAN needs to be initialised. Initializing.."
+                        __besman_echo_white  "\n PODMAN needs to be initialised. Initializing.."
 
                         podman machine start podman-machine-default
                         podman machine init
@@ -59,7 +59,7 @@ function __besman_install {
 
                         while true; do
                             if podman info 2>&1 | grep -q "Machine init complete"; then
-                                echo -e "\n Podman is Ready ! \n"
+                                __besman_echo_white  "\n Podman is Ready ! \n"
                                 break
                             fi
                             sleep 1
@@ -68,47 +68,47 @@ function __besman_install {
                 fi
 
             elif command -v docker &>/dev/null; then
-                echo -e "\n Docker is  Detected. "
+                __besman_echo_white  "\n Docker is  Detected. "
                 export Container_runtime="docker"
             else
-                echo -e "\n No Container Runtime detected. Installing a Container Runtime !"
+                __besman_echo_white  "\n No Container Runtime detected. Installing a Container Runtime !"
                 install_container_runtime
             fi
     }
 
     # Install Container Runtime 
 
-    install_container_runtime() {
+    __besman_install_container_runtime() {
 
 
         case "$(uname -s)" in
                     Linux*)
-                        install_podman_linux
+                        __besman_install_podman_linux
                         ;;
                     Darwin*)
                         if ! command -v brew &>/dev/null; then
-                            echo -e "\n Homebrew not found. Installing Homebrew..."
+                            __besman_echo_white  "\n Homebrew not found. Installing Homebrew..."
                             /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
                         fi
                         install_podman_mac
                         ;;
                     MINGW*|MSYS*|CYGWIN*)
                         if ! command -v choco &>/dev/null; then
-                            echo -e "\n We Use Chocolatey to install Package On Windows. You may install Chocolatey from https://chocolatey.org/install"
+                            __besman_echo_white  "\n We Use Chocolatey to install Package On Windows. You may install Chocolatey from https://chocolatey.org/install"
                             exit 1
                         fi
-                        install_podman_windows
+                        __besman_install_podman_windows
                         ;;
                     *)
-                        echo -e "\n Sorry ! Wecould not recognise your OS ! \n Dont worry, Let us know your operating sytem , we will improve it :-) operating system."
+                        __besman_echo_white  "\n Sorry ! Wecould not recognise your OS ! \n Dont worry, Let us know your operating sytem , we will improve it :-) operating system."
                         exit 1
                         ;;
                 esac
 
-                echo -e "\n Podman installation complete !"
+                __besman_echo_white  "\n Podman installation complete !"
 
                 # Installing PODMAN in Linux
-                install_podman_linux() {
+                __besman_install_podman_linux() {
                     
 
                     . /etc/os-release
@@ -124,17 +124,17 @@ function __besman_install {
                             sudo yum -y install podman
                             ;;
                         *)
-                            echo -e "\n Sorry ! Wecould not recognise your OS ! \n Dont worry, Let us know your operating sytem , we will improve it :-) operating system."
+                            __besman_echo_white  "\n Sorry ! Wecould not recognise your OS ! \n Dont worry, Let us know your operating sytem , we will improve it :-) operating system."
                             exit 1
                             ;;
                     esac
                 }
                 # Installing PODMAN in Mac
-                install_podman_mac() {
+                __besman_install_podman_mac() {
                     brew install podman
                 }
                 # Installing PODMAN in Windows:
-                install_podman_windows() {
+                __besman_install_podman_windows() {
                     choco install podman
                 }
 
@@ -146,29 +146,29 @@ function __besman_install {
     # Python3 and PIP Installation :
 
 
-            check_and_install_python_pip() {
+            __besman_check_and_install_python_pip() {
                 if ! command -v python3 &>/dev/null || ! command -v pip3 &>/dev/null; then
                     case "$(uname -s)" in
                         Linux*)
-                            install_python_pip_linux
+                            __besman_install_python_pip_linux
                             ;;
                         Darwin*)
-                            install_python_pip_mac
+                            __besman_install_python_pip_mac
                             ;;
                         MINGW*|MSYS*|CYGWIN*)
-                            install_python_pip_windows
+                            __besman_install_python_pip_windows
                             ;;
                         *)
-                            echo -e "\n Sorry ! Wecould not recognise your OS ! \n Dont worry, Let us know your operating sytem , we will improve it :-) operating system."
+                            __besman_echo_white  "\n Sorry ! Wecould not recognise your OS ! \n Dont worry, Let us know your operating sytem , we will improve it :-) operating system."
                             exit 1
                             ;;
                     esac
                 else
-                    echo -e "\n Python 3 and pip are already installed."
+                    __besman_echo_white  "\n Python 3 and pip are already installed."
                 fi
             }
 
-            install_python_pip_linux() {
+            __besman_install_python_pip_linux() {
                 . /etc/os-release
                 case "$ID" in
                     ubuntu|debian)
@@ -182,45 +182,45 @@ function __besman_install {
                         sudo yum -y install python3 python3-pip
                         ;;
                     *)
-                        echo -e "\n Sorry ! Wecould not recognise your OS ! \n Dont worry, Let us know your operating sytem , we will improve it :-) operating system."
+                        __besman_echo_white  "\n Sorry ! Wecould not recognise your OS ! \n Dont worry, Let us know your operating sytem , we will improve it :-) operating system."
                         exit 1
                         ;;
                 esac
             }
 
-            install_python_pip_mac() {
+            __besman_install_python_pip_mac() {
                 if ! command -v brew &>/dev/null; then
-                    echo -e "Homebrew not found. Installing Homebrew..."
+                    __besman_echo_white  "Homebrew not found. Installing Homebrew..."
                     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
                 fi
                 brew install python
             }
 
-            install_python_pip_windows() {
+            __besman_install_python_pip_windows() {
                 if ! command -v choco &>/dev/null; then
-                    echo -e "\n Chocolatey not found. Please install Chocolatey from https://chocolatey.org/install"
+                    __besman_echo_white  "\n Chocolatey not found. Please install Chocolatey from https://chocolatey.org/install"
                     exit 1
                 fi
                 choco install -y python
             }
 
 
-    echo -e "\n Setting Up SonarQube"
+    __besman_echo_white  "\n Setting Up SonarQube"
 
-    preparing_sonar_qube(){
+    __besman_preparing_sonar_qube(){
     
-    container_tool_setup sonarqube 9000 9000
+    __besman_container_tool_setup sonarqube 9000 9000
 
 
     }
 
-    preparing_fosology(){
+    __besman_preparing_fosology(){
 
-        container_tool_setup fosology 8081 80
+        __besman_container_tool_setup fosology 8081 80
 
     }
 
-    container_tool_setup(){
+    __besman_container_tool_setup(){
 
         local container_toolname="$1"
         local container_port="$2"
@@ -231,43 +231,43 @@ function __besman_install {
         # Check the status of SonarQube container
 
         if $container_runtime inspect $container_toolname &>/dev/null; then
-            echo -e "\n SonarQube container exists."
+            __besman_echo_white  "\n SonarQube container exists."
 
             container_status=$($container_runtime inspect --format='{{.State.Status}}' $container_toolname)
 
             if [ "$container_status" == "running" ]; then
 
-                echo -e "\n $container_toolname container is running."
+                __besman_echo_white  "\n $container_toolname container is running."
 
-                print_container_url
+                __besman_print_container_url
 
             else
-                echo -e "\n $container_toolname container is not running. Current status: $container_status"
+                __besman_echo_white  "\n $container_toolname container is not running. Current status: $container_status"
             fi
             
         else
-            echo -e "\n $container_toolname container does not exist. Installing Now."
-            install_container
+            __besman_echo_white  "\n $container_toolname container does not exist. Installing Now."
+            __besman_install_container
         fi
 
             }
 
-        install_container(){
+        __besman_install_container(){
 
-            echo -e "\n Pulling $container_toolname image..."
+            __besman_echo_white  "\n Pulling $container_toolname image..."
             $container_runtime pull $container_toolname:latest
 
-            echo -e "\n Running $container_toolname container..."
+            __besman_echo_white  "\n Running $container_toolname container..."
             $container_runtime run -d --name $container_toolname -p $container_port:$port_forwad_port $container_toolname:latest
-            print_container_url
+            __besman_print_container_url
         }
 
-        print_container_url()  {       
+        __besman_print_container_url()  {       
         container_ip=$("$Container_runtime" inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' "$container_toolname")
 
         # Print the SonarQube server URL
 
-        echo -e "\n You $container_runtime server is running at http://$container_ip:$port_forwad_port"
+        __besman_echo_white  "\n You $container_runtime server is running at http://$container_ip:$port_forwad_port"
 
         }
     }
@@ -279,7 +279,7 @@ function __besman_install {
 
     # Setup snyk
 
-    echo -e "\n All set-up for Kubernetes, Enjoy Hacking K8s !"
+    __besman_echo_white  "\n All set-up for Kubernetes, Enjoy Hacking K8s !"
 }
 
 function __besman_uninstall {
@@ -321,7 +321,7 @@ function __besman_uninstall {
 
     # }
 
-    echo -e "We have cleaned up Your WorkSpace"
+    __besman_echo_white  "We have cleaned up Your WorkSpace"
 
 }
 
