@@ -1,0 +1,117 @@
+# .gitignore for shell and python projects
+
+# Ignore compiled python files
+__pycache__/
+*.py[cod]
+
+# Ignore Jupyter Notebook checkpoints
+.ipynb_checkpoints
+
+# Ignore environment directories
+env/
+venv/
+ENV/
+.venv/
+.VENV/
+
+# Ignore virtualenv and pipenv files
+*.env
+*.venv
+Pipfile.lock
+
+# Ignore pyenv directory
+.pyenv
+
+# Ignore python egg files
+*.egg
+*.egg-info/
+dist/
+build/
+eggs/
+parts/
+sdist/
+develop-eggs/
+.installed.cfg
+lib/
+lib64/
+
+# Ignore setuptools distribution folder
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Ignore wheel distribution folder
+*.whl
+
+# Ignore coverage reports
+.coverage
+*.cover
+.hypothesis/
+*.hyp
+.cache
+nosetests.xml
+coverage.xml
+*.coveragerc
+
+# Ignore mypy type checking files
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Ignore pytest
+.pytest_cache/
+
+# Ignore bandit
+.bandit/
+
+# Ignore pyright
+.pyright/
+.pyrightconfig.json
+
+# Ignore shell temporary files
+*.swp
+*~
+.*.swp
+.*~
+
+# Ignore vim temporary files
+*.swo
+*.swp
+.*.swo
+.*.swp
+
+# Ignore macOS generated files
+.DS_Store
+
+# Ignore backup files
+*.bak
+*.tmp
+
+# Ignore log files
+*.log
+
+# Ignore other generated files
+*.manifest
+*.spec
+
+# Ignore local IDE configurations (example for VSCode and PyCharm)
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Ignore pytest cache
+.pytest_cache/
+
+# Ignore pipenv files
+Pipfile.lock
+
+# Ignore tox files
+.tox/
+
+# Ignore coverage reports
+coverage/
+
+# Ignore pyenv local file
+.python-version
