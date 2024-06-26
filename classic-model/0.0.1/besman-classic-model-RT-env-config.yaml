@@ -10,50 +10,50 @@
 # Project/ml model/training dataset
 BESMAN_ARTIFACT_TYPE: model
 
-# Name of the artifact under assessment.
+# Name of artifact under assessment.
 BESMAN_ARTIFACT_NAME: ""
 
-# Version of the artifact under assessment.
+# Version of artifact under assessment.
 BESMAN_ARTIFACT_VERSION: ""
 
-# Source code url of the artifact under assessment.
+# Source code url of artifact under assessment.
 BESMAN_ARTIFACT_URL: ""
 
-# This variable stores the name of the environment file.
+# Name of environment.
 BESMAN_ENV_NAME: ML-RT-env
 
-# The path where you wish to clone the source code of the artifact under assessment.
+# Path to clone source code of artifact under assessment.
 # If you wish to change the clone path, provide the complete path.
 #BESMAN_ARTIFACT_DIR: $HOME/$BESMAN_ARTIFACT_NAME
 
-# The path where we download the assessment and other required tools during installation.
+# Path to download assessment and other required tools during installation.
 BESMAN_TOOL_PATH: /opt #***
 
-# Organization. This variable indicates the individual's lab affiliation
+# Organization/lab/individual.
 BESMAN_LAB_TYPE: Organization #***
 
-# Name of the lab. Default is Be-Secure. This variable indicates the individual's lab affiliation
+# Name of owner of lab. Default is Be-Secure.
 BESMAN_LAB_NAME: Be-Secure #***
 
-# This is the local dir where we store the assessment reports. Default is home.
+# Local dir to store assessment reports. Default is home.
 BESMAN_ASSESSMENT_DATASTORE_DIR: $HOME/besecure-ml-assessment-datastore #***
 
-# The remote repo where we store the assessment reports.
+# Remote repo to store assessment reports.
 BESMAN_ASSESSMENT_DATASTORE_URL: https://github.com/Be-Secure/besecure-ml-assessment-datastore #***
 
-# The remote repo from CounterFit will be installed.
+# Remote repo from CounterFit will be installed.
 BESMAN_COUNTERFIT_URL: https://github.com/Be-Secure/counterfit.git
 
-# The remote repo from watchtower will be installed.
+# Remote repo from watchtower will be installed.
 BESMAN_WATCHTOWER_URL: https://github.com/bosch-aisecurity-aishield/watchtower.git
 
-# The remote repo branch
+# CounterFit remote repo branch
 BESMAN_COUNTERFIT_BRANCH: develop
 
-# The remote repo branch
-BESMAN_WATCHTOWER_TAG: v1.0.0
+# Watchtower release version
+BESMAN_WATCHTOWER_VERSION: v1.0.0
 
-# Watchtower tool path in user system
+# Watchtower path in user system
 BESMAN_WATCHTOWER_PATH: "$HOME/watchtower" # It is the default path, don't change it until required
 
 # Path of counterfit dir in user system.
@@ -65,9 +65,6 @@ BESMAN_COUNTERFIT_LOCAL_PATH: $HOME/counterfit
 
 # Type of repo user wants to scan using Watchtower [options: github, huggingface]
 BESMAN_TARGET_REPO_TYPE: ""
-
-# Model repo url for watchtower execution [github / huggingface url]
-BESMAN_TARGET_REPO_URL: ""
 
 # Branch name of target repo for watchtower execution (applicable for GitHub only)
 BESMAN_TARGET_BRANCH_NAME: "main"

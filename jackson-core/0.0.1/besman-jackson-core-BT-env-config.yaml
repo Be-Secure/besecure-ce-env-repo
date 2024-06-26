@@ -12,60 +12,60 @@ BESMAN_ORG: Be-Secure
 #  project/ml model/training dataset
 BESMAN_ARTIFACT_TYPE: project 
 
-# Name of the artifact under assessment.
+# Name of artifact under assessment.
 BESMAN_ARTIFACT_NAME: jackson-core
 
-# Version of the artifact under assessment.
+# Version of artifact under assessment.
 BESMAN_ARTIFACT_VERSION: jackson-core-2.16.1
 
-# Source code url of the artifact under assessment.
+# Source code url of artifact under assessment.
 BESMAN_ARTIFACT_URL: https://github.com/Be-Secure/jackson-core
 
-# This variable stores the name of the environment file.
+# Name of environment.
 BESMAN_ENV_NAME: jackson-core-BT-env
 
-# The path where you wish to clone the source code of the artifact under assessment.
+# Path to clone source code of artifact under assessment.
 # If you wish to change the clone path, provide the complete path.
 BESMAN_ARTIFACT_DIR: $HOME/$BESMAN_ARTIFACT_NAME
 
-# The path where we download the assessment and other required tools during installation.
+# Path to download assessment and other required tools during installation.
 BESMAN_TOOL_PATH: /opt
 
 # Organization/lab/individual.
 BESMAN_LAB_TYPE: Organization
 
-# Name of the owner of the lab. Default is Be-Secure.
+# Name of lab owner. Default is Be-Secure.
 BESMAN_LAB_NAME: Be-Secure
 
-# This is the local dir where we store the assessment reports. Default is home.
+# Local dir to store assessment reports. Default is home.
 BESMAN_ASSESSMENT_DATASTORE_DIR: $HOME/besecure-assessment-datastore
 
-# The remote repo where we store the assessment reports.
+# Remote repo to store assessment reports.
 BESMAN_ASSESSMENT_DATASTORE_URL: https://github.com/Be-Secure/besecure-assessment-datastore
 
-# The path where we download the ansible role of the assessment tools and other utilities
+# Path to download ansible role of assessment tools and other utilities
 BESMAN_ANSIBLE_ROLES_PATH: $BESMAN_DIR/tmp/$BESMAN_ARTIFACT_NAME/roles
 
-# The list of tools you wish to install. The tools are installed using ansible roles.# To get the list of ansible roles run 
+# List of tools to install. Tools are installed using ansible roles.# To get the list of ansible roles run 
 #   $ bes list --role
 #add the roles here. format - <Github id>/<repo name>,<Github id>/<repo name>,<Github id>/<repo name>,...
 BESMAN_ANSIBLE_ROLES: Be-Secure/ansible-role-bes-java,Be-Secure/ansible-role-oah-maven,Be-Secure/ansible-role-oah-eclipse 
 
-# Sets the path of the playbook with which we run the ansible roles.
+# Path of the playbook with which we run the ansible roles.
 # Default path is ~/.besman/tmp/<artifact name dir>/
 BESMAN_ARTIFACT_TRIGGER_PLAYBOOK_PATH: $BESMAN_DIR/tmp/$BESMAN_ARTIFACT_NAME
 
-# Name of the trigger playbook which runs the ansible roles.
+# Name of trigger playbook which runs the ansible roles.
 BESMAN_ARTIFACT_TRIGGER_PLAYBOOK: besman-$BESMAN_ARTIFACT_NAME-BT-trigger-playbook.yaml
 
-# If the users likes to display all the skipped steps, set it to true.
+# Display all the skipped steps, set it to true.
 # Default value is false
 BESMAN_DISPLAY_SKIPPED_ANSIBLE_HOSTS: false
 
 
-# The default values of the ansible roles will be present in their respective repos.
-# You can go to https://github.com/Be-Secure/<repo of the ansible role>/blob/main/defaults/main.yml.
-# If you wish to change the default values copy the variable from the https://github.com/Be-Secure/<repo of the ansible role>/blob/main/defaults/main.yml
+# Default values of ansible roles will be present in their respective repos.
+# Check https://github.com/Be-Secure/<repo of the ansible role>/blob/main/defaults/main.yml.
+# To change the default values copy variable from https://github.com/Be-Secure/<repo of the ansible role>/blob/main/defaults/main.yml
 # and paste it here and change the value.
 # Format is <variable name>: <value> 
 # Eg: openjdk_version: 11
