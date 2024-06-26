@@ -16,3 +16,5 @@ Be-Secure/besecure-ce-env-repo/jackson-core-BT-env,0.0.1
 
 Be-Secure/besecure-ce-env-repo/druid-BT-env,0.0.1
 
+Be-Secure/besecure-ce-env-repo/dubbo-RT-env,0.0.1
+Be-Secure/besecure-ce-env-repo/struts-RT-env,0.0.1
