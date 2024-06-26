@@ -3,10 +3,12 @@
     "environments": [
         {
             "name": "fastjson-RT-env",
-            "version": {
-                "tag": "0.0.1",
-                "release_date": "NA"
-            },
+            "version": [
+                {
+                    "tag": "0.0.1",
+                    "release_date": "NA"
+                }
+            ],
             "author": {
                 "name": "BeSLab",
                 "type": "Lab"
@@ -48,10 +50,12 @@
         },
         {
             "name": "fastjson-BT-env",
-            "version": {
-                "tag": "0.0.1",
-                "release_date": "NA"
-            },
+            "version": [
+                {
+                    "tag": "0.0.1",
+                    "release_date": "NA"
+                }
+            ],
             "author": {
                 "name": "BeSLab",
                 "type": "Lab"
@@ -93,10 +97,12 @@
         },
         {
             "name": "classic-model-RT-env",
-            "version": {
-                "tag": "0.0.1",
-                "release_date": "NA"
-            },
+            "version": [
+                {
+                    "tag": "0.0.1",
+                    "release_date": "NA"
+                }
+            ],
             "author": {
                 "name": "BeSLab",
                 "type": "Lab"
@@ -126,10 +132,12 @@
         },
         {
             "name": "druid-BT-env",
-            "version": {
-                "tag": "0.0.1",
-                "release_date": "NA"
-            },
+            "version": [
+                {
+                    "tag": "0.0.1",
+                    "release_date": "NA"
+                }
+            ],
             "author": {
                 "name": "BeSLab",
                 "type": "Lab"
@@ -171,10 +179,12 @@
         },
         {
             "name": "HWC-API-BT-env",
-            "version": {
-                "tag": "0.0.1",
-                "release_date": "NA"
-            },
+            "version": [
+                {
+                    "tag": "0.0.1",
+                    "release_date": "NA"
+                }
+            ],
             "author": {
                 "name": "BeSLab",
                 "type": "Lab"
@@ -216,10 +226,12 @@
         },
         {
             "name": "jackson-core-BT-env",
-            "version": {
-                "tag": "0.0.1",
-                "release_date": "NA"
-            },
+            "version": [
+                {
+                    "tag": "0.0.1",
+                    "release_date": "NA"
+                }
+            ],
             "author": {
                 "name": "BeSLab",
                 "type": "Lab"
@@ -261,10 +273,12 @@
         },
         {
             "name": "jackson-databind-BT-env",
-            "version": {
-                "tag": "0.0.1",
-                "release_date": "NA"
-            },
+            "version": [
+                {
+                    "tag": "0.0.1",
+                    "release_date": "NA"
+                }
+            ],
             "author": {
                 "name": "BeSLab",
                 "type": "Lab"
@@ -306,10 +320,12 @@
         },
         {
             "name": "jackson-databind-RT-env",
-            "version": {
-                "tag": "0.0.1",
-                "release_date": "NA"
-            },
+            "version": [
+                {
+                    "tag": "0.0.1",
+                    "release_date": "NA"
+                }
+            ],
             "author": {
                 "name": "BeSLab",
                 "type": "Lab"
@@ -351,10 +367,12 @@
         },
         {
             "name": "lettuce-BT-env",
-            "version": {
-                "tag": "0.0.1",
-                "release_date": "NA"
-            },
+            "version": [
+                {
+                    "tag": "0.0.1",
+                    "release_date": "NA"
+                }
+            ],
             "author": {
                 "name": "BeSLab",
                 "type": "Lab"
@@ -396,10 +414,12 @@
         },
         {
             "name": "opencti-RT-env",
-            "version": {
-                "tag": "0.0.1",
-                "release_date": "NA"
-            },
+            "version": [
+                {
+                    "tag": "0.0.1",
+                    "release_date": "NA"
+                }
+            ],
             "author": {
                 "name": "BeSLab",
                 "type": "Lab"
@@ -441,10 +461,12 @@
         },
         {
             "name": "zaproxy-RT-env",
-            "version": {
-                "tag": "0.0.1",
-                "release_date": "NA"
-            },
+            "version": [
+                {
+                    "tag": "0.0.1",
+                    "release_date": "NA"
+                }
+            ],
             "author": {
                 "name": "BeSLab",
                 "type": "Lab"
@@ -486,10 +508,12 @@
         },
         {
             "name": "zaproxy-BT-env",
-            "version": {
-                "tag": "0.0.1",
-                "release_date": "NA"
-            },
+            "version": [
+                {
+                    "tag": "0.0.1",
+                    "release_date": "NA"
+                }
+            ],
             "author": {
                 "name": "BeSLab",
                 "type": "Lab"
