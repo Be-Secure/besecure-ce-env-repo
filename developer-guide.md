@@ -426,9 +426,24 @@ BESMAN_JAVA_VERSION: 8
 
 ```
 
+## Testing the new environments
+
+Once you run the `create` command, BeSman automatically changes the configuration so that it will install the environments from your local `besecure-ce-env-repo` dir.
+
+**Steps**
+
+1. Run the list to get the list of environments
+
+        bes list -env
+
+    From the output message, you can see that BeSman is now pointing to your local environment dir.
+
+2. Run the install command to test the environment
+
+        bes install -env <environment name> -V <version>
 
 ## End objective for environments
 
-You read above that the environments are used to install and manage the tools required for your activity. This is done so that the a [Be-Secure playbook](https://github.com/Be-Secure/besecure-playbooks-store/tree/develop?tab=readme-ov-file#bes-playbooks) would have all the required tools to perform an assessment and generate an [OSAR](https://be-secure.github.io/bes-schema/assessment-report/). 
+You read above that the environments are used to install and manage the tools required for your activity. This is done so that the a [Be-Secure playbook](https://github.com/Be-Secure/besecure-playbooks-store/tree/develop?tab=readme-ov-file#bes-playbooks) would have all the required tools to perform an assessment and generate an [OSAR](https://be-secure.github.io/bes-schema/assessment-report/).
 
 Read more about this in the [besecure-playbooks-store](https://github.com/Be-Secure/besecure-playbooks-store/tree/develop).
