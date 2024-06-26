@@ -10,7 +10,7 @@
 BESMAN_ORG: Be-Secure #***
 
 # BESMAN_ARTIFACT_TYPE - project/ml model/training dataset
-BESMAN_ARTIFACT_TYPE: # project/ml model/training dataset #***
+BESMAN_ARTIFACT_TYPE: project # project/ml model/training dataset #***
 
 # BESMAN_ARTIFACT_NAME - name of the artifact under assessment.
 BESMAN_ARTIFACT_NAME: dubbo #***
