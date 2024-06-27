@@ -121,7 +121,7 @@ function __besman_uninstall
     else
         __besman_echo_yellow "Could not find dir $BESMAN_ARTIFACT_DIR"
     fi
-    Please add the rest of the code here for uninstallation
+    # Please add the rest of the code here for uninstallation
     # Function to stop and remove Docker containers
     stop_and_remove_containers() {
         echo "Stopping and removing Docker containers..."
