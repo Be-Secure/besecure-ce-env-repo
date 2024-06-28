@@ -246,6 +246,8 @@ For more info regarding a command,
 3. [opencti](opencti/0.0.1/besman-opencti-RT-env.sh)
 4. [zaproxy](zaproxy/0.0.1/besman-zaproxy-RT-env.sh)
 5. [ML Assessment](ML/0.0.1/besman-ML-RT-env.sh)
+6. [dubbo](dubbo/0.0.1/besman-dubbo-RT-env.sh)
+7. [struts](struts/0.0.1/besman-struts-RT-env.sh)
 
 
 ## BT Environments
