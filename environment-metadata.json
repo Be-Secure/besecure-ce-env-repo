@@ -673,6 +673,12 @@
             },
             "compatible_playbooks": [
                 {
+                    "name": "spdx-sbom-generator",
+                    "version": [
+                        "0.0.1"
+                    ]
+                },
+                {
                     "name": "criticality_score",
                     "version": [
                         "0.0.1"
@@ -714,6 +720,12 @@
             },
             "compatible_playbooks": [
                 {
+                    "name": "spdx-sbom-generator",
+                    "version": [
+                        "0.0.1"
+                    ]
+                },
+                {
                     "name": "criticality_score",
                     "version": [
                         "0.0.1"
@@ -754,6 +766,12 @@
                 "timestamp": "2024-07-01T11:14:34"
             },
             "compatible_playbooks": [
+                {
+                    "name": "spdx-sbom-generator",
+                    "version": [
+                        "0.0.1"
+                    ]
+                },
                 {
                     "name": "criticality_score",
                     "version": [
