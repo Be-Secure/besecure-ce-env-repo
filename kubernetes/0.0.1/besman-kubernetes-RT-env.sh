@@ -34,19 +34,15 @@ function __besman_install {
 
     __besman_check_and_install_python_pip
 
-    __besman_install_python_pip_linux
-
-    __besman_install_python_pip_mac
-
-    __besman_install_python_pip_windows
-
     __besman_echo_white  "\n Setting Up Container Tools"
 
     __besman_container_tool_setup sonarqube 9000 9000
 
     __besman_container_tool_setup fosology 8081 80
 
-    # Setup Go-lang ()
+    # Setup Go-lang 
+    
+    __besman_golang_setup()
 
     # go is required to install criticality_score
 
