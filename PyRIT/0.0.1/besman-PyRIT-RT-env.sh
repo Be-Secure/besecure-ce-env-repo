@@ -37,7 +37,6 @@ function __besman_install
 
     fi
     # Please add the rest of the code here for installation
-    bash
 }
 
 function __besman_uninstall
@@ -53,8 +52,6 @@ function __besman_uninstall
     fi
     # Please add the rest of the code here for uninstallation
     __uninstall_conda
-    bash
-
 }
 
 function __besman_update
