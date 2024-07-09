@@ -47,3 +47,6 @@ BESMAN_PURPLELAMA_URL: https://github.com/Be-Secure/PurpleLlama.git
 # PURPLELAMA remote repo branch
 BESMAN_PURPLELAMA_BRANCH: main
 
+
+# Path where it should config
+BESMAN_PURPLELAMA_LOCAL_PATH: $HOME/test
