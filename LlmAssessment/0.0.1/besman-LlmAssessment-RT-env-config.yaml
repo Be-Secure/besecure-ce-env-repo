@@ -20,11 +20,11 @@ BESMAN_ARTIFACT_VERSION: ""
 BESMAN_ARTIFACT_URL: "" #***
 
 #BESMAN_ENV_NAME - This variable stores the name of the environment file.
-BESMAN_ENV_NAME: PurpleLlama-RT-env #***
+BESMAN_ENV_NAME: LlmAssessment-RT-env #***
 
 # BESMAN_ARTIFACT_DIR - The path where you wish to clone the source code of the artifact under assessment.
 # If you wish to change the clone path, provide the complete path.
-# BESMAN_ARTIFACT_DIR: $HOME/$BESMAN_ARTIFACT_NAME #***
+#BESMAN_ARTIFACT_DIR: $HOME/$BESMAN_ARTIFACT_NAME #***
 
 # BESMAN_TOOL_PATH - The path where we download the assessment and other required tools during installation.
 BESMAN_TOOL_PATH: /opt #***
