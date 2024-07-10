@@ -60,7 +60,6 @@ function __besman_update
     [[ "$?" -eq 1 ]] && __besman_create_ansible_playbook
     __besman_run_ansible_playbook_extra_vars "$BESMAN_ARTIFACT_TRIGGER_PLAYBOOK_PATH/$BESMAN_ARTIFACT_TRIGGER_PLAYBOOK" "bes_command=update role_path=$BESMAN_ANSIBLE_ROLES_PATH" || return 1
     # Please add the rest of the code here for update
-
 }
 
 function __besman_validate
@@ -69,7 +68,28 @@ function __besman_validate
     [[ "$?" -eq 1 ]] && __besman_create_ansible_playbook
     __besman_run_ansible_playbook_extra_vars "$BESMAN_ARTIFACT_TRIGGER_PLAYBOOK_PATH/$BESMAN_ARTIFACT_TRIGGER_PLAYBOOK" "bes_command=validate role_path=$BESMAN_ANSIBLE_ROLES_PATH" || return 1
     # Please add the rest of the code here for validate
+    temp_file=$(mktemp)
+    bash -c 'export PATH=$HOME/anaconda3/bin:$PATH; function __check_anaconda {
+        if command -v conda --version &> /dev/null; then
+            exit 0
+        else
+            exit 1
+        fi
+    }
+    __check_anaconda' &> $temp_file &
 
+    check_pid=$!
+    wait $check_pid
+    check_status=$?
+
+    check_output=$(cat $temp_file)
+    rm $temp_file
+
+    if [ $check_status -eq 0 ]; then
+        echo "$check_output available."
+    else
+        echo "Anaconda not available"
+    fi
 }
 
 function __besman_reset
@@ -78,15 +98,34 @@ function __besman_reset
     [[ "$?" -eq 1 ]] && __besman_create_ansible_playbook
     __besman_run_ansible_playbook_extra_vars "$BESMAN_ARTIFACT_TRIGGER_PLAYBOOK_PATH/$BESMAN_ARTIFACT_TRIGGER_PLAYBOOK" "bes_command=reset role_path=$BESMAN_ANSIBLE_ROLES_PATH" || return 1
     # Please add the rest of the code here for reset
-
+    __uninstall_conda
+    __install_conda
 }
 
 function __install_conda {
-    sudo apt-get install libgl1-mesa-glx libegl1-mesa libxrandr2 libxrandr2 libxss1 libxcursor1 libxcomposite1 libasound2 libxi6 libxtst6
     echo "Checking for Anaconda..."
-    if command -v conda &> /dev/null; then
+    temp_file=$(mktemp)
+    bash -c 'export PATH=$HOME/anaconda3/bin:$PATH; function __check_anaconda {
+        if command -v conda &> /dev/null; then
+            exit 0
+        else
+            exit 1
+        fi
+    }
+    __check_anaconda' &> $temp_file &
+    
+    check_pid=$!
+    wait $check_pid
+    check_status=$?
+
+    check_output=$(cat $temp_file)
+    rm $temp_file
+    
+    if [ $check_status -eq 0 ]; then
         echo "Anaconda is already installed."
     else
+        sudo apt-get -y update
+        sudo apt-get install -y libgl1-mesa-glx libegl1-mesa libxrandr2 libxss1 libxcursor1 libxcomposite1 libasound2 libxi6 libxtst6
         echo "Installing Anaconda..."
         wget https://repo.anaconda.com/archive/Anaconda3-2023.03-Linux-x86_64.sh -O /tmp/anaconda.sh
         bash /tmp/anaconda.sh -b -p $HOME/anaconda3
@@ -94,35 +133,55 @@ function __install_conda {
         conda init bash
         source ~/.bashrc
         rm /tmp/anaconda.sh
+        eval "$(conda shell.bash hook)"
+        conda config --set auto_activate_base false
     fi
-    eval "$(conda shell.bash hook)"
-    conda config --set auto_activate_base false
 }
 
 function __uninstall_conda {
     echo "Removing Anaconda distribution..."
-    conda deactivate 2>/dev/null
-    conda init --reverse --all
-    rm -rf $HOME/anaconda3
-    sudo rm -rf /opt/anaconda3
-    rm -rf $HOME/.conda
-    rm -rf $HOME/.continuum
-    rm -rf $HOME/.anaconda
-    rm -rf $HOME/.condarc
-    rm -rf $HOME/.conda_environments.txt
-    rm -rf $HOME/.conda_build_config.yaml
-    sed -i '/# >>> conda initialize >>>/,/# <<< conda initialize <<</d' $HOME/.bashrc
-    sed -i '/# >>> conda initialize >>>/,/# <<< conda initialize <<</d' $HOME/.zshrc
-    sed -i '/anaconda3/d' $HOME/.bashrc
-    sed -i '/anaconda3/d' $HOME/.zshrc
-    unset CONDA_EXE
-    unset _CE_M
-    unset _CE_CONDA
-    unset CONDA_PYTHON_EXE
-    unset CONDA_SHLVL
-    unset CONDA_DEFAULT_ENV
-    unset CONDA_PROMPT_MODIFIER
-    source $HOME/.bashrc
-    source $HOME/.zshrc
-    hash -r
+    temp_file=$(mktemp)
+    bash -c 'export PATH=$HOME/anaconda3/bin:$PATH;
+    if command -v conda &> /dev/null; then
+        conda deactivate 2>/dev/null
+        conda init --reverse --all
+        rm -rf $HOME/anaconda3
+        sudo rm -rf /opt/anaconda3
+        rm -rf $HOME/.conda
+        rm -rf $HOME/.continuum
+        rm -rf $HOME/.anaconda
+        rm -rf $HOME/.condarc
+        rm -rf $HOME/.conda_environments.txt
+        rm -rf $HOME/.conda_build_config.yaml
+        sed -i "/# >>> conda initialize >>>/,/# <<< conda initialize <<</d" $HOME/.bashrc
+        sed -i "/# >>> conda initialize >>>/,/# <<< conda initialize <<</d" $HOME/.zshrc
+        sed -i "/anaconda3/d" $HOME/.bashrc
+        sed -i "/anaconda3/d" $HOME/.zshrc
+        unset CONDA_EXE
+        unset _CE_M
+        unset _CE_CONDA
+        unset CONDA_PYTHON_EXE
+        unset CONDA_SHLVL
+        unset CONDA_DEFAULT_ENV
+        unset CONDA_PROMPT_MODIFIER
+        source $HOME/.bashrc
+        source $HOME/.zshrc
+        exit 0
+    else
+        echo "Anaconda not available"
+        exit 1
+    fi' &> $temp_file &
+
+    check_pid=$!
+    wait $check_pid
+    check_status=$?
+
+    check_output=$(cat $temp_file)
+    rm $temp_file
+
+    if [ $check_status -eq 0 ]; then
+        echo "Anaconda uninstalled successfully."
+    else
+        echo "$check_output"
+    fi
 }
