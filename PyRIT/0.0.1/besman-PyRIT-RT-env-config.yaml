@@ -16,7 +16,7 @@ BESMAN_ARTIFACT_TYPE: project
 BESMAN_ARTIFACT_NAME: PyRIT #***
 
 # Version of the artifact under assessment.
-BESMAN_ARTIFACT_VERSION: PyRIT
+BESMAN_ARTIFACT_VERSION: v0.3.0
 
 # Source code url of the artifact under assessment.
 BESMAN_ARTIFACT_URL: https://github.com/Be-Secure/PyRIT #***
