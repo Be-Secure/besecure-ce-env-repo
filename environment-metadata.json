@@ -528,33 +528,6 @@
                     ]
                 }
             ]
-        },
-        {
-            "name": "sample-RT-env",
-            "version": {
-                "tag": "0.0.1",
-                "release_date": ""
-            },
-            "author": {
-                "name": "BeSLab",
-                "type": "Lab"
-            },
-            "date_of_creation": "2024-07-04T09:13:09",
-            "last_update_date": "2024-07-04T09:13:09",
-            "last_execution": {
-                "name": "BeSLab",
-                "type": "Lab",
-                "status": "Success",
-                "timestamp": "2024-07-04T09:13:09"
-            },
-            "compatible_playbooks": [
-                {
-                    "name": "spdx-sbom-generator",
-                    "version": [
-                        "0.0.1"
-                    ]
-                }
-            ]
         }
     ]
 }
