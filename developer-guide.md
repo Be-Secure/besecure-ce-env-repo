@@ -64,6 +64,11 @@ There are two methods of execution which your environment script can follow
 
 [Learn more](./README.md#two-ways-of-execution)
 
+
+## Branching strategy
+
+We follow a standard branching strategy in this repo. You can read about it [here](./CONTRIBUTING.md#branching-and-release-strategy).
+
 ## Developing your environment script.
 
 **Pre-requisites**
@@ -447,3 +452,7 @@ Once you run the `create` command, BeSman automatically changes the configuratio
 You read above that the environments are used to install and manage the tools required for your activity. This is done so that the a [Be-Secure playbook](https://github.com/Be-Secure/besecure-playbooks-store/tree/develop?tab=readme-ov-file#bes-playbooks) would have all the required tools to perform an assessment and generate an [OSAR](https://be-secure.github.io/bes-schema/assessment-report/).
 
 Read more about this in the [besecure-playbooks-store](https://github.com/Be-Secure/besecure-playbooks-store/tree/develop).
+
+## Pushing changes to remote and raising pr
+
+After you are done with the changes, you can push it to your working branch in remote and raise pr to develop branch of [besecure-ce-env-repo](https://github.com/asa1997/besecure-ce-env-repo/tree/develop). [Learn more](./CONTRIBUTING.md#pull-request-process)

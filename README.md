@@ -191,7 +191,7 @@ To set it run,
 
     $ bes set BESMAN_USER_NAMESPACE <id>
 
-`Note: It is assumed that the source code repo as well as the assessment datastore repo has been forked to your namespace before you install an environment. Make sure you have git configured in your system for a seamless experience.`
+`Note: It is assumed that the source code repo of the artifact under assessment as well as the assessment datastore repo has been forked to your namespace before you install an environment. Make sure you have git configured in your system for a seamless experience.`
 
 ## 3. List environments
 
@@ -208,11 +208,12 @@ Each environment has a configuration file with it. If you wish to edit some envi
 `IMPORTANT: If you are using a common environment to assess multiple artifacts, you will have to do this step.`
 
 1. Check if you have a file under your home directory under the name - `besman-<environment name>-config.yaml`.
-2. If not, then download the config file by editing the url below and executing the command
-   
-    `$ wget -P $HOME https://raw.githubusercontent.com/$BESMAN_ENV_REPOS/$BESMAN_ENV_REPO_BRANCH/<artifact name>/<artifact version>/besman-<environment name>-config.yaml`
+2. If not, then download the configuration file for your enviornment by running the below command.
 
-3. Open the file `besman-<environment name>-config.yaml` in an editor.
+        bes config -env <environment name> -V <version>
+    
+    This would download the configuration file to your `$HOME` dir.
+
 4. Run the `install` command and BeSman will automatically use this configuration for your environment.
 
 ### 4.2 Install command
@@ -259,3 +260,8 @@ For more info regarding a command,
 5. [lettuce](lettuce/0.0.1/besman-lettuce-BT-env.sh)
 6. [zaproxy](zaproxy/0.0.1/besman-zaproxy-BT-env.sh)
 7. [druid](druid/0.0.1/besman-druid-BT-env.sh)
+
+
+## Developer guide
+
+Thank you for taking the time to contribute to this repository. Your efforts help make our project better for everyone. To get started, please refer to the [Developer Guide](./developer-guide.md) available in this repository.
