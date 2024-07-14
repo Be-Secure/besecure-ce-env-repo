@@ -1,0 +1,76 @@
+---
+# If you wish to update the default configuration values, copy this file and place it under your home dir, under the same name.
+# These variables are used to drive the installation of the environment script.
+# The variables that start with BESMAN_ are converted to environment vars.
+# If you wish to add any other vars that should be used globally, add the var using the below format.
+# BESMAN_<var name>: <value>
+# If you are not using any particular value, remove it or comment it(#).
+#*** - These variables should not be removed, nor left empty.
+# BESMAN_ORG - used to mention where you should clone the repo from, default value is Be-Secure
+BESMAN_ORG: Be-Secure #***
+
+# BESMAN_ARTIFACT_TYPE - project/ml model/training dataset
+BESMAN_ARTIFACT_TYPE: # project/ml model/training dataset #***
+
+# BESMAN_ARTIFACT_NAME - name of the artifact under assessment.
+BESMAN_ARTIFACT_NAME: odxtools #***
+
+# BESMAN_ARTIFACT_VERSION - version of the artifact under assessment.
+BESMAN_ARTIFACT_VERSION: #Enter the version of the artifact here. #***
+
+# BESMAN_ARTIFACT_URL - Source code url of the artifact under assessment.
+BESMAN_ARTIFACT_URL: https://github.com/Be-Secure/odxtools #***
+
+#BESMAN_ENV_NAME - This variable stores the name of the environment file.
+BESMAN_ENV_NAME: odxtools-RT-env #***
+
+# BESMAN_ARTIFACT_DIR - The path where you wish to clone the source code of the artifact under assessment.
+# If you wish to change the clone path, provide the complete path.
+BESMAN_ARTIFACT_DIR: $HOME/$BESMAN_ARTIFACT_NAME #***
+
+# BESMAN_TOOL_PATH - The path where we download the assessment and other required tools during installation.
+BESMAN_TOOL_PATH: /opt #***
+
+# BESMAN_LAB_TYPE - Organization/lab/individual.
+BESMAN_LAB_TYPE: Organization #***
+
+# BESMAN_LAB_NAME - Name of the owner of the lab. Default is Be-Secure.
+BESMAN_LAB_NAME: Be-Secure #***
+
+# BESMAN_ASSESSMENT_DATASTORE_DIR - This is the local dir where we store the assessment reports. Default is home.
+BESMAN_ASSESSMENT_DATASTORE_DIR: $HOME/besecure-assessment-datastore #***
+
+# BESMAN_ASSESSMENT_DATASTORE_URL - The remote repo where we store the assessment reports.
+BESMAN_ASSESSMENT_DATASTORE_URL: https://github.com/Be-Secure/besecure-assessment-datastore #***
+
+# BESMAN_ANSIBLE_ROLES_PATH - The path where we download the ansible role of the assessment tools and other utilities
+BESMAN_ANSIBLE_ROLES_PATH: $BESMAN_DIR/tmp/$BESMAN_ARTIFACT_NAME/roles #***
+
+# BESMAN_ANSIBLE_ROLES - The list of tools you wish to install. The tools are installed using ansible roles.
+# To get the list of ansible roles run 
+#   $ bes list --role
+BESMAN_ANSIBLE_ROLES: Be-Secure/ansible-role-oah-criticality_score,Be-Secure/ansible-role-oah-docker,Be-Secure/ansible-role-oah-sonarQube,Be-Secure/ansible-role-oah-fossology,Be-Secure/ansible-role-oah-sbomGenerator #add the roles here. format - <Github id>/<repo name>,<Github id>/<repo name>,<Github id>/<repo name>,... #***
+
+# BESMAN_ARTIFACT_TRIGGER_PLAYBOOK_PATH - sets the path of the playbook with which we run the ansible roles.
+# Default path is ~/.besman/tmp/<artifact name dir>/
+BESMAN_ARTIFACT_TRIGGER_PLAYBOOK_PATH: $BESMAN_DIR/tmp/$BESMAN_ARTIFACT_NAME #***
+
+#BESMAN_ARTIFACT_TRIGGER_PLAYBOOK - Name of the trigger playbook which runs the ansible roles.
+BESMAN_ARTIFACT_TRIGGER_PLAYBOOK: besman-$BESMAN_ARTIFACT_NAME-RT-trigger-playbook.yaml #***
+
+# BESMAN_DISPLAY_SKIPPED_ANSIBLE_HOSTS - If the users likes to display all the skipped steps, set it to true.
+# Default value is false
+BESMAN_DISPLAY_SKIPPED_ANSIBLE_HOSTS: false #***
+
+ASSESSMENT_STEP:
+    - sbom
+    - sast
+    - scorecard
+    - criticality_score
+
+# The default values of the ansible roles will be present in their respective repos.
+# You can go to https://github.com/Be-Secure/<repo of the ansible role>/blob/main/defaults/main.yml.
+# If you wish to change the default values copy the variable from the https://github.com/Be-Secure/<repo of the ansible role>/blob/main/defaults/main.yml
+# and paste it here and change the value.
+# Format is <variable name>: <value> 
+# Eg: openjdk_version: 11

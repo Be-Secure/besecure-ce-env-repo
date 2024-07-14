@@ -436,6 +436,80 @@
           "version": ["0.0.1"]
         }
       ]
+    },
+    {
+      "name": "fleetbase-RT-env",
+      "version": {
+          "tag": "0.0.1",
+          "release_date": "NA"
+        },
+      "author": {
+        "name": "BeSLab",
+        "type": "Lab"
+      },
+      "date_of_creation": "2024-07-14T20:00:34 ",
+      "last_update_date": "2024-07-14T20:00:34",
+      "last_execution": {
+        "name": "BeSLab",
+        "type": "Lab",
+        "status": "Success",
+        "timestamp": "2024-07-14T20:00:34"
+      },
+      "compatible_playbooks": [
+        {
+          "name": "spdx-sbom-generator",
+          "version": ["0.0.1"]
+        },
+        {
+          "name": "criticality_score",
+          "version": ["0.0.1"]
+        },
+        {
+          "name": "sonarqube",
+          "version": ["0.0.1"]
+        },
+        {
+          "name": "scorecard",
+          "version": ["0.0.1"]
+        }
+      ]
+    },
+    {
+      "name": "odxtools-RT-env",
+      "version": {
+          "tag": "0.0.1",
+          "release_date": "NA"
+        },
+      "author": {
+        "name": "BeSLab",
+        "type": "Lab"
+      },
+      "date_of_creation": "2024-07-14T20:03:34 ",
+      "last_update_date": "2024-07-14T20:03:34",
+      "last_execution": {
+        "name": "BeSLab",
+        "type": "Lab",
+        "status": "Success",
+        "timestamp": "2024-07-14T20:03:34"
+      },
+      "compatible_playbooks": [
+        {
+          "name": "spdx-sbom-generator",
+          "version": ["0.0.1"]
+        },
+        {
+          "name": "criticality_score",
+          "version": ["0.0.1"]
+        },
+        {
+          "name": "sonarqube",
+          "version": ["0.0.1"]
+        },
+        {
+          "name": "scorecard",
+          "version": ["0.0.1"]
+        }
+      ]
     }
   ]
 }
