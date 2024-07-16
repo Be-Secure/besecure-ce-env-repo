@@ -13,5 +13,3 @@ Be-Secure/besecure-ce-env-repo/druid-BT-env,0.0.1
 Be-Secure/besecure-ce-env-repo/classic-model-RT-env,0.0.1
 Be-Secure/besecure-ce-env-repo/dubbo-RT-env,0.0.1
 Be-Secure/besecure-ce-env-repo/struts-RT-env,0.0.1
-Be-Secure/besecure-ce-env-repo/fleetbase-RT-env,0.0.1
-Be-Secure/besecure-ce-env-repo/odxtools-RT-env,0.0.1
