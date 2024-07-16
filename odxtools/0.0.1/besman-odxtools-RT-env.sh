@@ -86,44 +86,24 @@ function __besman_validate
     [[ "$?" -eq 1 ]] && __besman_create_ansible_playbook
     __besman_run_ansible_playbook_extra_vars "$BESMAN_ARTIFACT_TRIGGER_PLAYBOOK_PATH/$BESMAN_ARTIFACT_TRIGGER_PLAYBOOK" "bes_command=validate role_path=$BESMAN_ANSIBLE_ROLES_PATH" || return 1
     # Please add the rest of the code here for validate
-    # Function to validate Python
-    validate_python() {
-        if ! command -v python3 &>/dev/null; then
-            echo "Python is not installed."
-            return 1
-        fi
-    }
+    # Validate Python installation
+    if ! command -v python3 &>/dev/null; then
+        errors+=("Python")
+    fi
+    # Validate pip installation
+    if ! command -v pip3 &>/dev/null; then
+        errors+=("pip")
+    fi
+    # Check if any error message is present
+    if [ ${#errors[@]} -eq 0 ]; then
+        echo "All requirements satisfied. Environment is set up successfully."
+    else
+        echo "Some requirements are not satisfied. Please install the following:"
+        for error in "${errors[@]}"; do
+            echo "- $error"
+        done
+    fi
 
-    # Function to validate pip installation
-    validate_pip() {
-        if ! command -v pip3 &>/dev/null; then
-            echo "pip is not installed."
-            return 1
-        fi
-    }
-
-    # Main validation function
-    validate_environment() {
-        # Array to store error messages
-        declare -a errors
-
-        # Validate all components and store errors
-        validate_python || errors+=("Python")
-        validate_pip || errors+=("pip")
-
-        # Check if any error message is present
-        if [ ${#errors[@]} -eq 0 ]; then
-            echo "All requirements satisfied. Environment is set up successfully."
-        else
-            echo "Some requirements are not satisfied. Please install the following:"
-            for error in "${errors[@]}"; do
-                echo "- $error"
-            done
-        fi
-    }
-
-    # Run validation
-    validate_environment
 }
 
 function __besman_reset
