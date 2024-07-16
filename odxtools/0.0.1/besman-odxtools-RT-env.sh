@@ -87,6 +87,7 @@ function __besman_validate
     __besman_run_ansible_playbook_extra_vars "$BESMAN_ARTIFACT_TRIGGER_PLAYBOOK_PATH/$BESMAN_ARTIFACT_TRIGGER_PLAYBOOK" "bes_command=validate role_path=$BESMAN_ANSIBLE_ROLES_PATH" || return 1
     # Please add the rest of the code here for validate
     # Validate Python installation
+    declare -a errors
     if ! command -v python3 &>/dev/null; then
         errors+=("Python")
     fi
