@@ -3,21 +3,15 @@
 function __besman_install
 {
     __besman_check_github_id || return 1
-    echo "------------------------------------------------------"
-    echo "Starting PurpleLama Installation..."
-    echo "------------------------------------------------------"
-    install_purpleLlama
-    echo "------------------------------------------------------"
-    echo "Purplelama environment installation completed!"
-    echo "------------------------------------------------------"
+    __besman_echo_white "Starting PurpleLama Installation..."
+    install_purpleLlama || return 1
+    __besman_echo_white "Purplelama environment installation completed!"
 
 }
 
 function __besman_uninstall
 {
-   echo "------------------------------------------------------"
-   echo "uninstall PurpleLama..."
-   echo "------------------------------------------------------"
+   __besman_echo_white "uninstall PurpleLama..."
    uninstall_PurpleLlama
 }
 
