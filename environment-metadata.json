@@ -824,7 +824,117 @@
           ]
         }
       ]
+    },
+    {
+      "name": "privacyidea-RT-env",
+      "version": {
+        "tag": "0.0.1",
+        "release_date": "NA"
+      },
+      "author": {
+        "name": "BeSLab",
+        "type": "Lab"
+      },
+      "date_of_creation": "2024-10-01T10:55:34 ",
+      "last_update_date": "2024-10-01T10:55:34",
+      "last_execution": {
+        "name": "BeSLab",
+        "type": "Lab",
+        "status": "",
+        "timestamp": "2024-10-01T10:55:34"
+      },
+      "compatible_playbooks": [
+        {
+          "name": "spdx-sbom-generator",
+          "version": ["0.0.1"]
+        },
+        {
+          "name": "criticality_score",
+          "version": ["0.0.1"]
+        },
+        {
+          "name": "sonarqube",
+          "version": ["0.0.1"]
+        },
+        {
+          "name": "scorecard",
+          "version": ["0.0.1"]
+        }
+      ]
+    },
+    {
+      "name": "prometheus-RT-env",
+      "version": {
+        "tag": "0.0.1",
+        "release_date": "NA"
+      },
+      "author": {
+        "name": "BeSLab",
+        "type": "Lab"
+      },
+      "date_of_creation": "2024-07-01T10:57:34 ",
+      "last_update_date": "2024-07-01T10:57:34",
+      "last_execution": {
+        "name": "BeSLab",
+        "type": "Lab",
+        "status": "",
+        "timestamp": "2024-07-01T10:57:34"
+      },
+      "compatible_playbooks": [
+        {
+          "name": "spdx-sbom-generator",
+          "version": ["0.0.1"]
+        },
+        {
+          "name": "criticality_score",
+          "version": ["0.0.1"]
+        },
+        {
+          "name": "sonarqube",
+          "version": ["0.0.1"]
+        },
+        {
+          "name": "scorecard",
+          "version": ["0.0.1"]
+        }
+      ]
+    },
+    {
+      "name": "logstash-RT-env",
+      "version": {
+        "tag": "0.0.1",
+        "release_date": "NA"
+      },
+      "author": {
+        "name": "BeSLab",
+        "type": "Lab"
+      },
+      "date_of_creation": "2024-07-01T11:14:34 ",
+      "last_update_date": "2024-07-01T11:14:34",
+      "last_execution": {
+        "name": "BeSLab",
+        "type": "Lab",
+        "status": "",
+        "timestamp": "2024-07-01T11:14:34"
+      },
+      "compatible_playbooks": [
+        {
+          "name": "spdx-sbom-generator",
+          "version": ["0.0.1"]
+        },
+        {
+          "name": "criticality_score",
+          "version": ["0.0.1"]
+        },
+        {
+          "name": "sonarqube",
+          "version": ["0.0.1"]
+        },
+        {
+          "name": "scorecard",
+          "version": ["0.0.1"]
+        }
+      ]
     }
-
   ]
 }
