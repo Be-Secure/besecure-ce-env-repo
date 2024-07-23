@@ -41,7 +41,7 @@ function __besman_install
     if ! command -v ruby &>/dev/null; then
         echo "Ruby is not installed. Installing Ruby"
         sudo apt update
-        sudo apt install ruby
+        sudo apt install -y ruby
     else
         echo "Ruby is already installed."
     fi
@@ -63,7 +63,7 @@ function __besman_uninstall
     # Please add the rest of the code here for uninstallation
     # To uninstall ruby
     echo "Uninstalling ruby..."
-    sudo apt purge ruby
+    sudo apt purge -y ruby
     echo "Ruby uninstalled successfully."
 
 }

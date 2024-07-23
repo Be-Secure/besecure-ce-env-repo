@@ -37,28 +37,6 @@ function __besman_install
 
     fi
     # Please add the rest of the code here for installation
-    # Check whether go is installed and installing if not
-    if ! command -v go &> /dev/null; then
-        echo "Go is not installed. Installing Go..."
-    
-        # Check if snap is installed and install it if not
-        if ! command -v snap &> /dev/null; then
-            echo "Snap is not installed. Installing Snap..."
-            sudo apt update
-            sudo apt install snapd
-        else
-            echo "Snap is already installed."
-        fi
-    
-        # Install Go using snap
-        sudo snap install go --classic
-        # Set up Go environment variables
-        export GOPATH=$HOME/go
-        export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
-        echo "Go installation complete."
-    else
-        echo "Go is already installed."
-    fi
 
 }
 
@@ -74,11 +52,6 @@ function __besman_uninstall
         __besman_echo_yellow "Could not find dir $BESMAN_ARTIFACT_DIR"
     fi
     # Please add the rest of the code here for uninstallation
-    # Function to uninstall go
-    echo "Uninstalling go..."
-    # Remove go
-    sudo snap remove go
-    echo "Go uninstalled successfully."
 
 }
 
@@ -97,20 +70,6 @@ function __besman_validate
     [[ "$?" -eq 1 ]] && __besman_create_ansible_playbook
     __besman_run_ansible_playbook_extra_vars "$BESMAN_ARTIFACT_TRIGGER_PLAYBOOK_PATH/$BESMAN_ARTIFACT_TRIGGER_PLAYBOOK" "bes_command=validate role_path=$BESMAN_ANSIBLE_ROLES_PATH" || return 1
     # Please add the rest of the code here for validate
-    # Validate go installation
-    declare -a errors
-    if ! command -v go &>/dev/null; then
-        errors+=("go")
-    fi
-    # Check if any error message is present
-    if [ ${#errors[@]} -eq 0 ]; then
-        echo "All requirements satisfied. Environment is set up successfully."
-    else
-        echo "Some requirements are not satisfied. Please install the following:"
-        for error in "${errors[@]}"; do
-            echo "- $error"
-        done
-    fi
 
 }
 
