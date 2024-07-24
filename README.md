@@ -207,13 +207,12 @@ Each environment has a configuration file with it. If you wish to edit some envi
 
 `IMPORTANT: If you are using a common environment to assess multiple artifacts, you will have to do this step.`
 
-1. Check if you have a file under your home directory under the name - `besman-<environment name>-config.yaml`.
-2. If not, then download the config file by editing the url below and executing the command
-   
-    `$ wget -P $HOME https://raw.githubusercontent.com/$BESMAN_ENV_REPOS/$BESMAN_ENV_REPO_BRANCH/<artifact name>/<artifact version>/besman-<environment name>-config.yaml`
+1. Run the below command to download the environment configuration. The file will be downloaded to `$HOME` dir.
 
-3. Open the file `besman-<environment name>-config.yaml` in an editor.
-4. Run the `install` command and BeSman will automatically use this configuration for your environment.
+        bes config -env <environment name> -V <version>
+
+2. Open the file in your editor. The file will be available in your `$HOME` dir under the name `besman-<environment name>-config.yaml`
+3. Fill in the missing values.
 
 ### 4.2 Install command
 
@@ -236,6 +235,11 @@ You can get the complete list of commands using
 For more info regarding a command,
 
     $ bes help <command>
+
+
+# Developer Guide
+
+Thank you for taking your time to contribute to Be-Secure Environment Repo. Please check the [developer-guide](./developer-guide.md) for instructions on how to develop your environment script.
 
 # Available environments.
 
