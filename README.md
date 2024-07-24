@@ -241,7 +241,7 @@ For more info regarding a command,
 
 Thank you for taking your time to contribute to Be-Secure Environment Repo. Please check the [developer-guide](./developer-guide.md) for instructions on how to develop your environment script.
 
-# Available environments.
+<!-- # Available environments.
 
 ## RT Environments
 
@@ -262,4 +262,4 @@ Thank you for taking your time to contribute to Be-Secure Environment Repo. Plea
 4. [jackson-databind](jackson-databind/0.0.1/besman-jackson-databind-BT-env.sh)
 5. [lettuce](lettuce/0.0.1/besman-lettuce-BT-env.sh)
 6. [zaproxy](zaproxy/0.0.1/besman-zaproxy-BT-env.sh)
-7. [druid](druid/0.0.1/besman-druid-BT-env.sh)
+7. [druid](druid/0.0.1/besman-druid-BT-env.sh) -->
