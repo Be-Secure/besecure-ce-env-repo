@@ -64,6 +64,12 @@ There are two methods of execution which your environment script can follow
 
 [Learn more](./README.md#two-ways-of-execution)
 
+
+## Branching Strategy
+
+Learn about the branching strategy that we follow from [here](./CONTRIBUTING.md#branching-and-release-strategy).
+
+
 ## Developing your environment script.
 
 **Pre-requisites**
