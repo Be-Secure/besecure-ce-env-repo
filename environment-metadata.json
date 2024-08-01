@@ -686,12 +686,11 @@
     },
     {
       "name": "sechub-RT-env",
-      "version": [
+      "version":
         {
           "tag": "0.0.1",
           "release_date": "NA"
-        }
-      ],
+        },
       "author": {
         "name": "BeSLab",
         "type": "Lab"
@@ -733,12 +732,11 @@
     },
     {
       "name": "dubbo-RT-env",
-      "version": [
+      "version":
         {
           "tag": "0.0.1",
           "release_date": "NA"
-        }
-      ],
+        },
       "author": {
         "name": "BeSLab",
         "type": "Lab"
@@ -780,12 +778,11 @@
     },
     {
       "name": "struts-RT-env",
-      "version": [
+      "version": 
         {
           "tag": "0.0.1",
           "release_date": "NA"
-        }
-      ],
+        },
       "author": {
         "name": "BeSLab",
         "type": "Lab"
