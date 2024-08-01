@@ -682,12 +682,7 @@
         "status": "Success",
         "timestamp": "2024-04-02T11:27:34"
       },
-      "compatible_playbooks": [{
-        "name": "spdx-sbom-generator",
-        "version": [
-          "0.0.1"
-        ]
-      }]
+      "compatible_playbooks": []
     },
     {
       "name": "sechub-RT-env",
@@ -785,12 +780,11 @@
     },
     {
       "name": "struts-RT-env",
-      "version": [
+      "version": 
         {
           "tag": "0.0.1",
           "release_date": "NA"
-        }
-      ],
+        },
       "author": {
         "name": "BeSLab",
         "type": "Lab"
