@@ -682,7 +682,12 @@
         "status": "Success",
         "timestamp": "2024-04-02T11:27:34"
       },
-      "compatible_playbooks": []
+      "compatible_playbooks": [{
+        "name": "spdx-sbom-generator",
+        "version": [
+          "0.0.1"
+        ]
+      }]
     },
     {
       "name": "sechub-RT-env",
