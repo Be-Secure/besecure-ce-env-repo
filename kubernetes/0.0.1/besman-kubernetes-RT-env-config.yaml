@@ -1,13 +1,23 @@
 BESMAN_ORG: Be-Secure
-
-# BESMAN_CONTAINER_RUNTIME - You can mention your container runtime here. The default is PODMAN but Not necessarily . You are free to use DOCKER, even RunC
-BESMAN_CONTAINER_RUNTIME: podman
-
 # BESMAN_ARTIFACT_TYPE - project/ml model/training dataset
 BESMAN_ARTIFACT_TYPE: project
 
 # BESMAN_ARTIFACT_NAME - name of the artifact under assessment.
 BESMAN_ARTIFACT_NAME: kubernetes #***
+
+# BESMAN_ASSESSMENT_REQUIREMENTS <dictionary> - All required tool for Kubernetes assessment.
+
+
+BESMAN_codeql: (80 "latest" "Default")
+BESMAN_scorecard: (80 "latest" "Default")
+BESMAN_sonar: (80 "latest" "Default")
+BESMAN_snyk: (80 "latest" "Default")
+BESMAN_python3: (80 "latest" "Default")
+BESMAN_pip: (80 "latest" "Default")
+BESMAN_go: (80 "latest" "Default")
+BESMAN_podman: (80 "latest" "Default")
+
+BESMAN_PRIVATE_IMAGE_REPO: ""
 
 # BESMAN_ARTIFACT_VERSION - version of the artifact under assessment.
 BESMAN_ARTIFACT_VERSION: 1.29.6
@@ -37,3 +47,28 @@ BESMAN_ASSESSMENT_DATASTORE_DIR: $HOME/CRS_Work/temp/besecure-assessment-datasto
 # BESMAN_ASSESSMENT_DATASTORE_URL - The remote repo where we store the assessment reports.
 BESMAN_ASSESSMENT_DATASTORE_URL: https://github.com/Be-Secure/besecure-assessment-datastore #***
 
+#Currentstate of the Machine. This get populated while running `besman_validate()`` function. Do not Delete or add this section. This section is used by other funnction to Install, Update, clean and Revert back changes.
+
+BESMAN_SYSTEM_STATE: 
+  codeql:
+    version: coll
+    installation: none
+  sonar:
+    version: latest
+    installation: Default
+  snyk:
+    version: latest
+    installation: Default
+  python3:
+    version: latest
+    installation: Default
+  go:
+    version: latest
+    installation: Default
+  pip:
+    port: 80
+    version: latest
+    installation: Default
+  podman:
+    version: latest
+    installation: Default

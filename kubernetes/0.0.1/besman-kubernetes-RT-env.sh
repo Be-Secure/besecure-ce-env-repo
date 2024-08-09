@@ -1,9 +1,24 @@
 #!/bin/bash
+function __besman_validate {
+
+    __besman_check_vcs_exist || return 1
+    __besman_check_github_id || return 1 
+    __besman_detect_container_runtime || return 1
+    __besman_generate_state
+    __besman_check_python_installation || return 1
+    __besman_generate_state
+    __besman_check_go_installation || return 1
+    __besman_generate_state
+    __besman_check_tools || return 1
+    __besman_generate_state
+    __besman_check_container_tools || return 1
+
+
+}
+
 function __besman_install {
 
-    __besman_check_vcs_exist || return 1   # Checks if GitHub CLI is present or not.
-    __besman_check_github_id || return 1   # checks whether the user github id has been populated or not under BESMAN_USER_NAMESPACE
-    __besman_create_roles_config_file      # Creates the role config file with the parameters from env config
+    __besman_detect_system
 
     if [[ -d $BESMAN_ARTIFACT_DIR ]]; then
         __besman_echo_white "The clone path already contains dir names $BESMAN_ARTIFACT_NAME"
@@ -22,40 +37,25 @@ function __besman_install {
 
     fi
 
-    # Please add the rest of the code here for installation
-
-    __besman_detect_container_runtime
+    snap install yq
 
     # Install Container Runtime 
-
-    __besman_install_container_runtime
-
-    # Python3 and PIP Installation :
-
-    __besman_check_and_install_python_pip
-
-    __besman_echo_white  "\n Setting Up Container Tools"
-
-    __besman_container_tool_setup sonarqube 9000 9000
-
-    __besman_container_tool_setup fosology 8081 80
-
-    # Setup Go-lang 
-    
-    __besman_golang_setup()
-
-    # go is required to install criticality_score
-
-
-    # Setup snyk
-
+    __besman_echo_white  "\n Installing Container Runtime"
+    __besman_install_container_runtime || return 1
+    __besman_echo_white  "\n Installing golang"
+    __besman_check_Install_go || return 1
+    __besman_echo_white  "\n Installing Python3 and PIP"
+    __besman_install_python_pip_linux || return 1
+    __besman_echo_white  "\n Setting Up Containerised Tools"
+    __besman_container_tool_setup sonarqube 9000 9000 || return 1
+    __besman_container_tool_setup fosology 8081 80 || return 1
+    __besman_echo_white  "\n Installing Snyk"
+    __besman_Install_snyk || return 1
     __besman_echo_white  "\n All set-up for Kubernetes, Enjoy Hacking K8s !"
 }
 
 function __besman_uninstall {
-    __besman_check_for_trigger_playbook "$BESMAN_ARTIFACT_TRIGGER_PLAYBOOK_PATH/$BESMAN_ARTIFACT_TRIGGER_PLAYBOOK"
-    [[ "$?" -eq 1 ]] && __besman_create_ansible_playbook
-    __besman_run_ansible_playbook_extra_vars "$BESMAN_ARTIFACT_TRIGGER_PLAYBOOK_PATH/$BESMAN_ARTIFACT_TRIGGER_PLAYBOOK" "bes_command=remove role_path=$BESMAN_ANSIBLE_ROLES_PATH" || return 1
+    
     if [[ -d $BESMAN_ARTIFACT_DIR ]]; then
         __besman_echo_white "Removing $BESMAN_ARTIFACT_DIR..."
         rm -rf "$BESMAN_ARTIFACT_DIR"
@@ -63,73 +63,59 @@ function __besman_uninstall {
         __besman_echo_yellow "Could not find dir $BESMAN_ARTIFACT_DIR"
     fi
 
-    # Please add the rest of the code here for uninstallation
-
-    # # Uninstall Containers
-    # stop_containers() {
-
-    #     # to be added Do not Review this function
-    
-    # }
-    # remove_containers(){
-
-    #         # to be added Do not Review this function
-
-    # }
-    # purge_containers(){
-
-    #         # to be added Do not Review this function
-
-    # }
-
-
-    # # Function to uninstall Docker
-
-    # uninstall_container() {
-
-    #         # to be added Do not Review this function
-
-    # }
-
+    __besman_stop_containers || return 1
+    __besman_remove_containers || return 1
+    __besman_purge_containers || return 1
+    __besman_uninstall_container_runtime || return 1
+    __besman_uninstall_tools || return 1
     __besman_echo_white  "We have cleaned up Your WorkSpace"
 
 }
 
 function __besman_update {
-    __besman_check_for_trigger_playbook "$BESMAN_ARTIFACT_TRIGGER_PLAYBOOK_PATH/$BESMAN_ARTIFACT_TRIGGER_PLAYBOOK"
-    [[ "$?" -eq 1 ]] && __besman_create_ansible_playbook
-    __besman_run_ansible_playbook_extra_vars "$BESMAN_ARTIFACT_TRIGGER_PLAYBOOK_PATH/$BESMAN_ARTIFACT_TRIGGER_PLAYBOOK" "bes_command=update role_path=$BESMAN_ANSIBLE_ROLES_PATH" || return 1
-    # Please add the rest of the code here for update
-
-    # update_tools (){
-    #         # to be added Do not Review this function
-    # }
+    __besman_update_container_runtime  || return 1
+    __besman_update_python_installation  || return 1
+    __besman_update_go_installation || return 1
+    __besman_update_tools || return 1
+    __besman_update_container_tools  || return 1
 
 }
 
-function __besman_validate {
-    __besman_check_for_trigger_playbook "$BESMAN_ARTIFACT_TRIGGER_PLAYBOOK_PATH/$BESMAN_ARTIFACT_TRIGGER_PLAYBOOK"
-    [[ "$?" -eq 1 ]] && __besman_create_ansible_playbook
-    __besman_run_ansible_playbook_extra_vars "$BESMAN_ARTIFACT_TRIGGER_PLAYBOOK_PATH/$BESMAN_ARTIFACT_TRIGGER_PLAYBOOK" "bes_command=validate role_path=$BESMAN_ANSIBLE_ROLES_PATH" || return 1
-    # Please add the rest of the code here for validate
 
-# validate_required_tools (){
-#         # to be added Do not Review this function
-#         }
-
-
-}
 
 function __besman_reset {
-    __besman_check_for_trigger_playbook "$BESMAN_ARTIFACT_TRIGGER_PLAYBOOK_PATH/$BESMAN_ARTIFACT_TRIGGER_PLAYBOOK"
-    [[ "$?" -eq 1 ]] && __besman_create_ansible_playbook
-    __besman_run_ansible_playbook_extra_vars "$BESMAN_ARTIFACT_TRIGGER_PLAYBOOK_PATH/$BESMAN_ARTIFACT_TRIGGER_PLAYBOOK" "bes_command=reset role_path=$BESMAN_ANSIBLE_ROLES_PATH" || return 1
-    # Please add the rest of the code here for reset
 
-    # reset_required_tools (){
-    #     # to be added Do not Review this function
-    #     }
+    __besman_reset_container_runtime  || return 1
+    __besman_reset_python_installation  || return 1
+    __besman_reset_go_installation || return 1
+    __besman_reset_tools || return 1
+    __besman_reset_container_tools  || return 1
 
+}
+
+__besman_detect_system(){
+
+    BESMAN_SYSTEM=""
+
+    if [ -f /etc/os-release ]; then
+        . /etc/os-release
+        __besman_echo_white  "This is a Linux operating system: $NAME $VERSION_ID"
+        export BESMAN_SYSTEM="$ID"
+
+    elif [ "$(uname -o)" == "Darwin" ]; then
+        __besman_echo_white "This is macOS: $(sw_vers -productName) $(sw_vers -productVersion)"
+        export BESMAN_SYSTEM="mac"
+    else
+        case "$(uname -o)" in
+            MINGW*|MSYS*|CYGWIN*)
+                export BESMAN_SYSTEM="windows"
+                ;;
+            *)
+                __besman_echo_white  "\n Sorry ! Wecould not recognise your OS ! \n Dont worry, Let us know your operating sytem , we will improve it :-) operating system."
+                exit 1
+                ;;
+        esac
+    fi
 }
 
 __besman_detect_container_runtime() {
@@ -167,132 +153,85 @@ __besman_detect_container_runtime() {
             __besman_echo_white  "\n Docker is  Detected. "
             export Container_runtime="docker"
         else
-            __besman_echo_white  "\n No Container Runtime detected. Installing a Container Runtime !"
+            __besman_echo_white  "\n No Container Runtime detected ! Will be installed"
             install_container_runtime
         fi
 }
 
-__besman_install_container_runtime() {
+__besman_check_python_installation(){
 
-
-    case "$(uname -s)" in
-                Linux*)
-                    __besman_install_podman_linux
-                    ;;
-                Darwin*)
-                    if ! command -v brew &>/dev/null; then
-                        __besman_echo_white  "\n Homebrew not found. Installing Homebrew..."
-                        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-                    fi
-                    install_podman_mac
-                    ;;
-                MINGW*|MSYS*|CYGWIN*)
-                    if ! command -v choco &>/dev/null; then
-                        __besman_echo_white  "\n We Use Chocolatey to install Package On Windows. You may install Chocolatey from https://chocolatey.org/install"
-                        exit 1
-                    fi
-                    __besman_install_podman_windows
-                    ;;
-                *)
-                    __besman_echo_white  "\n Sorry ! Wecould not recognise your OS ! \n Dont worry, Let us know your operating sytem , we will improve it :-) operating system."
-                    exit 1
-                    ;;
-            esac
-
-            __besman_echo_white  "\n Podman installation complete !"
-
-            # Installing PODMAN in Linux
-            __besman_install_podman_linux() {
-                
-
-                . /etc/os-release
-                case "$ID" in
-                    ubuntu|debian)
-                        sudo apt-get update
-                        sudo apt-get -y install podman
-                        ;;
-                    fedora)
-                        sudo dnf -y install podman
-                        ;;
-                    centos|rhel)
-                        sudo yum -y install podman
-                        ;;
-                    *)
-                        __besman_echo_white  "\n Sorry ! Wecould not recognise your OS ! \n Dont worry, Let us know your operating sytem , we will improve it :-) operating system."
-                        exit 1
-                        ;;
-                esac
-            }
-            # Installing PODMAN in Mac
-            __besman_install_podman_mac() {
-                brew install podman
-            }
-            # Installing PODMAN in Windows:
-            __besman_install_podman_windows() {
-                choco install podman
-            }
-
-                
-
-    }
-
-__besman_check_and_install_python_pip() {
-        if ! command -v python3 &>/dev/null || ! command -v pip3 &>/dev/null; then
-            case "$(uname -s)" in
-                Linux*)
-                    __besman_install_python_pip_linux
-                    ;;
-                Darwin*)
-                    __besman_install_python_pip_mac
-                    ;;
-                MINGW*|MSYS*|CYGWIN*)
-                    __besman_install_python_pip_windows
-                    ;;
-                *)
-                    __besman_echo_white  "\n Sorry ! Wecould not recognise your OS ! \n Dont worry, Let us know your operating sytem , we will improve it :-) operating system."
-                    exit 1
-                    ;;
-            esac
+if ! command -v python3 &>/dev/null || ! command -v pip3 &>/dev/null; then
+            __besman_echo_white "\n Python 3 and PiP are not Found. Will be Installed"
         else
             __besman_echo_white  "\n Python 3 and pip are already installed."
         fi
-        }
+        
+}
 
-        __besman_install_python_pip_linux() {
-            . /etc/os-release
-            case "$ID" in
-                ubuntu|debian)
-                    sudo apt-get update
-                    sudo apt-get -y install python3 python3-pip
-                    ;;
-                fedora)
-                    sudo dnf -y install python3 python3-pip
-                    ;;
-                centos|rhel)
-                    sudo yum -y install python3 python3-pip
-                    ;;
-                *)
-                    __besman_echo_white  "\n Sorry ! Wecould not recognise your OS ! \n Dont worry, Let us know your operating sytem , we will improve it :-) operating system."
-                    exit 1
-                    ;;
-            esac
-        }
+__besman_install_container_runtime() {
 
-        __besman_install_python_pip_mac() {
+    if [$BESMAN_SYSTEM == "linux"]; then
+        __besman_install_podman_linux
+ 
+    else if $BESMAN_SYSTEM == "darwin"
             if ! command -v brew &>/dev/null; then
-                __besman_echo_white  "Homebrew not found. Installing Homebrew..."
+                __besman_echo_white  "\n Homebrew not found. Installing Homebrew..."
                 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
             fi
-            brew install python
-        }
+        __besman_install_podman_mac
 
-        __besman_install_python_pip_windows() {
+    else if $BESMAN_SYSTEM == "windows"
             if ! command -v choco &>/dev/null; then
-                __besman_echo_white  "\n Chocolatey not found. Please install Chocolatey from https://chocolatey.org/install"
+                __besman_echo_white  "\n We Use Chocolatey to install Package On Windows. You may install Chocolatey from https://chocolatey.org/install"
                 exit 1
             fi
-            choco install -y python
-        }
+        __besman_install_podman_windows
+    fi
+            __besman_echo_white  "\n Podman installation complete !"
+    }
+
+        
+
+    __besman_install_python_pip_linux() {
+
+        case "$BESMAN_SYSTEM" in
+            ubuntu|debian)
+                sudo apt-get update
+                sudo apt-get -y install python3 python3-pip
+                __besman_echo_white "\n python3 and python3-pip Installed"
+                ;;
+            fedora)
+                sudo dnf -y install python3 python3-pip
+                __besman_echo_white "\n python3 and python3-pip Installed"
+                ;;
+            centos|rhel)
+                sudo yum -y install python3 python3-pip
+                __besman_echo_white "\n python3 and python3-pip Installed"
+                ;;
+            *)
+                __besman_echo_white  "\n Sorry ! Could not recognise your Linux System ! \n Dont worry, Let us know your operating sytem , we will improve it :-) operating system."
+                exit 1
+                ;;
+        esac
+    }
+
+    __besman_install_python_pip_mac() {
+        if ! command -v brew &>/dev/null; then
+            __besman_echo_white  "Homebrew not found. Installing Homebrew..."
+            /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+        fi
+        brew install python3 pip3
+        __besman_echo_white "\n python3 and python3-pip Installed"
+    }
+
+    __besman_install_python_pip_windows() {
+        if ! command -v choco &>/dev/null; then
+            __besman_echo_white  "\n Chocolatey not found. Please install Chocolatey from https://chocolatey.org/install"
+            exit 1
+        fi
+        choco install -y python3 pip3
+        __besman_echo_white "\n python3 and python3-pip Installed"
+    }
         
 __besman_container_tool_setup(){
 
@@ -345,3 +284,64 @@ __besman_container_tool_setup(){
 
         }
     }
+
+
+__besman_install_podman_linux() {
+    
+    case "$BESMAN_SYSTEM" in
+        ubuntu|debian)
+            sudo apt-get update
+            sudo apt-get -y install podman
+            __besman_echo_white "\n PODMAN Installed"
+            ;;
+        fedora)
+            sudo dnf -y install podman
+            __besman_echo_white "\n PODMAN Installed"
+            ;;
+        centos|rhel)
+            sudo yum -y install podman
+            __besman_echo_white "\n PODMAN Installed"
+            ;;
+        *)
+            __besman_echo_red  "\n Sorry ! Wecould not recognise your OS ! \n Dont worry, Let us know your operating sytem , we will improve it :-) operating system."
+            exit 1
+            ;;
+    esac
+}
+
+# Installing PODMAN in Mac
+__besman_install_podman_mac() {
+    brew install podman
+}
+
+
+__besman_install_podman_windows() {
+    choco install podman
+}
+
+__besman_generate_state() {
+
+local file_path="besman-kubernetes-RT-env-config.yaml"
+
+if [ -f "$file_path" ]; then
+    # Check if BESMAN_ASSESSMENT_REQUIREMENTS: exists in the file
+    if grep -q "BESMAN_SYSTEM_STATE:" "$file_path"; then
+        # Append the scorecard content under BESMAN_ASSESSMENT_REQUIREMENTS with proper indentation
+        awk '/BESMAN_SYSTEM_STATE:/ {print; print "  '$toolName:'"; print "    PORT: '$toolPort'"; print "    VERSION: '$toolVersion'"; print "    INSTALLATION: '$toolInstallation'"; next}1' "$file_path" >> "$file_path"
+
+        echo "Successfully added Your current machine status to $file_path"
+    else
+        # Add BESMAN_ASSESSMENT_REQUIREMENTS section with scorecard content
+        cat <<EOF >> "$file_path"
+BESMAN_SYSTEM_STATE:
+  $toolName:
+    port: $toolPort
+    version: $toolVersion
+    installation: $toolInstallation
+EOF
+        __besman_echo_White "Successfully added BESMAN_SYSTEM_STATE section to $file_path"
+    fi
+else
+    __besman_echo_red  "\n File $file_path does not exist."
+fi
+}
