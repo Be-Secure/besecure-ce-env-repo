@@ -21,3 +21,9 @@ Be-Secure/besecure-ce-env-repo/sechub-RT-env,0.0.1
 Be-Secure/besecure-ce-env-repo/logstash-RT-env,0.0.1
 Be-Secure/besecure-ce-env-repo/privacyidea-RT-env,0.0.1
 Be-Secure/besecure-ce-env-repo/prometheus-RT-env,0.0.1
+Be-Secure/besecure-ce-env-repo/night-vision-RT-env,0.0.1
+Be-Secure/besecure-ce-env-repo/oscc-RT-env,0.0.1
+Be-Secure/besecure-ce-env-repo/openauto-RT-env,0.0.1
+Be-Secure/besecure-ce-env-repo/apollo-RT-env,0.0.1
+Be-Secure/besecure-ce-env-repo/openpilot-RT-env,0.0.1
+Be-Secure/besecure-ce-env-repo/open-adas-RT-env,0.0.1
