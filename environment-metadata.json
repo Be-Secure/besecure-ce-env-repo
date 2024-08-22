@@ -934,7 +934,7 @@
       ]
     },
     {
-        "name": "night-vision-RT-env",
+        "name": "nightvision-RT-env",
         "version": {
             "tag": "0.0.1",
             "release_date": ""

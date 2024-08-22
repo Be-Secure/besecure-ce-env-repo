@@ -37,15 +37,7 @@ function __besman_install
 
     fi
     # Please add the rest of the code here for installation
-    # Check if npm is installed
-    if ! command -v npm &>/dev/null; then
-        echo "npm is not installed. Installing npm"
-        sudo apt update
-        sudo apt install -y nodejs
-        sudo apt install -y npm
-    else
-        echo "npm is already installed."
-    fi
+
 }
 
 function __besman_uninstall
@@ -60,11 +52,6 @@ function __besman_uninstall
         __besman_echo_yellow "Could not find dir $BESMAN_ARTIFACT_DIR"
     fi
     # Please add the rest of the code here for uninstallation
-    # To uninstall ruby
-    echo "Uninstalling npm..."
-    sudo apt purge -y npm
-    sudo apt purge -y nodejs
-    echo "npm uninstalled successfully."
 
 }
 
@@ -83,20 +70,6 @@ function __besman_validate
     [[ "$?" -eq 1 ]] && __besman_create_ansible_playbook
     __besman_run_ansible_playbook_extra_vars "$BESMAN_ARTIFACT_TRIGGER_PLAYBOOK_PATH/$BESMAN_ARTIFACT_TRIGGER_PLAYBOOK" "bes_command=validate role_path=$BESMAN_ANSIBLE_ROLES_PATH" || return 1
     # Please add the rest of the code here for validate
-    # To validate npm installation
-    declare -a errors
-    if ! command -v npm &>/dev/null; then
-        errors+=("npm")
-    fi  
-    # Check if any error message is present
-    if [ ${#errors[@]} -eq 0 ]; then
-        echo "All requirements satisfied. Environment is set up successfully."
-    else
-        echo "Some requirements are not satisfied. Please install the following:"
-        for error in "${errors[@]}"; do
-            echo "- $error"
-        done
-    fi
 
 }
 

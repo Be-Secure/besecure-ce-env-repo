@@ -13,16 +13,16 @@ BESMAN_ORG: Be-Secure #***
 BESMAN_ARTIFACT_TYPE: project #***
 
 # Name of the artifact under assessment.
-BESMAN_ARTIFACT_NAME: night-vision #***
+BESMAN_ARTIFACT_NAME: nightvision #***
 
 # Version of the artifact under assessment.
 BESMAN_ARTIFACT_VERSION: alpha #***
 
 # Source code url of the artifact under assessment.
-BESMAN_ARTIFACT_URL: https://github.com/Be-Secure/night-vision #***
+BESMAN_ARTIFACT_URL: https://github.com/Be-Secure/nightvision #***
 
 # This variable stores the name of the environment file.
-BESMAN_ENV_NAME: night-vision-RT-env #***
+BESMAN_ENV_NAME: nightvision-RT-env #***
 
 # The path where you wish to clone the source code of the artifact under assessment.
 # If you wish to change the clone path, provide the complete path.
@@ -50,7 +50,7 @@ BESMAN_ANSIBLE_ROLES_PATH: $BESMAN_DIR/tmp/$BESMAN_ARTIFACT_NAME/roles #***
 # To get the list of ansible roles run 
 #   $ bes list --role
 #add the roles here. format - <Github id>/<repo name>,<Github id>/<repo name>,<Github id>/<repo name>,... #***
-BESMAN_ANSIBLE_ROLES: Be-Secure/ansible-role-oah-criticality_score,Be-Secure/ansible-role-oah-docker,Be-Secure/ansible-role-oah-sonarQube,Be-Secure/ansible-role-oah-vscode
+BESMAN_ANSIBLE_ROLES: Be-Secure/ansible-role-bes-java,Be-Secure/ansible-role-oah-maven,Be-Secure/ansible-role-oah-eclipse,Be-Secure/ansible-role-oah-criticality_score,Be-Secure/ansible-role-oah-docker,Be-Secure/ansible-role-oah-sonarQube
 
 # sets the path of the playbook with which we run the ansible roles.
 # Default path is ~/.besman/tmp/<artifact name dir>/
