@@ -26,3 +26,4 @@ Be-Secure/besecure-ce-env-repo/beep-RT-env,0.0.1
 Be-Secure/besecure-ce-env-repo/threat-dragon-RT-env,0.0.1
 Be-Secure/besecure-ce-env-repo/chainloop-RT-env,0.0.1
 Be-Secure/besecure-ce-env-repo/airflow-RT-env,0.0.1
+Be-Secure/besecure-ce-env-repo/gitleaks-RT-env,0.0.1
