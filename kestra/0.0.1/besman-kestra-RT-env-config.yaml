@@ -50,7 +50,7 @@ BESMAN_ANSIBLE_ROLES_PATH: $BESMAN_DIR/tmp/$BESMAN_ARTIFACT_NAME/roles #***
 # To get the list of ansible roles run 
 #   $ bes list --role
 #add the roles here. format - <Github id>/<repo name>,<Github id>/<repo name>,<Github id>/<repo name>,... #***
-BESMAN_ANSIBLE_ROLES: sand-hya/ansible-role-bes-java #,Be-Secure/ansible-role-oah-gradle,Be-Secure/ansible-role-oah-criticality_score,Be-Secure/ansible-role-oah-docker,Be-Secure/ansible-role-oah-sonarQube,Be-Secure/ansible-role-oah-eclipse
+BESMAN_ANSIBLE_ROLES: Be-Secure/ansible-role-bes-java,Be-Secure/ansible-role-oah-gradle,Be-Secure/ansible-role-oah-criticality_score,Be-Secure/ansible-role-oah-docker,Be-Secure/ansible-role-oah-sonarQube,Be-Secure/ansible-role-oah-eclipse
 
 # sets the path of the playbook with which we run the ansible roles.
 # Default path is ~/.besman/tmp/<artifact name dir>/
