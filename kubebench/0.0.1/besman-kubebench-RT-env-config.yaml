@@ -1,0 +1,64 @@
+BESMAN_ORG: Be-Secure
+BESMAN_ARTIFACT_TYPE: project
+BESMAN_ARTIFACT_NAME: kubebench
+BESMAN_ARTIFACT_VERSION: 0.0.1
+BESMAN_ARTIFACT_URL: https://github.com/Be-Secure/kubernetes
+BESMAN_ENV_NAME: kubebench-RT-env
+BESMAN_ARTIFACT_DIR: $HOME/CRS_Work/temp/$BESMAN_ARTIFACT_NAME
+BESMAN_TOOL_PATH: /opt
+BESMAN_LAB_TYPE: Organization
+BESMAN_LAB_NAME: Be-Secure
+BESMAN_ASSESSMENT_DATASTORE_DIR: $HOME/CRS_Work/temp/besecure-assessment-datastore
+BESMAN_ASSESSMENT_DATASTORE_URL: https://github.com/Be-Secure/besecure-assessment-datastore
+BESMAN_REQUIRED_TOOL_SET:
+  yq:
+    version: "latest"
+    type: "Default"
+    port_fwd: ""
+    port: ""
+  codeql:
+    port: 8080
+    version: "latest"
+    port_fwd: ""
+    type: "Default"
+  scorecard:
+    port: 8080
+    version: "latest"
+    port_fwd: ""
+    type: "Default"
+  sonar:
+    port: 9000
+    port_fwd: "9000"
+    version: "latest"
+    type: "container"
+  snyk:
+    port: 8080
+    port_fwd: ""
+    version: "latest"
+    type: "Default"
+  python3:
+    port: ""
+    port_fwd: ""
+    version: "latest"
+    type: "Default"
+  pip:
+    port: ""
+    port_fwd: ""
+    version: "latest"
+    type: "Default"
+  go:
+    port: ""
+    port_fwd: ""
+    version: "latest"
+    type: "Default"
+  podman:
+    port: 8080
+    port_fwd: ""
+    version: "latest"
+    type: "Default"
+  fosology:
+    port: 8080
+    port_fwd: "8080"
+    version: "latest"
+    type: "container"
+BESMAN_SYSTEM_CURRENT_STATE:
