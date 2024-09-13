@@ -32,11 +32,11 @@ function __besman_install {
 
     fi
 
-    for tool_name in $(yq eval '.BESMAN_REQUIRED_TOOL_SET | keys' "$BESMAN_K8S_CONFIG_FILE_PATH"); do
-        local tool_version=$(yq eval '.BESMAN_REQUIRED_TOOL_SET."$tool_name".version' "$BESMAN_K8S_CONFIG_FILE_PATH")
-        local tool_type= $(yq eval '.BESMAN_REQUIRED_TOOL_SET."$tool_name".type' "$BESMAN_K8S_CONFIG_FILE_PATH")
-        local port=$(yq eval '.BESMAN_REQUIRED_TOOL_SET."$tool_name".port' "$BESMAN_K8S_CONFIG_FILE_PATH")
-        local port_fwd=$(yq eval '.BESMAN_REQUIRED_TOOL_SET."$tool_name".port_fwd' "$BESMAN_K8S_CONFIG_FILE_PATH")
+    for tool_name in $(yq eval '.required_tool_set | keys' "$BESMAN_K8S_CONFIG_FILE_PATH"); do
+        local tool_version=$(yq eval '.required_tool_set."$tool_name".version' "$BESMAN_K8S_CONFIG_FILE_PATH")
+        local tool_type= $(yq eval '.required_tool_set."$tool_name".type' "$BESMAN_K8S_CONFIG_FILE_PATH")
+        local port=$(yq eval '.required_tool_set."$tool_name".port' "$BESMAN_K8S_CONFIG_FILE_PATH")
+        local port_fwd=$(yq eval '.required_tool_set."$tool_name".port_fwd' "$BESMAN_K8S_CONFIG_FILE_PATH")
         __besman_check_tools_check  "$tool_name" "$tool_version" "$tool_type" "$port" "$port_fwd" || return 1
     done
     __besman_echo_white  "\n All set-up for kubebench !"
@@ -53,11 +53,11 @@ function __besman_uninstall {
         __besman_echo_yellow "Could not find dir $BESMAN_ARTIFACT_DIR"
     fi
     
-        for tool_name in $(yq eval '.BESMAN_REQUIRED_TOOL_SET | keys' "$BESMAN_K8S_CONFIG_FILE_PATH"); do
-            local tool_version=$(yq eval '.BESMAN_REQUIRED_TOOL_SET."$tool_name".version' "$BESMAN_K8S_CONFIG_FILE_PATH")
-            local tool_type= $(yq eval '.BESMAN_REQUIRED_TOOL_SET."$tool_name".type' "$BESMAN_K8S_CONFIG_FILE_PATH")
-            local port=$(yq eval '.BESMAN_REQUIRED_TOOL_SET."$tool_name".port' "$BESMAN_K8S_CONFIG_FILE_PATH")
-            local port_fwd=$(yq eval '.BESMAN_REQUIRED_TOOL_SET."$tool_name".port_fwd' "$BESMAN_K8S_CONFIG_FILE_PATH")
+        for tool_name in $(yq eval '.required_tool_set | keys' "$BESMAN_K8S_CONFIG_FILE_PATH"); do
+            local tool_version=$(yq eval '.required_tool_set."$tool_name".version' "$BESMAN_K8S_CONFIG_FILE_PATH")
+            local tool_type= $(yq eval '.required_tool_set."$tool_name".type' "$BESMAN_K8S_CONFIG_FILE_PATH")
+            local port=$(yq eval '.required_tool_set."$tool_name".port' "$BESMAN_K8S_CONFIG_FILE_PATH")
+            local port_fwd=$(yq eval '.required_tool_set."$tool_name".port_fwd' "$BESMAN_K8S_CONFIG_FILE_PATH")
             if [ "$tool_type" != "container" ]; then
                 __besman_uninstall_tool  "$tool_name" "$tool_version" "$tool_type" "$port" "$port_fwd" || return 1
             else 
@@ -79,11 +79,11 @@ function __besman_update {
 
     local tool_name
 
-    for tool_name in $(yq eval '.BESMAN_REQUIRED_TOOL_SET | keys' "$BESMAN_K8S_CONFIG_FILE_PATH"); do
-        local tool_version=$(yq eval '.BESMAN_REQUIRED_TOOL_SET."$tool_name".version' "$BESMAN_K8S_CONFIG_FILE_PATH")
-        local tool_type= $(yq eval '.BESMAN_REQUIRED_TOOL_SET."$tool_name".type' "$BESMAN_K8S_CONFIG_FILE_PATH")
-        local port=$(yq eval '.BESMAN_REQUIRED_TOOL_SET."$tool_name".port' "$BESMAN_K8S_CONFIG_FILE_PATH")
-        local port_fwd=$(yq eval '.BESMAN_REQUIRED_TOOL_SET."$tool_name".port_fwd' "$BESMAN_K8S_CONFIG_FILE_PATH")
+    for tool_name in $(yq eval '.required_tool_set | keys' "$BESMAN_K8S_CONFIG_FILE_PATH"); do
+        local tool_version=$(yq eval '.required_tool_set."$tool_name".version' "$BESMAN_K8S_CONFIG_FILE_PATH")
+        local tool_type= $(yq eval '.required_tool_set."$tool_name".type' "$BESMAN_K8S_CONFIG_FILE_PATH")
+        local port=$(yq eval '.required_tool_set."$tool_name".port' "$BESMAN_K8S_CONFIG_FILE_PATH")
+        local port_fwd=$(yq eval '.required_tool_set."$tool_name".port_fwd' "$BESMAN_K8S_CONFIG_FILE_PATH")
         __besman_check_tools_check "$tool_name" "$tool_version" "$tool_type" "$port" "$port_fwd" || return 1
     done
     __besman_echo_white  "\n your Environment is Updated for kubebench !"
@@ -93,11 +93,11 @@ function __besman_update {
 function __besman_reset {
 
     local tool_name
-        for tool_name in $(yq eval '.BESMAN_SYSTEM_CURRENT_STATE | keys' "$BESMAN_K8S_CONFIG_FILE_PATH"); do
-            local tool_version=$(yq eval '.BESMAN_SYSTEM_CURRENT_STATE."$tool_name".version' "$BESMAN_K8S_CONFIG_FILE_PATH")
-            local tool_type= $(yq eval '.BESMAN_SYSTEM_CURRENT_STATE."$tool_name".type' "$BESMAN_K8S_CONFIG_FILE_PATH")
-            local port=$(yq eval '.BESMAN_SYSTEM_CURRENT_STATE."$tool_name".port' "$BESMAN_K8S_CONFIG_FILE_PATH")
-            local port_fwd=$(yq eval '.BESMAN_SYSTEM_CURRENT_STATE."$tool_name".port_fwd' "$BESMAN_K8S_CONFIG_FILE_PATH")
+        for tool_name in $(yq eval '.current_system_state | keys' "$BESMAN_K8S_CONFIG_FILE_PATH"); do
+            local tool_version=$(yq eval '.current_system_state."$tool_name".version' "$BESMAN_K8S_CONFIG_FILE_PATH")
+            local tool_type= $(yq eval '.current_system_state."$tool_name".type' "$BESMAN_K8S_CONFIG_FILE_PATH")
+            local port=$(yq eval '.current_system_state."$tool_name".port' "$BESMAN_K8S_CONFIG_FILE_PATH")
+            local port_fwd=$(yq eval '.current_system_state."$tool_name".port_fwd' "$BESMAN_K8S_CONFIG_FILE_PATH")
             if [ "$tool_type" != "container" ]; then
                 __besman_uninstall_container_tool "$tool_name" "$tool_version" "$tool_type" "$port" "$port_fwd" || return 1
                 __besman_uninstall_tool  "$tool_name" || return 1  
@@ -543,10 +543,10 @@ __besman_detect_container_runtime() {
         else
             __besman_echo_white  "\n No Container Runtime detected ! Will be installed"
             local toolname = "$BESMAN_CONTAINER_RUNTIME"
-            local tool_version=$(yq eval '.BESMAN_REQUIRED_TOOL_SET."$toolname".version' "$BESMAN_K8S_CONFIG_FILE_PATH")
-            local tool_type= $(yq eval '.BESMAN_REQUIRED_TOOL_SET."$toolname".type' "$BESMAN_K8S_CONFIG_FILE_PATH")
-            local port=$(yq eval '.BESMAN_REQUIRED_TOOL_SET."$toolname".port' "$BESMAN_K8S_CONFIG_FILE_PATH")
-            local port_fwd=$(yq eval '.BESMAN_REQUIRED_TOOL_SET."$toolname".port_fwd' "$BESMAN_K8S_CONFIG_FILE_PATH")
+            local tool_version=$(yq eval '.required_tool_set."$toolname".version' "$BESMAN_K8S_CONFIG_FILE_PATH")
+            local tool_type= $(yq eval '.required_tool_set."$toolname".type' "$BESMAN_K8S_CONFIG_FILE_PATH")
+            local port=$(yq eval '.required_tool_set."$toolname".port' "$BESMAN_K8S_CONFIG_FILE_PATH")
+            local port_fwd=$(yq eval '.required_tool_set."$toolname".port_fwd' "$BESMAN_K8S_CONFIG_FILE_PATH")
             
             __besman_install_tool "$tool_name" "$tool_version" "$tool_type" "$port" "$port_fwd"
         fi
@@ -591,36 +591,36 @@ __besman_generate_state() {
     local port = "$4"
     local port_fwd="$5"
 
-    if ! yq eval '.BESMAN_SYSTEM_CURRENT_STATE' "$BESMAN_K8S_CONFIG_FILE_PATH" &> /dev/null; then
-        yq eval -i '.BESMAN_SYSTEM_CURRENT_STATE = {}' "$BESMAN_K8S_CONFIG_FILE_PATH"
+    if ! yq eval '.current_system_state' "$BESMAN_K8S_CONFIG_FILE_PATH" &> /dev/null; then
+        yq eval -i '.current_system_state = {}' "$BESMAN_K8S_CONFIG_FILE_PATH"
     fi
 
     # Append or update the tool in BESMAN_SYSTEM_INITIAL_STATE
-    yq eval -i ".BESMAN_SYSTEM_CURRENT_STATE.$tool_name = {\"version\": \"$tool_version\", \"installation\": \"$tool_type\", \"port\": \"$port\", \"port_fwd\": \"$port_fwd\" }" "$BESMAN_K8S_CONFIG_FILE_PATH"
+    yq eval -i ".current_system_state.$tool_name = {\"version\": \"$tool_version\", \"installation\": \"$tool_type\", \"port\": \"$port\", \"port_fwd\": \"$port_fwd\" }" "$BESMAN_K8S_CONFIG_FILE_PATH"
 
 }
 
 __besman_remove_state() {
     local tool_name="$1"
 
-    if ! yq eval '.BESMAN_SYSTEM_CURRENT_STATE' "$BESMAN_K8S_CONFIG_FILE_PATH" &> /dev/null; then
-        __besman_echo_white "\nNo state found for removal in BESMAN_SYSTEM_CURRENT_STATE."
+    if ! yq eval '.current_system_state' "$BESMAN_K8S_CONFIG_FILE_PATH" &> /dev/null; then
+        __besman_echo_white "\nNo state found for removal in current_system_state."
         return 1
     fi
 
-    if ! yq eval ".BESMAN_SYSTEM_CURRENT_STATE.$tool_name" "$BESMAN_K8S_CONFIG_FILE_PATH" &> /dev/null; then
+    if ! yq eval ".current_system_state.$tool_name" "$BESMAN_K8S_CONFIG_FILE_PATH" &> /dev/null; then
         __besman_echo_white "\nNo entry found for tool: $tool_name."
         return 1
     fi
 
-    yq eval -i "del(.BESMAN_SYSTEM_CURRENT_STATE.$tool_name)" "$BESMAN_K8S_CONFIG_FILE_PATH"
+    yq eval -i "del(.current_system_state.$tool_name)" "$BESMAN_K8S_CONFIG_FILE_PATH"
 
     # Verify the removal
-    if yq eval ".BESMAN_SYSTEM_CURRENT_STATE.$tool_name" "$BESMAN_K8S_CONFIG_FILE_PATH" &> /dev/null; then
-        __besman_echo_white "\nFailed to remove tool: $tool_name from BESMAN_SYSTEM_CURRENT_STATE."
+    if yq eval ".current_system_state.$tool_name" "$BESMAN_K8S_CONFIG_FILE_PATH" &> /dev/null; then
+        __besman_echo_white "\nFailed to remove tool: $tool_name from current_system_state."
         return 1
     else
-        __besman_echo_white "\nSuccessfully removed tool: $tool_name from BESMAN_SYSTEM_CURRENT_STATE."
+        __besman_echo_white "\nSuccessfully removed tool: $tool_name from current_system_state."
         return 0
     fi
 }
