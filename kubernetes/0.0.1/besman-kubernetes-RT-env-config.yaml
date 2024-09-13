@@ -61,4 +61,4 @@ required_tool_set:
     port_fwd: "8080"
     version: "latest"
     type: "container"
-BESMAN_SYSTEM_CURRENT_STATE:
+current_system_state:
