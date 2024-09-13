@@ -1045,7 +1045,7 @@
             ]
         },
         {
-            "name": "k8s-RT-env",
+            "name": "kubernetes-RT-env",
             "version": {
                 "tag": "0.0.1",
                 "release_date": ""
