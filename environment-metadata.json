@@ -1045,7 +1045,7 @@
             ]
         },
         {
-            "name": "trivy-RT-env",
+            "name": "kubebench-RT-env",
             "version": {
                 "tag": "0.0.1",
                 "release_date": ""
