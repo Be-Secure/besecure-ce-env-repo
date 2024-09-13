@@ -10,7 +10,7 @@ BESMAN_LAB_TYPE: Organization
 BESMAN_LAB_NAME: Be-Secure
 BESMAN_ASSESSMENT_DATASTORE_DIR: $HOME/CRS_Work/temp/besecure-assessment-datastore
 BESMAN_ASSESSMENT_DATASTORE_URL: https://github.com/Be-Secure/besecure-assessment-datastore
-BESMAN_REQUIRED_TOOL_SET:
+required_tool_set:
   yq:
     version: "latest"
     type: "Default"
