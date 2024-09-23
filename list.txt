@@ -23,3 +23,9 @@ Be-Secure/besecure-ce-env-repo/privacyidea-RT-env,0.0.1
 Be-Secure/besecure-ce-env-repo/prometheus-RT-env,0.0.1
 Be-Secure/besecure-ce-env-repo/RomRaider-RT-env,0.0.1
 Be-Secure/besecure-ce-env-repo/beep-RT-env,0.0.1
+Be-Secure/besecure-ce-env-repo/nightvision-RT-env,0.0.1
+Be-Secure/besecure-ce-env-repo/oscc-RT-env,0.0.1
+Be-Secure/besecure-ce-env-repo/openauto-RT-env,0.0.1
+Be-Secure/besecure-ce-env-repo/apollo-RT-env,0.0.1
+Be-Secure/besecure-ce-env-repo/openpilot-RT-env,0.0.1
+Be-Secure/besecure-ce-env-repo/open-adas-RT-env,0.0.1
