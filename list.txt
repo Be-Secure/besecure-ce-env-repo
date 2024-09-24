@@ -26,3 +26,4 @@ Be-Secure/besecure-ce-env-repo/beep-RT-env,0.0.1
 Be-Secure/besecure-ce-env-repo/cosign-RT-env,0.0.1
 Be-Secure/besecure-ce-env-repo/trivy-RT-env,0.0.1
 Be-Secure/besecure-ce-env-repo/zaproxy-RT-env,0.0.2
+Be-Secure/besecure-ce-env-repo/sonarqube-RT-env,0.0.1
