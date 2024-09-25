@@ -38,10 +38,10 @@ function __besman_install
     fi
     # Please add the rest of the code here for installation
     # Check if Python is installed and install if not
-    if ! command -v python3.10 &>/dev/null; then
+    if ! command -v python3.8 &>/dev/null; then
         echo "Python is not installed. Installing Python..."
         sudo apt update
-        sudo apt install python3.10 -y
+        sudo apt install python3.8 -y
     else
         echo "Python is already there to use."
     fi
@@ -88,7 +88,7 @@ function __besman_validate
     # Please add the rest of the code here for validate
     # Validate Python installation
     declare -a errors
-    if ! command -v python3.10 &>/dev/null; then
+    if ! command -v python3.8 &>/dev/null; then
         errors+=("Python")
     fi
     # Validate pip installation
