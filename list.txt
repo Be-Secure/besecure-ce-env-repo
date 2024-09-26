@@ -21,3 +21,4 @@ Be-Secure/besecure-ce-env-repo/sechub-RT-env,0.0.1
 Be-Secure/besecure-ce-env-repo/logstash-RT-env,0.0.1
 Be-Secure/besecure-ce-env-repo/privacyidea-RT-env,0.0.1
 Be-Secure/besecure-ce-env-repo/prometheus-RT-env,0.0.1
+Be-Secure/besecure-ce-env-repo/guardrails-RT-env,0.0.1
