@@ -33,3 +33,4 @@ Be-Secure/besecure-ce-env-repo/sqlmap-RT-env,0.0.1
 Be-Secure/besecure-ce-env-repo/DependencyCheck-RT-env,0.0.1
 Be-Secure/besecure-ce-env-repo/clair-RT-env,0.0.1
 Be-Secure/besecure-ce-env-repo/oss-fuzz-RT-env,0.0.1
+Be-Secure/besecure-ce-env-repo/grype-RT-env,0.0.1
