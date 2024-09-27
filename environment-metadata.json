@@ -1550,6 +1550,45 @@
                     ]
                 }
             ]
+        },
+        {
+            "name": "nmap-RT-env",
+            "version": {
+                "tag": "0.0.1",
+                "release_date": ""
+            },
+            "author": {
+                "name": "BeSLab",
+                "type": "Lab"
+            },
+            "date_of_creation": "2024-09-27T13:55:02",
+            "last_update_date": "2024-09-27T13:55:02",
+            "last_execution": {
+                "name": "BeSLab",
+                "type": "Lab",
+                "status": "Success",
+                "timestamp": "2024-09-27T13:55:02"
+            },
+            "compatible_playbooks": [
+                {
+                    "name": "criticality_score",
+                    "version": [
+                        "0.0.1"
+                    ]
+                },
+                {
+                    "name": "sonarqube",
+                    "version": [
+                        "0.0.1"
+                    ]
+                },
+                {
+                    "name": "scorecard",
+                    "version": [
+                        "0.0.1"
+                    ]
+                }
+            ]
         }
     ]
 }
