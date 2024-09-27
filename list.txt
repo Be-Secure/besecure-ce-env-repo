@@ -37,3 +37,4 @@ Be-Secure/besecure-ce-env-repo/grype-RT-env,0.0.1
 Be-Secure/besecure-ce-env-repo/TheHive-RT-env,0.0.1
 Be-Secure/besecure-ce-env-repo/fossology-RT-env,0.0.1
 Be-Secure/besecure-ce-env-repo/nmap-RT-env,0.0.1
+Be-Secure/besecure-ce-env-repo/aircrack-ng-RT-env,0.0.1
