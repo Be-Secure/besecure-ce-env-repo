@@ -16,10 +16,10 @@ BESMAN_ARTIFACT_TYPE: project
 BESMAN_ARTIFACT_NAME: criticalityscore
 
 # Version of the artifact under assessment.
-BESMAN_ARTIFACT_VERSION: 1.2.24
+BESMAN_ARTIFACT_VERSION: 2.0.4
 
 # Source code url of the artifact under assessment.
-BESMAN_ARTIFACT_URL: https://github.com/ossf/criticality_score
+BESMAN_ARTIFACT_URL: https://github.com/Be-Secure/criticality_score
 
 # This variable stores the name of the environment file.
 BESMAN_ENV_NAME: criticalityscore-BT-env

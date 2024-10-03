@@ -13,15 +13,15 @@ BESMAN_ORG: Be-Secure
 BESMAN_ARTIFACT_TYPE: project 
 
 # Name of the artifact under assessment.
-BESMAN_ARTIFACT_NAME: fastjson
+BESMAN_ARTIFACT_NAME: scorecard
 
 # Version of the artifact under assessment.
-BESMAN_ARTIFACT_VERSION: 1.2.24
+BESMAN_ARTIFACT_VERSION: 5.0.0
 # Source code url of the artifact under assessment.
-BESMAN_ARTIFACT_URL: https://github.com/Be-Secure/fastjson
+BESMAN_ARTIFACT_URL: https://github.com/Be-Secure/scorecard
 
 # This variable stores the name of the environment file.
-BESMAN_ENV_NAME: fastjson-RT-env
+BESMAN_ENV_NAME: scorecard-RT-env
 
 # The path where you wish to clone the source code of the artifact under assessment.
 # If you wish to change the clone path, provide the complete path.
