@@ -24,3 +24,4 @@ Be-Secure/besecure-ce-env-repo/prometheus-RT-env,0.0.1
 Be-Secure/besecure-ce-env-repo/RomRaider-RT-env,0.0.1
 Be-Secure/besecure-ce-env-repo/beep-RT-env,0.0.1
 Be-Secure/besecure-ce-env-repo/guardrails-RT-env,0.0.1
+Be-Secure/besecure-ce-env-repo/kestra-RT-env,0.0.1
