@@ -16,7 +16,7 @@ BESMAN_ARTIFACT_TYPE: project
 BESMAN_ARTIFACT_NAME: fossology
 
 # Version of the artifact under assessment.
-BESMAN_ARTIFACT_VERSION: 1.2.24
+BESMAN_ARTIFACT_VERSION: 4.4.0
 # Source code url of the artifact under assessment.
 BESMAN_ARTIFACT_URL: https://github.com/Be-Secure/fossology
 
