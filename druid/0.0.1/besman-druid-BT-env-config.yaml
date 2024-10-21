@@ -9,20 +9,20 @@
 # Used to mention where you should clone the repo from, default value is Be-Secure
 BESMAN_ORG: Be-Secure
 
-#  project/ml model/training dataset
+# project/ml model/training dataset
 BESMAN_ARTIFACT_TYPE: project 
 
 # Name of artifact under assessment.
-BESMAN_ARTIFACT_NAME: HWC-API
+BESMAN_ARTIFACT_NAME: druid
 
 # Version of artifact under assessment.
-BESMAN_ARTIFACT_VERSION: develop
+BESMAN_ARTIFACT_VERSION: druid-27.0.0
 
 # Source code url of artifact under assessment.
-BESMAN_ARTIFACT_URL: https://github.com/Be-Secure/HWC-API
+BESMAN_ARTIFACT_URL: https://github.com/Be-Secure/druid
 
 # Name of environment.
-BESMAN_ENV_NAME: HWC-API-BT-env
+BESMAN_ENV_NAME: druid-BT-env
 
 # Path to clone source code of artifact under assessment.
 # If you wish to change the clone path, provide the complete path.
@@ -48,8 +48,7 @@ BESMAN_ANSIBLE_ROLES_PATH: $BESMAN_DIR/tmp/$BESMAN_ARTIFACT_NAME/roles
 
 # List of tools to install. Tools are installed using ansible roles.# To get the list of ansible roles run 
 #   $ bes list --role
-# add the roles here. format - <Github id>/<repo name>,<Github id>/<repo name>,<Github id>/<repo name>,...
-BESMAN_ANSIBLE_ROLES: Be-Secure/ansible-role-bes-java,Be-Secure/ansible-role-oah-maven,Be-Secure/ansible-role-oah-eclipse
+BESMAN_ANSIBLE_ROLES: Be-Secure/ansible-role-bes-java,Be-Secure/ansible-role-oah-maven,Be-Secure/ansible-role-oah-eclipse #add the roles here. format - <Github id>/<repo name>,<Github id>/<repo name>,<Github id>/<repo name>,... #***
 
 # Path of the playbook with which we run the ansible roles.
 # Default path is ~/.besman/tmp/<artifact name dir>/
@@ -69,6 +68,11 @@ BESMAN_DISPLAY_SKIPPED_ANSIBLE_HOSTS: false
 # and paste it here and change the value.
 # Format is <variable name>: <value> 
 # Eg: openjdk_version: 11
+
 openjdk_version: 8
+maven_version: 3.9.6
+vagrant_home: /home/vagrant
+java_tmp: "{{ home_dir }}/java_tmp"
 eclipse_req_packages: snapd
+eclipse_tmp: "{{ home_dir }}/eclipse_tmp"
 eclipse_pin_fav: true
