@@ -27,3 +27,4 @@ Be-Secure/besecure-ce-env-repo/guardrails-RT-env,0.0.1
 Be-Secure/besecure-ce-env-repo/threat-dragon-RT-env,0.0.1
 Be-Secure/besecure-ce-env-repo/grype-RT-env,0.0.1
 Be-Secure/besecure-ce-env-repo/sqlmap-RT-env,0.0.1
+Be-Secure/besecure-ce-env-repo/trivy-RT-env,0.0.1
