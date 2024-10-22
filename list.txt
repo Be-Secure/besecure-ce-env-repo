@@ -37,3 +37,4 @@ Be-Secure/besecure-ce-env-repo/nightvision-RT-env,0.0.1
 Be-Secure/besecure-ce-env-repo/oscc-RT-env,0.0.1
 Be-Secure/besecure-ce-env-repo/openauto-RT-env,0.0.1
 Be-Secure/besecure-ce-env-repo/apollo-RT-env,0.0.1
+Be-Secure/besecure-ce-env-repo/gitleaks-RT-env,0.0.1
