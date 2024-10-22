@@ -34,3 +34,4 @@ Be-Secure/besecure-ce-env-repo/TheHive-RT-env,0.0.1
 Be-Secure/besecure-ce-env-repo/openpilot-RT-env,0.0.1
 Be-Secure/besecure-ce-env-repo/open-adas-RT-env,0.0.1
 Be-Secure/besecure-ce-env-repo/nightvision-RT-env,0.0.1
+Be-Secure/besecure-ce-env-repo/oscc-RT-env,0.0.1
