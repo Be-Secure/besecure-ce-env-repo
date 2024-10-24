@@ -29,7 +29,6 @@ A BeSman environment script contain the following lifecycle functions
 - update: Update configurations of the tools.
 - reset: Reset the environment to the default state.
 
-
 # Two ways of execution
 
 A BeSman environment script can be executed in two ways,
@@ -237,29 +236,67 @@ For more info regarding a command,
     $ bes help <command>
 
 
-# Developer Guide
+# Contribution Guide
 
 Thank you for taking your time to contribute to Be-Secure Environment Repo. Please check the [developer-guide](./developer-guide.md) for instructions on how to develop your environment script.
 
-<!-- # Available environments.
 
-## RT Environments
-
-1. [Fastjson](fastjson/0.0.1/besman-fastjson-RT-env.sh)
-2. [jackson-databind](jackson-databind/0.0.1/besman-jackson-databind-RT-env.sh)
-3. [opencti](opencti/0.0.1/besman-opencti-RT-env.sh)
-4. [zaproxy](zaproxy/0.0.1/besman-zaproxy-RT-env.sh)
-5. [ML Assessment](ML/0.0.1/besman-ML-RT-env.sh)
-6. [dubbo](dubbo/0.0.1/besman-dubbo-RT-env.sh)
-7. [struts](struts/0.0.1/besman-struts-RT-env.sh)
+This guide outlines the process for contributing to the BeSEnvironment Script, focusing on the adoption of a Test-Driven Methodology for evaluating tools and projects within the BeSecure framework. Contributors are expected to follow these guidelines to ensure consistency and quality in the development process.
 
 
-## BT Environments
+### Getting Started
+**Fork and Clone Repositories:** 
+Begin by forking the env and test repositories. Clone them to your local development environment to start working on the BeSEnvironment.
 
-1. [Fastjson](fastjson/0.0.1/besman-fastjson-BT-env.sh)
-2. [HWC-API](HWC-API/0.0.1/besman-HWC-API-BT-env.sh)
-3. [jackson-core](jackson-core/0.0.1/besman-jackson-core-BT-env.sh)
-4. [jackson-databind](jackson-databind/0.0.1/besman-jackson-databind-BT-env.sh)
-5. [lettuce](lettuce/0.0.1/besman-lettuce-BT-env.sh)
-6. [zaproxy](zaproxy/0.0.1/besman-zaproxy-BT-env.sh)
-7. [druid](druid/0.0.1/besman-druid-BT-env.sh) -->
+**Set Up Development Environment:** Ensure your development environment meets the prerequisites for working with the BeSEnvironment Script. This may involve setting up virtual environments, Docker, or Ansible, depending on the project's needs.
+
+### Development Workflow
+
+**Test-Driven Development (TDD):**
+Start by understanding the requirements for the tools and projects within the BeSecure framework.
+Write skeleton test cases for the BeSEnvironment, covering the following actions:
+- install: Installs the required tools.
+- uninstall: Removes the installed tools.
+- validate: Checks whether all tools are installed and required configurations are met.
+- update: Updates configurations of the tools.
+- reset: Resets the environment to the default state.
+
+**Implement Features:**
+Develop features and functionalities for the BeSEnvironment, ensuring each meets the criteria outlined in the test cases.
+Regularly run the test cases to guide your development, aiming to pass all tests.
+
+**Continuous Integration and Continuous Deployment (CI/CD):**
+Integrate a CI/CD pipeline in both the env and test repositories.
+Ensure the pipeline automatically runs the test cases against new commits to verify the integrity of the environment.
+
+**Playbook Development:**
+Develop a skeleton Ansible playbook or Docker compose file for the BeSEnvironment.
+Write skeleton test cases for each playbook lifecycle method:
+- __besman_init()
+_ __besman_execute()
+- __besman_prepare()
+- __besman_publish()
+- __besman_cleanup()
+- __besman_launch()
+
+Implement the playbook methods, ensuring each passes its corresponding test case.
+
+**Documentation:**
+Document the steps for validating the installation instructions.
+Ensure all code contributions are accompanied by comprehensive documentation.
+
+### Contribution Submission
+**Code Review:**
+Once development is complete, and all tests are passing, submit a pull request to the env and test repositories.
+Engage with the BeSecure community during the code review process to refine your contribution.
+
+**Merge and Deployment:**
+After the code review is approved, your contributions will be merged into the master branch.
+The CI/CD pipeline will deploy your changes, integrating them into the BeSEnvironment.
+
+### Best Practices
+**Code Quality:** Ensure your code is clean, well-documented, and follows the project's coding standards.
+
+**Testing:** Adopt a test-driven development approach, writing tests before implementing features.
+
+**Collaboration:** Engage with the BeSecure community, seeking feedback and collaborating with other contributors.
