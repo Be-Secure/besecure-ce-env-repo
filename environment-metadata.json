@@ -1751,6 +1751,33 @@
                     ]
                 }
             ]
+        },
+        {
+            "name": "oasp-seller-app-RT-env",
+            "version": {
+                "tag": "0.0.1",
+                "release_date": ""
+            },
+            "author": {
+                "name": "Be-Secure",
+                "type": "Organization"
+            },
+            "date_of_creation": "2024-10-24T15:12:57",
+            "last_update_date": "2024-10-24T15:12:57",
+            "last_execution": {
+                "name": "Be-Secure",
+                "type": "Organization",
+                "status": "Success",
+                "timestamp": "2024-10-24T15:12:57"
+            },
+            "compatible_playbooks": [
+                {
+                    "name": "spdx-sbom-generator",
+                    "version": [
+                        "0.0.1"
+                    ]
+                }
+            ]
         }
     ]
 }
