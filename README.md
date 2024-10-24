@@ -1,6 +1,8 @@
-# BeSman Environment Script
+# BeS Environment Scripts
 
-A BeSman environment script is file that contains instructions for setting up and configuring the necessary tools, dependencies, and settings required for a specific software or project environment. It typically includes commands or directives to install/manage libraries, frameworks, databases, and other components needed to run the software or project successfully. Environment scripts automate the setup process, ensuring consistency and reproducibility across different environments or systems. They are commonly used in software development, testing, deployment, and other related tasks to streamline the environment setup and configuration. This repository contains environment scripts for projects tracked by [Be-Secure](https://github.com/Be-Secure) community.
+A **BeS Envrionment** is a controlled testing and patching ground for security testing and patching of open source projects, tools and ML models. All the tools and utilities necesary to carry out a cybersecurity task on an OSS artifact is preinstalled in the BeS Environment. Ethical hackers, known as red teamers, utilitze these envrionment to attack a system to identify vulnerabilities and weaknesses. A blue teaming environment is a defensive environment designed to protect against and respond to simulated cyberattacks. 
+
+A **BeS Environment Script** is file that contains instructions for setting up and configuring a BeS Environment. The necessary tools, dependencies, and settings required for a specific software or project environment are installed using the environment script. It typically includes commands or directives to install/manage libraries, frameworks, databases, and other components needed to run the software or project successfully. Environment scripts automate the setup process, ensuring consistency and reproducibility across different environments or systems. They are commonly used in software development, testing, deployment, and other related tasks to streamline the environment setup and configuration. This repository contains environment scripts for projects tracked by [Be-Secure](https://github.com/Be-Secure) community.
 
 ### Features
 
@@ -17,7 +19,7 @@ BeS environments are categorized as following.
 
 ## Lifecycle Functions of BeS Environment Scripts
 
-A BeS environment script contain the following lifecycle functions.
+A BeS environment script should implement the following lifecycle functions.
 
 - **__besman_install:** Installs the required tools.
 - **__besman_uninstall:** Removes the installed tools.
@@ -29,9 +31,9 @@ A BeS environment script contain the following lifecycle functions.
 
 A BeS environment can be implemented in two ways,
 
-### 1. Basic environment
+### 1. Basic Environment Script
 
-In this type of environment script, the developer has to code all the required steps to install the required tools. Its lightweight and no overhead of additional scripting tools.
+In this type of environment script, the developer has to code all the required steps to install the tools. Its lightweight and no overhead of additional automation frameworks.
 
 **Skeletal Code**
 
@@ -52,9 +54,9 @@ In this type of environment script, the developer has to code all the required s
     function __besman_reset {
     }
 
-### 2. Ansible Based Scripts
+### 2. Advanced Envrionment Scripts
 
-The environment script uses ansible roles to install the required tools. The major advantage here is the tools can be programatically configured and the components are reusable.
+The advanced implemention of BeS environment script uses ansible roles to install the required tools. The major advantage here is the tools can be programatically configured and the components are reusable.
 
 **Skeletal Code**
 
@@ -131,8 +133,6 @@ The environment script uses ansible roles to install the required tools. The maj
         __besman_run_ansible_playbook_extra_vars "$BESMAN_ARTIFACT_TRIGGER_PLAYBOOK_PATH/$BESMAN_ARTIFACT_TRIGGER_PLAYBOOK" "bes_command=reset role_path=$BESMAN_ANSIBLE_ROLES_PATH" || return 1
         # Please add the rest of the code here for reset
     }
-
-
 
 ## Usage
 
