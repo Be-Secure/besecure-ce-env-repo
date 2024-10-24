@@ -6,8 +6,10 @@
 # BESMAN_<var name>: <value>
 # If you are not using any particular value, remove it or comment it(#).
 #*** - These variables should not be removed, nor left empty.
+BESMAN_USER_NAMESPACE: NeerajK007
+
 # BESMAN_ORG - used to mention where you should clone the repo from, default value is Be-Secure
-BESMAN_ORG: OSSVerse #***
+BESMAN_ORG: NeerajK007 #***
 
 # BESMAN_ARTIFACT_TYPE - project/ml model/training dataset
 BESMAN_ARTIFACT_TYPE: # project/ml model/training dataset #***
@@ -16,20 +18,21 @@ BESMAN_ARTIFACT_TYPE: # project/ml model/training dataset #***
 BESMAN_ARTIFACT_NAME: oasp-seller-app #***
 
 # BESMAN_ARTIFACT_VERSION - version of the artifact under assessment.
-BESMAN_ARTIFACT_VERSION: #Enter the version of the artifact here. #***
+BESMAN_ARTIFACT_VERSION: v0.0.1 #Enter the version of the artifact here. #***
 
 # BESMAN_ARTIFACT_URL - Source code url of the artifact under assessment.
-BESMAN_ARTIFACT_URL: https://github.com/OSSVerse/oasp-seller-app #***
+BESMAN_ARTIFACT_URL: https://github.com/NeerajK007/oasp-seller-app #***
 
 #BESMAN_ENV_NAME - This variable stores the name of the environment file.
 BESMAN_ENV_NAME: oasp-seller-app-RT-env #***
 
 # BESMAN_ARTIFACT_DIR - The path where you wish to clone the source code of the artifact under assessment.
 # If you wish to change the clone path, provide the complete path.
-BESMAN_ARTIFACT_DIR: $HOME/bes-env-clone/$BESMAN_ARTIFACT_NAME #***
+BESMAN_ARTIFACT_DIR: $HOME/CRS_Work/temp/$BESMAN_ARTIFACT_NAME #***
 
 # BESMAN_TOOL_PATH - The path where we download the assessment and other required tools during installation.
-BESMAN_TOOL_PATH: /opt #***
+#BESMAN_TOOL_PATH: /opt #***
+BESMAN_TOOL_PATH: /home/neeraj/CRS_Work/temp
 
 # BESMAN_LAB_TYPE - Organization/lab/individual.
 BESMAN_LAB_TYPE: Organization #***
@@ -38,16 +41,16 @@ BESMAN_LAB_TYPE: Organization #***
 BESMAN_LAB_NAME: Be-Secure #***
 
 # BESMAN_ASSESSMENT_DATASTORE_DIR - This is the local dir where we store the assessment reports. Default is home.
-BESMAN_ASSESSMENT_DATASTORE_DIR: $HOME/besecure-assessment-datastore #***
+BESMAN_ASSESSMENT_DATASTORE_DIR: $HOME/CRS_Work/temp/besecure-assessment-datastore #***
 
 # BESMAN_ASSESSMENT_DATASTORE_URL - The remote repo where we store the assessment reports.
-BESMAN_ASSESSMENT_DATASTORE_URL: https://github.com/Be-Secure/besecure-assessment-datastore #***
+BESMAN_ASSESSMENT_DATASTORE_URL: https://github.com/NeerajK007/besecure-assessment-datastore #***
 
 # BESMAN_ANSIBLE_ROLES_PATH - The path where we download the ansible role of the assessment tools and other utilities
 BESMAN_ANSIBLE_ROLES_PATH: $BESMAN_DIR/tmp/$BESMAN_ARTIFACT_NAME/roles #***
 
 # BESMAN_ANSIBLE_ROLES - The list of tools you wish to install. The tools are installed using ansible roles.
-# To get the list of ansible roles run 
+# To get the list of ansible roles run
 #   $ bes list --role
 BESMAN_ANSIBLE_ROLES: #add the roles here. format - <Github id>/<repo name>,<Github id>/<repo name>,<Github id>/<repo name>,... #***
 
@@ -62,10 +65,10 @@ BESMAN_ARTIFACT_TRIGGER_PLAYBOOK: besman-$BESMAN_ARTIFACT_NAME-RT-trigger-playbo
 # Default value is false
 BESMAN_DISPLAY_SKIPPED_ANSIBLE_HOSTS: false #***
 
-
+BESMAN_ASSESSMENT_TOOLS: spdx-sbom-generator,scorecard,criticality_score,sonarqube
 # The default values of the ansible roles will be present in their respective repos.
 # You can go to https://github.com/Be-Secure/<repo of the ansible role>/blob/main/defaults/main.yml.
 # If you wish to change the default values copy the variable from the https://github.com/Be-Secure/<repo of the ansible role>/blob/main/defaults/main.yml
 # and paste it here and change the value.
-# Format is <variable name>: <value> 
+# Format is <variable name>: <value>
 # Eg: openjdk_version: 11
