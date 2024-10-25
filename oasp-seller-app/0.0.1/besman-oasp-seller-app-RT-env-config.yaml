@@ -65,10 +65,13 @@ BESMAN_ASSESSMENT_DATASTORE_URL: https://github.com/NeerajK007/besecure-assessme
 # Default value is false
 #BESMAN_DISPLAY_SKIPPED_ANSIBLE_HOSTS: false #***
 
-BESMAN_ASSESSMENT_TOOLS: spdx-sbom-generator,scorecard,criticality_score,sonarqube,fossology
+BESMAN_ASSESSMENT_TOOLS: criticality_score,sonarqube,fossology,spdx-sbom-generator
+
 # The default values of the ansible roles will be present in their respective repos.
 # You can go to https://github.com/Be-Secure/<repo of the ansible role>/blob/main/defaults/main.yml.
 # If you wish to change the default values copy the variable from the https://github.com/Be-Secure/<repo of the ansible role>/blob/main/defaults/main.yml
 # and paste it here and change the value.
 # Format is <variable name>: <value>
 # Eg: openjdk_version: 11
+
+BESMAN_SPDX_SBOM_ASSET_URL: https://github.com/opensbom-generator/spdx-sbom-generator/releases/download/v0.0.15/spdx-sbom-generator-v0.0.15-linux-amd64.tar.gz
