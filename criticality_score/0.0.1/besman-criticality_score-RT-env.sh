@@ -99,7 +99,7 @@ function __besman_install
 
         #uncomment below function call
         #install_$tool
-        
+        echo ""
      done
    fi
   
@@ -188,7 +188,7 @@ function __besman_uninstall
 
        #uncomment below function call
        #uninstall_$tool
-
+       echo ""
      done
    fi
 
