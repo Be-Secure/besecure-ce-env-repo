@@ -36,19 +36,177 @@ function __besman_install {
     fi
     # Please add the rest of the code here for installation
 
-    install_CommonDep
+    # ************************* env dependency *********************************
+
+    ## Name:docker
+    __besman_echo_white "Check if docker is installed or not"
+    if [ ! -x "$(command -v docker)" ]; then
+        __besman_echo_white "Docker is not installed. Installing Docker..."
+        __besman_echo_white "installing docker ..."
+        sudo apt update
+        sudo apt install -y ca-certificates curl software-properties-common
+        curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+        sudo add-apt-repository -y "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
+        sudo apt update
+        sudo apt install -y docker-ce docker-ce-cli containerd.io
+
+        # sudo groupadd -f docker
+        sudo usermod -aG docker $USER
+        sudo systemctl restart docker
+        # newgrp docker
+
+        #sudo su - $USER
+
+        # Check if Docker is successfully installed and running
+        if ! command -v docker &>/dev/null; then
+            __besman_echo_white "Docker installation failed or Docker is not available."
+        else
+            docker version
+        fi
+
+        __besman_echo_white "Docker installation is completed"
+    else
+        __besman_echo_white "Docker is already installed."
+    fi
+
+    ## Name:npm & yarn
+    __besman_echo_white "check if npm & yarn is installed"
+    if ! command -v npm &>/dev/null; then
+        # npm
+        _besman_echo_white "installing npm ..."
+        sudo apt update
+        curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
+        sudo apt install -y nodejs
+        # yarn
+        __besman_echo_white "installing yarn ..."
+        sudo apt update
+        sudo npm install --global yarn
+    else
+        __besman_echo_white "npm is already available"
+        __besman_echo_white "check if yarn is installed"
+        if ! command -v yarn &>/dev/null; then
+            __besman_echo_white "installing yarn ..."
+            sudo apt update
+            sudo npm install --global yarn
+        else
+            __besman_echo_white "yarn is already installed"
+        fi
+
+    fi
+
+    ## Name:snap
+    __besman_echo_white "check if snap is installed or not"
+    if ! [ -x "$(command -v snap)" ]; then
+        __besman_echo_white "installing snap ..."
+        sudo apt update
+        sudo apt install snapd
+    else
+        __besman_echo_white "snap is already available"
+    fi
+
+    ## Name:go
+    __besman_echo_white "check if go is intalled or not"
+    if ! [ -x "$(command -v go)" ]; then
+        __besman_echo_white "installing go ..."
+        sudo snap install go --classic
+        export GOPATH=$HOME/go
+        export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
+    else
+        __besman_echo_white "go is already available"
+    fi
+
+    # ********************** Assessment tools ********************************
 
     [[ ! -z $BESMAN_ASSESSMENT_TOOLS ]] && readarray -d ',' -t ASSESSMENT_TOOLS <<<"$BESMAN_ASSESSMENT_TOOLS"
 
     if [ ! -z $ASSESSMENT_TOOLS ]; then
         for tool in ${ASSESSMENT_TOOLS[*]}; do
+            if [[ $tool == *:* ]]; then
+                tool_name=${tool%%:*}    # Get the tool name
+                tool_version=${tool##*:} # Get the tool version
+            else
+                tool_name=$tool # Get the tool name
+                tool_version="" # No version specified
+            fi
 
-            __besman_echo_white "tool - $tool"
-            install_$tool
+            __besman_echo_white "installling tool - $tool : version - $tool_version"
 
+            case $tool_name in
+            criticality_score)
+                __besman_echo_white "check for criticality_score"
+                if ! [ -x "$(command -v criticality_score)" ]; then
+                    __besman_echo_white "installing criticality_score ..."
+                    go install github.com/ossf/criticality_score/v2/cmd/criticality_score@latest
+                    __besman_echo_white "criticality_score is installed\n"
+                else
+                    __besman_echo_white "criticality_score is already available"
+                fi
+                ;;
+            sonarqube)
+                __besman_echo_white "Installing sonarqube..."
+                if [ "$(docker ps -aq -f name=sonarqube-$BESMAN_ARTIFACT_NAME)" ]; then
+                    # If a container exists, stop and remove it
+                    __besman_echo_white "Removing existing container 'sonarqube-$BESMAN_ARTIFACT_NAME'..."
+                    docker stop sonarqube-$BESMAN_ARTIFACT_NAME
+                    docker container rm --force sonarqube-$BESMAN_ARTIFACT_NAME
+                fi
+                # Create sonarqube-docker container
+                __besman_echo_white "creating sonarqube container for env - $BESMAN_ARTIFACT_NAME ..."
+                docker create --name sonarqube-$BESMAN_ARTIFACT_NAME -p 9000:9000 sonarqube
+                docker start sonarqube-$BESMAN_ARTIFACT_NAME
+
+                __besman_echo_white "sonarqube installation is done & $BESMAN_ARTIFACT_NAME container is up"
+                ;;
+            fossology)
+                __besman_echo_white "Installing fossology..."
+                __besman_echo_white "check for fossology-docker container"
+                if [ "$(docker ps -aq -f name=fossology-$BESMAN_ARTIFACT_NAME)" ]; then
+                    # If a container exists, stop and remove it
+                    __besman_echo_white "Removing existing container 'fossology-$BESMAN_ARTIFACT_NAME'..."
+                    docker stop fossology-$BESMAN_ARTIFACT_NAME
+                    docker container rm --force fossology-$BESMAN_ARTIFACT_NAME
+                fi
+
+                # Create fossology-docker container
+                __besman_echo_white "creating fossology container for env - $BESMAN_ARTIFACT_NAME ..."
+                docker create --name fossology-$BESMAN_ARTIFACT_NAME -p 8081:80 fossology/fossology
+                docker start fossology-$BESMAN_ARTIFACT_NAME
+
+                __besman_echo_white "fossology installation is done & $BESMAN_ARTIFACT_NAME container is up"
+                ;;
+            spdx-sbom-generator)
+                __besman_echo_white "Installing spdx-sbom-generator..."
+                __besman_echo_white "Installing spdx-sbom-generator from github ..."
+                # URL of the asset
+                __besman_echo_white "Asset URL - $BESMAN_SPDX_SBOM_ASSET_URL"
+                # Download the asset
+                __besman_echo_white "Downloading the asset ..."
+                curl -L -o $BESMAN_ARTIFACT_DIR/spdx-sbom-generator-v0.0.15-linux-amd64.tar.gz "$BESMAN_SPDX_SBOM_ASSET_URL"
+
+                # Check if the download was successful
+                if [ $? -eq 0 ]; then
+                    __besman_echo_white "Download completed successfully."
+
+                    # Extract the downloaded file
+                    __besman_echo_white "Extracting the asset..."
+                    cd $BESMAN_ARTIFACT_DIR
+                    tar -xzf spdx-sbom-generator-v0.0.15-linux-amd64.tar.gz
+                    __besman_echo_white "Extraction completed."
+                    cd -
+                else
+                    __besman_echo_white "Download failed."
+                fi
+
+                __besman_echo_white "spdx-sbom-generator installation is done."
+                ;;
+            *)
+                echo "No installation steps found for $tool_name."
+                ;;
+            esac
         done
         echo "bes assessment tools installation done"
     fi
+
 }
 
 function __besman_uninstall {
@@ -63,29 +221,65 @@ function __besman_uninstall {
     fi
 
     # Please add the rest of the code here for uninstallation
-    stop_and_remove_containers() {
-        __besman_echo_white "removing containers ..."
-        if [ "$(docker ps -aq -f name=sonarqube-OSSVerse-Buyer-App)" ]; then
-            docker stop sonarqube-OSSVerse-Buyer-App
-            docker container rm --force sonarqube-OSSVerse-Buyer-App
+    # check yarn
+    if command -v yarn &>/dev/null; then
+        __besman_echo_white "Removing yarn ..."
+        sudo npm uninstall --global yarn
+        sudo apt update
+        __besman_echo_white "yarn removed successfully"
+    fi
 
-            __besman_echo_white "Docker containers sonarqube-OSSVerse-Buyer-App removed"
+    # check npm
+    if command -v npm &>/dev/null; then
+        __besman_echo_white "Removing node & npm .."
+        sudo apt update
+        sudo apt remove --purge -y nodejs npm
+        sudo apt update
+        __besman_echo_white "node & npm removed successfully"
+    fi
+
+    # check criticality_score
+    if command -v criticality_score &>/dev/null; then
+        __besman_echo_white "Removing criticality_score..."
+        # Remove criticality_score
+        sudo rm -rf $GOPATH/bin/criticality_score
+        sudo apt update
+        __besman_echo_white "criticality_score removed successfully."
+    fi
+
+    # Check go
+    if command -v go &>/dev/null; then
+        __besman_echo_white "Removing go..."
+        # Remove go
+        sudo snap remove go -y
+        __besman_echo_white "Go removed successfully."
+    fi
+
+    # check docker & containers
+    if command -v docker &>/dev/null; then
+
+        # remove sonarqube container
+        __besman_echo_white "Un-installing sonarqube..."
+        __besman_echo_white "removing container ..."
+        if [ "$(docker ps -aq -f name=sonarqube-$BESMAN_ARTIFACT_DIR)" ]; then
+            docker stop sonarqube-$BESMAN_ARTIFACT_DIR
+            docker container rm --force sonarqube-$BESMAN_ARTIFACT_DIR
+
+            __besman_echo_white "Docker containers sonarqube-$BESMAN_ARTIFACT_DIR removed"
         fi
 
-        if [ "$(docker ps -aq -f name=fossology-OSSVerse-Buyer-App)" ]; then
-            docker stop fossology-OSSVerse-Buyer-App
-            docker container rm --force fossology-OSSVerse-Buyer-App
-            __besman_echo_white "Docker containers fossology-OSSVerse-Buyer-App removed"
+        # remove fossology container
+        __besman_echo_white "Un-installing fossology..."
+        __besman_echo_white "removing container ..."
+        if [ "$(docker ps -aq -f name=fossology-$BESMAN_ARTIFACT_DIR)" ]; then
+            docker stop fossology-$BESMAN_ARTIFACT_DIR
+            docker container rm --force fossology-$BESMAN_ARTIFACT_DIR
+            __besman_echo_white "Docker containers fossology-$BESMAN_ARTIFACT_DIR removed"
         fi
 
-    }
-
-    uninstall_docker() {
-        # Stop and remove Docker containers
-        stop_and_remove_containers
         # Remove Docker Engine
         # Purge Docker packages and dependencies
-        __besman_echo_white "Removing Docker ..."
+        echo "Removing Docker ..."
         sudo apt purge -y docker-ce docker-ce-cli containerd.io
 
         # Remove Docker’s data and configuration files
@@ -101,67 +295,12 @@ function __besman_uninstall {
         sudo groupdel docker
 
         sudo apt update
-        __besman_echo_white "Docker removed successfully"
-    }
+        echo "Docker removed successfully"
 
-    uninstall_go() {
-        __besman_echo_white "Removing go..."
-        # Remove go
-        sudo snap remove go -y
-        __besman_echo_white "Go removed successfully."
-    }
-
-    uninstall_criticality_score() {
-        __besman_echo_white "Removing criticality_score..."
-        # Remove criticality_score
-        sudo rm -rf $GOPATH/bin/criticality_score
-        sudo apt update
-        __besman_echo_white "criticality_score removed successfully."
-    }
-
-    uninstall_node_npm() {
-        __besman_echo_white "Removing node & npm .."
-        sudo apt update
-        sudo apt remove --purge -y nodejs npm
-        sudo apt update
-        __besman_echo_white "node & npm removed successfully"
-    }
-
-    uninstall_yarn() {
-        __besman_echo_white "Removing yarn ..."
-        sudo npm uninstall --global yarn
-        sudo apt update
-        __besman_echo_white "yarn removed successfully"
-    }
-
-    # check yarn
-    if command -v yarn &>/dev/null; then
-        uninstall_yarn
-    fi
-
-    # check npm
-    if command -v npm &>/dev/null; then
-        uninstall_node_npm
-    fi
-
-    # check criticality_score
-    if command -v criticality_score &>/dev/null; then
-        uninstall_criticality_score
-    fi
-
-    # Check if go is installed
-    if command -v go &>/dev/null; then
-        uninstall_go
-    fi
-
-    # check docker
-    if command -v docker &>/dev/null; then
-        uninstall_docker
     fi
 
     # Clean up unused packages
     sudo apt autoremove -y
-
 }
 
 function __besman_update {
@@ -182,99 +321,85 @@ function __besman_validate {
     # Please add the rest of the code here for validate
     __besman_echo_white "validate"
 
-    # Function to validate Docker installation
-    validate_docker() {
-        if ! command -v docker &>/dev/null; then
-            __besman_echo_white "Docker is not installed."
-            return 1
-        fi
-    }
+    validationStatus=1
+    declare -a errors
 
-    # Function to validate Docker containers
-    validate_docker_containers() {
-        # Check if the sonarqube-OSSVerse-Buyer-App container exists and is running
-        if [ "$(docker ps -q -f name=sonarqube-OSSVerse-Buyer-App)" ]; then
-            __besman_echo_white "The sonarqube-OSSVerse-Buyer-App container is running."
+    # validate Docker installation
+    if ! command -v docker &>/dev/null; then
+        __besman_echo_white "Docker is not installed."
+        validationStatus=0
+        errors+=("Docker")
+    fi
+
+    # validate Docker containers
+    # Check if the sonarqube container exists and running
+    if [ "$(docker ps -q -f name=sonarqube-$BESMAN_ARTIFACT_NAME)" ]; then
+        __besman_echo_white "The sonarqube-$BESMAN_ARTIFACT_NAME container is running."
+    else
+        # Check if the container exists but is stopped
+        if [ "$(docker ps -a -q -f name=sonarqube-$BESMAN_ARTIFACT_NAME)" ]; then
+            __besman_echo_white "The sonarqube-$BESMAN_ARTIFACT_NAME container exists but is not running."
+            validationStatus=0
+            errors+=("Docker container - sonarqube-$BESMAN_ARTIFACT_NAME is not running")
         else
-            # Check if the container exists but is stopped
-            if [ "$(docker ps -a -q -f name=sonarqube-OSSVerse-Buyer-App)" ]; then
-                __besman_echo_white "The sonarqube-OSSVerse-Buyer-App container exists but is not running."
-                return 1
-            else
-                __besman_echo_white "The sonarqube-OSSVerse-Buyer-App container does not exist."
-                return 1
-            fi
+            __besman_echo_white "The sonarqube-$BESMAN_ARTIFACT_NAME container does not exist."
+            validationStatus=0
+            errors+=("Docker container - sonarqube-$BESMAN_ARTIFACT_NAME is missing")
         fi
+    fi
 
-        # Check if the fossology-OSSVerse-Buyer-App container exists and is running
-        if [ "$(docker ps -q -f name=fossology-OSSVerse-Buyer-App)" ]; then
-            __besman_echo_white "The fossology-OSSVerse-Buyer-App container is running."
+    # Check if the fossology container exists and running
+    if [ "$(docker ps -q -f name=fossology-$BESMAN_ARTIFACT_NAME)" ]; then
+        __besman_echo_white "The fossology-$BESMAN_ARTIFACT_NAME container is running."
+    else
+        # Check if the container exists but is stopped
+        if [ "$(docker ps -a -q -f name=fossology-$BESMAN_ARTIFACT_NAME)" ]; then
+            __besman_echo_white "The fossology-$BESMAN_ARTIFACT_NAME container exists but is not running."
+            validationStatus=0
+            errors+=("Docker container - fossology-$BESMAN_ARTIFACT_NAME is not running")
         else
-            # Check if the container exists but is stopped
-            if [ "$(docker ps -a -q -f name=fossology-OSSVerse-Buyer-App)" ]; then
-                __besman_echo_white "The fossology-OSSVerse-Buyer-App container exists but is not running."
-                return 1
-            else
-                __besman_echo_white "The fossology-OSSVerse-Buyer-App container does not exist."
-                return 1
-            fi
+            __besman_echo_white "The fossology-$BESMAN_ARTIFACT_NAME container does not exist."
+            validationStatus=0
+            errors+=("Docker container - fossology-$BESMAN_ARTIFACT_NAME is missing")
         fi
-    }
+    fi
 
-    # Function to validate npm installation
-    validate_npm() {
-        if ! command -v npm &>/dev/null; then
-            echo "npm is not installed."
-            return 1
-        fi
-    }
+    # validate npm installation
+    if ! command -v npm &>/dev/null; then
+        __besman_echo_white "npm is not installed."
+        validationStatus=0
+        errors+=("npm is missing")
+    fi
 
-    # Function to validate Yarn installation
-    validate_yarn() {
-        if ! command -v yarn &>/dev/null; then
-            echo "Yarn is not installed."
-            return 1
-        fi
-    }
+    # validate Yarn installation
+    if ! command -v yarn &>/dev/null; then
+        __besman_echo_white "Yarn is not installed."
+        validationStatus=0
+        errors+=("yarn is missing")
+    fi
 
-    # Function to validate snap installation
-    validate_snap() {
-        if ! command -v snap &>/dev/null; then
-            echo "snap is not installed."
-            return 1
-        fi
-    }
+    # validate snap installation
+    if ! command -v snap &>/dev/null; then
+        __besman_echo_white "snap is not installed."
+        validationStatus=0
+        errors+=("snap is missing")
+    fi
 
-    # Function to validate go installation
-    validate_go() {
-        if ! command -v go &>/dev/null; then
-            echo "go is not installed."
-            return 1
-        fi
-    }
+    # validate go installation
+    if ! command -v go &>/dev/null; then
+        __besman_echo_white "go is not installed."
+        validationStatus=0
+        errors+=("go is missing")
+    fi
 
-    # Function to validate criticality_score installation
-    validate_criticality_score() {
-        if ! command -v criticality_score &>/dev/null; then
-            echo "criticality_score is not installed."
-            return 1
-        fi
-    }
+    # validate criticality_score installation
+    if ! command -v criticality_score &>/dev/null; then
+        __besman_echo_white "criticality_score is not installed."
+        validationStatus=0
+        errors+=("criticality_score is missing")
+    fi
 
-    validate_environment() {
-        # Array to store error messages
-        declare -a errors
-
-        validate_docker || errors+=("Docker")
-        validate_docker_containers || errors+=("Docker containers")
-        validate_npm || errors+=("npm")
-        validate_yarn || errors+=("Yarn")
-        validate_snap || errors+=("snap")
-        validate_go || errors+=("go")
-        validate_criticality_score || errors+=("criticality_score")
-
-    }
-    validate_environment
+    __besman_echo_white "errors: " ${errors[@]}
 
 }
 
@@ -285,185 +410,5 @@ function __besman_reset {
 
     # Please add the rest of the code here for reset
     __besman_echo_white "reset"
-
-}
-
-function install_CommonDep {
-
-    # install docker
-    install_docker() {
-        __besman_echo_white "installing docker ..."
-        # Docker installation steps
-        sudo apt update
-        sudo apt install -y ca-certificates curl software-properties-common
-        curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-        sudo add-apt-repository -y "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
-        sudo apt update
-        # sudo apt-cache policy docker-ce
-        sudo apt install -y docker-ce docker-ce-cli containerd.io
-
-        # Check if Docker is successfully installed and running
-        if ! command -v docker &>/dev/null; then
-            __besman_echo_white "Docker installation failed or Docker is not available."
-            exit 1
-        fi
-
-        sudo usermod -aG docker $USER
-
-        __besman_echo_white "Docker installation is completed and running"
-
-    }
-
-    # install npm
-    install_npm() {
-        __besman_echo_white "installing npm ..."
-        sudo apt update
-        curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
-        sudo apt install -y nodejs
-    }
-
-    # install yarn
-    install_yarn() {
-        __besman_echo_white "installing yarn ..."
-        sudo apt update
-        sudo npm install --global yarn
-    }
-
-    # install yarn
-    install_snap() {
-        __besman_echo_white "installing snap ..."
-        sudo apt update
-        sudo apt install snapd
-    }
-
-    # install go
-    install_go() {
-        __besman_echo_white "installing go ..."
-        sudo snap install go --classic
-        export GOPATH=$HOME/go
-        export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
-    }
-
-    ## docker check
-    __besman_echo_white "Check if docker is installed or not"
-    #if ! command -v docker &>/dev/null; then
-    if [ ! -x "$(command -v docker)" ]; then
-        __besman_echo_white "Docker is not installed. Installing Docker..."
-        install_docker
-    else
-        __besman_echo_white "Docker is already installed."
-    fi
-
-    ## npm & yarn check
-    __besman_echo_white "check if npm & yarn is installed"
-    if ! command -v npm &>/dev/null; then
-        install_npm
-        install_yarn
-    else
-        __besman_echo_white "npm is already available"
-        __besman_echo_white "check if yarn is installed"
-        if ! command -v yarn &>/dev/null; then
-            install_yarn
-        else
-            __besman_echo_white "yarn is already installed"
-        fi
-
-    fi
-
-    # snap check
-    __besman_echo_white "check if snap is installed or not"
-    if ! [ -x "$(command -v snap)" ]; then
-        install_snap
-    else
-        __besman_echo_white "snap is already available"
-    fi
-
-    # go check
-    __besman_echo_white "check if go is intalled or not"
-    if ! [ -x "$(command -v go)" ]; then
-        install_go
-    else
-        __besman_echo_white "go is already available"
-    fi
-
-    return 0
-}
-
-function install_sonarqube {
-    __besman_echo_white "check for sonarqube-docker container"
-    if [ "$(docker ps -aq -f name=sonarqube-OSSVerse-Buyer-App)" ]; then
-        # If a container exists, stop and remove it
-        __besman_echo_white "Removing existing container 'sonarqube-OSSVerse-Buyer-App'..."
-        docker stop sonarqube-OSSVerse-Buyer-App
-        docker container rm --force sonarqube-OSSVerse-Buyer-App
-    fi
-    __besman_echo_white "creating sonarqube container for env - OSSVerse-Buyer-App ..."
-    docker create --name sonarqube-OSSVerse-Buyer-App -p 9000:9000 sonarqube
-    docker start sonarqube-OSSVerse-Buyer-App
-
-    return 0
-}
-
-function install_fossology {
-    __besman_echo_white "check for fossology-docker container"
-    if [ "$(docker ps -aq -f name=fossology-OSSVerse-Buyer-App)" ]; then
-        # If a container exists, stop and remove it
-        echo "Removing existing container 'fossology-OSSVerse-Buyer-App'..."
-        docker stop fossology-OSSVerse-Buyer-App
-        docker container rm --force fossology-OSSVerse-Buyer-App
-    fi
-
-    # Create fossology-docker container
-    __besman_echo_white "creating fossology container for env - OSSVerse-Buyer-App ..."
-    docker create --name fossology-OSSVerse-Buyer-App -p 8081:80 fossology/fossology
-    docker start fossology-OSSVerse-Buyer-App
-
-    return 0
-
-}
-
-function install_scorecard {
-
-    return 0
-
-}
-
-function install_criticality_score {
-    __besman_echo_white "check for criticality_score"
-    if ! [ -x "$(command -v criticality_score)" ]; then
-        __besman_echo_white "installing criticality_score ..."
-        go install github.com/ossf/criticality_score/v2/cmd/criticality_score@latest
-        __besman_echo_white "criticality_score is installed\n"
-    else
-        __besman_echo_white "criticality_score is already available"
-    fi
-
-    return 0
-
-}
-
-function install_spdx-sbom-generator {
-    __besman_echo_white "Installing spdx-sbom-generator from github ..."
-    # URL of the asset
-    __besman_echo_white "Asset URL - $BESMAN_SPDX_SBOM_ASSET_URL"
-    # Download the asset
-    __besman_echo_white "Downloading the asset ..."
-    curl -L -o $BESMAN_ARTIFACT_DIR/spdx-sbom-generator-v0.0.15-linux-amd64.tar.gz "$BESMAN_SPDX_SBOM_ASSET_URL"
-
-    # Check if the download was successful
-    if [ $? -eq 0 ]; then
-        __besman_echo_white "Download completed successfully."
-
-        # Extract the downloaded file
-        __besman_echo_white "Extracting the asset..."
-        cd $BESMAN_ARTIFACT_DIR
-        tar -xzf spdx-sbom-generator-v0.0.15-linux-amd64.tar.gz
-        __besman_echo_white "Extraction completed."
-        cd -
-    else
-        __besman_echo_white "Download failed."
-    fi
-
-    return 0
 
 }
