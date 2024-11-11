@@ -1,75 +1,24 @@
 #!/bin/bash
 
-#################################################################################
-### INSTALL
-#################################################################################
-
-###### 
-## Description: Installs the sonarqube and its dependencies.
-## Parameters:  list of parameters and their description if any.
-######
-function install_sonarqube {
-
-	# Write code  to install SBOM tool and its dependencies
-
-	echo ""
-	return 0
-}
-
-######
-## Description: Installs the scorecard and its dependencies.
-## Parameters:  list of parameters and their description if any.
-######
-
-function install_scorecard {
-
-	# Write code  to scorecard tool and its dependencies
-
-        echo ""
-        return 0
-
-}
-
-######
-## Description: Installs the criticality_score and its dependencies.
-## Parameters:  list of parameters and their description if any.
-######
-
-function install_criticality_score {
-
-        # Write code  to criticality_score tool and its dependencies
-
-        echo ""
-        return 0
-
-}
-
-######
-## Description: Installs the spdx-sbom-generator and its dependencies.
-## Parameters:  list of parameters and their description if any.
-######
-
-function install_spdx-sbom-generator {
-
-        # Write code  to spdx-sbom-generator tool and its dependencies
-
-        echo ""
-        return 0
-
-}
-
-######
-## Description: Installs the env and its dependencies.
-## Parameters:  list of parameters and their description if any.
-######
 function __besman_install
 {
-    # Checks if GitHub CLI is present or not.
-    __besman_check_vcs_exist || return 1 
-    # checks whether the user github id has been populated or not under BESMAN_USER_NAMESPACE
-    __besman_check_github_id || return 1 
 
-    # Clone the source code repo of the project under assessment.
+    __besman_check_vcs_exist || return 1 # Checks if GitHub CLI is present or not.
+    __besman_check_github_id || return 1 # checks whether the user github id has been populated or not under BESMAN_USER_NAMESPACE 
+    __besman_check_for_ansible || return 1 # Checks if ansible is installed or not.
+    __besman_create_roles_config_file # Creates the role config file with the parameters from env config
+    
+    # Requirements file is used to list the required ansible roles. The data for requirements file comes from BESMAN_ANSIBLE_ROLES env var.
+    # This function updates the requirements file from BESMAN_ANSIBLE_ROLES env var.
+    __besman_update_requirements_file 
+    __besman_ansible_galaxy_install_roles_from_requirements # Downloads the ansible roles mentioned in BESMAN_ANSIBLE_ROLES to BESMAN_ANSIBLE_ROLES_PATH
+    # This function checks for the playbook BESMAN_ARTIFACT_TRIGGER_PLAYBOOK under BESMAN_ARTIFACT_TRIGGER_PLAYBOOK_PATH.
+    # The trigger playbook is used to run the ansible roles.
+    __besman_check_for_trigger_playbook "$BESMAN_ARTIFACT_TRIGGER_PLAYBOOK_PATH/$BESMAN_ARTIFACT_TRIGGER_PLAYBOOK"
+    [[ "$?" -eq 1 ]] && __besman_create_ansible_playbook # Creates the trigger playbook if not present.
+    # Runs the trigger playbook. We are also passing these variables - bes_command=install; role_path=$BESMAN_ANSIBLE_ROLES_PATH
+    __besman_run_ansible_playbook_extra_vars "$BESMAN_ARTIFACT_TRIGGER_PLAYBOOK_PATH/$BESMAN_ARTIFACT_TRIGGER_PLAYBOOK" "bes_command=install role_path=$BESMAN_ANSIBLE_ROLES_PATH" || return 1
+    # Clones the source code repo.
     if [[ -d $BESMAN_ARTIFACT_DIR ]]; then
         __besman_echo_white "The clone path already contains dir names $BESMAN_ARTIFACT_NAME"
     else
@@ -79,8 +28,7 @@ function __besman_install
         cd "$HOME"
     fi
 
-    # Clone the source code repo of the project under assessment.
-    if [[ -d $BESMAN_ASSESSMENT_DATASTORE_DIR ]]
+    if [[ -d $BESMAN_ASSESSMENT_DATASTORE_DIR ]] 
     then
         __besman_echo_white "Assessment datastore found at $BESMAN_ASSESSMENT_DATASTORE_DIR"
     else
@@ -88,351 +36,47 @@ function __besman_install
         __besman_repo_clone "$BESMAN_USER_NAMESPACE" "besecure-assessment-datastore" "$BESMAN_ASSESSMENT_DATASTORE_DIR" || return 1
 
     fi
-   
-   [[ ! -z $BESMAN_ASSESSMENT_TOOLS ]] && readarray -d ',' -t ASSESSMENT_TOOLS <<< "$BESMAN_ASSESSMENT_TOOLS"
-
-   if [ ! -z $ASSESSMENT_TOOLS ];then
-     for tool in ${ASSESSMENT_TOOLS[*]}
-     do
-        #write the functions to install the each tool mentioned in ASSESSMENT_STEP variable and call them here accordingly.
-        # Write function names with format install_$tool, replace $tool with the list specified in ASSESSMENT_STEP varaible.
-
-        #uncomment below function call
-        #install_$tool
-        echo ""
-     done
-   fi
-  
-   echo ""
-   return 0   
+    # Please add the rest of the code here for installation
 }
-
-
-#################################################################################
-### UNINSTALL
-#################################################################################
-
-######
-## Description: Uninstalls the env and its dependencies.
-## Parameters:  list of parameters and their description if any.
-######
-
-function uninstall_sonarqube {
-
-        # Write code  to install SBOM tool and its dependencies
-
-        echo ""
-        return 0
-}
-
-######
-## Description: Uninstalls the scorecard and its dependencies.
-## Parameters:  list of parameters and their description if any.
-######
-
-function uninstall_scorecard {
-
-        # Write code to uninstall scorecard tool and its dependencies
-
-        echo ""
-        return 0
-
-}
-
-######
-## Description: Uninstalls the criticality_score and its dependencies.
-## Parameters:  list of parameters and their description if any.
-######
-
-function uninstall_criticality_score {
-
-        # Write code  to criticality_score tool and its dependencies
-
-        echo ""
-        return 0
-
-}
-
-######
-## Description: Uninstalls the spdx-sbom-generator and its dependencies.
-## Parameters:  list of parameters and their description if any.
-######
-
-function uninstall_spdx-sbom-generator {
-
-        # Write code  to spdx-sbom-generator tool and its dependencies
-
-        echo ""
-        return 0
-
-}
-
 
 function __besman_uninstall
 {
-     # Clone the source code repo of the project under assessment.
+    __besman_check_for_trigger_playbook "$BESMAN_ARTIFACT_TRIGGER_PLAYBOOK_PATH/$BESMAN_ARTIFACT_TRIGGER_PLAYBOOK"
+    [[ "$?" -eq 1 ]] && __besman_create_ansible_playbook
+    __besman_run_ansible_playbook_extra_vars "$BESMAN_ARTIFACT_TRIGGER_PLAYBOOK_PATH/$BESMAN_ARTIFACT_TRIGGER_PLAYBOOK" "bes_command=remove role_path=$BESMAN_ANSIBLE_ROLES_PATH" || return 1
     if [[ -d $BESMAN_ARTIFACT_DIR ]]; then
-        rm -rf  $BESMAN_ARTIFACT_DIR
+        __besman_echo_white "Removing $BESMAN_ARTIFACT_DIR..."
+        rm -rf "$BESMAN_ARTIFACT_DIR"
     else
-	 __besman_echo_root "$BESMAN_ARTIFACT_NAME not found"
+        __besman_echo_yellow "Could not find dir $BESMAN_ARTIFACT_DIR"
     fi
-
-    
-   [[ ! -z $BESMAN_ASSESSMENT_TOOLS ]] && readarray -d ',' -t ASSESSMENT_TOOLS <<< "$BESMAN_ASSESSMENT_TOOLS"
-
-   if [ ! -z $ASSESSMENT_TOOLS ];then
-     for tool in ${ASSESSMENT_TOOLS[*]}
-     do
-       #write the functions to install the each tool mentioned in ASSESSMENT_STEP variable and call them here accordingly.
-       # Write function names with format install_$tool, replace $tool with the list specified in ASSESSMENT_STEP varaible.^S
-
-       #uncomment below function call
-       #uninstall_$tool
-       echo ""
-     done
-   fi
-
-    echo ""
-    return 0
-}
-
-
-#################################################################################
-### UPDATE
-#################################################################################
-
-######
-## Description: Updates the env to the newer version.
-## Parameters:  list of parameters and their description if any.
-######
-
-function update_sonarqube {
-
-        # Write code  to install SBOM tool and its dependencies
-
-        echo ""
-        return 0
-}
-
-######
-## Description: Updates the scorecard and its dependencies.
-## Parameters:  list of parameters and their description if any.
-######
-
-function update_scorecard {
-
-        # Write code to uninstall scorecard tool and its dependencies
-
-        echo ""
-        return 0
+    # Please add the rest of the code here for uninstallation
 
 }
-
-######
-## Description: Update the criticality_score and its dependencies.
-## Parameters:  list of parameters and their description if any.
-######
-
-function update_criticality_score {
-
-        # Write code  to criticality_score tool and its dependencies
-
-        echo ""
-        return 0
-
-}
-
-######
-## Description: Update the spdx-sbom-generator and its dependencies.
-## Parameters:  list of parameters and their description if any.
-######
-
-function update_spdx-sbom-generator {
-
-        # Write code  to spdx-sbom-generator tool and its dependencies
-
-        echo ""
-        return 0
-
-}
-
 
 function __besman_update
 {
-    
-    [[ ! -z $BESMAN_ASSESSMENT_TOOLS ]] &&  readarray -d ',' -t ASSESSMENT_TOOLS <<< "$BESMAN_ASSESSMENT_TOOLS"
-
-    if [ ! -z $ASSESSMENT_TOOLS ];then
-       
-     for tool in ${ASSESSMENT_TOOLS[*]}
-     do
-       # Check if tool is already installed.
-       # if [ installed ];then
-       #    call the update function to update to latest version.
-       #    uncoment beloe function to call update. Write a update function if not already present for the tool.
-       #    update_$tool
-       # else
-       #    Call the install function for the tool
-       #    uncomment the below call
-       #    install_$tool
-       # fi
-     done
-
-    fi
-    echo ""
-    return 0
-}
-
-#################################################################################
-### VALIDATE
-#################################################################################
-
-######
-## Description: validates the env to the newer version.
-## Parameters:  list of parameters and their description if any.
-######
-
-function validate_sonarqube {
-
-        # Write code  to install SBOM tool and its dependencies
-
-        echo ""
-        return 0
-}
-
-######
-## Description: validates the scorecard and its dependencies.
-## Parameters:  list of parameters and their description if any.
-######
-
-function validate_scorecard {
-
-        # Write code to uninstall scorecard tool and its dependencies
-
-        echo ""
-        return 0
-
-}
-
-######
-## Description: Validate the criticality_score and its dependencies.
-## Parameters:  list of parameters and their description if any.
-######
-
-function validate_criticality_score {
-
-        # Write code  to criticality_score tool and its dependencies
-
-        echo ""
-        return 0
-
-}
-
-######
-## Description: validate the spdx-sbom-generator and its dependencies.
-## Parameters:  list of parameters and their description if any.
-######
-
-function validate_spdx-sbom-generator {
-
-        # Write code  to spdx-sbom-generator tool and its dependencies
-
-        echo ""
-        return 0
+    __besman_check_for_trigger_playbook "$BESMAN_ARTIFACT_TRIGGER_PLAYBOOK_PATH/$BESMAN_ARTIFACT_TRIGGER_PLAYBOOK"
+    [[ "$?" -eq 1 ]] && __besman_create_ansible_playbook
+    __besman_run_ansible_playbook_extra_vars "$BESMAN_ARTIFACT_TRIGGER_PLAYBOOK_PATH/$BESMAN_ARTIFACT_TRIGGER_PLAYBOOK" "bes_command=update role_path=$BESMAN_ANSIBLE_ROLES_PATH" || return 1
+    # Please add the rest of the code here for update
 
 }
 
 function __besman_validate
 {
-    [[ ! -z $BESMAN_ASSESSMENT_TOOLS ]] &&  readarray -d ',' -t ASSESSMENT_TOOLS <<< "$BESMAN_ASSESSMENT_TOOLS"
-
-    if [ ! -z $ASSESSMENT_TOOLS ];then
-
-     for tool in ${ASSESSMENT_TOOLS[*]}
-     do
-       # Check if tool is installed.
-       # uncomment this function call
-       # validate_$tool
-     done
-
-    fi
-    echo ""
-    return 0
-}
-
-#################################################################################
-### RESET
-#################################################################################
-
-######
-## Description: Reset the tools configurations.
-## Parameters:  list of parameters and their description if any.
-######
-
-function reset_sonarqube {
-
-        # Write code  to install SBOM tool and its dependencies
-
-        echo ""
-        return 0
-}
-
-######
-## Description: Reset the scorecard and its dependencies.
-## Parameters:  list of parameters and their description if any.
-######
-
-function reset_scorecard {
-
-        # Write code to uninstall scorecard tool and its dependencies
-
-        echo ""
-        return 0
-
-}
-
-######
-## Description: Reset the criticality_score and its dependencies.
-## Parameters:  list of parameters and their description if any.
-######
-
-function reset_criticality_score {
-
-        # Write code  to criticality_score tool and its dependencies
-
-        echo ""
-        return 0
-
-}
-
-######
-## Description: Reset the spdx-sbom-generator and its dependencies.
-## Parameters:  list of parameters and their description if any.
-######
-
-function reset_spdx-sbom-generator {
-
-        # Write code  to spdx-sbom-generator tool and its dependencies
-
-        echo ""
-        return 0
+    __besman_check_for_trigger_playbook "$BESMAN_ARTIFACT_TRIGGER_PLAYBOOK_PATH/$BESMAN_ARTIFACT_TRIGGER_PLAYBOOK"
+    [[ "$?" -eq 1 ]] && __besman_create_ansible_playbook
+    __besman_run_ansible_playbook_extra_vars "$BESMAN_ARTIFACT_TRIGGER_PLAYBOOK_PATH/$BESMAN_ARTIFACT_TRIGGER_PLAYBOOK" "bes_command=validate role_path=$BESMAN_ANSIBLE_ROLES_PATH" || return 1
+    # Please add the rest of the code here for validate
 
 }
 
 function __besman_reset
 {
-    [[ ! -z $BESMAN_ASSESSMENT_TOOLS ]] &&  readarray -d ',' -t ASSESSMENT_TOOLS <<< "$BESMAN_ASSESSMENT_TOOLS"
+    __besman_check_for_trigger_playbook "$BESMAN_ARTIFACT_TRIGGER_PLAYBOOK_PATH/$BESMAN_ARTIFACT_TRIGGER_PLAYBOOK"
+    [[ "$?" -eq 1 ]] && __besman_create_ansible_playbook
+    __besman_run_ansible_playbook_extra_vars "$BESMAN_ARTIFACT_TRIGGER_PLAYBOOK_PATH/$BESMAN_ARTIFACT_TRIGGER_PLAYBOOK" "bes_command=reset role_path=$BESMAN_ANSIBLE_ROLES_PATH" || return 1
+    # Please add the rest of the code here for reset
 
-    if [ ! -z $ASSESSMENT_TOOLS ];then
-
-     for tool in ${ASSESSMENT_TOOLS[*]}
-     do
-       # Check if tool is installed.
-       # uncomment this function call
-       # reset_$tool
-     done
-
-    fi
-    echo ""
-    return 0
 }

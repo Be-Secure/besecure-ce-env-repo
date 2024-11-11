@@ -37,7 +37,6 @@ function __besman_install
 
     fi
     # Please add the rest of the code here for installation
-
 }
 
 function __besman_uninstall
