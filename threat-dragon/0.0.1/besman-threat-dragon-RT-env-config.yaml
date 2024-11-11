@@ -6,6 +6,8 @@
 # BESMAN_<var name>: <value>
 # If you are not using any particular value, remove it or comment it(#).
 #*** - These variables should not be removed, nor left empty.
+# project/model/training dataset
+
 # used to mention where you should clone the repo from, default value is Be-Secure
 BESMAN_ORG: Be-Secure #***
 
@@ -69,3 +71,4 @@ BESMAN_DISPLAY_SKIPPED_ANSIBLE_HOSTS: false #***
 # and paste it here and change the value.
 # Format is <variable name>: <value> 
 # Eg: openjdk_version: 11
+>>>>>>> develop

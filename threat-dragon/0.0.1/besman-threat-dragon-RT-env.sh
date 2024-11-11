@@ -28,8 +28,7 @@ function __besman_install
         cd "$HOME"
     fi
 
-    if [[ -d $BESMAN_ASSESSMENT_DATASTORE_DIR ]] 
-    then
+    if [[ -d $BESMAN_ASSESSMENT_DATASTORE_DIR ]]; then
         __besman_echo_white "Assessment datastore found at $BESMAN_ASSESSMENT_DATASTORE_DIR"
     else
         __besman_echo_white "Cloning assessment datastore from $\BESMAN_USER_NAMESPACE/besecure-assessment-datastore"
@@ -120,5 +119,4 @@ function __besman_reset
     [[ "$?" -eq 1 ]] && __besman_create_ansible_playbook
     __besman_run_ansible_playbook_extra_vars "$BESMAN_ARTIFACT_TRIGGER_PLAYBOOK_PATH/$BESMAN_ARTIFACT_TRIGGER_PLAYBOOK" "bes_command=reset role_path=$BESMAN_ANSIBLE_ROLES_PATH" || return 1
     # Please add the rest of the code here for reset
-
 }
