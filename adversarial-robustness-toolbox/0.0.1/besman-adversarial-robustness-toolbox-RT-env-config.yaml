@@ -13,13 +13,14 @@ BESMAN_ORG: Be-Secure #***
 BESMAN_ARTIFACT_TYPE: project #***
 
 # Name of the artifact under assessment.
-BESMAN_ARTIFACT_NAME: adversarial-robustness-toolbox #***
+BESMAN_ARTIFACT_NAME: adversarial-robustness-toolbox
+  #***
 
 # Version of the artifact under assessment.
 BESMAN_ARTIFACT_VERSION: 1.18.2 #***
 
 # Source code url of the artifact under assessment.
-BESMAN_ARTIFACT_URL: https://github.com/NeerajK007/adversarial-robustness-toolbox #***
+BESMAN_ARTIFACT_URL: https://github.com/Be-Secure/adversarial-robustness-toolbox #***
 
 # This variable stores the name of the environment file.
 BESMAN_ENV_NAME: adversarial-robustness-toolbox-RT-env #***
@@ -41,7 +42,7 @@ BESMAN_LAB_NAME: Be-Secure #***
 BESMAN_ASSESSMENT_DATASTORE_DIR: $HOME/besecure-assessment-datastore #***
 
 # The remote repo where we store the assessment reports.
-BESMAN_ASSESSMENT_DATASTORE_URL: https://github.com/NeerajK007/besecure-assessment-datastore #***
+BESMAN_ASSESSMENT_DATASTORE_URL: https://github.com/Be-Secure/besecure-assessment-datastore #***
 
 # The path where we download the ansible role of the assessment tools and other utilities
 #BESMAN_ANSIBLE_ROLES_PATH: $BESMAN_DIR/tmp/$BESMAN_ARTIFACT_NAME/roles #***
