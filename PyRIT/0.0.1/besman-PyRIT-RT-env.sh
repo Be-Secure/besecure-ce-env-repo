@@ -4,6 +4,7 @@ function __besman_install {
 
     __besman_check_vcs_exist || return 1 # Checks if GitHub CLI is present or not.
     __besman_check_github_id || return 1 # checks whether the user github id has been populated or not under BESMAN_USER_NAMESPACE
+
     # Clones the source code repo.
     if [[ -d $BESMAN_ARTIFACT_DIR ]]; then
         __besman_echo_white "The clone path already contains dir names $BESMAN_ARTIFACT_NAME"
@@ -22,7 +23,6 @@ function __besman_install {
 
     fi
     # Please add the rest of the code here for installation
-
     # ************************* env dependency *********************************
 
     ## Name:docker
@@ -168,17 +168,49 @@ function __besman_install {
         done
         echo "bes assessment tools installation done"
     fi
+    #echo "Checking for Anaconda..."
+    #temp_file=$(mktemp)
+    #bash -c 'export PATH=$HOME/anaconda3/bin:$PATH; function __check_anaconda {
+    #    if command -v conda &> /dev/null; then
+    #        exit 0
+    #    else
+    #        exit 1
+    #    fi
+    #}
+    #__check_anaconda' &> $temp_file &
+    
+    #check_pid=$!
+    #wait $check_pid
+    #check_status=$?
 
+    #check_output=$(cat $temp_file)
+    #rm $temp_file
+    
+    #if [ $check_status -eq 0 ]; then
+    #    echo "Anaconda is already installed."
+    #else
+    #    sudo apt-get -y update
+    #    sudo apt-get install -y libgl1-mesa-glx libegl1-mesa libxrandr2 libxss1 libxcursor1 libxcomposite1 libasound2 libxi6 libxtst6
+    #    echo "Installing Anaconda..."
+    #    wget https://repo.anaconda.com/archive/Anaconda3-2023.03-Linux-x86_64.sh -O /tmp/anaconda.sh
+    #    bash /tmp/anaconda.sh -b -p $HOME/anaconda3
+    #    eval "$($HOME/anaconda3/bin/conda shell.bash hook)"
+    #    conda init bash
+    #    source ~/.bashrc
+    #    rm /tmp/anaconda.sh
+    #    eval "$(conda shell.bash hook)"
+    #    conda config --set auto_activate_base false
+    #fi
 }
 
 function __besman_uninstall {
+
     if [[ -d $BESMAN_ARTIFACT_DIR ]]; then
         __besman_echo_white "Removing $BESMAN_ARTIFACT_DIR..."
         rm -rf "$BESMAN_ARTIFACT_DIR"
     else
         __besman_echo_yellow "Could not find dir $BESMAN_ARTIFACT_DIR"
     fi
-
     # Please add the rest of the code here for uninstallation
 
     # check criticality_score
@@ -241,7 +273,52 @@ function __besman_uninstall {
         echo "Docker removed successfully"
 
     fi
+    #echo "Removing Anaconda distribution..."
+    #temp_file=$(mktemp)
+    #bash -c 'export PATH=$HOME/anaconda3/bin:$PATH;
+    #if command -v conda &> /dev/null; then
+    #    conda deactivate 2>/dev/null
+    #    conda init --reverse --all
+    #    rm -rf $HOME/anaconda3
+    #    sudo rm -rf /opt/anaconda3
+    #    rm -rf $HOME/.conda
+    #    rm -rf $HOME/.continuum
+    #    rm -rf $HOME/.anaconda
+    #    rm -rf $HOME/.condarc
+    #    rm -rf $HOME/.conda_environments.txt
+    #    rm -rf $HOME/.conda_build_config.yaml
+    #    sed -i "/# >>> conda initialize >>>/,/# <<< conda initialize <<</d" $HOME/.bashrc
+    #    sed -i "/# >>> conda initialize >>>/,/# <<< conda initialize <<</d" $HOME/.zshrc
+    #    sed -i "/anaconda3/d" $HOME/.bashrc
+    #    sed -i "/anaconda3/d" $HOME/.zshrc
+    #    unset CONDA_EXE
+    #    unset _CE_M
+    #    unset _CE_CONDA
+    #    unset CONDA_PYTHON_EXE
+    #    unset CONDA_SHLVL
+    #    unset CONDA_DEFAULT_ENV
+    #    unset CONDA_PROMPT_MODIFIER
+    #    source $HOME/.bashrc
+    #    source $HOME/.zshrc
+    #    exit 0
+    #else
+    #    echo "Anaconda not available"
+    #    exit 1
+    #fi' &> $temp_file &
 
+    #check_pid=$!
+    #wait $check_pid
+    #check_status=$?
+
+    #check_output=$(cat $temp_file)
+    #rm $temp_file
+
+    #if [ $check_status -eq 0 ]; then
+    #    echo "Anaconda uninstalled successfully."
+    #else
+    #    echo "$check_output"
+    #fi
+    
     # Clean up unused packages
     sudo apt autoremove -y
 }
@@ -321,6 +398,29 @@ function __besman_validate {
         validationStatus=0
         errors+=("criticality_score is missing")
     fi
+
+    #temp_file=$(mktemp)
+    #bash -c 'export PATH=$HOME/anaconda3/bin:$PATH; function __check_anaconda {
+    #    if command -v conda --version &> /dev/null; then
+    #        exit 0
+    #    else
+    #        exit 1
+    #    fi
+    #}
+    #__check_anaconda' &> $temp_file &
+
+    #check_pid=$!
+    #wait $check_pid
+    #check_status=$?
+
+    #check_output=$(cat $temp_file)
+    #rm $temp_file
+
+    #if [ $check_status -eq 0 ]; then
+    #    echo "$check_output available."
+    #else
+    #    echo "Anaconda not available"
+    #fi
 
     __besman_echo_white "errors: " ${errors[@]}
 

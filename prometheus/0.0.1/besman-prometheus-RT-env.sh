@@ -329,5 +329,4 @@ function __besman_validate {
 function __besman_reset {
     # Please add the rest of the code here for reset
     __besman_echo_white "reset"
-
 }

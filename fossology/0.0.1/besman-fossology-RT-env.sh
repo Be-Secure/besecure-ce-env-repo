@@ -1,5 +1,6 @@
 #!/bin/bash
 
+
 function __besman_install {
 
     __besman_check_vcs_exist || return 1 # Checks if GitHub CLI is present or not.
@@ -13,6 +14,7 @@ function __besman_install {
         cd "$BESMAN_ARTIFACT_DIR" && git checkout -b "$BESMAN_ARTIFACT_VERSION"_tavoss "$BESMAN_ARTIFACT_VERSION"
         cd "$HOME"
     fi
+
 
     if [[ -d $BESMAN_ASSESSMENT_DATASTORE_DIR ]]; then
         __besman_echo_white "Assessment datastore found at $BESMAN_ASSESSMENT_DATASTORE_DIR"
@@ -329,5 +331,4 @@ function __besman_validate {
 function __besman_reset {
     # Please add the rest of the code here for reset
     __besman_echo_white "reset"
-
 }

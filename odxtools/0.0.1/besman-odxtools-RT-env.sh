@@ -1,5 +1,6 @@
 #!/bin/bash
 
+
 function __besman_install {
 
     __besman_check_vcs_exist || return 1 # Checks if GitHub CLI is present or not.
@@ -172,6 +173,7 @@ function __besman_install {
 }
 
 function __besman_uninstall {
+
     if [[ -d $BESMAN_ARTIFACT_DIR ]]; then
         __besman_echo_white "Removing $BESMAN_ARTIFACT_DIR..."
         rm -rf "$BESMAN_ARTIFACT_DIR"
@@ -329,5 +331,4 @@ function __besman_validate {
 function __besman_reset {
     # Please add the rest of the code here for reset
     __besman_echo_white "reset"
-
 }

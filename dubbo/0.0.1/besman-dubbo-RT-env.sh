@@ -15,6 +15,7 @@ function __besman_install {
     fi
 
     if [[ -d $BESMAN_ASSESSMENT_DATASTORE_DIR ]]; then
+
         __besman_echo_white "Assessment datastore found at $BESMAN_ASSESSMENT_DATASTORE_DIR"
     else
         __besman_echo_white "Cloning assessment datastore from $\BESMAN_USER_NAMESPACE/besecure-assessment-datastore"
@@ -329,5 +330,4 @@ function __besman_validate {
 function __besman_reset {
     # Please add the rest of the code here for reset
     __besman_echo_white "reset"
-
 }

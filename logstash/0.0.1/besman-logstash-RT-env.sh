@@ -1,9 +1,11 @@
 #!/bin/bash
 
+
 function __besman_install {
 
     __besman_check_vcs_exist || return 1 # Checks if GitHub CLI is present or not.
     __besman_check_github_id || return 1 # checks whether the user github id has been populated or not under BESMAN_USER_NAMESPACE
+
     # Clones the source code repo.
     if [[ -d $BESMAN_ARTIFACT_DIR ]]; then
         __besman_echo_white "The clone path already contains dir names $BESMAN_ARTIFACT_NAME"
@@ -22,7 +24,6 @@ function __besman_install {
 
     fi
     # Please add the rest of the code here for installation
-
     # ************************* env dependency *********************************
 
     ## Name:docker
@@ -178,7 +179,6 @@ function __besman_uninstall {
     else
         __besman_echo_yellow "Could not find dir $BESMAN_ARTIFACT_DIR"
     fi
-
     # Please add the rest of the code here for uninstallation
 
     # check criticality_score
@@ -329,5 +329,4 @@ function __besman_validate {
 function __besman_reset {
     # Please add the rest of the code here for reset
     __besman_echo_white "reset"
-
 }
