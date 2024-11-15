@@ -1,11 +1,9 @@
 #!/bin/bash
 
-
 function __besman_install {
 
     __besman_check_vcs_exist || return 1 # Checks if GitHub CLI is present or not.
     __besman_check_github_id || return 1 # checks whether the user github id has been populated or not under BESMAN_USER_NAMESPACE
-
     # Clones the source code repo.
     if [[ -d $BESMAN_ARTIFACT_DIR ]]; then
         __besman_echo_white "The clone path already contains dir names $BESMAN_ARTIFACT_NAME"
@@ -17,7 +15,6 @@ function __besman_install {
     fi
 
     if [[ -d $BESMAN_ASSESSMENT_DATASTORE_DIR ]]; then
-
         __besman_echo_white "Assessment datastore found at $BESMAN_ASSESSMENT_DATASTORE_DIR"
     else
         __besman_echo_white "Cloning assessment datastore from $\BESMAN_USER_NAMESPACE/besecure-assessment-datastore"
@@ -27,6 +24,24 @@ function __besman_install {
     # Please add the rest of the code here for installation
 
     # ************************* env dependency *********************************
+
+    # Check if Python is installed
+    if ! command -v python3 &>/dev/null; then
+        __besman_echo_white "Python is not installed. Installing Python..."
+        sudo apt update
+        sudo apt install python3 -y
+    else
+        __besman_echo_white "Python is already there to use."
+    fi
+
+    # Check if pip is installed
+    if ! command -v pip3 &>/dev/null; then
+        __besman_echo_white "pip is not installed. Installing pip..."
+        sudo apt update
+        sudo apt install python3-pip -y
+    else
+        __besman_echo_white "pip is already there is use."
+    fi
 
     ## Name:docker
     __besman_echo_white "Check if docker is installed or not"
@@ -41,8 +56,9 @@ function __besman_install {
         sudo apt install -y docker-ce docker-ce-cli containerd.io
 
         # sudo groupadd -f docker
-        sudo usermod -aG docker $USER
         sudo systemctl restart docker
+        sudo groupadd -f docker # Uncomment this line
+        sudo usermod -aG docker $USER
         # newgrp docker
 
         #sudo su - $USER
@@ -172,10 +188,17 @@ function __besman_install {
         echo "bes assessment tools installation done"
     fi
 
+    cd $BESMAN_ARTIFACT_DIR
+    pip install .
+    ## test dep pytest-cov
+    pip install pytest-cov
+    ./run_tests.sh
+
+    __besman_echo_white "===== Install completed =="
+
 }
 
 function __besman_uninstall {
-
     if [[ -d $BESMAN_ARTIFACT_DIR ]]; then
         __besman_echo_white "Removing $BESMAN_ARTIFACT_DIR..."
         rm -rf "$BESMAN_ARTIFACT_DIR"
@@ -277,6 +300,21 @@ function __besman_uninstall {
 
     fi
 
+    # Check if pip is installed
+    if command -v pip3 &>/dev/null; then
+        __besman_echo_white "Uninstalling pip..."
+        sudo apt purge -y python3-pip
+        __besman_echo_white "pip uninstalled successfully."
+    fi
+
+    # Function to uninstall Python and pip
+    if command -v python3 &>/dev/null; then
+        __besman_echo_white "Uninstalling Python..."
+        # Remove Python
+        sudo apt purge -y python3
+        # Remove pip
+        sudo apt purge -y python3-pip
+        __besman_echo_white "Python uninstalled successfully."
     # Check go
     if command -v go &>/dev/null; then
         __besman_echo_white "Removing go..."
@@ -363,6 +401,20 @@ function __besman_validate {
         __besman_echo_white "criticality_score is not installed."
         validationStatus=0
         errors+=("criticality_score is missing")
+    fi
+
+    # Check if Python is installed
+    if ! command -v python3 &>/dev/null; then
+        __besman_echo_white "python is not installed."
+        validationStatus=0
+        errors+=("python is missing")
+    fi
+
+    # Check if pip is installed
+    if ! command -v pip3 &>/dev/null; then
+        __besman_echo_white "pip is not installed."
+        validationStatus=0
+        errors+=("pip is missing")
     fi
 
     __besman_echo_white "errors: " ${errors[@]}

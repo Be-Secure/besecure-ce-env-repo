@@ -6,7 +6,6 @@
 # BESMAN_<var name>: <value>
 # If you are not using any particular value, remove it or comment it(#).
 #*** - These variables should not be removed, nor left empty.
-
 # project/model/training dataset
 BESMAN_ARTIFACT_TYPE: project 
 
