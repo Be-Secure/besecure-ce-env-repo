@@ -7,6 +7,10 @@
 # If you are not using any particular value, remove it or comment it(#).
 #*** - These variables should not be removed, nor left empty.
 
+# Used to mention where you should clone the repo from, default value is Be-Secure
+BESMAN_ORG: Be-Secure
+
+
 #  project/ml model/training dataset
 BESMAN_ARTIFACT_TYPE: project 
 
@@ -44,3 +48,4 @@ BESMAN_ASSESSMENT_DATASTORE_URL: https://github.com/Be-Secure/besecure-assessmen
 # Add a comma seperated list of tools that needs to be installed to assess this project.
 BESMAN_ASSESSMENT_TOOLS: scorecard,criticality_score,sonarqube,spdx-sbom-generator
 
+#
