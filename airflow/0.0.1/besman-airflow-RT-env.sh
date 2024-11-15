@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 function __besman_install {
 
     __besman_check_vcs_exist || return 1 # Checks if GitHub CLI is present or not.
@@ -276,7 +275,6 @@ function __besman_uninstall {
         echo "Docker removed successfully"
 
     fi
-
     # Check go
     if command -v go &>/dev/null; then
         __besman_echo_white "Removing go..."

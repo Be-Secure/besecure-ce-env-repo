@@ -1,11 +1,9 @@
 #!/bin/bash
 
-
 function __besman_install {
 
     __besman_check_vcs_exist || return 1 # Checks if GitHub CLI is present or not.
     __besman_check_github_id || return 1 # checks whether the user github id has been populated or not under BESMAN_USER_NAMESPACE
-
     # Clones the source code repo.
     if [[ -d $BESMAN_ARTIFACT_DIR ]]; then
         __besman_echo_white "The clone path already contains dir names $BESMAN_ARTIFACT_NAME"
@@ -17,7 +15,6 @@ function __besman_install {
     fi
 
     if [[ -d $BESMAN_ASSESSMENT_DATASTORE_DIR ]]; then
-
         __besman_echo_white "Assessment datastore found at $BESMAN_ASSESSMENT_DATASTORE_DIR"
     else
         __besman_echo_white "Cloning assessment datastore from $\BESMAN_USER_NAMESPACE/besecure-assessment-datastore"
@@ -175,7 +172,6 @@ function __besman_install {
 }
 
 function __besman_uninstall {
-
     if [[ -d $BESMAN_ARTIFACT_DIR ]]; then
         __besman_echo_white "Removing $BESMAN_ARTIFACT_DIR..."
         rm -rf "$BESMAN_ARTIFACT_DIR"
@@ -184,7 +180,6 @@ function __besman_uninstall {
     fi
 
     # Please add the rest of the code here for uninstallation
-
     if [ ! -z $ASSESSMENT_TOOLS ]; then
         for tool in ${ASSESSMENT_TOOLS[*]}; do
             if [[ $tool == *:* ]]; then
