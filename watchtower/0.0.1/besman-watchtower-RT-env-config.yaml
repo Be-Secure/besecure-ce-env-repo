@@ -7,10 +7,13 @@
 # If you are not using any particular value, remove it or comment it(#).
 #*** - These variables should not be removed, nor left empty.
 
-# project/model/training dataset
-BESMAN_ARTIFACT_TYPE: project
+# Used to mention where you should clone the repo from, default value is Be-Secure
+BESMAN_ORG: Be-Secure
 
-# BESMAN_ARTIFACT_NAME - name of the artifact under assessment.
+#  project/ml model/training dataset
+BESMAN_ARTIFACT_TYPE: project 
+
+# Name of the artifact under assessment.
 BESMAN_ARTIFACT_NAME: watchtower
 
 # Version of the artifact under assessment.
@@ -29,10 +32,10 @@ BESMAN_ARTIFACT_DIR: $HOME/$BESMAN_ARTIFACT_NAME
 # The path where we download the assessment and other required tools during installation.
 BESMAN_TOOL_PATH: /opt
 
-# This variable indicates the individual's lab affiliation
+# Organization/lab/individual.
 BESMAN_LAB_TYPE: Organization
 
-# Name of the lab. Default is Be-Secure. This variable indicates the individual's lab affiliation
+# Name of the owner of the lab. Default is Be-Secure.
 BESMAN_LAB_NAME: Be-Secure
 
 # This is the local dir where we store the assessment reports. Default is home.
@@ -44,3 +47,4 @@ BESMAN_ASSESSMENT_DATASTORE_URL: https://github.com/Be-Secure/besecure-assessmen
 # Add a comma seperated list of tools that needs to be installed to assess this project.
 BESMAN_ASSESSMENT_TOOLS: scorecard,criticality_score,sonarqube,spdx-sbom-generator
 
+# 

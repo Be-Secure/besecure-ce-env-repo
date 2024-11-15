@@ -36,11 +36,12 @@ BESMAN_LAB_TYPE: Organization
 BESMAN_LAB_NAME: Be-Secure
 
 # This is the local dir where we store the assessment reports. Default is home.
-BESMAN_ASSESSMENT_DATASTORE_DIR: $HOME/besecure-assessment-datastore #***
+BESMAN_ASSESSMENT_DATASTORE_DIR: $HOME/besecure-assessment-datastore
 
 # The remote repo where we store the assessment reports.
-BESMAN_ASSESSMENT_DATASTORE_URL: https://github.com/Be-Secure/besecure-assessment-datastore #***
+BESMAN_ASSESSMENT_DATASTORE_URL: https://github.com/Be-Secure/besecure-assessment-datastore
 
 # Add a comma seperated list of tools that needs to be installed to assess this project.
 BESMAN_ASSESSMENT_TOOLS: scorecard,criticality_score,sonarqube,spdx-sbom-generator
 
+#
