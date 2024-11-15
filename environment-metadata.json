@@ -1754,7 +1754,7 @@
         },
         {
             "name": "oasp-seller-app-RT-env",
-            "version": {
+              "version": {
                 "tag": "0.0.1",
                 "release_date": ""
             },
@@ -1773,11 +1773,29 @@
             "compatible_playbooks": [
                 {
                     "name": "spdx-sbom-generator",
+                     "version": [
+                        "0.0.1"
+                    ]
+                },
+                {
+                    "name": "criticality_score",
+                    "version": [
+                        "0.0.1"
+                    ]
+                },
+                {
+                    "name": "sonarqube",
+                    "version": [
+                        "0.0.1"
+                    ]
+                },
+                {
+                    "name": "scorecard",
                     "version": [
                         "0.0.1"
                     ]
                 }
-            ]
+              ]
         },
         {
             "name": "OSSVerse-Buyer-App-RT-env",
@@ -1786,59 +1804,188 @@
                 "release_date": ""
             },
             "author": {
-                "name": "Be-Secure",
-                "type": "Organization"
+                "name": "BeSLab",
+                "type": "Lab"
             },
-            "date_of_creation": "2024-10-25T16:31:11",
-            "last_update_date": "2024-10-25T16:31:11",
+            "date_of_creation": "2024-09-02T10:08:31",
+            "last_update_date": "2024-09-02T10:08:31",
             "last_execution": {
-                "name": "Be-Secure",
-                "type": "Organization",
+                "name": "BeSLab",
+                "type": "Lab",
                 "status": "Success",
-                "timestamp": "2024-10-25T16:31:11"
+                "timestamp": "2024-09-02T10:08:31"
             },
             "compatible_playbooks": [
                 {
-                    "name": "spdx-sbom-generator",
+                    "name": "criticality_score",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "criticality_score",
+                    "name": "sonarqube",
+                    "version": [
+                        "0.0.1"
+                    ]
+                },
+                {
+                    "name": "scorecard",
                     "version": [
                         "0.0.1"
                     ]
                 }
             ]
         },
-        {
-            "name": "adversarial-robustness-toolbox-RT-env",
+	      {
+            "name": "criticality_score-RT-env"
             "version": {
                 "tag": "0.0.1",
                 "release_date": ""
             },
             "author": {
-                "name": "Be-Secure",
-                "type": "Organization"
+                "name": "BeSLab",
+                "type": "Lab"
             },
-            "date_of_creation": "2024-11-11T09:32:42",
-            "last_update_date": "2024-11-11T09:32:42",
+            "date_of_creation": "2024-11-11T10:08:31",
+            "last_update_date": "2024-11-11T10:08:31",
             "last_execution": {
-                "name": "Be-Secure",
-                "type": "Organization",
+                "name": "BeSLab",
+                "type": "Lab",
                 "status": "Success",
-                "timestamp": "2024-11-11T09:32:42"
+                "timestamp": "2024-11-11T10:08:31"
             },
             "compatible_playbooks": [
                 {
-                    "name": "spdx-sbom-generator",
+                    "name": "criticality_score",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
+                    "name": "sonarqube",
+                    "version": [
+                        "0.0.1"
+                    ]
+                },
+                {
+                    "name": "scorecard",
+                    "version": [
+                        "0.0.1"
+                    ]
+                }
+            ]
+        },
+      	{
+            "name": "fossology-RT-env",
+            "version": {
+                "tag": "0.0.1",
+                "release_date": ""
+            },
+            "author": {
+                "name": "BeSLab",
+                "type": "Lab"
+            },
+            "date_of_creation": "2024-11-11T10:08:31",
+            "last_update_date": "2024-11-11T10:08:31",
+            "last_execution": {
+                "name": "BeSLab",
+                "type": "Lab",
+                "status": "Success",
+                "timestamp": "2024-11-11T10:08:31"
+            },
+            "compatible_playbooks": [
+                {
                     "name": "criticality_score",
+                    "version": [
+                        "0.0.1"
+                    ]
+                },
+                {
+                    "name": "sonarqube",
+                    "version": [
+                        "0.0.1"
+                    ]
+                },
+                {
+                    "name": "scorecard",
+                    "version": [
+                        "0.0.1"
+                    ]
+                }
+            ]
+        },
+	      {
+            "name": "sonarqube-RT-env",
+            "version": {
+                "tag": "0.0.1",
+                "release_date": ""
+            },
+            "author": {
+                "name": "BeSLab",
+                "type": "Lab"
+            },
+            "date_of_creation": "2024-11-11T10:08:31",
+            "last_update_date": "2024-11-11T10:08:31",
+            "last_execution": {
+                "name": "BeSLab",
+                "type": "Lab",
+                "status": "Success",
+                "timestamp": "2024-11-11T10:08:31"
+            },
+            "compatible_playbooks": [
+                {
+                    "name": "criticality_score",
+                    "version": [
+                        "0.0.1"
+                    ]
+                },
+                {
+                    "name": "sonarqube",
+                    "version": [
+                        "0.0.1"
+                    ]
+                },
+                {
+                    "name": "scorecard",
+                    "version": [
+                        "0.0.1"
+                    ]
+                }
+            ]
+        },
+      	{
+            "name": "spdx-sbom-generator-RT-env",
+            "version": {
+                "tag": "0.0.1",
+                "release_date": ""
+            },
+            "author": {
+                "name": "BeSLab",
+                "type": "Lab"
+            },
+            "date_of_creation": "2024-11-11T10:08:31",
+            "last_update_date": "2024-11-11T10:08:31",
+            "last_execution": {
+                "name": "BeSLab",
+                "type": "Lab",
+                "status": "Success",
+                "timestamp": "2024-11-11T10:08:31"
+            },
+            "compatible_playbooks": [
+                {
+                    "name": "criticality_score",
+                    "version": [
+                        "0.0.1"
+                    ]
+                },
+                {
+                    "name": "sonarqube",
+                    "version": [
+                        "0.0.1"
+                    ]
+                },
+                {
+                    "name": "scorecard",
                     "version": [
                         "0.0.1"
                     ]
