@@ -23,6 +23,10 @@ Be-Secure/besecure-ce-env-repo/privacyidea-RT-env,0.0.1
 Be-Secure/besecure-ce-env-repo/prometheus-RT-env,0.0.1
 Be-Secure/besecure-ce-env-repo/RomRaider-RT-env,0.0.1
 Be-Secure/besecure-ce-env-repo/beep-RT-env,0.0.1
+Be-Secure/besecure-ce-env-repo/SmartEVSE-3-RT-env,0.0.1
+Be-Secure/besecure-ce-env-repo/Open-Vehicle-Monitoring-System-3-RT-env,0.0.1
+Be-Secure/besecure-ce-env-repo/open_evse-RT-env,0.0.1
+Be-Secure/besecure-ce-env-repo/busmaster-RT-env,0.0.1
 Be-Secure/besecure-ce-env-repo/kubernetes-RT-env,0.0.1
 Be-Secure/besecure-ce-env-repo/cilium-RT-env,0.0.1
 Be-Secure/besecure-ce-env-repo/guardrails-RT-env,0.0.1
