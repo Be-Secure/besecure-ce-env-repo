@@ -1,0 +1,47 @@
+---
+# If you wish to update the default configuration values, copy this file and place it under your home dir, under the same name.
+# These variables are used to drive the installation of the environment script.
+# The variables that start with BESMAN_ are converted to environment vars.
+# If you wish to add any other vars that should be used globally, add the var using the below format.
+# BESMAN_<var name>: <value>
+# If you are not using any particular value, remove it or comment it(#).
+#*** - These variables should not be removed, nor left empty.
+
+# project/model/training dataset
+BESMAN_ARTIFACT_TYPE: project
+
+# BESMAN_ARTIFACT_NAME - name of the artifact under assessment.
+BESMAN_ARTIFACT_NAME: TextAttack
+
+# Version of the artifact under assessment.
+BESMAN_ARTIFACT_VERSION: 0.0.1
+
+# Source code url of the artifact under assessment.
+BESMAN_ARTIFACT_URL: https://github.com/Be-Secure/TextAttack
+
+# This variable stores the name of the environment file.
+BESMAN_ENV_NAME: TextAttack-RT-env
+
+# The path where you wish to clone the source code of the artifact under assessment.
+# If you wish to change the clone path, provide the complete path.
+BESMAN_ARTIFACT_DIR: $HOME/$BESMAN_ARTIFACT_NAME
+
+# The path where we download the assessment and other required tools during installation.
+BESMAN_TOOL_PATH: /opt
+
+# This variable indicates the individual's lab affiliation
+BESMAN_LAB_TYPE: Organization
+
+# Name of the lab. Default is Be-Secure. This variable indicates the individual's lab affiliation
+BESMAN_LAB_NAME: Be-Secure
+
+# This is the local dir where we store the assessment reports. Default is home.
+BESMAN_ASSESSMENT_DATASTORE_DIR: $HOME/besecure-assessment-datastore
+
+# The remote repo where we store the assessment reports.
+BESMAN_ASSESSMENT_DATASTORE_URL: https://github.com/Be-Secure/besecure-assessment-datastore
+
+# Add a comma seperated list of tools that needs to be installed to assess this project.
+BESMAN_ASSESSMENT_TOOLS: scorecard,criticality_score,sonarqube,spdx-sbom-generator
+
+#
