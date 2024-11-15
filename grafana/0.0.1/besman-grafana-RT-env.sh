@@ -17,7 +17,6 @@ function __besman_install {
     fi
 
     if [[ -d $BESMAN_ASSESSMENT_DATASTORE_DIR ]]; then
-
         __besman_echo_white "Assessment datastore found at $BESMAN_ASSESSMENT_DATASTORE_DIR"
     else
         __besman_echo_white "Cloning assessment datastore from $\BESMAN_USER_NAMESPACE/besecure-assessment-datastore"
@@ -175,7 +174,6 @@ function __besman_install {
 }
 
 function __besman_uninstall {
-
     if [[ -d $BESMAN_ARTIFACT_DIR ]]; then
         __besman_echo_white "Removing $BESMAN_ARTIFACT_DIR..."
         rm -rf "$BESMAN_ARTIFACT_DIR"
@@ -294,6 +292,8 @@ function __besman_update {
     # Please add the rest of the code here for update
     __besman_echo_white "update"
 
+    # Clean up unused packages
+    sudo apt autoremove -y
 }
 
 function __besman_validate {
