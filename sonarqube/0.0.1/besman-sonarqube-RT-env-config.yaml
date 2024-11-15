@@ -44,3 +44,5 @@ BESMAN_ASSESSMENT_DATASTORE_URL: https://github.com/Be-Secure/besecure-assessmen
 
 # Add a comma seperated list of tools that needs to be installed to assess this project.
 BESMAN_ASSESSMENT_TOOLS: scorecard,criticality_score,sonarqube,spdx-sbom-generator
+
+#
