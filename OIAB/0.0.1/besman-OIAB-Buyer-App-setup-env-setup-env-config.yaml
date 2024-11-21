@@ -1,0 +1,33 @@
+---
+# If you wish to update the default configuration values, copy this file and place it under your home dir, under the same name.
+# These variables are used to drive the installation of the environment script.
+# The variables that start with BESMAN_ are converted to environment vars.
+# If you wish to add any other vars that should be used globally, add the var using the below format.
+# BESMAN_<var name>: <value>
+# If you are not using any particular value, remove it or comment it(#).
+#*** - These variables should not be removed, nor left empty.
+
+# Name of the organization from which we will download the OSSverse components.
+BESMAN_ORG: Be-Secure
+
+# Name of the marketplace ui source code repo.
+BESMAN_OIAB_BUYER_UI: OSSVerse-Buyer-App-ui
+
+# Name of the buyer app source code repo.
+BESMAN_OIAB_BUYER_APP: OSSVerse-Buyer-App
+
+# The path where we download the marketplace ui source code.
+BESMAN_OIAB_BUYER_UI_DIR: $HOME/$BESMAN_OIAB_BUYER_UI 
+
+# The path where we download the buyer app source code.
+BESMAN_OIAB_BUYER_APP_DIR: $HOME/$BESMAN_OIAB_BUYER_APP
+
+# This variable indicates the individual's lab affiliation
+BESMAN_LAB_TYPE: Organization #***
+
+# Name of the lab. Default is Be-Secure. This variable indicates the individual's lab affiliation
+BESMAN_LAB_NAME: Be-Secure #***
+
+# Docker compose version to be used.
+BESMAN_DOCKER_COMPOSE_VERSION: 1.29.2
+

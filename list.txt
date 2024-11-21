@@ -45,3 +45,4 @@ Be-Secure/besecure-ce-env-repo/criticality_score-RT-env,0.0.1
 Be-Secure/besecure-ce-env-repo/fossology-RT-env,0.0.1
 Be-Secure/besecure-ce-env-repo/sonarqube-RT-env,0.0.1
 Be-Secure/besecure-ce-env-repo/spdx-sbom-generator-RT-env,0.0.1
+Be-Secure/besecure-ce-env-repo/OSSverse-Buyer-App-setup-env,0.0.1
