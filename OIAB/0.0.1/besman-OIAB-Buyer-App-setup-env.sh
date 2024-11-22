@@ -99,8 +99,8 @@ function __besman_install
 {
     # Checks if git/GitHub CLI is present or not.
     __besman_check_vcs_exist || return 1
-    # checks whether the user github id has been populated or not under BESMAN_USER_NAMESPACE 
-    __besman_check_github_id || return 1 
+    # # checks whether the user github id has been populated or not under BESMAN_USER_NAMESPACE 
+    # __besman_check_github_id || return 1 
     __besman_install_docker
     __besman_install_docker_compose
     __besman_install_buyer_ui || return 1
