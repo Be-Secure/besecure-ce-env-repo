@@ -60,6 +60,8 @@ function __besman_install_buyer_ui()
     sed -i "s/listen 80;/listen 8001;/g" nginx.conf
     docker build -t oiab-buyer-ui .
     docker run -d --name oiab-buyer-ui -p 8001:8001 oiab-buyer-ui
+    cd "$HOME" || return 1
+
 }
 
 function __besman_install_buyer_app()
@@ -74,6 +76,7 @@ function __besman_install_buyer_app()
     __besman_echo_white "Installing $BESMAN_OIAB_BUYER_APP"
     __besman_echo_yellow "Building buyer app"
     docker-compose up --build -d
+    cd "$HOME" || return 1
 }
 
 function __besman_install_docker_compose() {
@@ -117,7 +120,7 @@ function __besman_uninstall
 
     __besman_echo_white "Removing Docker images and volumes..."
     docker image rm "$(docker image ls -q)"
-    docker volume rmm "$(docker volume ls -q)"
+    docker volume rm "$(docker volume ls -q)"
 
     __besman_echo_white "Cleaning up directories..."
     if [[ -d $BESMAN_OIAB_BUYER_UI_DIR ]]; then
