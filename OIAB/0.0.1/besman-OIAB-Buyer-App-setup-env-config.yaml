@@ -8,7 +8,7 @@
 #*** - These variables should not be removed, nor left empty.
 
 # Name of the organization from which we will download the OSSverse components.
-BESMAN_ORG: Be-Secure
+BESMAN_ORG: OSSVerse
 
 # Name of the marketplace ui source code repo.
 BESMAN_OIAB_BUYER_UI: OSSVerse-Buyer-App-ui
