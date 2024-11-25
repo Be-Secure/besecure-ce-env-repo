@@ -115,12 +115,12 @@ function __besman_uninstall
 {
     __besman_echo_white "Stopping and removing Docker containers..."
 
-    docker stop "$(docker ps -a -q)"
-    docker container rm "$(docker ps -a -q)"
+    docker stop $(docker ps -a -q)
+    docker container rm $(docker ps -a -q)
 
     __besman_echo_white "Removing Docker images and volumes..."
-    docker image rm "$(docker image ls -q)"
-    docker volume rm "$(docker volume ls -q)"
+    docker image rm $(docker image ls -q)
+    docker volume rm $(docker volume ls -q)
 
     __besman_echo_white "Cleaning up directories..."
     if [[ -d $BESMAN_OIAB_BUYER_UI_DIR ]]; then
