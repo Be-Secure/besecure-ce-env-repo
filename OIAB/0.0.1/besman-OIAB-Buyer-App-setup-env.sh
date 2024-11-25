@@ -56,7 +56,7 @@ function __besman_install_buyer_ui()
     cd "$BESMAN_OIAB_BUYER_UI_DIR" || return 1
     __besman_echo_white "Installing $BESMAN_OIAB_BUYER_UI"
     __besman_echo_yellow "Building OIAB buyer ui"
-    sed -i "s/'EXPOSE 80'/EXPOSE 8001/g" Dockerfile
+    sed -i "s/EXPOSE 80/EXPOSE 8001/g" Dockerfile
     docker build -t oiab-buyer-ui .
     docker run -d --name oiab-buyer-ui -p 8001:8001 oiab-buyer-ui
 }
