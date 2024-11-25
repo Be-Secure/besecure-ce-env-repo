@@ -54,3 +54,15 @@ Be-Secure/besecure-ce-env-repo/criticality_score-RT-env,0.0.1
 Be-Secure/besecure-ce-env-repo/fossology-RT-env,0.0.1
 Be-Secure/besecure-ce-env-repo/sonarqube-RT-env,0.0.1
 Be-Secure/besecure-ce-env-repo/spdx-sbom-generator-RT-env,0.0.1
+Be-Secure/besecure-ce-env-repo/FuzzBench-RT-env,0.0.1
+Be-Secure/besecure-ce-env-repo/OSS-Fuzz-RT-env,0.0.1
+Be-Secure/besecure-ce-env-repo/OpenSearch-RT-env,0.0.1
+Be-Secure/besecure-ce-env-repo/PoisonIvy-RT-env,0.0.1
+Be-Secure/besecure-ce-env-repo/PrivacyRaven-RT-env,0.0.1
+Be-Secure/besecure-ce-env-repo/aequitas-RT-env,0.0.1
+Be-Secure/besecure-ce-env-repo/evidently-RT-env,0.0.1
+Be-Secure/besecure-ce-env-repo/interpret-RT-env,0.0.1
+Be-Secure/besecure-ce-env-repo/metasploit-framework-RT-env,0.0.1
+Be-Secure/besecure-ce-env-repo/tensorflow-federated-RT-env,0.0.1
+Be-Secure/besecure-ce-env-repo/themis-RT-env,0.0.1
+Be-Secure/besecure-ce-env-repo/w3af-RT-env,0.0.1
