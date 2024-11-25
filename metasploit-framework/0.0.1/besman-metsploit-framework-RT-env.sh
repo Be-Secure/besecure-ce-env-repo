@@ -1,10 +1,85 @@
 #!/bin/bash
 
+<<<<<<< HEAD
+#################################################################################
+### INSTALL
+#################################################################################
+
+###### 
+## Description: Installs the sonarqube and its dependencies.
+## Parameters:  list of parameters and their description if any.
+######
+function install_sonarqube {
+
+	# Write code  to install SBOM tool and its dependencies
+
+	echo ""
+	return 0
+}
+
+######
+## Description: Installs the scorecard and its dependencies.
+## Parameters:  list of parameters and their description if any.
+######
+
+function install_scorecard {
+
+	# Write code  to scorecard tool and its dependencies
+
+        echo ""
+        return 0
+
+}
+
+######
+## Description: Installs the criticality_score and its dependencies.
+## Parameters:  list of parameters and their description if any.
+######
+
+function install_criticality_score {
+
+        # Write code  to criticality_score tool and its dependencies
+
+        echo ""
+        return 0
+
+}
+
+######
+## Description: Installs the spdx-sbom-generator and its dependencies.
+## Parameters:  list of parameters and their description if any.
+######
+
+function install_spdx-sbom-generator {
+
+        # Write code  to spdx-sbom-generator tool and its dependencies
+
+        echo ""
+        return 0
+
+}
+
+######
+## Description: Installs the env and its dependencies.
+## Parameters:  list of parameters and their description if any.
+######
+function __besman_install
+{
+    # Checks if GitHub CLI is present or not.
+    __besman_check_vcs_exist || return 1 
+    # checks whether the user github id has been populated or not under BESMAN_USER_NAMESPACE
+    __besman_check_github_id || return 1 
+
+    # Clone the source code repo of the project under assessment.
+=======
+
 function __besman_install {
 
     __besman_check_vcs_exist || return 1 # Checks if GitHub CLI is present or not.
     __besman_check_github_id || return 1 # checks whether the user github id has been populated or not under BESMAN_USER_NAMESPACE
+
     # Clones the source code repo.
+>>>>>>> 3e7d7d8c6697244a8b9351af392d61123fc329b3
     if [[ -d $BESMAN_ARTIFACT_DIR ]]; then
         __besman_echo_white "The clone path already contains dir names $BESMAN_ARTIFACT_NAME"
     else
@@ -14,34 +89,372 @@ function __besman_install {
         cd "$HOME"
     fi
 
+<<<<<<< HEAD
+    # Clone the source code repo of the project under assessment.
+    if [[ -d $BESMAN_ASSESSMENT_DATASTORE_DIR ]]
+    then
+=======
     if [[ -d $BESMAN_ASSESSMENT_DATASTORE_DIR ]]; then
+
+>>>>>>> 3e7d7d8c6697244a8b9351af392d61123fc329b3
         __besman_echo_white "Assessment datastore found at $BESMAN_ASSESSMENT_DATASTORE_DIR"
     else
         __besman_echo_white "Cloning assessment datastore from $\BESMAN_USER_NAMESPACE/besecure-assessment-datastore"
         __besman_repo_clone "$BESMAN_USER_NAMESPACE" "besecure-assessment-datastore" "$BESMAN_ASSESSMENT_DATASTORE_DIR" || return 1
 
     fi
+<<<<<<< HEAD
+   
+   [[ ! -z $BESMAN_ASSESSMENT_TOOLS ]] && readarray -d ',' -t ASSESSMENT_TOOLS <<< "$BESMAN_ASSESSMENT_TOOLS"
+
+   if [ ! -z $ASSESSMENT_TOOLS ];then
+     for tool in ${ASSESSMENT_TOOLS[*]}
+     do
+        #write the functions to install the each tool mentioned in ASSESSMENT_STEP variable and call them here accordingly.
+        # Write function names with format install_$tool, replace $tool with the list specified in ASSESSMENT_STEP varaible.
+
+        #uncomment below function call
+        #install_$tool
+        
+     done
+   fi
+  
+   echo ""
+   return 0   
+}
+
+
+#################################################################################
+### UNINSTALL
+#################################################################################
+
+######
+## Description: Uninstalls the env and its dependencies.
+## Parameters:  list of parameters and their description if any.
+######
+
+function uninstall_sonarqube {
+
+        # Write code  to install SBOM tool and its dependencies
+
+        echo ""
+        return 0
+}
+
+######
+## Description: Uninstalls the scorecard and its dependencies.
+## Parameters:  list of parameters and their description if any.
+######
+
+function uninstall_scorecard {
+
+        # Write code to uninstall scorecard tool and its dependencies
+
+        echo ""
+        return 0
+
+}
+
+######
+## Description: Uninstalls the criticality_score and its dependencies.
+## Parameters:  list of parameters and their description if any.
+######
+
+function uninstall_criticality_score {
+
+        # Write code  to criticality_score tool and its dependencies
+
+        echo ""
+        return 0
+
+}
+
+######
+## Description: Uninstalls the spdx-sbom-generator and its dependencies.
+## Parameters:  list of parameters and their description if any.
+######
+
+function uninstall_spdx-sbom-generator {
+
+        # Write code  to spdx-sbom-generator tool and its dependencies
+
+        echo ""
+        return 0
+
+}
+
+
+function __besman_uninstall
+{
+     # Clone the source code repo of the project under assessment.
+    if [[ -d $BESMAN_ARTIFACT_DIR ]]; then
+        rm -rf  $BESMAN_ARTIFACT_DIR
+    else
+	 __besman_echo_root "$BESMAN_ARTIFACT_NAME not found"
+    fi
+
+    
+   [[ ! -z $BESMAN_ASSESSMENT_TOOLS ]] && readarray -d ',' -t ASSESSMENT_TOOLS <<< "$BESMAN_ASSESSMENT_TOOLS"
+
+   if [ ! -z $ASSESSMENT_TOOLS ];then
+     for tool in ${ASSESSMENT_TOOLS[*]}
+     do
+       #write the functions to install the each tool mentioned in ASSESSMENT_STEP variable and call them here accordingly.
+       # Write function names with format install_$tool, replace $tool with the list specified in ASSESSMENT_STEP varaible.^S
+
+       #uncomment below function call
+       #uninstall_$tool
+
+     done
+   fi
+
+    echo ""
+    return 0
+}
+
+
+#################################################################################
+### UPDATE
+#################################################################################
+
+######
+## Description: Updates the env to the newer version.
+## Parameters:  list of parameters and their description if any.
+######
+
+function update_sonarqube {
+
+        # Write code  to install SBOM tool and its dependencies
+
+        echo ""
+        return 0
+}
+
+######
+## Description: Updates the scorecard and its dependencies.
+## Parameters:  list of parameters and their description if any.
+######
+
+function update_scorecard {
+
+        # Write code to uninstall scorecard tool and its dependencies
+
+        echo ""
+        return 0
+
+}
+
+######
+## Description: Update the criticality_score and its dependencies.
+## Parameters:  list of parameters and their description if any.
+######
+
+function update_criticality_score {
+
+        # Write code  to criticality_score tool and its dependencies
+
+        echo ""
+        return 0
+
+}
+
+######
+## Description: Update the spdx-sbom-generator and its dependencies.
+## Parameters:  list of parameters and their description if any.
+######
+
+function update_spdx-sbom-generator {
+
+        # Write code  to spdx-sbom-generator tool and its dependencies
+
+        echo ""
+        return 0
+
+}
+
+
+function __besman_update
+{
+    
+    [[ ! -z $BESMAN_ASSESSMENT_TOOLS ]] &&  readarray -d ',' -t ASSESSMENT_TOOLS <<< "$BESMAN_ASSESSMENT_TOOLS"
+
+    if [ ! -z $ASSESSMENT_TOOLS ];then
+       
+     for tool in ${ASSESSMENT_TOOLS[*]}
+     do
+       # Check if tool is already installed.
+       # if [ installed ];then
+       #    call the update function to update to latest version.
+       #    uncoment beloe function to call update. Write a update function if not already present for the tool.
+       #    update_$tool
+       # else
+       #    Call the install function for the tool
+       #    uncomment the below call
+       #    install_$tool
+       # fi
+     done
+
+    fi
+    echo ""
+    return 0
+}
+
+#################################################################################
+### VALIDATE
+#################################################################################
+
+######
+## Description: validates the env to the newer version.
+## Parameters:  list of parameters and their description if any.
+######
+
+function validate_sonarqube {
+
+        # Write code  to install SBOM tool and its dependencies
+
+        echo ""
+        return 0
+}
+
+######
+## Description: validates the scorecard and its dependencies.
+## Parameters:  list of parameters and their description if any.
+######
+
+function validate_scorecard {
+
+        # Write code to uninstall scorecard tool and its dependencies
+
+        echo ""
+        return 0
+
+}
+
+######
+## Description: Validate the criticality_score and its dependencies.
+## Parameters:  list of parameters and their description if any.
+######
+
+function validate_criticality_score {
+
+        # Write code  to criticality_score tool and its dependencies
+
+        echo ""
+        return 0
+
+}
+
+######
+## Description: validate the spdx-sbom-generator and its dependencies.
+## Parameters:  list of parameters and their description if any.
+######
+
+function validate_spdx-sbom-generator {
+
+        # Write code  to spdx-sbom-generator tool and its dependencies
+
+        echo ""
+        return 0
+
+}
+
+function __besman_validate
+{
+    [[ ! -z $BESMAN_ASSESSMENT_TOOLS ]] &&  readarray -d ',' -t ASSESSMENT_TOOLS <<< "$BESMAN_ASSESSMENT_TOOLS"
+
+    if [ ! -z $ASSESSMENT_TOOLS ];then
+
+     for tool in ${ASSESSMENT_TOOLS[*]}
+     do
+       # Check if tool is installed.
+       # uncomment this function call
+       # validate_$tool
+     done
+
+    fi
+    echo ""
+    return 0
+}
+
+#################################################################################
+### RESET
+#################################################################################
+
+######
+## Description: Reset the tools configurations.
+## Parameters:  list of parameters and their description if any.
+######
+
+function reset_sonarqube {
+
+        # Write code  to install SBOM tool and its dependencies
+
+        echo ""
+        return 0
+}
+
+######
+## Description: Reset the scorecard and its dependencies.
+## Parameters:  list of parameters and their description if any.
+######
+
+function reset_scorecard {
+
+        # Write code to uninstall scorecard tool and its dependencies
+
+        echo ""
+        return 0
+
+}
+
+######
+## Description: Reset the criticality_score and its dependencies.
+## Parameters:  list of parameters and their description if any.
+######
+
+function reset_criticality_score {
+
+        # Write code  to criticality_score tool and its dependencies
+
+        echo ""
+        return 0
+
+}
+
+######
+## Description: Reset the spdx-sbom-generator and its dependencies.
+## Parameters:  list of parameters and their description if any.
+######
+
+function reset_spdx-sbom-generator {
+
+        # Write code  to spdx-sbom-generator tool and its dependencies
+
+        echo ""
+        return 0
+
+}
+
+function __besman_reset
+{
+    [[ ! -z $BESMAN_ASSESSMENT_TOOLS ]] &&  readarray -d ',' -t ASSESSMENT_TOOLS <<< "$BESMAN_ASSESSMENT_TOOLS"
+
+    if [ ! -z $ASSESSMENT_TOOLS ];then
+
+     for tool in ${ASSESSMENT_TOOLS[*]}
+     do
+       # Check if tool is installed.
+       # uncomment this function call
+       # reset_$tool
+     done
+
+    fi
+    echo ""
+    return 0
+=======
     # Please add the rest of the code here for installation
 
     # ************************* env dependency *********************************
-
-    # Check if Python is installed
-    if ! command -v python3 &>/dev/null; then
-        __besman_echo_white "Python is not installed. Installing Python..."
-        sudo apt update
-        sudo apt install python3 -y
-    else
-        __besman_echo_white "Python is already there to use."
-    fi
-
-    # Check if pip is installed
-    if ! command -v pip3 &>/dev/null; then
-        __besman_echo_white "pip is not installed. Installing pip..."
-        sudo apt update
-        sudo apt install python3-pip -y
-    else
-        __besman_echo_white "pip is already there is use."
-    fi
 
     ## Name:docker
     __besman_echo_white "Check if docker is installed or not"
@@ -56,9 +469,8 @@ function __besman_install {
         sudo apt install -y docker-ce docker-ce-cli containerd.io
 
         # sudo groupadd -f docker
-        sudo systemctl restart docker
-        sudo groupadd -f docker # Uncomment this line
         sudo usermod -aG docker $USER
+        sudo systemctl restart docker
         # newgrp docker
 
         #sudo su - $USER
@@ -188,17 +600,10 @@ function __besman_install {
         echo "bes assessment tools installation done"
     fi
 
-    cd $BESMAN_ARTIFACT_DIR
-    pip install .
-    ## test dep pytest-cov
-    pip install pytest-cov
-    ./run_tests.sh
-
-    __besman_echo_white "===== Install completed =="
-
 }
 
 function __besman_uninstall {
+
     if [[ -d $BESMAN_ARTIFACT_DIR ]]; then
         __besman_echo_white "Removing $BESMAN_ARTIFACT_DIR..."
         rm -rf "$BESMAN_ARTIFACT_DIR"
@@ -300,21 +705,6 @@ function __besman_uninstall {
 
     fi
 
-    # Check if pip is installed
-    if command -v pip3 &>/dev/null; then
-        __besman_echo_white "Uninstalling pip..."
-        sudo apt purge -y python3-pip
-        __besman_echo_white "pip uninstalled successfully."
-    fi
-
-    # Function to uninstall Python and pip
-    if command -v python3 &>/dev/null; then
-        __besman_echo_white "Uninstalling Python..."
-        # Remove Python
-        sudo apt purge -y python3
-        # Remove pip
-        sudo apt purge -y python3-pip
-        __besman_echo_white "Python uninstalled successfully."
     # Check go
     if command -v go &>/dev/null; then
         __besman_echo_white "Removing go..."
@@ -403,20 +793,6 @@ function __besman_validate {
         errors+=("criticality_score is missing")
     fi
 
-    # Check if Python is installed
-    if ! command -v python3 &>/dev/null; then
-        __besman_echo_white "python is not installed."
-        validationStatus=0
-        errors+=("python is missing")
-    fi
-
-    # Check if pip is installed
-    if ! command -v pip3 &>/dev/null; then
-        __besman_echo_white "pip is not installed."
-        validationStatus=0
-        errors+=("pip is missing")
-    fi
-
     __besman_echo_white "errors: " ${errors[@]}
 
 }
@@ -424,4 +800,5 @@ function __besman_validate {
 function __besman_reset {
     # Please add the rest of the code here for reset
     __besman_echo_white "reset"
+>>>>>>> 3e7d7d8c6697244a8b9351af392d61123fc329b3
 }

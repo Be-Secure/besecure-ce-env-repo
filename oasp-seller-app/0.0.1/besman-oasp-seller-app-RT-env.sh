@@ -4,6 +4,19 @@ function __besman_install {
 
     __besman_check_vcs_exist || return 1 # Checks if GitHub CLI is present or not.
     __besman_check_github_id || return 1 # checks whether the user github id has been populated or not under BESMAN_USER_NAMESPACE
+    # __besman_check_for_ansible || return 1 # Checks if ansible is installed or not.
+    # __besman_create_roles_config_file      # Creates the role config file with the parameters from env config
+
+    # # Requirements file is used to list the required ansible roles. The data for requirements file comes from BESMAN_ANSIBLE_ROLES env var.
+    # # This function updates the requirements file from BESMAN_ANSIBLE_ROLES env var.
+    # __besman_update_requirements_file
+    # __besman_ansible_galaxy_install_roles_from_requirements # Downloads the ansible roles mentioned in BESMAN_ANSIBLE_ROLES to BESMAN_ANSIBLE_ROLES_PATH
+    # # This function checks for the playbook BESMAN_ARTIFACT_TRIGGER_PLAYBOOK under BESMAN_ARTIFACT_TRIGGER_PLAYBOOK_PATH.
+    # # The trigger playbook is used to run the ansible roles.
+    # __besman_check_for_trigger_playbook "$BESMAN_ARTIFACT_TRIGGER_PLAYBOOK_PATH/$BESMAN_ARTIFACT_TRIGGER_PLAYBOOK"
+    # [[ "$?" -eq 1 ]] && __besman_create_ansible_playbook # Creates the trigger playbook if not present.
+    # # Runs the trigger playbook. We are also passing these variables - bes_command=install; role_path=$BESMAN_ANSIBLE_ROLES_PATH
+    # __besman_run_ansible_playbook_extra_vars "$BESMAN_ARTIFACT_TRIGGER_PLAYBOOK_PATH/$BESMAN_ARTIFACT_TRIGGER_PLAYBOOK" "bes_command=install role_path=$BESMAN_ANSIBLE_ROLES_PATH" || return 1
     # Clones the source code repo.
     if [[ -d $BESMAN_ARTIFACT_DIR ]]; then
         __besman_echo_white "The clone path already contains dir names $BESMAN_ARTIFACT_NAME"
@@ -21,27 +34,10 @@ function __besman_install {
         __besman_repo_clone "$BESMAN_USER_NAMESPACE" "besecure-assessment-datastore" "$BESMAN_ASSESSMENT_DATASTORE_DIR" || return 1
 
     fi
+
     # Please add the rest of the code here for installation
 
     # ************************* env dependency *********************************
-
-    # Check if Python is installed
-    if ! command -v python3 &>/dev/null; then
-        __besman_echo_white "Python is not installed. Installing Python..."
-        sudo apt update
-        sudo apt install python3 -y
-    else
-        __besman_echo_white "Python is already there to use."
-    fi
-
-    # Check if pip is installed
-    if ! command -v pip3 &>/dev/null; then
-        __besman_echo_white "pip is not installed. Installing pip..."
-        sudo apt update
-        sudo apt install python3-pip -y
-    else
-        __besman_echo_white "pip is already there is use."
-    fi
 
     ## Name:docker
     __besman_echo_white "Check if docker is installed or not"
@@ -56,9 +52,8 @@ function __besman_install {
         sudo apt install -y docker-ce docker-ce-cli containerd.io
 
         # sudo groupadd -f docker
-        sudo systemctl restart docker
-        sudo groupadd -f docker # Uncomment this line
         sudo usermod -aG docker $USER
+        sudo systemctl restart docker
         # newgrp docker
 
         #sudo su - $USER
@@ -75,7 +70,32 @@ function __besman_install {
         __besman_echo_white "Docker is already installed."
     fi
 
-    ## Name:snap to use go
+    ## Name:npm & yarn
+    __besman_echo_white "check if npm & yarn is installed"
+    if ! command -v npm &>/dev/null; then
+        # npm
+        _besman_echo_white "installing npm ..."
+        sudo apt update
+        curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
+        sudo apt install -y nodejs
+        # yarn
+        __besman_echo_white "installing yarn ..."
+        sudo apt update
+        sudo npm install --global yarn
+    else
+        __besman_echo_white "npm is already available"
+        __besman_echo_white "check if yarn is installed"
+        if ! command -v yarn &>/dev/null; then
+            __besman_echo_white "installing yarn ..."
+            sudo apt update
+            sudo npm install --global yarn
+        else
+            __besman_echo_white "yarn is already installed"
+        fi
+
+    fi
+
+    ## Name:snap
     __besman_echo_white "check if snap is installed or not"
     if ! [ -x "$(command -v snap)" ]; then
         __besman_echo_white "installing snap ..."
@@ -85,7 +105,7 @@ function __besman_install {
         __besman_echo_white "snap is already available"
     fi
 
-    ## Name:go to use criticality_score
+    ## Name:go
     __besman_echo_white "check if go is intalled or not"
     if ! [ -x "$(command -v go)" ]; then
         __besman_echo_white "installing go ..."
@@ -188,17 +208,17 @@ function __besman_install {
         echo "bes assessment tools installation done"
     fi
 
-    cd $BESMAN_ARTIFACT_DIR
-    pip install .
-    ## test dep pytest-cov
-    pip install pytest-cov
-    ./run_tests.sh
-
-    __besman_echo_white "===== Install completed =="
+    # ******************** yarn run for test case execution *****************************
+    cd $BESMAN_ARTIFACT_DIR/seller
+    yarn install
+    cd -
 
 }
 
 function __besman_uninstall {
+    # __besman_check_for_trigger_playbook "$BESMAN_ARTIFACT_TRIGGER_PLAYBOOK_PATH/$BESMAN_ARTIFACT_TRIGGER_PLAYBOOK"
+    # [[ "$?" -eq 1 ]] && __besman_create_ansible_playbook
+    # __besman_run_ansible_playbook_extra_vars "$BESMAN_ARTIFACT_TRIGGER_PLAYBOOK_PATH/$BESMAN_ARTIFACT_TRIGGER_PLAYBOOK" "bes_command=remove role_path=$BESMAN_ANSIBLE_ROLES_PATH" || return 1
     if [[ -d $BESMAN_ARTIFACT_DIR ]]; then
         __besman_echo_white "Removing $BESMAN_ARTIFACT_DIR..."
         rm -rf "$BESMAN_ARTIFACT_DIR"
@@ -208,75 +228,61 @@ function __besman_uninstall {
 
     # Please add the rest of the code here for uninstallation
 
-    if [ ! -z $ASSESSMENT_TOOLS ]; then
-        for tool in ${ASSESSMENT_TOOLS[*]}; do
-            if [[ $tool == *:* ]]; then
-                tool_name=${tool%%:*}    # Get the tool name
-                tool_version=${tool##*:} # Get the tool version
-            else
-                tool_name=$tool # Get the tool name
-                tool_version="" # No version specified
-            fi
+    # check yarn
+    if command -v yarn &>/dev/null; then
+        __besman_echo_white "Removing yarn ..."
+        sudo npm uninstall --global yarn
+        sudo apt update
+        __besman_echo_white "yarn removed successfully"
+    fi
 
-            __besman_echo_white "Uninstallling tool - $tool : version - $tool_version"
+    # check npm
+    if command -v npm &>/dev/null; then
+        __besman_echo_white "Removing node & npm .."
+        sudo apt update
+        sudo apt remove --purge -y nodejs npm
+        sudo apt update
+        __besman_echo_white "node & npm removed successfully"
+    fi
 
-            case $tool_name in
-            criticality_score)
-                __besman_echo_white "check for criticality_score"
-                if [ -x "$(command -v criticality_score)" ]; then
-                    __besman_echo_white "uninstalling criticality_score ..."
-                    go install github.com/ossf/criticality_score/v2/cmd/criticality_score@none
+    # check criticality_score
+    if command -v criticality_score &>/dev/null; then
+        __besman_echo_white "Removing criticality_score..."
+        # Remove criticality_score
+        sudo rm -rf $GOPATH/bin/criticality_score
+        sudo apt update
+        __besman_echo_white "criticality_score removed successfully."
+    fi
 
-		    [[ -f $GOPATH/bin/criticality_score ]] && rm -rf $GOPATH/bin/criticality_score
-
-                    __besman_echo_white "criticality_score is uninstalled\n"
-                else
-                    __besman_echo_white "criticality_score is not installed"
-                fi
-                ;;
-            sonarqube)
-                __besman_echo_white "Uninstalling sonarqube..."
-                if [ "$(docker ps -aq -f name=sonarqube-$BESMAN_ARTIFACT_NAME)" ]; then
-                    # If a container exists, stop and remove it
-                    __besman_echo_white "Removing existing container 'sonarqube-$BESMAN_ARTIFACT_NAME'..."
-                    docker stop sonarqube-$BESMAN_ARTIFACT_NAME
-                    docker container rm --force sonarqube-$BESMAN_ARTIFACT_NAME
-                fi
-                __besman_echo_white "sonarqube uninstallation is done"
-                ;;
-            fossology)
-                __besman_echo_white "Uninstalling fossology..."
-                __besman_echo_white "check for fossology-docker container"
-                if [ "$(docker ps -aq -f name=fossology-$BESMAN_ARTIFACT_NAME)" ]; then
-                    # If a container exists, stop and remove it
-                    __besman_echo_white "Removing existing container 'fossology-$BESMAN_ARTIFACT_NAME'..."
-                    docker stop fossology-$BESMAN_ARTIFACT_NAME
-                    docker container rm --force fossology-$BESMAN_ARTIFACT_NAME
-                fi
-                __besman_echo_white "fossology uninstallation is done"
-                ;;
-            spdx-sbom-generator)
-                __besman_echo_white "Uninstalling spdx-sbom-generator..."
-                # URL of the asset
-                __besman_echo_white "Asset URL - $BESMAN_SPDX_SBOM_ASSET_URL"
-                # Download the asset
-                __besman_echo_white "Downloading the asset ..."
-                curl -L -o $BESMAN_ARTIFACT_DIR/spdx-sbom-generator-v0.0.15-linux-amd64.tar.gz "$BESMAN_SPDX_SBOM_ASSET_URL"
-                [[ -f $BESMAN_ARTIFACT_DIR/spdx-sbom-generator-v0.0.15-linux-amd64.tar.gz]] && rm -f $BESMAN_ARTIFACT_DIR/spdx-sbom-generator-v0.0.15-linux-amd64.tar.gz
-                [[ -d $BESMAN_ARTIFACT_DIR/spdx-sbom-generator* ]] && rm -rf $BESMAN_ARTIFACT_DIR/spdx-sbom-generator*
-
-                __besman_echo_white "spdx-sbom-generator uninstallation is done."
-                ;;
-            *)
-                echo "No uninstallation steps found for $tool_name."
-                ;;
-            esac
-        done
-        echo "bes assessment tools uninstallation done"
+    # Check go
+    if command -v go &>/dev/null; then
+        __besman_echo_white "Removing go..."
+        # Remove go
+        sudo snap remove go -y
+        __besman_echo_white "Go removed successfully."
     fi
 
     # check docker & containers
     if command -v docker &>/dev/null; then
+
+        # remove sonarqube container
+        __besman_echo_white "Un-installing sonarqube..."
+        __besman_echo_white "removing container ..."
+        if [ "$(docker ps -aq -f name=sonarqube-$BESMAN_ARTIFACT_DIR)" ]; then
+            docker stop sonarqube-$BESMAN_ARTIFACT_DIR
+            docker container rm --force sonarqube-$BESMAN_ARTIFACT_DIR
+
+            __besman_echo_white "Docker containers sonarqube-$BESMAN_ARTIFACT_DIR removed"
+        fi
+
+        # remove fossology container
+        __besman_echo_white "Un-installing fossology..."
+        __besman_echo_white "removing container ..."
+        if [ "$(docker ps -aq -f name=fossology-$BESMAN_ARTIFACT_DIR)" ]; then
+            docker stop fossology-$BESMAN_ARTIFACT_DIR
+            docker container rm --force fossology-$BESMAN_ARTIFACT_DIR
+            __besman_echo_white "Docker containers fossology-$BESMAN_ARTIFACT_DIR removed"
+        fi
 
         # Remove Docker Engine
         # Purge Docker packages and dependencies
@@ -300,45 +306,25 @@ function __besman_uninstall {
 
     fi
 
-    # Check if pip is installed
-    if command -v pip3 &>/dev/null; then
-        __besman_echo_white "Uninstalling pip..."
-        sudo apt purge -y python3-pip
-        __besman_echo_white "pip uninstalled successfully."
-    fi
-
-    # Function to uninstall Python and pip
-    if command -v python3 &>/dev/null; then
-        __besman_echo_white "Uninstalling Python..."
-        # Remove Python
-        sudo apt purge -y python3
-        # Remove pip
-        sudo apt purge -y python3-pip
-        __besman_echo_white "Python uninstalled successfully."
-    # Check go
-    if command -v go &>/dev/null; then
-        __besman_echo_white "Removing go..."
-        # Remove go
-        sudo snap remove go -y
-        __besman_echo_white "Go removed successfully."
-    fi
-
     # Clean up unused packages
     sudo apt autoremove -y
 }
 
 function __besman_update {
-
+    # __besman_check_for_trigger_playbook "$BESMAN_ARTIFACT_TRIGGER_PLAYBOOK_PATH/$BESMAN_ARTIFACT_TRIGGER_PLAYBOOK"
+    # [[ "$?" -eq 1 ]] && __besman_create_ansible_playbook
+    # __besman_run_ansible_playbook_extra_vars "$BESMAN_ARTIFACT_TRIGGER_PLAYBOOK_PATH/$BESMAN_ARTIFACT_TRIGGER_PLAYBOOK" "bes_command=update role_path=$BESMAN_ANSIBLE_ROLES_PATH" || return 1
     # Please add the rest of the code here for update
-    __besman_echo_white "update"
 
+    __besman_echo_white "update"
 }
 
 function __besman_validate {
-
+    # __besman_check_for_trigger_playbook "$BESMAN_ARTIFACT_TRIGGER_PLAYBOOK_PATH/$BESMAN_ARTIFACT_TRIGGER_PLAYBOOK"
+    # [[ "$?" -eq 1 ]] && __besman_create_ansible_playbook
+    # __besman_run_ansible_playbook_extra_vars "$BESMAN_ARTIFACT_TRIGGER_PLAYBOOK_PATH/$BESMAN_ARTIFACT_TRIGGER_PLAYBOOK" "bes_command=validate role_path=$BESMAN_ANSIBLE_ROLES_PATH" || return 1
     # Please add the rest of the code here for validate
     __besman_echo_white "validate"
-
     validationStatus=1
     declare -a errors
 
@@ -382,6 +368,20 @@ function __besman_validate {
         fi
     fi
 
+    # validate npm installation
+    if ! command -v npm &>/dev/null; then
+        __besman_echo_white "npm is not installed."
+        validationStatus=0
+        errors+=("npm is missing")
+    fi
+
+    # validate Yarn installation
+    if ! command -v yarn &>/dev/null; then
+        __besman_echo_white "Yarn is not installed."
+        validationStatus=0
+        errors+=("yarn is missing")
+    fi
+
     # validate snap installation
     if ! command -v snap &>/dev/null; then
         __besman_echo_white "snap is not installed."
@@ -403,25 +403,14 @@ function __besman_validate {
         errors+=("criticality_score is missing")
     fi
 
-    # Check if Python is installed
-    if ! command -v python3 &>/dev/null; then
-        __besman_echo_white "python is not installed."
-        validationStatus=0
-        errors+=("python is missing")
-    fi
-
-    # Check if pip is installed
-    if ! command -v pip3 &>/dev/null; then
-        __besman_echo_white "pip is not installed."
-        validationStatus=0
-        errors+=("pip is missing")
-    fi
-
-    __besman_echo_white "errors: " ${errors[@]}
-
+    __besman_echo_white "errors: " $errors
 }
 
 function __besman_reset {
+    # __besman_check_for_trigger_playbook "$BESMAN_ARTIFACT_TRIGGER_PLAYBOOK_PATH/$BESMAN_ARTIFACT_TRIGGER_PLAYBOOK"
+    # [[ "$?" -eq 1 ]] && __besman_create_ansible_playbook
+    # __besman_run_ansible_playbook_extra_vars "$BESMAN_ARTIFACT_TRIGGER_PLAYBOOK_PATH/$BESMAN_ARTIFACT_TRIGGER_PLAYBOOK" "bes_command=reset role_path=$BESMAN_ANSIBLE_ROLES_PATH" || return 1
     # Please add the rest of the code here for reset
     __besman_echo_white "reset"
+
 }
