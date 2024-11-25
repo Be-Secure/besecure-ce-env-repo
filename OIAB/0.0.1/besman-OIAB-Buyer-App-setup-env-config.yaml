@@ -29,5 +29,5 @@ BESMAN_LAB_TYPE: Organization #***
 BESMAN_LAB_NAME: Be-Secure #***
 
 # Docker compose version to be used.
-BESMAN_DOCKER_COMPOSE_VERSION: 1.29.2
+BESMAN_DOCKER_COMPOSE_VERSION: "1.29.2"
 
