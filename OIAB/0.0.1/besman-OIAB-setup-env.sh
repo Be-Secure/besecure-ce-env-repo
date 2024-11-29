@@ -148,7 +148,7 @@ function __besman_install_ossverse_network() {
     # Running the third option in beckn-onix.sh(install file) which will install the entire network in your current machine.
     local install_file="$BESMAN_BECKN_ONIX_DIR/install/beckn-onix.sh"
     cd "$BESMAN_BECKN_ONIX_DIR" || return 1
-    echo "3" | ./"$install_file"
+    echo "3" | . "$install_file"
 
     if [[ "$?" != "0" ]]; then
         __besman_echo_red "Failed to install using Beckn Onix"
