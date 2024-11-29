@@ -141,7 +141,13 @@ function __besman_install_beckn_onix() {
             __besman_echo_white "Switched to branch: $BESMAN_BECKN_ONIX_SOURCE_BRANCH"
         fi
     fi
+
+}  
+
+function __besman_install_ossverse_network() {
     # Running the third option in beckn-onix.sh(install file) which will install the entire network in your current machine.
+    local install_file="$BESMAN_BECKN_ONIX_DIR/install/beckn-onix.sh"
+    cd "$BESMAN_BECKN_ONIX_DIR" || return 1
     echo "3" | ./"$install_file"
 
     if [[ "$?" != "0" ]]; then
@@ -151,7 +157,46 @@ function __besman_install_beckn_onix() {
         __besman_echo_green "Successfully installed the entire network using Beckn Onix"
         return 0
     fi
-}  
+}
+
+function __besman_copy_layer2_config() {
+
+    local layer2_config_dir="$BESMAN_BECKN_ONIX_DIR/layer2/samples"
+    __besman_echo_white "Copying layer2 config files"
+    
+    cp "$layer2_config_dir/retail_1.1.0.yaml" "$layer2_config_dir/Software Assurance_1.0.0.yaml" || {
+        __besman_echo_red "Failed to copy retail yaml file"
+        return 1
+    }
+    
+    docker cp "$layer2_config_dir/Software Assurance_1.0.0.yaml" "bap-client:/usr/src/app/schemas" || {
+        __besman_echo_red "Failed to copy config to bap-client"
+        return 1
+    }
+    
+    docker cp "$layer2_config_dir/Software Assurance_1.0.0.yaml" "bap-network:/usr/src/app/schemas" || {
+        __besman_echo_red "Failed to copy config to bap-network"
+        return 1
+    }
+    
+    docker cp "$layer2_config_dir/Software Assurance_1.0.0.yaml" "bpp-network:/usr/src/app/schemas" || {
+        __besman_echo_red "Failed to copy config to bpp-network"
+        return 1
+    }
+    
+    docker cp "$layer2_config_dir/Software Assurance_1.0.0.yaml" "bpp-client:/usr/src/app/schemas" || {
+        __besman_echo_red "Failed to copy config to bpp-client"
+        return 1
+    }
+    
+    docker restart bap-client bap-network bpp-network bpp-client || {
+        __besman_echo_red "Failed to restart containers"
+        return 1
+    }
+    
+    __besman_echo_green "Copied layer2 config files"
+    return 0
+}
 
 
 function __besman_install {
@@ -164,6 +209,8 @@ function __besman_install {
     __besman_install_buyer_ui || return 1
     __besman_install_buyer_app || return 1
     __besman_install_beckn_onix || return 1
+    __besman_install_ossverse_network || return 1
+    __besman_copy_layer2_config || return 1
 }
 
 function __besman_uninstall {
