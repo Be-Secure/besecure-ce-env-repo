@@ -2266,7 +2266,7 @@
             ]
         },
         {
-            "name": "OIAB-Buyer-App-setup-env",
+            "name": "OIAB-setup-env",
             "version": {
                 "tag": "0.0.1",
                 "release_date": ""
