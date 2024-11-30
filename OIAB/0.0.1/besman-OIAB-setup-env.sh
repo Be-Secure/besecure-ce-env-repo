@@ -162,15 +162,21 @@ function __besman_install_ossverse_network() {
 function __besman_copy_layer2_config() {
 
     local layer2_config_dir="$BESMAN_BECKN_ONIX_DIR/layer2/samples"
-    local layer2_file="Software\ Assurance_1.0.0.yaml"
+    local layer2_file="Software Assurance_1.0.0.yaml"
     local source_path="$layer2_config_dir/$layer2_file"
     local destination_path="/usr/src/app/schemas"
     __besman_echo_white "Copying layer2 config files"
     
-    cp "$layer2_config_dir/retail_1.1.0.yaml" "$source_path" || {
-        __besman_echo_red "Failed to copy retail yaml file"
-        return 1
-    }
+    if [[ -f $source_path ]];
+    then
+        __besman_echo_yellow "Found layer2 $source_path"
+    else
+        cp "$layer2_config_dir/retail_1.1.0.yaml" "$source_path" || {
+            __besman_echo_red "Failed to copy retail yaml file"
+            return 1
+        }
+    fi
+
     
     docker cp "$source_path" "bap-client:$destination_path" || {
         __besman_echo_red "Failed to copy config to bap-client"
@@ -191,6 +197,7 @@ function __besman_copy_layer2_config() {
         __besman_echo_red "Failed to copy config to bpp-client"
         return 1
     }
+    __besman_echo_white "Sleep for 10"
     sleep 10
     __besman_echo_white "Restarting containers"
     docker restart bap-client bap-network bpp-network bpp-client || {
