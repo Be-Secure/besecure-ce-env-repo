@@ -177,10 +177,9 @@ function __besman_copy_layer2_config() {
         }
     fi
 
-    __besman_echo_yellow "Using volume, copying layer2"
+    __besman_echo_yellow "Using volume, copying layer2 file"
 
-    docker run --rm -v bap_client_schemas_volume:$destination_path -v $source_path:/source/$layer2_file busybox cp /source/$layer2_file $destination_path
-
+    docker run --rm   -v bap_client_schemas_volume:$destination_path   -v $source_path:/source/$layer2_file  busybox cp /source/$layer2_file $destination_path
 
     # docker cp "$source_path" "bap-client:$destination_path" || {
     #     __besman_echo_red "Failed to copy config to bap-client"
