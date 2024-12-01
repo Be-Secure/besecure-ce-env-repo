@@ -177,26 +177,30 @@ function __besman_copy_layer2_config() {
         }
     fi
 
+    __besman_echo_yellow "Using volume, copying layer2"
+
+    docker run --rm -v bap_client_schemas_volume:$destination_path -v $source_path:/source/$layer2_file busybox cp /source/$layer2_file $destination_path
+
+
+    # docker cp "$source_path" "bap-client:$destination_path" || {
+    #     __besman_echo_red "Failed to copy config to bap-client"
+    #     return 1
+    # }
     
-    docker cp "$source_path" "bap-client:$destination_path" || {
-        __besman_echo_red "Failed to copy config to bap-client"
-        return 1
-    }
+    # docker cp "$source_path" "bap-network:$destination_path" || {
+    #     __besman_echo_red "Failed to copy config to bap-network"
+    #     return 1
+    # }
     
-    docker cp "$source_path" "bap-network:$destination_path" || {
-        __besman_echo_red "Failed to copy config to bap-network"
-        return 1
-    }
+    # docker cp "$source_path" "bpp-network:$destination_path" || {
+    #     __besman_echo_red "Failed to copy config to bpp-network"
+    #     return 1
+    # }
     
-    docker cp "$source_path" "bpp-network:$destination_path" || {
-        __besman_echo_red "Failed to copy config to bpp-network"
-        return 1
-    }
-    
-    docker cp "$source_path" "bpp-client:$destination_path" || {
-        __besman_echo_red "Failed to copy config to bpp-client"
-        return 1
-    }
+    # docker cp "$source_path" "bpp-client:$destination_path" || {
+    #     __besman_echo_red "Failed to copy config to bpp-client"
+    #     return 1
+    # }
     __besman_echo_white "Sleep for 10"
     sleep 10
     __besman_echo_white "Restarting containers"
