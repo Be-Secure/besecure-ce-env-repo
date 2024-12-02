@@ -204,7 +204,7 @@ function __besman_copy_layer2_config() {
     # docker cp "$source_path" "bpp-client:$destination_path" || {
     #     __besman_echo_red "Failed to copy config to bpp-client"
     #     return 1
-    # }
+    }
     __besman_echo_white "Sleep for 10"
     sleep 10
     __besman_echo_white "Restarting containers"
@@ -229,7 +229,7 @@ function __besman_install {
     __besman_install_buyer_app || return 1
     __besman_install_beckn_onix || return 1
     __besman_install_ossverse_network || return 1
-    __besman_copy_layer2_config || return 1
+    # __besman_copy_layer2_config || return 1
 }
 
 function __besman_uninstall {

@@ -38,7 +38,7 @@ BESMAN_BAP_ID: "bap-network"
 BESMAN_BAP_URI: "http://bap-network:5002"
 
 # BAP Client url, localhost if you are running in your local machine and public ip if you are running in a cloud VM.
-BESMAN_PROTOCOL_SERVER_URL: "http://13.233.84.135:5001"
+BESMAN_PROTOCOL_SERVER_URL: "http://localhost:5001"
 
 # beckn-onix source code
 BESMAN_BECKN_ONIX_SOURCE: "asa1997"
