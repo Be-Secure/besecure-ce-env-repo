@@ -221,7 +221,18 @@ function __besman_update_cors_and_config() {
     __besman_echo_white "Updating CORS and config"
 
     local seller_cors_file="$BESMAN_SELLER_APP_DIR/seller/app/config/environments/base/env.cors.js"
+    local seller_env_file="$BESMAN_SELLER_APP_DIR/seller/.env"
     local seller_api_config="$BESMAN_SELLER_APP_DIR/seller-app-api/lib/config/production_env_config.json"
+
+
+    if [[ -f $seller_env_file ]] 
+    then
+        sed -i "s|localhost|$BESMAN_IP_ADDRESS|g" "$seller_env_file"
+
+    else
+        __besman_echo_red "Seller env file not found"
+        return 1
+    fi
 
     [[ -f $seller_cors_file ]] && rm "$seller_cors_file"
     touch "$seller_cors_file"
