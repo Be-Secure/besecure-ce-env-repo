@@ -437,7 +437,7 @@ function __besman_install {
     __besman_install_buyer_app || return 1
     __besman_install_beckn_onix || return 1
     __besman_install_ossverse_network || return 1
-    __besman_copy_layer2_config || return 1
+    # __besman_copy_layer2_config || return 1
     __besman_install_seller_app || return 1
     # __besman_install_seller_ui || return 1 # TODO
 }
