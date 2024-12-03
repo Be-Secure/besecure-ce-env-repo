@@ -115,14 +115,25 @@ function __besman_install_docker_compose() {
 	else
 		__besman_echo_white "Docker Compose not found. Installing latest version..."
 
-		# Download the latest version of Docker Compose
-		sudo curl -L "https://github.com/docker/compose/releases/latest/$BESMAN_DOCKER_COMPOSE_VERSION/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+		# Download the latest version of Docker Compose directly from GitHub releases
+		sudo curl -L "https://github.com/docker/compose/releases/download/$BESMAN_DOCKER_COMPOSE_VERSION/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 
+		# check if operation successful
+		if [ $? -ne 0 ]; then
+			__besman_echo_red "Failed to download Docker Compose. Please check your docker compose version try again."
+			__besman_echo_yellow "Current version $BESMAN_DOCKER_COMPOSE_VERSION"
+			return 1
+		fi
 		# Apply executable permissions
 		sudo chmod +x /usr/local/bin/docker-compose
 
 		__besman_echo_yellow "Docker Compose installed successfully!"
 		docker-compose --version
+		if [ $? -ne 0 ]; then
+			__besman_echo_red "Failed to download Docker Compose. Please check your docker compose version try again."
+			__besman_echo_yellow "Current version $BESMAN_DOCKER_COMPOSE_VERSION"
+			return 1
+		fi
 	fi
 }
 
@@ -146,7 +157,6 @@ function __besman_install_beckn_onix() {
 
 function __besman_install_ossverse_network() {
 	# Running the third option in beckn-onix.sh(install file) which will install the entire network in your current machine.
-	local install_file="$BESMAN_BECKN_ONIX_DIR/install/beckn-onix.sh"
 	cd "$BESMAN_BECKN_ONIX_DIR/install" || return 1
 	echo "3" | ./beckn-onix.sh
 
