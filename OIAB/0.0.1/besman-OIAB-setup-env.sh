@@ -227,7 +227,7 @@ function __besman_update_cors_and_config() {
 
     if [[ -f $seller_env_file ]] 
     then
-        sed -i "s|OPENFORT_SELLER_APP=.*|OPENFORT_SELLER_APP=http://$BESMAN_IP_ADDRESS:3008|g" "$seller_env_file"
+        sed -i "s|OPENFORT_SELLER_APP=.*|OPENFORT_SELLER_APP=$BESMAN_IP_ADDRESS:3008|g" "$seller_env_file"
 
     else
         __besman_echo_red "Seller env file not found"
