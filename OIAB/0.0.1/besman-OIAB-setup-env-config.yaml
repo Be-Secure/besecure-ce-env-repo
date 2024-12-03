@@ -31,3 +31,34 @@ BESMAN_LAB_NAME: Be-Secure #***
 # Docker compose version to be used.
 BESMAN_DOCKER_COMPOSE_VERSION: "1.29.2"
 
+# Enter the BAP ID
+BESMAN_BAP_ID: "bap-network"
+
+# Enter the network url for bap
+BESMAN_BAP_URI: "http://bap-network:5002"
+
+# BAP Client url, localhost if you are running in your local machine and public ip if you are running in a cloud VM.
+# BESMAN_PROTOCOL_SERVER_URL: "http://localhost:5001"
+
+# BESMAN_BUYER_APP_URL: "htp://localhost:8000"
+
+# Public IP address of the machine/vm
+BESMAN_IP_ADDRESS: "http://localhost"
+
+# beckn-onix source code
+BESMAN_BECKN_ONIX_SOURCE: "asa1997"
+
+# repo for beckn-onix code
+BESMAN_BECKN_ONIX_SOURCE_REPO: "beckn-onix"
+
+# branch for beckn-onix code
+BESMAN_BECKN_ONIX_SOURCE_BRANCH: "dev"
+
+# location for beckn-onix code
+BESMAN_BECKN_ONIX_DIR: "$HOME/$BESMAN_BECKN_ONIX_SOURCE_REPO"
+
+# name for oasp-seller-app
+BESMAN_SELLER_APP_SOURCE_REPO: "oasp-seller-app"
+
+# location for oasp-seller-app
+BESMAN_SELLER_APP_DIR: "$HOME/oasp-seller-app"
