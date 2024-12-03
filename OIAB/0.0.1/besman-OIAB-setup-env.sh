@@ -72,8 +72,8 @@ function __besman_install_buyer_ui() {
 		__besman_echo_white "Updated nginx.conf port to 8001"
 	fi
 
-	docker build --build-arg VITE_API_BASE_URL="$BESMAN_IP_ADDRESS:8000" -t oiab-buyer-ui .
-	docker run -d --name oiab-buyer-ui -p 8001:8001 oiab-buyer-ui
+	sudo docker build --build-arg VITE_API_BASE_URL="$BESMAN_IP_ADDRESS:8000" -t oiab-buyer-ui .
+	sudo docker run -d --name oiab-buyer-ui -p 8001:8001 oiab-buyer-ui
 	cd "$HOME" || return 1
 
 }
@@ -102,7 +102,7 @@ function __besman_install_buyer_app() {
 
 	__besman_echo_white "Installing $BESMAN_OIAB_BUYER_APP"
 	__besman_echo_yellow "Building buyer app"
-	docker-compose up --build -d
+	sudo docker-compose up --build -d
 	cd "$HOME" || return 1
 }
 
@@ -424,7 +424,7 @@ function __besman_install_seller_app() {
 	__besman_update_cors_and_config || return 1
 
 	__besman_echo_white "Building seller app"
-	docker-compose up --build -d
+	sudo docker-compose up --build -d
 
 }
 
@@ -453,12 +453,12 @@ function __besman_uninstall {
 	__besman_echo_white "Stopping and removing Docker containers..."
 
 	# Stop and remove containers
-	docker stop $(docker ps -a -q)
-	docker container rm $(docker ps -a -q)
+	sudo docker stop $(docker ps -a -q)
+	sudo docker container rm $(docker ps -a -q)
 
 	__besman_echo_white "Removing Docker images and volumes..."
-	docker image rm $(docker image ls -q)
-	docker volume rm $(docker volume ls -q)
+	sudo docker image rm $(docker image ls -q)
+	sudo docker volume rm $(docker volume ls -q)
 
 	__besman_echo_white "Removing Docker and Docker Compose..."
 
@@ -470,9 +470,9 @@ function __besman_uninstall {
 	sudo apt-get autoremove -y
 
 	# Remove Docker files and directories
-	sudo rm -rf /var/lib/docker
-	sudo rm -rf /etc/docker
-	sudo rm -rf ~/.docker
+	# sudo rm -rf /var/lib/docker
+	# sudo rm -rf /etc/docker
+	# sudo rm -rf ~/.docker
 
 	# Remove Docker GPG key and repository
 	sudo rm -f /usr/share/keyrings/docker-archive-keyring.gpg
