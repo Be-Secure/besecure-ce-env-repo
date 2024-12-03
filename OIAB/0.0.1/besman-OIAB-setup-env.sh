@@ -38,7 +38,10 @@ function __besman_install_docker() {
 		sudo systemctl enable docker
 
 		# Add current user to docker group
+		sudo groupadd docker
 		sudo usermod -aG docker $USER
+		newgrp docker
+
 
 		__besman_echo_yellow "Docker installed successfully!"
 		docker --version
@@ -161,10 +164,10 @@ function __besman_install_ossverse_network() {
 	echo "3" | ./beckn-onix.sh
 
 	if [[ "$?" != "0" ]]; then
-		__besman_echo_red "Failed to install using Beckn Onix"
+		__besman_echo_red "Failed to install using OSSVerse Onix"
 		return 1
 	else
-		__besman_echo_green "Successfully installed the entire network using Beckn Onix"
+		__besman_echo_green "Successfully installed the entire network using OSSVerse Onix"
 		return 0
 	fi
 }
@@ -492,7 +495,7 @@ function __besman_uninstall {
 	# remove beckn-onix dir
 	if [[ -d $BESMAN_BECKN_ONIX_DIR ]]; then
 		rm -rf "$BESMAN_BECKN_ONIX_DIR"
-		__besman_echo_yellow "Removed beckn-onix directory"
+		__besman_echo_yellow "Removed OSSVerse-onix directory"
 	fi
 
 	# remove oasp-seller-app dir
