@@ -40,7 +40,7 @@ function __besman_install_docker() {
 		# Add current user to docker group
 		sudo groupadd docker
 		sudo usermod -aG docker $USER
-		newgrp docker
+		# newgrp docker
 
 
 		__besman_echo_yellow "Docker installed successfully!"
