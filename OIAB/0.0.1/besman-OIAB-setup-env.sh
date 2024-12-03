@@ -162,7 +162,7 @@ function __besman_install_ossverse_network() {
 function __besman_copy_layer2_config() {
 
     local layer2_config_dir="$BESMAN_BECKN_ONIX_DIR/layer2/samples"
-    local layer2_file="Software Assurance_1.0.0.yaml"
+    local layer2_file=Software\ Assurance_1.0.0.yaml
     local source_path="$layer2_config_dir/$layer2_file"
     local destination_path="/usr/src/app/schemas"
     __besman_echo_white "Copying layer2 config files"
@@ -177,34 +177,36 @@ function __besman_copy_layer2_config() {
         }
     fi
 
-    __besman_echo_yellow "Using volume, copying layer2 folder"
+    # __besman_echo_yellow "Using volume, copying layer2 folder"
 
-    docker run --rm \
-    -v bap_client_schemas_volume:$destination_path \
-    -v "$(dirname "$source_path"):/source" \
-    busybox cp "/source/$(basename "$source_path")" "$destination_path" || {
-        __besman_echo_red "Failed to copy layer2 file into the container"
+    # docker run --rm \
+    # -v bap_client_schemas_volume:$destination_path \
+    # -v "$(dirname "$source_path"):/source" \
+    # busybox cp "/source/$(basename "$source_path")" "$destination_path" || {
+    #     __besman_echo_red "Failed to copy layer2 file into the container"
+    #     return 1
+    # }
+
+    docker cp "$source_path" "bap-client:$destination_path" || {
+        __besman_echo_red "Failed to copy config to bap-client"
         return 1
-
-    # docker cp "$source_path" "bap-client:$destination_path" || {
-    #     __besman_echo_red "Failed to copy config to bap-client"
-    #     return 1
-    # }
-    
-    # docker cp "$source_path" "bap-network:$destination_path" || {
-    #     __besman_echo_red "Failed to copy config to bap-network"
-    #     return 1
-    # }
-    
-    # docker cp "$source_path" "bpp-network:$destination_path" || {
-    #     __besman_echo_red "Failed to copy config to bpp-network"
-    #     return 1
-    # }
-    
-    # docker cp "$source_path" "bpp-client:$destination_path" || {
-    #     __besman_echo_red "Failed to copy config to bpp-client"
-    #     return 1
     }
+    
+    docker cp "$source_path" "bap-network:$destination_path" || {
+        __besman_echo_red "Failed to copy config to bap-network"
+        return 1
+    }
+    
+    docker cp "$source_path" "bpp-network:$destination_path" || {
+        __besman_echo_red "Failed to copy config to bpp-network"
+        return 1
+    }
+    
+    docker cp "$source_path" "bpp-client:$destination_path" || {
+        __besman_echo_red "Failed to copy config to bpp-client"
+        return 1
+    }
+
     __besman_echo_white "Sleep for 10"
     sleep 10
     __besman_echo_white "Restarting containers"
@@ -435,7 +437,7 @@ function __besman_install {
     __besman_install_buyer_app || return 1
     __besman_install_beckn_onix || return 1
     __besman_install_ossverse_network || return 1
-    # __besman_copy_layer2_config || return 1
+    __besman_copy_layer2_config || return 1
     __besman_install_seller_app || return 1
     # __besman_install_seller_ui || return 1 # TODO
 }
