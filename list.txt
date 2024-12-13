@@ -55,3 +55,16 @@ Be-Secure/besecure-ce-env-repo/fossology-RT-env,0.0.1
 Be-Secure/besecure-ce-env-repo/sonarqube-RT-env,0.0.1
 Be-Secure/besecure-ce-env-repo/spdx-sbom-generator-RT-env,0.0.1
 Be-Secure/besecure-ce-env-repo/OSSverse-Buyer-App-setup-env,0.0.1
+Be-Secure/besecure-ce-env-repo/ms-sbom-tool-RT-env,0.0.1
+Be-Secure/besecure-ce-env-repo/oss-fuzz-RT-env,0.0.1
+Be-Secure/besecure-ce-env-repo/oss-fuzz-gen-RT-env,0.0.1
+Be-Secure/besecure-ce-env-repo/grimoirelab-RT-env,0.0.1
+Be-Secure/besecure-ce-env-repo/giskard-RT-env,0.0.1
+Be-Secure/besecure-ce-env-repo/instructlab-RT-env,0.0.1
+Be-Secure/besecure-ce-env-repo/beckn-onix-RT-env,0.0.1
+Be-Secure/besecure-ce-env-repo/seller-ui-RT-env,0.0.1
+Be-Secure/besecure-ce-env-repo/buyer-ui-RT-env,0.0.1
+Be-Secure/besecure-ce-env-repo/aifairness360-RT-env,0.0.1
+Be-Secure/besecure-ce-env-repo/bliman-RT-env,0.0.1
+Be-Secure/besecure-ce-env-repo/besman-RT-env,0.0.1
+Be-Secure/besecure-ce-env-repo/beslab-RT-env,0.0.1
