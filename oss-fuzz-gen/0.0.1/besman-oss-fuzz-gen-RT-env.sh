@@ -22,13 +22,156 @@ function __besman_install {
 
     fi
     # Please add the rest of the code here for installation
+
+    # ************************* env dependency *********************************
+
+    ## Name:docker
+    __besman_echo_white "Check if docker is installed or not"
+    if [ ! -x "$(command -v docker)" ]; then
+        __besman_echo_white "Docker is not installed. Installing Docker..."
+        __besman_echo_white "installing docker ..."
+        sudo apt update
+        sudo apt install -y ca-certificates curl software-properties-common
+        curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+        sudo add-apt-repository -y "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
+        sudo apt update
+        sudo apt install -y docker-ce docker-ce-cli containerd.io
+
+        # sudo groupadd -f docker
+        sudo usermod -aG docker $USER
+        sudo systemctl restart docker
+        # newgrp docker
+
+        #sudo su - $USER
+
+        # Check if Docker is successfully installed and running
+        if ! command -v docker &>/dev/null; then
+            __besman_echo_white "Docker installation failed or Docker is not available."
+        else
+            docker version
+        fi
+
+        __besman_echo_white "Docker installation is completed"
+    else
+        __besman_echo_white "Docker is already installed."
+    fi
+
+    ## Name:snap to use go
+    __besman_echo_white "check if snap is installed or not"
+    if ! [ -x "$(command -v snap)" ]; then
+        __besman_echo_white "installing snap ..."
+        sudo apt update
+        sudo apt install snapd
+    else
+        __besman_echo_white "snap is already available"
+    fi
+
+    ## Name:go to use criticality_score
+    __besman_echo_white "check if go is intalled or not"
+    if ! [ -x "$(command -v go)" ]; then
+        __besman_echo_white "installing go ..."
+        sudo snap install go --classic
+        export GOPATH=$HOME/go
+        export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
+    else
+        __besman_echo_white "go is already available"
+    fi
+
+    # ********************** Assessment tools ********************************
+
+    [[ ! -z $BESMAN_ASSESSMENT_TOOLS ]] && readarray -d ',' -t ASSESSMENT_TOOLS <<<"$BESMAN_ASSESSMENT_TOOLS"
+
+    if [ ! -z $ASSESSMENT_TOOLS ]; then
+        for tool in ${ASSESSMENT_TOOLS[*]}; do
+            if [[ $tool == *:* ]]; then
+                tool_name=${tool%%:*}    # Get the tool name
+                tool_version=${tool##*:} # Get the tool version
+            else
+                tool_name=$tool # Get the tool name
+                tool_version="" # No version specified
+            fi
+
+            __besman_echo_white "installling tool - $tool : version - $tool_version"
+
+            case $tool_name in
+            criticality_score)
+                __besman_echo_white "check for criticality_score"
+                if ! [ -x "$(command -v criticality_score)" ]; then
+                    __besman_echo_white "installing criticality_score ..."
+                    go install github.com/ossf/criticality_score/v2/cmd/criticality_score@latest
+                    __besman_echo_white "criticality_score is installed\n"
+                else
+                    __besman_echo_white "criticality_score is already available"
+                fi
+                ;;
+            sonarqube)
+                __besman_echo_white "Installing sonarqube..."
+                if [ "$(docker ps -aq -f name=sonarqube-$BESMAN_ARTIFACT_NAME)" ]; then
+                    # If a container exists, stop and remove it
+                    __besman_echo_white "Removing existing container 'sonarqube-$BESMAN_ARTIFACT_NAME'..."
+                    docker stop sonarqube-$BESMAN_ARTIFACT_NAME
+                    docker container rm --force sonarqube-$BESMAN_ARTIFACT_NAME
+                fi
+                # Create sonarqube-docker container
+                __besman_echo_white "creating sonarqube container for env - $BESMAN_ARTIFACT_NAME ..."
+                docker create --name sonarqube-$BESMAN_ARTIFACT_NAME -p 9000:9000 sonarqube
+                docker start sonarqube-$BESMAN_ARTIFACT_NAME
+
+                __besman_echo_white "sonarqube installation is done & $BESMAN_ARTIFACT_NAME container is up"
+                ;;
+            fossology)
+                __besman_echo_white "Installing fossology..."
+                __besman_echo_white "check for fossology-docker container"
+                if [ "$(docker ps -aq -f name=fossology-$BESMAN_ARTIFACT_NAME)" ]; then
+                    # If a container exists, stop and remove it
+                    __besman_echo_white "Removing existing container 'fossology-$BESMAN_ARTIFACT_NAME'..."
+                    docker stop fossology-$BESMAN_ARTIFACT_NAME
+                    docker container rm --force fossology-$BESMAN_ARTIFACT_NAME
+                fi
+
+                # Create fossology-docker container
+                __besman_echo_white "creating fossology container for env - $BESMAN_ARTIFACT_NAME ..."
+                docker create --name fossology-$BESMAN_ARTIFACT_NAME -p 8081:80 fossology/fossology
+                docker start fossology-$BESMAN_ARTIFACT_NAME
+
+                __besman_echo_white "fossology installation is done & $BESMAN_ARTIFACT_NAME container is up"
+                ;;
+            spdx-sbom-generator)
+                __besman_echo_white "Installing spdx-sbom-generator..."
+                __besman_echo_white "Installing spdx-sbom-generator from github ..."
+                # URL of the asset
+                __besman_echo_white "Asset URL - $BESMAN_SPDX_SBOM_ASSET_URL"
+                # Download the asset
+                __besman_echo_white "Downloading the asset ..."
+                curl -L -o $BESMAN_ARTIFACT_DIR/spdx-sbom-generator-v0.0.15-linux-amd64.tar.gz "$BESMAN_SPDX_SBOM_ASSET_URL"
+
+                # Check if the download was successful
+                if [ $? -eq 0 ]; then
+                    __besman_echo_white "Download completed successfully."
+
+                    # Extract the downloaded file
+                    __besman_echo_white "Extracting the asset..."
+                    cd $BESMAN_ARTIFACT_DIR
+                    tar -xzf spdx-sbom-generator-v0.0.15-linux-amd64.tar.gz
+                    __besman_echo_white "Extraction completed."
+                    cd -
+                else
+                    __besman_echo_white "Download failed."
+                fi
+
+                __besman_echo_white "spdx-sbom-generator installation is done."
+                ;;
+            *)
+                echo "No installation steps found for $tool_name."
+                ;;
+            esac
+        done
+        echo "bes assessment tools installation done"
+    fi
+
 }
 
-function __besman_uninstall
-{
-    __besman_check_for_trigger_playbook "$BESMAN_ARTIFACT_TRIGGER_PLAYBOOK_PATH/$BESMAN_ARTIFACT_TRIGGER_PLAYBOOK"
-    [[ "$?" -eq 1 ]] && __besman_create_ansible_playbook
-    __besman_run_ansible_playbook_extra_vars "$BESMAN_ARTIFACT_TRIGGER_PLAYBOOK_PATH/$BESMAN_ARTIFACT_TRIGGER_PLAYBOOK" "bes_command=remove role_path=$BESMAN_ANSIBLE_ROLES_PATH" || return 1
+function __besman_uninstall {
     if [[ -d $BESMAN_ARTIFACT_DIR ]]; then
         __besman_echo_white "Removing $BESMAN_ARTIFACT_DIR..."
         rm -rf "$BESMAN_ARTIFACT_DIR"
