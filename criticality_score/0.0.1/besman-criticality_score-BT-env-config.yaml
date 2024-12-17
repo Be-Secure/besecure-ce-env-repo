@@ -45,6 +45,6 @@ BESMAN_ASSESSMENT_DATASTORE_DIR: $HOME/besecure-assessment-datastore
 BESMAN_ASSESSMENT_DATASTORE_URL: https://github.com/Be-Secure/besecure-assessment-datastore
 
 # Add a comma seperated list of tools that needs to be installed to assess this project.
-BESMAN_ASSESSMENT_TOOLS: scorecard,criticality_score,sonarqube,spdx-sbom-generator
-
+BESMAN_ASSESSMENT_TOOLS: fossology,criticality_score,sonarqube,spdx-sbom-generator,scorecard
+BESMAN_SPDX_SBOM_ASSET_URL: https://github.com/opensbom-generator/spdx-sbom-generator/releases/download/v0.0.15/spdx-sbom-generator-v0.0.15-linux-amd64.tar.gz
 # 
