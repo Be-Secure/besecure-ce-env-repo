@@ -11,16 +11,16 @@
 BESMAN_ARTIFACT_TYPE: project
 
 # BESMAN_ARTIFACT_NAME - name of the artifact under assessment.
-BESMAN_ARTIFACT_NAME: BeSLab
+BESMAN_ARTIFACT_NAME: ScoreCard
 
 # Version of the artifact under assessment.
-BESMAN_ARTIFACT_VERSION: 0.2.2
+BESMAN_ARTIFACT_VERSION: 5.0.0
 
 # Source code url of the artifact under assessment.
-BESMAN_ARTIFACT_URL: https://github.com/Be-Secure/BeSLab
+BESMAN_ARTIFACT_URL: https://github.com/Be-Secure/ScoreCard
 
 # This variable stores the name of the environment file.
-BESMAN_ENV_NAME: BeSLab-RT-env
+BESMAN_ENV_NAME: ScoreCard-RT-env
 
 # The path where you wish to clone the source code of the artifact under assessment.
 # If you wish to change the clone path, provide the complete path.
