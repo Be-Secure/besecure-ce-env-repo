@@ -44,7 +44,11 @@ BESMAN_ASSESSMENT_DATASTORE_DIR: $HOME/besecure-assessment-datastore #***
 BESMAN_ASSESSMENT_DATASTORE_URL: https://github.com/Be-Secure/besecure-assessment-datastore #***
 
 # The path where we download the ansible role of the assessment tools and other utilities
+<<<<<<< HEAD
 #BESMAN_ANSIBLE_ROLES_PATH: $BESMAN_DIR/tmp/$BESMAN_ARTIFACT_NAME/roles #***
+=======
+BESMAN_ANSIBLE_ROLES_PATH: $BESMAN_DIR/tmp/$BESMAN_ARTIFACT_NAME/roles #***
+>>>>>>> upstream/develop
 
 # The list of tools you wish to install. The tools are installed using ansible roles.
 # To get the list of ansible roles run 
