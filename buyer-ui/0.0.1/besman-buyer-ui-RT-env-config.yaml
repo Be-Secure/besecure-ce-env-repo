@@ -13,13 +13,13 @@ BESMAN_ORG: Be-Secure #***
 BESMAN_ARTIFACT_TYPE: project #***
 
 # Name of the artifact under assessment.
-BESMAN_ARTIFACT_NAME: buyer-ui #***
+BESMAN_ARTIFACT_NAME: OSSVerse-Buyer-App-ui #***
 
 # Version of the artifact under assessment.
 BESMAN_ARTIFACT_VERSION: 0.1.0 #***
 
 # Source code url of the artifact under assessment.
-BESMAN_ARTIFACT_URL: https://github.com/Be-Secure/buyer-ui #***
+BESMAN_ARTIFACT_URL: https://github.com/OSSVerse/OSSVerse-Buyer-App-ui #***
 
 # This variable stores the name of the environment file.
 BESMAN_ENV_NAME: buyer-ui-RT-env #***

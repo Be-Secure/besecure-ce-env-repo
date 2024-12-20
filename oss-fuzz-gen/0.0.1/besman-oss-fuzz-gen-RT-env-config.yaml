@@ -16,7 +16,7 @@ BESMAN_ARTIFACT_TYPE: project #***
 BESMAN_ARTIFACT_NAME: oss-fuzz-gen #***
 
 # Version of the artifact under assessment.
-BESMAN_ARTIFACT_VERSION: v0.0.1 #***
+BESMAN_ARTIFACT_VERSION: 0.0.1 #***
 
 # Source code url of the artifact under assessment.
 BESMAN_ARTIFACT_URL: https://github.com/Be-Secure/oss-fuzz-gen #***

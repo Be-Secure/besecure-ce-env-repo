@@ -13,7 +13,7 @@ BESMAN_ARTIFACT_TYPE: project
 BESMAN_ARTIFACT_NAME: adversarial-robustness-toolbox
 
 # Version of the artifact under assessment.
-BESMAN_ARTIFACT_VERSION: 1.14.1
+BESMAN_ARTIFACT_VERSION: 1.18.2
 
 # Source code url of the artifact under assessment.
 BESMAN_ARTIFACT_URL: https://github.com/Be-Secure/adversarial-robustness-toolbox

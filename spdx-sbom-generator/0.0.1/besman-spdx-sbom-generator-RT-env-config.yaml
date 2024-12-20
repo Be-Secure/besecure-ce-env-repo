@@ -14,10 +14,10 @@ BESMAN_ORG: Be-Secure
 BESMAN_ARTIFACT_TYPE: project 
 
 # Name of the artifact under assessment.
-BESMAN_ARTIFACT_NAME: spdx-sbom-generot
+BESMAN_ARTIFACT_NAME: spdx-sbom-generator
 
 # Version of the artifact under assessment.
-BESMAN_ARTIFACT_VERSION: 2.0.2
+BESMAN_ARTIFACT_VERSION: 0.0.1
 
 # Source code url of the artifact under assessment.
 BESMAN_ARTIFACT_URL: https://github.com/Be-Secure/spdx-sbom-generator

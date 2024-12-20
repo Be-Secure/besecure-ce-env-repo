@@ -10,16 +10,16 @@
 BESMAN_ORG: Be-Secure #***
 
 # project/ml model/training dataset
-BESMAN_ARTIFACT_TYPE: #***
+BESMAN_ARTIFACT_TYPE: project #***
 
 # Name of the artifact under assessment.
-BESMAN_ARTIFACT_NAME: ms-sbom-tool #***
+BESMAN_ARTIFACT_NAME: sbom-tool  #***
 
 # Version of the artifact under assessment.
-BESMAN_ARTIFACT_VERSION: #***
+BESMAN_ARTIFACT_VERSION: 0.0.1 #***
 
 # Source code url of the artifact under assessment.
-BESMAN_ARTIFACT_URL: https://github.com/Be-Secure/ms-sbom-tool #***
+BESMAN_ARTIFACT_URL: https://github.com/Be-Secure/sbom-tool #***
 
 # This variable stores the name of the environment file.
 BESMAN_ENV_NAME: ms-sbom-tool-RT-env #***

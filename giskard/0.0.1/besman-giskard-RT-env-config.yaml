@@ -16,7 +16,7 @@ BESMAN_ARTIFACT_TYPE: project #***
 BESMAN_ARTIFACT_NAME: giskard #***
 
 # Version of the artifact under assessment.
-BESMAN_ARTIFACT_VERSION: v2.16.0 #***
+BESMAN_ARTIFACT_VERSION: 2.16.0 #***
 
 # Source code url of the artifact under assessment.
 BESMAN_ARTIFACT_URL: https://github.com/Be-Secure/giskard #***
