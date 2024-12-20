@@ -65,6 +65,8 @@ Be-Secure/besecure-ce-env-repo/beckn-onix-RT-env,0.0.1
 Be-Secure/besecure-ce-env-repo/seller-ui-RT-env,0.0.1
 Be-Secure/besecure-ce-env-repo/buyer-ui-RT-env,0.0.1
 Be-Secure/besecure-ce-env-repo/aifairness360-RT-env,0.0.1
+Be-Secure/besecure-ce-env-repo/AIX360-RT-env,0.0.1
+Be-Secure/besecure-ce-env-repo/lime-RT-env,0.0.1
 Be-Secure/besecure-ce-env-repo/bliman-RT-env,0.0.1
 Be-Secure/besecure-ce-env-repo/besman-RT-env,0.0.1
 Be-Secure/besecure-ce-env-repo/beslab-RT-env,0.0.1
