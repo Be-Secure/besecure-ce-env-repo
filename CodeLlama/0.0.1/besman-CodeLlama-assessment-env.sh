@@ -67,6 +67,7 @@ function __besman_uninstall {
     __besman_echo_green "Uninstallation completed successfully"
     [[ -d ~/.venvs/codeshield_env ]] && rm -rf ~/.venvs/codeshield_env
     [[ -d ~/.venvs/cyberseceval ]] && rm -rf ~/.venvs/cyberseceval
+    cd $HOME
 
 }
 
