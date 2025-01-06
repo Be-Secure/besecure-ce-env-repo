@@ -29,7 +29,7 @@ BESMAN_ENV_NAME: CodeLlama-assessment-env #***
 # BESMAN_ARTIFACT_DIR: $HOME/$BESMAN_ARTIFACT_NAME #***
 
 # The path where we download the assessment and other required tools during installation.
-BESMAN_TOOL_PATH: /etc/PurpleLlama #***
+BESMAN_TOOL_PATH: /tmp/PurpleLlama #***
 
 # This variable indicates the individual's lab affiliation
 BESMAN_LAB_TYPE: Organization #***
