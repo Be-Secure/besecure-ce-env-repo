@@ -35,6 +35,7 @@ function __besman_install {
     [[ $? -ne 0 ]] && __besman_echo_red "Failed to install codeshield" && return 1
     __besman_echo_no_colour ""
     __besman_echo_green "codeshield installed successfully"
+    deactivate
 
 }
 
@@ -64,6 +65,8 @@ function __besman_uninstall {
     __besman_echo_green "$BESMAN_TOOL_PATH removed successfully"
     __besman_echo_no_colour ""
     __besman_echo_green "Uninstallation completed successfully"
+    [[ -d ~/.venvs/codeshield_env ]] && rm -rf ~/.venvs/codeshield_env
+    [[ -d ~/.venvs/cyberseceval ]] && rm -rf ~/.venvs/cyberseceval
 
 }
 
