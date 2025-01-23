@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 function __besman_install {
 
     __besman_check_vcs_exist || return 1 # Checks if GitHub CLI is present or not.
@@ -14,7 +13,6 @@ function __besman_install {
         cd "$BESMAN_ARTIFACT_DIR" && git checkout -b "$BESMAN_ARTIFACT_VERSION"_tavoss "$BESMAN_ARTIFACT_VERSION"
         cd "$HOME"
     fi
-
 
     if [[ -d $BESMAN_ASSESSMENT_DATASTORE_DIR ]]; then
         __besman_echo_white "Assessment datastore found at $BESMAN_ASSESSMENT_DATASTORE_DIR"
@@ -77,6 +75,36 @@ function __besman_install {
         export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
     else
         __besman_echo_white "go is already available"
+    fi
+
+    ## Name:CycloneDX SBOM prerequisites - NPM
+    __besman_echo_white "Checking if Node.js is installed..."
+    if ! command -v node &>/dev/null; then
+        __besman_echo_white "Node.js is not installed. Installing Node.js and npm..."
+
+        # Update package index
+        sudo apt update -y
+
+        # Install Node.js and npm
+        curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+        sudo apt install -y nodejs
+
+        # Verify installation
+        if command -v node &>/dev/null && command -v npm &>/dev/null; then
+            __besman_echo_white "Node.js and npm installed successfully."
+        else
+            __besman_echo_yellow "Failed to install Node.js and npm."
+            exit 1
+        fi
+    else
+        __besman_echo_white "Node.js is already installed. Version: $(node -v)"
+        __besman_echo_white "Checking npm..."
+        if ! command -v npm &>/dev/null; then
+            __besman_echo_yellow "npm is not installed. Installing npm..."
+            sudo apt install -y npm
+        else
+            __besman_echo_white "npm is already installed. Version: $(npm -v)"
+        fi
     fi
 
     # ********************** Assessment tools ********************************
@@ -163,6 +191,23 @@ function __besman_install {
 
                 __besman_echo_white "spdx-sbom-generator installation is done."
                 ;;
+            cyclonedx-sbom-generator)
+                __besman_echo_white "Checking if cdxgen is already installed..."
+                if ! which cdxgen >/dev/null; then
+                    __besman_echo_white "cdxgen not found. Installing cyclonedx-sbom-generator..."
+                    sudo npm install -g @cyclonedx/cdxgen
+                    __besman_echo_white "moving cdxgen to /opt folder"
+                    sudo cp /usr/bin/cdxgen /opt/cyclonedx-sbom-generator
+                else
+                    if [ ! -f /opt/cyclonedx-sbom-generator ]; then
+                        sudo cp /usr/bin/cdxgen /opt/cyclonedx-sbom-generator
+                        __besman_echo_white "cdxgen is already installed, moved to /opt folder"
+                    else
+                        __besman_echo_white "cdxgen is already installed, skipping installation."
+                    fi
+
+                fi
+                ;;
             *)
                 echo "No installation steps found for $tool_name."
                 ;;
@@ -182,45 +227,98 @@ function __besman_uninstall {
     fi
 
     # Please add the rest of the code here for uninstallation
+    if [ ! -z $ASSESSMENT_TOOLS ]; then
+        for tool in ${ASSESSMENT_TOOLS[*]}; do
+            if [[ $tool == *:* ]]; then
+                tool_name=${tool%%:*}    # Get the tool name
+                tool_version=${tool##*:} # Get the tool version
+            else
+                tool_name=$tool # Get the tool name
+                tool_version="" # No version specified
+            fi
 
-    # check criticality_score
-    if command -v criticality_score &>/dev/null; then
-        __besman_echo_white "Removing criticality_score..."
-        # Remove criticality_score
-        sudo rm -rf $GOPATH/bin/criticality_score
-        sudo apt update
-        __besman_echo_white "criticality_score removed successfully."
-    fi
+            __besman_echo_white "Uninstallling tool - $tool : version - $tool_version"
 
-    # Check go
-    if command -v go &>/dev/null; then
-        __besman_echo_white "Removing go..."
-        # Remove go
-        sudo snap remove go -y
-        __besman_echo_white "Go removed successfully."
+            case $tool_name in
+            criticality_score)
+                __besman_echo_white "check for criticality_score"
+                if [ -x "$(command -v criticality_score)" ]; then
+                    __besman_echo_white "uninstalling criticality_score ..."
+
+                    [[ -f $GOPATH/bin/criticality_score ]] && rm -rf $GOPATH/bin/criticality_score
+
+                    __besman_echo_white "criticality_score is uninstalled\n"
+                else
+                    __besman_echo_white "criticality_score is not installed"
+                fi
+                ;;
+            sonarqube)
+                __besman_echo_white "Uninstalling sonarqube..."
+                if [ "$(docker ps -aq -f name=sonarqube-$BESMAN_ARTIFACT_NAME)" ]; then
+                    # If a container exists, stop and remove it
+                    __besman_echo_white "Removing existing container 'sonarqube-$BESMAN_ARTIFACT_NAME'..."
+                    docker stop sonarqube-$BESMAN_ARTIFACT_NAME
+                    docker container rm --force sonarqube-$BESMAN_ARTIFACT_NAME
+                fi
+                __besman_echo_white "sonarqube uninstallation is done"
+                ;;
+            fossology)
+                __besman_echo_white "Uninstalling fossology..."
+                __besman_echo_white "check for fossology-docker container"
+                if [ "$(docker ps -aq -f name=fossology-$BESMAN_ARTIFACT_NAME)" ]; then
+                    # If a container exists, stop and remove it
+                    __besman_echo_white "Removing existing container 'fossology-$BESMAN_ARTIFACT_NAME'..."
+                    docker stop fossology-$BESMAN_ARTIFACT_NAME
+                    docker container rm --force fossology-$BESMAN_ARTIFACT_NAME
+                fi
+                __besman_echo_white "fossology uninstallation is done"
+                ;;
+            spdx-sbom-generator)
+                __besman_echo_white "Uninstalling spdx-sbom-generator..."
+
+                # Remove the specific tar.gz file if it exists
+                if [[ -f $BESMAN_ARTIFACT_DIR/spdx-sbom-generator-v0.0.15-linux-amd64.tar.gz ]]; then
+                    rm -f "$BESMAN_ARTIFACT_DIR/spdx-sbom-generator-v0.0.15-linux-amd64.tar.gz"
+                    __besman_echo_white "Removed spdx-sbom-generator-v0.0.15-linux-amd64.tar.gz file."
+                else
+                    __besman_echo_white "spdx-sbom-generator-v0.0.15-linux-amd64.tar.gz file not found."
+                fi
+
+                # Remove the extracted directory (matching any version)
+                if [[ -d $BESMAN_ARTIFACT_DIR/spdx-sbom-generator* ]]; then
+                    rm -rf "$BESMAN_ARTIFACT_DIR/spdx-sbom-generator*"
+                    __besman_echo_white "Removed spdx-sbom-generator directory."
+                else
+                    __besman_echo_white "Directory not found."
+                fi
+
+                __besman_echo_white "spdx-sbom-generator uninstallation is done."
+                ;;
+            cyclonedx-sbom-generator)
+                __besman_echo_white "Checking if cdxgen is installed before uninstalling..."
+                if which cdxgen >/dev/null; then
+                    __besman_echo_white "cdxgen is installed. Proceeding with uninstallation..."
+                    sudo npm uninstall -g @cyclonedx/cdxgen
+                    sudo npm cache clean --force
+                    __besman_echo_white "cdxgen has been successfully uninstalled."
+
+                else
+                    __besman_echo_white "cdxgen is not installed. Skipping uninstallation."
+                fi
+                if [ -f /opt/cyclonedx-sbom-generator ]; then
+                    sudo rm -rf /opt/cyclonedx-sbom-generator
+                fi
+                ;;
+            *)
+                echo "No uninstallation steps found for $tool_name."
+                ;;
+            esac
+        done
+        echo "bes assessment tools uninstallation done"
     fi
 
     # check docker & containers
     if command -v docker &>/dev/null; then
-
-        # remove sonarqube container
-        __besman_echo_white "Un-installing sonarqube..."
-        __besman_echo_white "removing container ..."
-        if [ "$(docker ps -aq -f name=sonarqube-$BESMAN_ARTIFACT_DIR)" ]; then
-            docker stop sonarqube-$BESMAN_ARTIFACT_DIR
-            docker container rm --force sonarqube-$BESMAN_ARTIFACT_DIR
-
-            __besman_echo_white "Docker containers sonarqube-$BESMAN_ARTIFACT_DIR removed"
-        fi
-
-        # remove fossology container
-        __besman_echo_white "Un-installing fossology..."
-        __besman_echo_white "removing container ..."
-        if [ "$(docker ps -aq -f name=fossology-$BESMAN_ARTIFACT_DIR)" ]; then
-            docker stop fossology-$BESMAN_ARTIFACT_DIR
-            docker container rm --force fossology-$BESMAN_ARTIFACT_DIR
-            __besman_echo_white "Docker containers fossology-$BESMAN_ARTIFACT_DIR removed"
-        fi
 
         # Remove Docker Engine
         # Purge Docker packages and dependencies
@@ -241,6 +339,22 @@ function __besman_uninstall {
 
         sudo apt update
         echo "Docker removed successfully"
+
+    fi
+
+    # Check go
+    if command -v go &>/dev/null; then
+        __besman_echo_white "Removing go..."
+        # Remove go
+        sudo snap remove go -y
+        __besman_echo_white "Go removed successfully."
+    fi
+
+    # Check Node & NPM
+    if command -v node &>/dev/null; then
+        __besman_echo_white "Removing Node & NPM"
+        sudo apt purge -y nodejs npm
+        rm -rf ~/.npm
 
     fi
 
@@ -301,6 +415,26 @@ function __besman_validate {
             validationStatus=0
             errors+=("Docker container - fossology-$BESMAN_ARTIFACT_NAME is missing")
         fi
+    fi
+
+    # Validate CycloneDX-SBOM-Generation installation
+    if ! which cdxgen >/dev/null; then
+        __besman_echo_white "CycloneDX is not installed."
+        validationStatus=0
+        errors+=("CycloneDX is missing")
+    else
+        if [ ! -f /opt/cyclonedx-sbom-generator ]; then
+            __besman_echo_white "CycloneDX is installed but executable is not present in /opt directory."
+        else
+            __besman_echo_white "CycloneDX is properly installed and executable is present in /opt directory."
+        fi
+    fi
+
+    # validate Node & npm installation
+    if ! command -v npm &>/dev/null; then
+        __besman_echo_white "npm is not installed."
+        validationStatus=0
+        errors+=("npm is missing")
     fi
 
     # validate snap installation

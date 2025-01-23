@@ -96,6 +96,37 @@ function __besman_install {
         __besman_echo_white "go is already available"
     fi
 
+    ## Name:CycloneDX SBOM prerequisites - NPM
+    __besman_echo_white "Checking if Node.js is installed..."
+    if ! command -v node &>/dev/null; then
+        __besman_echo_white "Node.js is not installed. Installing Node.js and npm..."
+
+        # Update package index
+        sudo apt update -y
+
+        # Install Node.js and npm
+        curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+        sudo apt install -y nodejs
+
+        # Verify installation
+        if command -v node &>/dev/null && command -v npm &>/dev/null; then
+            __besman_echo_white "Node.js and npm installed successfully."
+        else
+            __besman_echo_yellow "Failed to install Node.js and npm."
+            exit 1
+        fi
+    else
+        __besman_echo_white "Node.js is already installed. Version: $(node -v)"
+        __besman_echo_white "Checking npm..."
+        if ! command -v npm &>/dev/null; then
+            __besman_echo_yellow "npm is not installed. Installing npm..."
+            sudo apt install -y npm
+        else
+            __besman_echo_white "npm is already installed. Version: $(npm -v)"
+        fi
+    fi
+    
+
     # ********************** Assessment tools ********************************
 
     [[ ! -z $BESMAN_ASSESSMENT_TOOLS ]] && readarray -d ',' -t ASSESSMENT_TOOLS <<<"$BESMAN_ASSESSMENT_TOOLS"
@@ -180,6 +211,23 @@ function __besman_install {
 
                 __besman_echo_white "spdx-sbom-generator installation is done."
                 ;;
+            cyclonedx-sbom-generator)
+                __besman_echo_white "Checking if cdxgen is already installed..."
+                if ! which cdxgen >/dev/null; then
+                    __besman_echo_white "cdxgen not found. Installing cyclonedx-sbom-generator..."
+                    sudo npm install -g @cyclonedx/cdxgen
+                    __besman_echo_white "moving cdxgen to /opt folder"
+                    sudo cp /usr/bin/cdxgen /opt/cyclonedx-sbom-generator
+                else
+                    if [ ! -f /opt/cyclonedx-sbom-generator ]; then
+                        sudo cp /usr/bin/cdxgen /opt/cyclonedx-sbom-generator
+                        __besman_echo_white "cdxgen is already installed, moved to /opt folder"
+                    else
+                        __besman_echo_white "cdxgen is already installed, skipping installation."
+                    fi
+
+                fi
+                ;;
             *)
                 echo "No installation steps found for $tool_name."
                 ;;
@@ -206,8 +254,7 @@ function __besman_uninstall {
         __besman_echo_yellow "Could not find dir $BESMAN_ARTIFACT_DIR"
     fi
 
-    # Please add the rest of the code here for uninstallation
-
+   # Please add the rest of the code here for uninstallation
     if [ ! -z $ASSESSMENT_TOOLS ]; then
         for tool in ${ASSESSMENT_TOOLS[*]}; do
             if [[ $tool == *:* ]]; then
@@ -225,9 +272,8 @@ function __besman_uninstall {
                 __besman_echo_white "check for criticality_score"
                 if [ -x "$(command -v criticality_score)" ]; then
                     __besman_echo_white "uninstalling criticality_score ..."
-                    go install github.com/ossf/criticality_score/v2/cmd/criticality_score@none
 
-		    [[ -f $GOPATH/bin/criticality_score ]] && rm -rf $GOPATH/bin/criticality_score
+                    [[ -f $GOPATH/bin/criticality_score ]] && rm -rf $GOPATH/bin/criticality_score
 
                     __besman_echo_white "criticality_score is uninstalled\n"
                 else
@@ -257,15 +303,39 @@ function __besman_uninstall {
                 ;;
             spdx-sbom-generator)
                 __besman_echo_white "Uninstalling spdx-sbom-generator..."
-                # URL of the asset
-                __besman_echo_white "Asset URL - $BESMAN_SPDX_SBOM_ASSET_URL"
-                # Download the asset
-                __besman_echo_white "Downloading the asset ..."
-                curl -L -o $BESMAN_ARTIFACT_DIR/spdx-sbom-generator-v0.0.15-linux-amd64.tar.gz "$BESMAN_SPDX_SBOM_ASSET_URL"
-                [[ -f $BESMAN_ARTIFACT_DIR/spdx-sbom-generator-v0.0.15-linux-amd64.tar.gz]] && rm -f $BESMAN_ARTIFACT_DIR/spdx-sbom-generator-v0.0.15-linux-amd64.tar.gz
-                [[ -d $BESMAN_ARTIFACT_DIR/spdx-sbom-generator* ]] && rm -rf $BESMAN_ARTIFACT_DIR/spdx-sbom-generator*
+
+                # Remove the specific tar.gz file if it exists
+                if [[ -f $BESMAN_ARTIFACT_DIR/spdx-sbom-generator-v0.0.15-linux-amd64.tar.gz ]]; then
+                    rm -f "$BESMAN_ARTIFACT_DIR/spdx-sbom-generator-v0.0.15-linux-amd64.tar.gz"
+                    __besman_echo_white "Removed spdx-sbom-generator-v0.0.15-linux-amd64.tar.gz file."
+                else
+                    __besman_echo_white "spdx-sbom-generator-v0.0.15-linux-amd64.tar.gz file not found."
+                fi
+
+                # Remove the extracted directory (matching any version)
+                if [[ -d $BESMAN_ARTIFACT_DIR/spdx-sbom-generator* ]]; then
+                    rm -rf "$BESMAN_ARTIFACT_DIR/spdx-sbom-generator*"
+                    __besman_echo_white "Removed spdx-sbom-generator directory."
+                else
+                    __besman_echo_white "Directory not found."
+                fi
 
                 __besman_echo_white "spdx-sbom-generator uninstallation is done."
+                ;;
+            cyclonedx-sbom-generator)
+                __besman_echo_white "Checking if cdxgen is installed before uninstalling..."
+                if which cdxgen >/dev/null; then
+                    __besman_echo_white "cdxgen is installed. Proceeding with uninstallation..."
+                    sudo npm uninstall -g @cyclonedx/cdxgen
+                    sudo npm cache clean --force
+                    __besman_echo_white "cdxgen has been successfully uninstalled."
+
+                else
+                    __besman_echo_white "cdxgen is not installed. Skipping uninstallation."
+                fi
+                if [ -f /opt/cyclonedx-sbom-generator ]; then
+                    sudo rm -rf /opt/cyclonedx-sbom-generator
+                fi
                 ;;
             *)
                 echo "No uninstallation steps found for $tool_name."
@@ -300,6 +370,22 @@ function __besman_uninstall {
 
     fi
 
+    # Check go
+    if command -v go &>/dev/null; then
+        __besman_echo_white "Removing go..."
+        # Remove go
+        sudo snap remove go -y
+        __besman_echo_white "Go removed successfully."
+    fi
+
+    # Check Node & NPM
+    if command -v node &>/dev/null; then
+        __besman_echo_white "Removing Node & NPM"
+        sudo apt purge -y nodejs npm
+        rm -rf ~/.npm
+
+    fi
+
     # Check if pip is installed
     if command -v pip3 &>/dev/null; then
         __besman_echo_white "Uninstalling pip..."
@@ -328,9 +414,8 @@ function __besman_uninstall {
 }
 
 function __besman_update {
-
     # Please add the rest of the code here for update
-    __besman_echo_white "update"
+     __besman_echo_white "update"
 
 }
 
@@ -382,6 +467,26 @@ function __besman_validate {
         fi
     fi
 
+    # Validate CycloneDX-SBOM-Generation installation
+    if ! which cdxgen >/dev/null; then
+        __besman_echo_white "CycloneDX is not installed."
+        validationStatus=0
+        errors+=("CycloneDX is missing")
+    else
+        if [ ! -f /opt/cyclonedx-sbom-generator ]; then
+            __besman_echo_white "CycloneDX is installed but executable is not present in /opt directory."
+        else
+            __besman_echo_white "CycloneDX is properly installed and executable is present in /opt directory."
+        fi
+    fi
+
+    # validate Node & npm installation
+    if ! command -v npm &>/dev/null; then
+        __besman_echo_white "npm is not installed."
+        validationStatus=0
+        errors+=("npm is missing")
+    fi
+    
     # validate snap installation
     if ! command -v snap &>/dev/null; then
         __besman_echo_white "snap is not installed."
