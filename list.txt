@@ -70,3 +70,4 @@ Be-Secure/besecure-ce-env-repo/lime-RT-env,0.0.1
 Be-Secure/besecure-ce-env-repo/bliman-RT-env,0.0.1
 Be-Secure/besecure-ce-env-repo/besman-RT-env,0.0.1
 Be-Secure/besecure-ce-env-repo/beslab-RT-env,0.0.1
+Be-Secure/besecure-ce-env-repo/fairlearn-RT-env,0.0.1
