@@ -65,7 +65,7 @@ BESMAN_ASSESSMENT_DATASTORE_URL: https://github.com/Be-Secure/besecure-assessmen
 # Default value is false
 #BESMAN_DISPLAY_SKIPPED_ANSIBLE_HOSTS: false #***
 
-BESMAN_ASSESSMENT_TOOLS: criticality_score,sonarqube,fossology,spdx-sbom-generator
+BESMAN_ASSESSMENT_TOOLS: scorecard,criticality_score,sonarqube,fossology,spdx-sbom-generator,cyclonedx-sbom-generator
 
 # The default values of the ansible roles will be present in their respective repos.
 # You can go to https://github.com/Be-Secure/<repo of the ansible role>/blob/main/defaults/main.yml.

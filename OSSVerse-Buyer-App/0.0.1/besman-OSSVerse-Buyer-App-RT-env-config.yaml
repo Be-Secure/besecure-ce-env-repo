@@ -70,5 +70,5 @@ BESMAN_ASSESSMENT_DATASTORE_URL: https://github.com/Be-Secure/besecure-assessmen
 # Format is <variable name>: <value>
 # Eg: openjdk_version: 11
 
-BESMAN_ASSESSMENT_TOOLS: criticality_score,sonarqube,fossology,spdx-sbom-generator
+BESMAN_ASSESSMENT_TOOLS: scorecard,criticality_score,sonarqube,spdx-sbom-generator,fossology,cyclonedx-sbom-generator
 BESMAN_SPDX_SBOM_ASSET_URL: https://github.com/opensbom-generator/spdx-sbom-generator/releases/download/v0.0.15/spdx-sbom-generator-v0.0.15-linux-amd64.tar.gz
