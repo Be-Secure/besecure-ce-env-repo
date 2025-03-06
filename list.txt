@@ -72,3 +72,4 @@ Be-Secure/besecure-ce-env-repo/besman-RT-env,0.0.1
 Be-Secure/besecure-ce-env-repo/beslab-RT-env,0.0.1
 Be-Secure/besecure-ce-env-repo/fairlearn-RT-env,0.0.1
 Be-Secure/besecure-ce-env-repo/scorecard-RT-env,0.0.1
+Be-Secure/besecure-ce-env-repo/shell_gpt-RT-env,0.0.1
