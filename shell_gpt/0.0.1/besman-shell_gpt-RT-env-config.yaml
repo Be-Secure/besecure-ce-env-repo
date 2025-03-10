@@ -1,0 +1,49 @@
+# If you wish to update the default configuration values, copy this file and place it under your home dir, under the same name.
+# These variables are used to drive the installation of the environment script.
+# The variables that start with BESMAN_ are converted to environment vars.
+# If you wish to add any other vars that should be used globally, add the var using the below format.
+# BESMAN_<var name>: <value>
+# If you are not using any particular value, remove it or comment it(#).
+#*** - These variables should not be removed, nor left empty.
+
+# Used to mention where you should clone the repo from, default value is Be-Secure
+BESMAN_ORG: Be-Secure
+
+# Project/ML model/training dataset
+BESMAN_ARTIFACT_TYPE: project
+
+# Name of artifact under assessment.
+BESMAN_ARTIFACT_NAME: shell_gpt
+
+# Version of artifact under assessment.
+BESMAN_ARTIFACT_VERSION: 1.4.4
+
+# Source code URL of artifact under assessment.
+BESMAN_ARTIFACT_URL: https://github.com/Be-Secure/shell_gpt
+
+# Name of environment.
+BESMAN_ENV_NAME: shell_gpt-RT-env
+
+# Path to clone source code of artifact under assessment.
+BESMAN_ARTIFACT_DIR: $HOME/$BESMAN_ARTIFACT_NAME
+
+# Path to download assessment and other required tools during installation.
+BESMAN_TOOL_PATH: /opt
+
+# Organization/lab/individual.
+BESMAN_LAB_TYPE: Organization
+
+# Name of lab owner. Default is Be-Secure.
+BESMAN_LAB_NAME: Be-Secure
+
+# Local dir to store assessment reports. Default is home.
+BESMAN_ASSESSMENT_DATASTORE_DIR: $HOME/besecure-assessment-datastore
+
+# Remote repo to store assessment reports.
+BESMAN_ASSESSMENT_DATASTORE_URL: https://github.com/Be-Secure/besecure-assessment-datastore
+
+# Add a comma-separated list of tools that needs to be installed to assess this project.
+BESMAN_ASSESSMENT_TOOLS: scorecard,criticality_score,sonarqube,spdx-sbom-generator,fossology,cyclonedx-sbom-generator
+
+# SPDX SBOM Asset URL
+BESMAN_SPDX_SBOM_ASSET_URL: https://github.com/opensbom-generator/spdx-sbom-generator/releases/download/v0.0.15/spdx-sbom-generator-v0.0.15-linux-amd64.tar.gz

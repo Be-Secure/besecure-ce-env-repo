@@ -3110,8 +3110,7 @@
                 "status": "Success",
                 "timestamp": "2025-01-02T15:28:56"
             },
-            "compatible_playbooks": [
-            ]
+            "compatible_playbooks": []
         },
         {
             "name": "bloom-assessment-env",
@@ -3131,8 +3130,7 @@
                 "status": "Success",
                 "timestamp": "2025-01-02T15:28:56"
             },
-            "compatible_playbooks": [
-            ]
+            "compatible_playbooks": []
         },
         {
             "name": "Falcon3-assessment-env",
@@ -3152,7 +3150,51 @@
                 "status": "Success",
                 "timestamp": "2025-01-02T15:28:56"
             },
+            "compatible_playbooks": []
+        },
+        {
+            "name": "shell_gpt-RT-env",
+            "version": {
+                "tag": "1.4.4",
+                "release_date": ""
+            },
+            "author": {
+                "name": "Be-Secure",
+                "type": "Organization"
+            },
+            "date_of_creation": "2025-03-06T18:30:34",
+            "last_update_date": "2025-03-06T18:30:34",
+            "last_execution": {
+                "name": "Be-Secure",
+                "type": "Organization",
+                "status": "Success",
+                "timestamp": "2025-03-06T18:30:34"
+            },
             "compatible_playbooks": [
+                {
+                    "name": "criticality_score",
+                    "version": [
+                        "0.0.1"
+                    ]
+                },
+                {
+                    "name": "sonarqube",
+                    "version": [
+                        "0.0.1"
+                    ]
+                },
+                {
+                    "name": "scorecard",
+                    "version": [
+                        "0.0.1"
+                    ]
+                },
+                {
+                    "name": "spdx-sbom-generator",
+                    "version": [
+                        "0.0.1"
+                    ]
+                }
             ]
         }
     ]
