@@ -3155,7 +3155,7 @@
         {
             "name": "shell_gpt-RT-env",
             "version": {
-                "tag": "1.4.4",
+                "tag": "0.0.1",
                 "release_date": ""
             },
             "author": {
