@@ -1,0 +1,49 @@
+---
+# If you wish to update the default configuration values, copy this file and place it under your home dir, under the same name.
+# These variables are used to drive the installation of the environment script.
+# The variables that start with BESMAN_ are converted to environment vars.
+# If you wish to add any other vars that should be used globally, add the var using the below format.
+# BESMAN_<var name>: <value>
+# If you are not using any particular value, remove it or comment it(#).
+#*** - These variables should not be removed, nor left empty.
+
+BESMAN_ORG: "Be-Secure"
+
+# project/model/training dataset
+BESMAN_ARTIFACT_TYPE: model
+
+# BESMAN_ARTIFACT_NAME - name of the artifact under assessment.
+BESMAN_ARTIFACT_NAME:bloom #***
+
+# Version of the artifact under assessment.
+# BESMAN_ARTIFACT_VERSION: #***
+
+# Source code url of the artifact under assessment.
+BESMAN_ARTIFACT_URL: https://huggingface.co/tiiuae/Falcon3-10B-Instruc #***
+
+# This variable stores the name of the environment file.
+BESMAN_ENV_NAME: CodeLlama-assessment-env #***
+
+# The path where you wish to clone the source code of the artifact under assessment.
+# If you wish to change the clone path, provide the complete path.
+# BESMAN_ARTIFACT_DIR: $HOME/$BESMAN_ARTIFACT_NAME #***
+
+# The path where we download the assessment and other required tools during installation.
+BESMAN_TOOL_PATH: /tmp/PurpleLlama #***
+
+# This variable indicates the individual's lab affiliation
+BESMAN_LAB_TYPE: Organization #***
+
+# Name of the lab. Default is Be-Secure. This variable indicates the individual's lab affiliation
+BESMAN_LAB_NAME: Be-Secure #***
+
+# This is the local dir where we store the assessment reports. Default is home.
+BESMAN_ASSESSMENT_DATASTORE_DIR: $HOME/besecure-ml-assessment-datastore #***
+
+# The remote repo where we store the assessment reports.
+BESMAN_ASSESSMENT_DATASTORE_URL: https://github.com/Be-Secure/besecure-ml-assessment-datastore #***
+
+
+BESMAN_CYBERSECEVAL_DATASETS: "$BESMAN_TOOL_PATH/CybersecurityBenchmarks/datasets"
+
+

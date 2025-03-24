@@ -15,7 +15,7 @@ BESMAN_ARTIFACT_TYPE: project
 BESMAN_ARTIFACT_NAME: opencti
 
 # Version of artifact under assessment.
-BESMAN_ARTIFACT_VERSION: 5.12.29
+BESMAN_ARTIFACT_VERSION: 6.3.1
 
 # Source code url of artifact under assessment.
 BESMAN_ARTIFACT_URL: https://github.com/Be-Secure/opencti
@@ -25,7 +25,7 @@ BESMAN_ENV_NAME: opencti-RT-env
 
 # Path to clone source code of artifact under assessment.
 # If you wish to change the clone path, provide the complete path.
-BESMAN_ARTIFACT_DIR: $HOME/CRS_Work/temp/$BESMAN_ARTIFACT_NAME
+BESMAN_ARTIFACT_DIR: $HOME/$BESMAN_ARTIFACT_NAME
 
 # Path to download assessment and other required tools during installation.
 BESMAN_TOOL_PATH: /opt
@@ -37,26 +37,31 @@ BESMAN_LAB_TYPE: Organization
 BESMAN_LAB_NAME: Be-Secure
 
 # Local dir to store assessment reports. Default is home.
-BESMAN_ASSESSMENT_DATASTORE_DIR: $HOME/CRS_Work/temp/besecure-assessment-datastore
+BESMAN_ASSESSMENT_DATASTORE_DIR: $HOME/besecure-assessment-datastore
 
 # Remote repo to store assessment reports.
 BESMAN_ASSESSMENT_DATASTORE_URL: https://github.com/Be-Secure/besecure-assessment-datastore
 
 # Path to download ansible role of assessment tools and other utilities
-BESMAN_ANSIBLE_ROLES_PATH: $BESMAN_DIR/tmp/$BESMAN_ARTIFACT_NAME/roles
+#BESMAN_ANSIBLE_ROLES_PATH: $BESMAN_DIR/tmp/$BESMAN_ARTIFACT_NAME/roles
 
 # List of tools to install. Tools are installed using ansible roles.# To get the list of ansible roles run 
 #   $ bes list --role
 # add the roles here. format - <Github id>/<repo name>,<Github id>/<repo name>,<Github id>/<repo name>,...
-BESMAN_ANSIBLE_ROLES: Be-Secure/ansible-role-oah-maven
+#BESMAN_ANSIBLE_ROLES: Be-Secure/ansible-role-oah-maven
 
 # Path of the playbook with which we run the ansible roles.
 # Default path is ~/.besman/tmp/<artifact name dir>/
-BESMAN_ARTIFACT_TRIGGER_PLAYBOOK_PATH: $BESMAN_DIR/tmp/$BESMAN_ARTIFACT_NAME
+#BESMAN_ARTIFACT_TRIGGER_PLAYBOOK_PATH: $BESMAN_DIR/tmp/$BESMAN_ARTIFACT_NAME
 
 # Name of trigger playbook which runs the ansible roles.
-BESMAN_ARTIFACT_TRIGGER_PLAYBOOK: besman-$BESMAN_ARTIFACT_NAME-RT-trigger-playbook.yaml
+#BESMAN_ARTIFACT_TRIGGER_PLAYBOOK: besman-$BESMAN_ARTIFACT_NAME-RT-trigger-playbook.yaml
 
 # Display all the skipped steps, set it to true.
 # Default value is false
-BESMAN_DISPLAY_SKIPPED_ANSIBLE_HOSTS: false
+#BESMAN_DISPLAY_SKIPPED_ANSIBLE_HOSTS: false
+
+# Add a comma seperated list of tools that needs to be installed to assess this project.
+BESMAN_ASSESSMENT_TOOLS: scorecard,criticality_score,sonarqube,spdx-sbom-generator,fossology,cyclonedx-sbom-generator
+BESMAN_SPDX_SBOM_ASSET_URL: https://github.com/opensbom-generator/spdx-sbom-generator/releases/download/v0.0.15/spdx-sbom-generator-v0.0.15-linux-amd64.tar.gz
+
