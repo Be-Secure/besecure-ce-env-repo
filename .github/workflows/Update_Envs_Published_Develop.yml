@@ -36,7 +36,7 @@ jobs:
           git fetch origin develop
           git checkout develop
           git pull origin develop
-        if: env.IS_CODE_OWNER='true'
+        if: env.IS_CODE_OWNER == 'true'
         
       - name: generate-table
         run: |
@@ -52,7 +52,7 @@ jobs:
           done
           awk '/## Available Envs/{flag=1;print;getline;while($0!~"^##"&&flag){getline}flag=0}flag{next}1' Environments.md temp.md > Env.new && mv Env.new Environments.md
 
-        if: env.IS_CODE_OWNER='true'
+        if: env.IS_CODE_OWNER == 'true'
         
       - name: Commit
         run: |
@@ -62,5 +62,5 @@ jobs:
             git commit -a -m "Updated the env table"
             git push origin HEAD
           fi
-        if: env.IS_CODE_OWNER='true'
+        if: env.IS_CODE_OWNER == 'true'
   
