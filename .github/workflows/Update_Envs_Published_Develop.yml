@@ -1,10 +1,10 @@
 on:
-  #push:
-  #  branches:
-  #    - master
-  pull_request:
+  push:
     branches:
-      - master
+      - develop
+  #pull_request:
+  #  branches:
+  #    - develop
   workflow_dispatch:
 
 permissions:
