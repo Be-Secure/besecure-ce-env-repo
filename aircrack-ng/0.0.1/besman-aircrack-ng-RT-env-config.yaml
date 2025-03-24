@@ -1,0 +1,12 @@
+tools:
+  - semgrep
+  - codeql
+  - bandit
+  - findsecbugs
+  - owasp
+  - syft
+  - grype
+  - trivy
+  - cyclonedx-cli
+  - scancode-toolkit
+  - spdx-tool

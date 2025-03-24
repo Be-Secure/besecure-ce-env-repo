@@ -1,0 +1,73 @@
+---
+# If you wish to update the default configuration values, copy this file and place it under your home dir, under the same name.
+# These variables are used to drive the installation of the environment script.
+# The variables that start with BESMAN_ are converted to environment vars.
+# If you wish to add any other vars that should be used globally, add the var using the below format.
+# BESMAN_<var name>: <value>
+# If you are not using any particular value, remove it or comment it(#).
+#*** - These variables should not be removed, nor left empty.
+
+# BESMAN_ORG - Organization to clone the repo from
+BESMAN_ORG: Be-Secure #***
+
+# BESMAN_ARTIFACT_TYPE - project/ml model/training dataset
+BESMAN_ARTIFACT_TYPE: project # project/ml model/training dataset #***
+
+# BESMAN_ARTIFACT_NAME - Name of the artifact under assessment.
+BESMAN_ARTIFACT_NAME: nmap #***
+
+# BESMAN_ARTIFACT_VERSION - Version of the artifact under assessment.
+BESMAN_ARTIFACT_VERSION: 7.92 #***
+
+# BESMAN_ARTIFACT_URL - Source code URL of the artifact under assessment.
+BESMAN_ARTIFACT_URL: https://github.com/nmap/nmap #***
+
+# BESMAN_ENV_NAME - Name of the environment file.
+BESMAN_ENV_NAME: nmap-RT-env #***
+
+# BESMAN_ARTIFACT_DIR - Path to clone the source code of the artifact.
+BESMAN_ARTIFACT_DIR: $HOME/$BESMAN_ARTIFACT_NAME #***
+
+# BESMAN_TOOL_PATH - Path where assessment and required tools are downloaded.
+BESMAN_TOOL_PATH: /opt #***
+
+# BESMAN_LAB_TYPE - Organization/lab/individual.
+BESMAN_LAB_TYPE: Organization #***
+
+# BESMAN_LAB_NAME - Name of the owner of the lab. Default is Be-Secure.
+BESMAN_LAB_NAME: Be-Secure #***
+
+# BESMAN_ASSESSMENT_DATASTORE_DIR - Local directory to store assessment reports.
+BESMAN_ASSESSMENT_DATASTORE_DIR: $HOME/besecure-assessment-datastore #***
+
+# BESMAN_ASSESSMENT_DATASTORE_URL - Remote repository to store assessment reports.
+BESMAN_ASSESSMENT_DATASTORE_URL: https://github.com/Be-Secure/besecure-assessment-datastore #***
+
+# BESMAN_ANSIBLE_ROLES_PATH - Path where ansible roles of assessment tools are downloaded.
+BESMAN_ANSIBLE_ROLES_PATH: $BESMAN_DIR/tmp/$BESMAN_ARTIFACT_NAME/roles #***
+
+# BESMAN_ASSESSMENT_TOOLS - List of assessment tools with their repository URLs.
+BESMAN_ASSESSMENT_TOOLS:
+  spdx-sbom-generator: https://github.com/spdx/spdx-sbom-generator.git
+  sonarqube: https://github.com/SonarSource/sonarqube.git
+  snyk: https://github.com/snyk/cli.git
+  fossology: https://github.com/fossology/fossology.git
+  CodeQL: https://github.com/github/codeql.git
+  Trivy: https://github.com/aquasecurity/trivy.git
+
+# BESMAN_ANSIBLE_ROLES - Ansible roles for tools installation.
+BESMAN_ANSIBLE_ROLES: Be-Secure/ansible-role-oah-criticality_score,Be-Secure/ansible-role-oah-docker,Be-Secure/ansible-role-oah-sonarQube,Be-Secure/ansible-role-oah-fossology,Be-Secure/ansible-role-oah-sbomGenerator #***
+
+# BESMAN_ARTIFACT_TRIGGER_PLAYBOOK_PATH - Path of the ansible playbook that runs the roles.
+BESMAN_ARTIFACT_TRIGGER_PLAYBOOK_PATH: $BESMAN_DIR/tmp/$BESMAN_ARTIFACT_NAME #***
+
+# BESMAN_ARTIFACT_TRIGGER_PLAYBOOK - Name of the trigger playbook.
+BESMAN_ARTIFACT_TRIGGER_PLAYBOOK: besman-$BESMAN_ARTIFACT_NAME-RT-trigger-playbook.yaml #***
+
+# BESMAN_DISPLAY_SKIPPED_ANSIBLE_HOSTS - Display skipped steps in ansible roles execution.
+BESMAN_DISPLAY_SKIPPED_ANSIBLE_HOSTS: false #***
+
+# The default values of the ansible roles will be present in their respective repos.
+# To modify default values, copy from the respective ansible role repository and paste below.
+# Format: <variable name>: <value>
+# Eg: openjdk_version: 11
