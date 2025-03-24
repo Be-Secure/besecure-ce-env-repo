@@ -1,0 +1,66 @@
+on:
+  push:
+    branches:
+      - develop
+  #pull_request:
+  #  branches:
+  #    - develop
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-envs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout-Repositry
+        uses: actions/checkout@v4
+        with:
+          ref: develop
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Check Author
+        id: check_author
+        run: |
+          AUTHOR_EMAIL=$(git log -1 --pretty=format:'%ae')
+          CODE_OWNERS=("anisingla111@gmail.com" "harimohanan@wipro.com")
+          if [[ " $CODE_WONERS[@] " =~ " $AUTHOR_EMAIl " ]];then
+             echo "IS_CODE_OWNER=true" >> $GITHUB_ENV 
+          else
+             echo "IS_CODE_OWNER=false" >> $GITHUB_ENV
+          fi
+      
+      - name: Checkout develop branch latest
+        run: |
+          git fetch origin develop
+          git checkout develop
+          git pull origin develop
+        if: env.IS_CODE_OWNER == 'true'
+        
+      - name: generate-table
+        run: |
+          echo "## Available Envs" > temp.md
+          echo "" >> temp.md
+          echo "| Enviroment Name | Status |" >> temp.md
+          echo "|-----------------|--------|" >> temp.md
+          for dir in $(find . -maxdepth 1 -type d ! -name '.*' | sort ); do
+            folder_name=$(basename "$dir")
+            if [ "$folder_name" != "." ];then
+              echo "| \`$folder_name\` | Published |" >> temp.md
+            fi
+          done
+          awk '/## Available Envs/{flag=1;print;getline;while($0!~"^##"&&flag){getline}flag=0}flag{next}1' Environments.md temp.md > Env.new && mv Env.new Environments.md
+
+        if: env.IS_CODE_OWNER == 'true'
+        
+      - name: Commit
+        run: |
+          if ! git diff --quiet; then
+            git config --global user.name "github-actions"
+            git config --global user.email "github-actions@github.com"
+            git commit -a -m "Updated the env table"
+            git push origin HEAD
+          fi
+        if: env.IS_CODE_OWNER == 'true'
+  
