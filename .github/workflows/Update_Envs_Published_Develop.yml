@@ -24,10 +24,12 @@ jobs:
         id: check_author
         run: |
           AUTHOR_EMAIL=$(git log -1 --pretty=format:'%ae')
-          CODE_OWNERS=("anisingla111@gmail.com" "harimohanan@wipro.com")
+          CODE_OWNERS=("anilsingla111@gmail.com" "harimohanan@wipro.com")
           if [[ " $CODE_WONERS[@] " =~ " $AUTHOR_EMAIl " ]];then
+             echo "Author Email is $AUTHOR_EMAIl"
              echo "IS_CODE_OWNER=true" >> $GITHUB_ENV 
           else
+             echo "Author Email is $AUTHOR_EMAIL"
              echo "IS_CODE_OWNER=false" >> $GITHUB_ENV
           fi
       
