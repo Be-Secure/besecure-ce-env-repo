@@ -3196,6 +3196,28 @@
                     ]
                 }
             ]
+        },
+        {
+            "name": "DeepSeek-R1-assessment-env",
+            "version": {
+                "tag": "0.0.1",
+                "release_date": ""
+            },
+            "author": {
+                "name": "Be-Secure",
+                "type": "Organization"
+            },
+            "date_of_creation": "2025-03-18T21:10:15",
+            "last_update_date": "2025-03-18T21:10:15",
+            "last_execution": {
+                "name": "Be-Secure",
+                "type": "Organization",
+                "status": "Success",
+                "timestamp": "2025-03-18T21:10:15"
+            },
+            "compatible_playbooks": [
+                
+            ]
         }
     ]
 }
