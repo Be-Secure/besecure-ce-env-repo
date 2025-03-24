@@ -1,4 +1,7 @@
 on:
+  #push:
+  #  branches:
+  #    - master
   pull_request:
     branches:
       - develop
@@ -13,6 +16,14 @@ jobs:
     steps:
       - name: Checkout-Repositry
         uses: actions/checkout@v4
+        with:
+          ref: develop
+
+      - name: Checkout develop branch latest
+        run: |
+          git fetch origin develop
+          git checkout develop
+          git pull origin develop
 
       - name: generate-table
         run: |
@@ -33,8 +44,7 @@ jobs:
           if ! git diff --quiet; then
             git config --global user.name "github-actions"
             git config --global user.email "github-actions@github.com"
-            git add Environments.md
             git commit -a -m "Updated the env table"
-            git push origin HEAD:develop
+            git push origin HEAD
           fi
   
