@@ -20,6 +20,13 @@ jobs:
           ref: develop
           token: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Checkout Table repo
+        uses: actions/checkout@v4
+        with:
+          repository: Be-Secure/EPPLists
+          token: ${{ secrets.PAT_TOKEN }}
+          path: envs
+          
       - name: Check Author
         id: check_author
         run: |
@@ -53,11 +60,14 @@ jobs:
             fi
           done
           awk '/## Available Envs/{flag=1;print;getline;while($0!~"^##"&&flag){getline}flag=0}flag{next}1' Environments.md temp.md > Env.new && mv Env.new Environments.md
+          cd envs
+          cp -f ../Environments.md Environments.md 
 
         if: env.IS_CODE_OWNER == 'true'
         
       - name: Commit
         run: |
+          cd envs
           if ! git diff --quiet; then
             git config --global user.name "github-actions"
             git config --global user.email "github-actions@github.com"
