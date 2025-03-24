@@ -18,13 +18,26 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: develop
+          token: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Check Author
+        id: check_author
+        run: |
+          AUTHOR_EMAIL=$(git log -1 --pretty=format:'%ae')
+          CODE_OWNERS=("anisingla111@gmail.com" "harimohanan@wipro.com")
+          if [[ " $CODE_WONERS[@] " =~ " $AUTHOR_EMAIl " ]];then
+             echo "IS_CODE_OWNER=true" >> $GITHUB_ENV 
+          else
+             echo "IS_CODE_OWNER=false" >> $GITHUB_ENV
+          fi
+      
       - name: Checkout develop branch latest
         run: |
           git fetch origin develop
           git checkout develop
           git pull origin develop
-
+        if: env.IS_CODE_OWNER='true'
+        
       - name: generate-table
         run: |
           echo "## Available Envs" > temp.md
@@ -37,8 +50,10 @@ jobs:
               echo "| \`$folder_name\` | Published |" >> temp.md
             fi
           done
-
           awk '/## Available Envs/{flag=1;print;getline;while($0!~"^##"&&flag){getline}flag=0}flag{next}1' Environments.md temp.md > Env.new && mv Env.new Environments.md
+
+        if: env.IS_CODE_OWNER='true'
+        
       - name: Commit
         run: |
           if ! git diff --quiet; then
@@ -47,4 +62,5 @@ jobs:
             git commit -a -m "Updated the env table"
             git push origin HEAD
           fi
+        if: env.IS_CODE_OWNER='true'
   
