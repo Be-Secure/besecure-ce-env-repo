@@ -23,7 +23,7 @@ jobs:
       - name: Checkout Table repo
         uses: actions/checkout@v4
         with:
-          repository: Be-Secure/EPPLists
+          repository: Be-Secure/BeSCommunityLabEPPCandidates
           token: ${{ secrets.PAT_TOKEN }}
           path: envs
           
@@ -51,17 +51,19 @@ jobs:
         run: |
           echo "## Available Envs" > temp.md
           echo "" >> temp.md
-          echo "| Enviroment Name | Status |" >> temp.md
-          echo "|-----------------|--------|" >> temp.md
+          echo "| Sr No | Environment Name | Status |" >> temp.md
+          echo "|-------|-----------------|--------|" >> temp.md
+          i=0
           for dir in $(find . -maxdepth 1 -type d ! -name '.*' | sort ); do
             folder_name=$(basename "$dir")
             if [ "$folder_name" != "." ];then
-              echo "| \`$folder_name\` | Published |" >> temp.md
+              echo "| \`$1\` | \`$folder_name\` | Published |" >> temp.md
             fi
+            i=$((i+1))
           done
-          awk '/## Available Envs/{flag=1;print;getline;while($0!~"^##"&&flag){getline}flag=0}flag{next}1' Environments.md temp.md > Env.new && mv Env.new Environments.md
+          awk '/## Available Envs/{flag=1;print;getline;while($0!~"^##"&&flag){getline}flag=0}flag{next}1' BeSEnvironments.md temp.md > Env.new && cp -f Env.new BeSEnvironments.md
           cd envs
-          cp -f ../Environments.md Environments.md 
+          cp -f ../BeSEnvironments.md BeSEnvironments.md 
 
         if: env.IS_CODE_OWNER == 'true'
         
