@@ -51,13 +51,22 @@ jobs:
         run: |
           echo "## Available Envs" > temp.md
           echo "" >> temp.md
-          echo "| Sr No | Environment Name | Status |" >> temp.md
-          echo "|-------|-----------------|--------|" >> temp.md
+          echo "| Sr No | Environment Name | File Name |" >> temp.md
+          echo "|-------|------------------|-----------|" >> temp.md
           i=0
-          for dir in $(find . -maxdepth 1 -type d ! -name '.*' | sort ); do
+          for dir in $(find . -type d ! -name '.*' | sort ); do
             folder_name=$(basename "$dir")
-            if [ "$folder_name" != "." ];then
-              echo "| \`$i\` | \`$folder_name\` | Published |" >> temp.md
+            if [ "$folder_name" != "." ]; then
+               j=0
+               for file in $(find "$dir" -maxdepth 1 -type f | sort ); do
+                file_name=$(basename "$file")
+                if [ "$j" == "0" ];then
+                   echo "| $i | \`$folder_name\` | |" >> temp.md
+                else
+                   echo "| $i.$j | | \`$file_name\` |" >> temp.md   
+                fi
+                j=$((j+1))
+              done
             fi
             i=$((i+1))
           done
