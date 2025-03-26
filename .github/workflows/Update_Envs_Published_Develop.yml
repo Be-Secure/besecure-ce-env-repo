@@ -61,9 +61,9 @@ jobs:
             fi
             i=$((i+1))
           done
-          awk '/## Available Envs/{flag=1;print;getline;while($0!~"^##"&&flag){getline}flag=0}flag{next}1' BeSEnvironments.md temp.md > Env.new && cp -f Env.new BeSEnvironments.md
+          awk '/## Available Envs/{flag=1;print;getline;while($0!~"^##"&&flag){getline}flag=0}flag{next}1' Environments.md temp.md > Env.new && cp -f Env.new Environments.md
           cd envs
-          cp -f ../BeSEnvironments.md BeSEnvironments.md 
+          cp -f ../Environments.md BeSEnvironments.md 
 
         if: env.IS_CODE_OWNER == 'true'
         
