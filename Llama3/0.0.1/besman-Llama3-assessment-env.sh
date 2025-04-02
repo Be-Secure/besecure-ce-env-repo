@@ -19,7 +19,7 @@ function __besman_install {
 
     __besman_echo_white "Installing Cybersecurity Benchmarks..."
     python3 -m venv ~/.venvs/cyberseceval
-    source ~/.venvs/cyberseceval/bin/activate
+    source ~/.venvs/CybersecurityBenchmarks/bin/activate
     cd "$BESMAN_TOOL_PATH" || { __besman_echo_red "Could not move to $BESMAN_TOOL_PATH" && return 1; }
     git checkout "$BESMAN_TOOL_BRANCH"
     pip3 install -r CybersecurityBenchmarks/requirements.txt

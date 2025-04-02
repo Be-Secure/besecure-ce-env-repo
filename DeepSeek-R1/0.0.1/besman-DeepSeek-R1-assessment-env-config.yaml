@@ -23,6 +23,7 @@ BESMAN_ARTIFACT_URL: https://ollama.com/library/deepseek-r1 #***
 
 # This variable stores the name of the environment file.
 BESMAN_ENV_NAME: DeepSeek-R1-assessment-env #***
+BESMAN_TOOL_BRANCH: "Be-Secure"
 
 # The path where you wish to clone the source code of the artifact under assessment.
 # If you wish to change the clone path, provide the complete path.
