@@ -3196,6 +3196,78 @@
                     ]
                 }
             ]
+        },
+        {
+            "name": "gemma3LLM1b-RT-env",
+            "version": {
+                "tag": "0.0.1",
+                "release_date": ""
+            },
+            "author": {
+                "name": "Be-Secure",
+                "type": "Organization"
+            },
+            "date_of_creation": "2025-04-02T17:57:22",
+            "last_update_date": "2025-04-02T17:57:22",
+            "last_execution": {
+                "name": "Be-Secure",
+                "type": "Organization",
+                "status": "Success",
+                "timestamp": "2025-04-02T17:57:22"
+            },
+            "compatible_playbooks": [
+                {
+                    "name": "counterfit",
+                    "version": [
+                        "0.0.1"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "openbas-RT-env",
+            "version": {
+                "tag": "0.0.1",
+                "release_date": ""
+            },
+            "author": {
+                "name": "Be-Secure",
+                "type": "Organization"
+            },
+            "date_of_creation": "2025-04-02T18:10:48",
+            "last_update_date": "2025-04-02T18:10:48",
+            "last_execution": {
+                "name": "Be-Secure",
+                "type": "Organization",
+                "status": "Success",
+                "timestamp": "2025-04-02T18:10:48"
+            },
+            "compatible_playbooks": [
+                {
+                    "name": "sonarqube",
+                    "version": [
+                        "0.0.1"
+                    ]
+                },
+                {
+                    "name": "scorecard",
+                    "version": [
+                        "0.0.1"
+                    ]
+                },
+                {
+                    "name": "criticality_score",
+                    "version": [
+                        "0.0.1"
+                    ]
+                },
+                {
+                    "name": "spdx-sbom-generator",
+                    "version": [
+                        "0.0.1"
+                    ]
+                }
+            ]
         }
     ]
 }
