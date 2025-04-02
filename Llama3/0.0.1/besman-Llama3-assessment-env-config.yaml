@@ -31,6 +31,8 @@ BESMAN_ENV_NAME: Llama3-assessment-env #***
 # The path where we download the assessment and other required tools during installation.
 BESMAN_TOOL_PATH: /tmp/PurpleLlama #***
 
+BESMAN_TOOL_BRANCH: "Be-Secure"
+
 # This variable indicates the individual's lab affiliation
 BESMAN_LAB_TYPE: Organization #***
 

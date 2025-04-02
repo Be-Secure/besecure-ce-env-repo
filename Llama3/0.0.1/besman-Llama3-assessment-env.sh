@@ -21,6 +21,7 @@ function __besman_install {
     python3 -m venv ~/.venvs/cyberseceval
     source ~/.venvs/cyberseceval/bin/activate
     cd "$BESMAN_TOOL_PATH" || { __besman_echo_red "Could not move to $BESMAN_TOOL_PATH" && return 1; }
+    git checkout "$BESMAN_TOOL_BRANCH"
     pip3 install -r CybersecurityBenchmarks/requirements.txt
     python3 -m pip install transformers torch boto3
     [[ $? -ne 0 ]] && __besman_echo_red "Failed to install CybersecurityBenchmarks" && return 1
