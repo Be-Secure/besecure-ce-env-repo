@@ -16,7 +16,7 @@ function __besman_install {
     fi
 
     __besman_repo_clone "$BESMAN_ORG" "PurpleLlama" "$BESMAN_TOOL_PATH" || return 1
-    sudo apt install python3-venv -y
+
     __besman_echo_white "Installing Cybersecurity Benchmarks..."
     python3 -m venv ~/.venvs/CybersecurityBenchmarks
     source ~/.venvs/CybersecurityBenchmarks/bin/activate
@@ -24,7 +24,6 @@ function __besman_install {
     git checkout "$BESMAN_TOOL_BRANCH"
     pip3 install -r CybersecurityBenchmarks/requirements.txt
     python3 -m pip install transformers torch boto3
-    git 
     [[ $? -ne 0 ]] && __besman_echo_red "Failed to install CybersecurityBenchmarks" && return 1
     deactivate
     __besman_echo_no_colour ""
@@ -43,8 +42,8 @@ function __besman_install {
     # Installing ollama
     __besman_echo_white "Installing ollama..."
     if [[ -z $(which ollama) ]]; then
-        # Placeholder for actual ollama installation command.
-        curl -sSL https://ollama.com/install | bash
+        curl -fsSL https://ollama.com/install.sh | sh
+        
         if [[ $? -ne 0 ]]; then
             __besman_echo_red "ollama installation failed" && return 1
         fi
@@ -59,7 +58,7 @@ function __besman_uninstall {
     __besman_echo_white "Uninstalling CybersecurityBenchmarks..."
     source ~/.venvs/CybersecurityBenchmarks/bin/activate
     cd "$BESMAN_TOOL_PATH" || { __besman_echo_red "Could not move to $BESMAN_TOOL_PATH" && return 1; }
-    pip3 uninstall -y CybersecurityBenchmarks
+    pip3 uninstall -y -r CybersecurityBenchmarks/requirements.txt
     [[ $? -ne 0 ]] && __besman_echo_red "Failed to uninstall CybersecurityBenchmarks" && return 1
     deactivate
     __besman_echo_no_colour ""
