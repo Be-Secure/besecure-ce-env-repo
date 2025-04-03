@@ -42,8 +42,8 @@ function __besman_install {
     # Installing ollama
     __besman_echo_white "Installing ollama..."
     if [[ -z $(which ollama) ]]; then
-        # Placeholder for actual ollama installation command.
-        curl -sSL https://ollama.com/install | bash
+        curl -fsSL https://ollama.com/install.sh | sh
+        
         if [[ $? -ne 0 ]]; then
             __besman_echo_red "ollama installation failed" && return 1
         fi
