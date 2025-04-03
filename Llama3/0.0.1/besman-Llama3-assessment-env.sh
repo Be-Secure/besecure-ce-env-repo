@@ -18,7 +18,7 @@ function __besman_install {
     __besman_repo_clone "$BESMAN_ORG" "PurpleLlama" "$BESMAN_TOOL_PATH" || return 1
 
     __besman_echo_white "Installing Cybersecurity Benchmarks..."
-    python3 -m venv ~/.venvs/cyberseceval
+    python3 -m venv ~/.venvs/CybersecurityBenchmarks
     source ~/.venvs/CybersecurityBenchmarks/bin/activate
     cd "$BESMAN_TOOL_PATH" || { __besman_echo_red "Could not move to $BESMAN_TOOL_PATH" && return 1; }
     git checkout "$BESMAN_TOOL_BRANCH"
@@ -56,9 +56,9 @@ function __besman_install {
 function __besman_uninstall {
 
     __besman_echo_white "Uninstalling CybersecurityBenchmarks..."
-    source ~/.venvs/cyberseceval/bin/activate
+    source ~/.venvs/CybersecurityBenchmarks/bin/activate
     cd "$BESMAN_TOOL_PATH" || { __besman_echo_red "Could not move to $BESMAN_TOOL_PATH" && return 1; }
-    pip3 uninstall -y CybersecurityBenchmarks
+    pip3 uninstall -y -r CybersecurityBenchmarks/requirements.txt
     [[ $? -ne 0 ]] && __besman_echo_red "Failed to uninstall CybersecurityBenchmarks" && return 1
     deactivate
     __besman_echo_no_colour ""
@@ -95,7 +95,7 @@ function __besman_uninstall {
     __besman_echo_no_colour ""
     __besman_echo_green "Uninstallation completed successfully"
     [[ -d ~/.venvs/codeshield_env ]] && rm -rf ~/.venvs/codeshield_env
-    [[ -d ~/.venvs/cyberseceval ]] && rm -rf ~/.venvs/cyberseceval
+    [[ -d ~/.venvs/CybersecurityBenchmarks ]] && rm -rf ~/.venvs/CybersecurityBenchmarks
     cd "$HOME"
 }
 
@@ -129,7 +129,7 @@ function __besman_validate {
     fi
 
     # Validate CybersecurityBenchmarks venv folder
-    if [[ ! -d ~/.venvs/cyberseceval ]]; then
+    if [[ ! -d ~/.venvs/CybersecurityBenchmarks ]]; then
         __besman_echo_red "CybersecurityBenchmarks venv folder missing." && return 1
     fi
 
