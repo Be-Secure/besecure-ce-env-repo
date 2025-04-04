@@ -7,7 +7,7 @@
 # If you are not using any particular value, remove it or comment it(#).
 #*** - These variables should not be removed, nor left empty.
 # used to mention where you should clone the repo from, default value is Be-Secure
-BESMAN_ORG: NeerajK007 #***
+BESMAN_ORG: Be-Secure #***
 
 # project/ml model/training dataset
 BESMAN_ARTIFACT_TYPE: model
@@ -44,7 +44,7 @@ BESMAN_LAB_NAME: Be-Secure #***
 BESMAN_ASSESSMENT_DATASTORE_DIR: $HOME/besecure-ml-assessment-datastore #***
 
 # The remote repo where we store the assessment reports.
-BESMAN_ASSESSMENT_DATASTORE_URL: https://github.com/NeerajK007/besecure-ml-assessment-datastore #***
+BESMAN_ASSESSMENT_DATASTORE_URL: https://github.com/Be-Secure/besecure-ml-assessment-datastore #***
 
 BESMAN_CYBERSECEVAL_DATASETS: "$BESMAN_TOOL_PATH/CybersecurityBenchmarks/datasets"
 
