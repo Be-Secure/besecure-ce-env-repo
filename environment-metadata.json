@@ -3198,7 +3198,7 @@
             ]
         },
         {
-            "name": "gemma3LLM1b-RT-env",
+            "name": "gemma3-llmSecurityBenchmark-RT-env",
             "version": {
                 "tag": "0.0.1",
                 "release_date": ""
