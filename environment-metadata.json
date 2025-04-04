@@ -3215,9 +3215,7 @@
                 "status": "Success",
                 "timestamp": "2025-03-18T21:10:15"
             },
-            "compatible_playbooks": [
-                
-            ]
+            "compatible_playbooks": []
         },
         {
             "name": "Llama3-assessment-env",
@@ -3237,8 +3235,84 @@
                 "status": "Success",
                 "timestamp": "2025-03-28T11:15:20"
             },
+            "compatible_playbooks": []
+        },
+        {
+            "name": "gemma3-llmSecurityBenchmark-env",
+            "version": {
+                "tag": "0.0.1",
+                "release_date": ""
+            },
+            "author": {
+                "name": "Be-Secure",
+                "type": "Organization"
+            },
+            "date_of_creation": "2025-04-02T17:57:22",
+            "last_update_date": "2025-04-02T17:57:22",
+            "last_execution": {
+                "name": "Be-Secure",
+                "type": "Organization",
+                "status": "Success",
+                "timestamp": "2025-04-02T17:57:22"
+            },
             "compatible_playbooks": [
-                
+                {
+                    "name": "counterfit",
+                    "version": [
+                        "0.0.1"
+                    ]
+                },
+                {
+                    "name": "llmSecurityBenchmark-frr",
+                    "version": [
+                        "0.0.1"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "openbas-RT-env",
+            "version": {
+                "tag": "0.0.1",
+                "release_date": ""
+            },
+            "author": {
+                "name": "Be-Secure",
+                "type": "Organization"
+            },
+            "date_of_creation": "2025-04-02T18:10:48",
+            "last_update_date": "2025-04-02T18:10:48",
+            "last_execution": {
+                "name": "Be-Secure",
+                "type": "Organization",
+                "status": "Success",
+                "timestamp": "2025-04-02T18:10:48"
+            },
+            "compatible_playbooks": [
+                {
+                    "name": "sonarqube",
+                    "version": [
+                        "0.0.1"
+                    ]
+                },
+                {
+                    "name": "scorecard",
+                    "version": [
+                        "0.0.1"
+                    ]
+                },
+                {
+                    "name": "criticality_score",
+                    "version": [
+                        "0.0.1"
+                    ]
+                },
+                {
+                    "name": "spdx-sbom-generator",
+                    "version": [
+                        "0.0.1"
+                    ]
+                }
             ]
         }
     ]
