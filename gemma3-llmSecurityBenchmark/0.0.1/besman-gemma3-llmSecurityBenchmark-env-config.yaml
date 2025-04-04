@@ -25,7 +25,7 @@ BESMAN_ARTIFACT_URL: https://ollama.com/library/gemma3:1b
 BESMAN_ARTIFACT_VERSION: 1b
 
 # This variable stores the name of the environment file.
-BESMAN_ENV_NAME: gemma3-llmSecurityBenchmark-RT-env #***
+BESMAN_ENV_NAME: gemma3-llmSecurityBenchmark-env #***
 
 # The path where you wish to clone the source code of the artifact under assessment.
 # If you wish to change the clone path, provide the complete path.

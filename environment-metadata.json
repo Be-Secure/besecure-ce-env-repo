@@ -3238,7 +3238,7 @@
             "compatible_playbooks": []
         },
         {
-            "name": "gemma3-llmSecurityBenchmark-RT-env",
+            "name": "gemma3-llmSecurityBenchmark-env",
             "version": {
                 "tag": "0.0.1",
                 "release_date": ""
