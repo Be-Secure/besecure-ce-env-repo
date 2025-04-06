@@ -3240,6 +3240,28 @@
             "compatible_playbooks": [
                 
             ]
+        },
+        {
+            "name": "LLMSafetyAssessment-env",
+            "version": {
+                "tag": "0.0.1",
+                "release_date": ""
+            },
+            "author": {
+                "name": "Be-Secure",
+                "type": "Organization"
+            },
+            "date_of_creation": "2025-04-06T21:29:56",
+            "last_update_date": "2025-04-06T21:29:56",
+            "last_execution": {
+                "name": "Be-Secure",
+                "type": "Organization",
+                "status": "Success",
+                "timestamp": "2025-04-06T21:29:56"
+            },
+            "compatible_playbooks": [
+                
+            ]
         }
     ]
 }
