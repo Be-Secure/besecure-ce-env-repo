@@ -45,8 +45,9 @@ BESMAN_ASSESSMENT_DATASTORE_DIR: $HOME/besecure-ml-assessment-datastore #***
 # The remote repo where we store the assessment reports.
 BESMAN_ASSESSMENT_DATASTORE_URL: https://github.com/Be-Secure/besecure-ml-assessment-datastore #***
 
+# Path to results and logs
+BESMAN_RESULTS_PATH: "$BESMAN_TOOL_PATH/CybersecurityBenchmarks/executions/$BESMAN_ARTIFACT_NAME:$BESMAN_ARTIFACT_VERSION"
+
 # Path to the dataset used for the assessment.
 BESMAN_CYBERSECEVAL_DATASETS: "$BESMAN_TOOL_PATH/CybersecurityBenchmarks/datasets"
 
-# Path to results and logs
-BESMAN_RESULTS_PATH: "$BESMAN_TOOL_PATH/CybersecurityBenchmarks/executions/$BESMAN_ARTIFACT_NAME:$BESMAN_ARTIFACT_VERSION"
