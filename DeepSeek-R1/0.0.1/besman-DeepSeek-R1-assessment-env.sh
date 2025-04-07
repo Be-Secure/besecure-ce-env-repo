@@ -24,9 +24,17 @@ function __besman_install {
     git checkout "$BESMAN_TOOL_BRANCH"
     pip3 install -r CybersecurityBenchmarks/requirements.txt
     python3 -m pip install transformers torch boto3
-    git 
     [[ $? -ne 0 ]] && __besman_echo_red "Failed to install CybersecurityBenchmarks" && return 1
     deactivate
+
+    if [[ -n "$BESMAN_RESULTS_PATH" ]] && [[ ! -d "$BESMAN_RESULTS_PATH" ]]; then
+        __besman_echo_white "Creating results directory at $BESMAN_RESULTS_PATH"
+        mkdir -p "$BESMAN_RESULTS_PATH"
+        
+    else
+        __besman_echo_white "Could not created Results directory. Check if path already exists."
+    fi
+
     __besman_echo_no_colour ""
     __besman_echo_green "CybersecurityBenchmarks installed successfully"
     __besman_echo_no_colour ""
@@ -44,7 +52,7 @@ function __besman_install {
     __besman_echo_white "Installing ollama..."
     if [[ -z $(which ollama) ]]; then
         # Placeholder for actual ollama installation command.
-        curl -sSL https://ollama.com/install | bash
+        curl -fsSL https://ollama.com/install.sh | sh
         if [[ $? -ne 0 ]]; then
             __besman_echo_red "ollama installation failed" && return 1
         fi

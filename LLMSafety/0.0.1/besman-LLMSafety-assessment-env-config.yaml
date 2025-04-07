@@ -13,17 +13,17 @@ BESMAN_ORG: "Be-Secure"
 BESMAN_ARTIFACT_TYPE: model
 
 # BESMAN_ARTIFACT_NAME - name of the artifact under assessment.
-BESMAN_ARTIFACT_NAME: DeepSeek-R1 #***
+BESMAN_ARTIFACT_NAME:  #***
 
 
-# Version of the artifact under assessment.
-BESMAN_ARTIFACT_VERSION: 7b
+# Version of the artifact under assessment/parameter size of model.
+BESMAN_ARTIFACT_VERSION: 
 
 # Source code url of the artifact under assessment.
 BESMAN_ARTIFACT_URL: https://ollama.com/library/deepseek-r1 #***
 
 # This variable stores the name of the environment file.
-BESMAN_ENV_NAME: DeepSeek-R1-assessment-env #***
+BESMAN_ENV_NAME: LLMSafetyAssessment-env #***
 
 # The branch of the repo to be used for the assessment.
 BESMAN_TOOL_BRANCH: "Be-Secure"
