@@ -3242,7 +3242,7 @@
             ]
         },
         {
-            "name": "LLMSafetyAssessment-env",
+            "name": "LLMSafety-assessment-env",
             "version": {
                 "tag": "0.0.1",
                 "release_date": ""
