@@ -52,9 +52,6 @@ BESMAN_RESULTS_PATH: "$BESMAN_TOOL_PATH/CybersecurityBenchmarks/executions/$BESM
 # Path to the dataset used for the assessment.
 BESMAN_CYBERSECEVAL_DATASETS: "$BESMAN_TOOL_PATH/CybersecurityBenchmarks/datasets"
 
-# Provider of the model under assessment: ollama | huggingface
-BESMAN_ARTIFACT_PROVIDER: ollama
-
 # Number of test cases to be executed for different benchmarking test.
 # Given below is the total count from each test case.
 BESMAN_NUM_TEST_CASES_MITRE: 1000
