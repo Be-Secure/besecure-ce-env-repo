@@ -16,7 +16,7 @@ function __besman_install {
     fi
 
     __besman_repo_clone "$BESMAN_ORG" "PurpleLlama" "$BESMAN_TOOL_PATH" || return 1
-
+    sudo apt install python3-venv -y
     __besman_echo_white "Installing Cybersecurity Benchmarks..."
     python3 -m venv ~/.venvs/CybersecurityBenchmarks
     source ~/.venvs/CybersecurityBenchmarks/bin/activate
@@ -26,6 +26,15 @@ function __besman_install {
     python3 -m pip install transformers torch boto3
     [[ $? -ne 0 ]] && __besman_echo_red "Failed to install CybersecurityBenchmarks" && return 1
     deactivate
+
+    if [[ -n "$BESMAN_RESULTS_PATH" ]] && [[ ! -d "$BESMAN_RESULTS_PATH" ]]; then
+        __besman_echo_white "Creating results directory at $BESMAN_RESULTS_PATH"
+        mkdir -p "$BESMAN_RESULTS_PATH"
+        
+    else
+        __besman_echo_white "Could not created Results directory. Check if path already exists."
+    fi
+
     __besman_echo_no_colour ""
     __besman_echo_green "CybersecurityBenchmarks installed successfully"
     __besman_echo_no_colour ""
@@ -42,8 +51,8 @@ function __besman_install {
     # Installing ollama
     __besman_echo_white "Installing ollama..."
     if [[ -z $(which ollama) ]]; then
+        # Placeholder for actual ollama installation command.
         curl -fsSL https://ollama.com/install.sh | sh
-        
         if [[ $? -ne 0 ]]; then
             __besman_echo_red "ollama installation failed" && return 1
         fi
