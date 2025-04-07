@@ -67,7 +67,7 @@ function __besman_uninstall {
     __besman_echo_white "Uninstalling CybersecurityBenchmarks..."
     source ~/.venvs/CybersecurityBenchmarks/bin/activate
     cd "$BESMAN_TOOL_PATH" || { __besman_echo_red "Could not move to $BESMAN_TOOL_PATH" && return 1; }
-    pip3 uninstall -y CybersecurityBenchmarks
+    pip3 uninstall -y -r CybersecurityBenchmarks/requirements.txt
     [[ $? -ne 0 ]] && __besman_echo_red "Failed to uninstall CybersecurityBenchmarks" && return 1
     deactivate
     __besman_echo_no_colour ""
