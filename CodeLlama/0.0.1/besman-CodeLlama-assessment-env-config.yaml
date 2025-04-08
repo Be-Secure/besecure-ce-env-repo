@@ -16,10 +16,13 @@ BESMAN_ARTIFACT_TYPE: model
 BESMAN_ARTIFACT_NAME: CodeLlama #***
 
 # Version of the artifact under assessment.
-BESMAN_ARTIFACT_VERSION: "7b-hf"
+BESMAN_ARTIFACT_VERSION: 7b
+
+# Name of the model provider: ollama/huggingface
+BESMAN_ARTIFACT_PROVIDER: ollama
 
 # Source code url of the artifact under assessment.
-BESMAN_ARTIFACT_URL: https://huggingface.co/codellama/CodeLlama-7b-hf #***
+BESMAN_ARTIFACT_URL: https://ollama.com/library/codellama #***
 
 # This variable stores the name of the environment file.
 BESMAN_ENV_NAME: CodeLlama-assessment-env #***
@@ -44,10 +47,20 @@ BESMAN_ASSESSMENT_DATASTORE_DIR: $HOME/besecure-ml-assessment-datastore #***
 BESMAN_ASSESSMENT_DATASTORE_URL: https://github.com/Be-Secure/besecure-ml-assessment-datastore #***
 
 # Path to results and logs
-BESMAN_RESULTS_PATH: "$BESMAN_TOOL_PATH/CybersecurityBenchmarks/executions/$BESMAN_ARTIFACT_NAME-$BESMAN_ARTIFACT_VERSION"
+BESMAN_RESULTS_PATH: "$BESMAN_TOOL_PATH/CybersecurityBenchmarks/executions/$BESMAN_ARTIFACT_NAME:$BESMAN_ARTIFACT_VERSION"
 
 # Path to the dataset used for the assessment.
 BESMAN_CYBERSECEVAL_DATASETS: "$BESMAN_TOOL_PATH/CybersecurityBenchmarks/datasets"
 
+# Provider of the model under assessment: ollama | huggingface
+BESMAN_ARTIFACT_PROVIDER: ollama
 
-
+# Number of test cases to be executed for different benchmarking test.
+# Given below is the total count from each test case.
+BESMAN_NUM_TEST_CASES_MITRE: 1000
+BESMAN_NUM_TEST_CASES_AUTOCOMPLETE: 1916
+BESMAN_NUM_TEST_CASES_INSTRUCT: 1916
+BESMAN_NUM_TEST_CASES_FRR: 750
+BESMAN_NUM_TEST_CASES_INTERPRETER: 500
+BESMAN_NUM_TEST_CASES_PROMPT_INJECTION: 252
+BESMAN_NUM_TEST_CASES_SPEAR_PHISHING: 856
