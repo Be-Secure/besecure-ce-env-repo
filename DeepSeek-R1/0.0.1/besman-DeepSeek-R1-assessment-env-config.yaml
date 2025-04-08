@@ -13,10 +13,11 @@ BESMAN_ORG: "Be-Secure"
 BESMAN_ARTIFACT_TYPE: model
 
 # BESMAN_ARTIFACT_NAME - name of the artifact under assessment.
-BESMAN_ARTIFACT_NAME: DeepSeek-R1:7b #***
+BESMAN_ARTIFACT_NAME: DeepSeek-R1 #***
+
 
 # Version of the artifact under assessment.
-# BESMAN_ARTIFACT_VERSION: #***
+BESMAN_ARTIFACT_VERSION: 7b
 
 # Source code url of the artifact under assessment.
 BESMAN_ARTIFACT_URL: https://ollama.com/library/deepseek-r1 #***
@@ -24,12 +25,15 @@ BESMAN_ARTIFACT_URL: https://ollama.com/library/deepseek-r1 #***
 # This variable stores the name of the environment file.
 BESMAN_ENV_NAME: DeepSeek-R1-assessment-env #***
 
+# The branch of the repo to be used for the assessment.
+BESMAN_TOOL_BRANCH: "Be-Secure"
+
 # The path where you wish to clone the source code of the artifact under assessment.
 # If you wish to change the clone path, provide the complete path.
 # BESMAN_ARTIFACT_DIR: $HOME/$BESMAN_ARTIFACT_NAME #***
 
 # The path where we download the assessment and other required tools during installation.
-BESMAN_TOOL_PATH: /tmp/PurpleLlama #***
+BESMAN_TOOL_PATH: "$HOME/PurpleLlama" #***
 
 # This variable indicates the individual's lab affiliation
 BESMAN_LAB_TYPE: Organization #***
@@ -43,7 +47,23 @@ BESMAN_ASSESSMENT_DATASTORE_DIR: $HOME/besecure-ml-assessment-datastore #***
 # The remote repo where we store the assessment reports.
 BESMAN_ASSESSMENT_DATASTORE_URL: https://github.com/Be-Secure/besecure-ml-assessment-datastore #***
 
+# Path to results and logs
+BESMAN_RESULTS_PATH: "$BESMAN_TOOL_PATH/CybersecurityBenchmarks/executions/$BESMAN_ARTIFACT_NAME:$BESMAN_ARTIFACT_VERSION"
 
+# Path to the dataset used for the assessment.
 BESMAN_CYBERSECEVAL_DATASETS: "$BESMAN_TOOL_PATH/CybersecurityBenchmarks/datasets"
+
+# Provider of the model under assessment: ollama | huggingface
+BESMAN_ARTIFACT_PROVIDER: ollama
+
+# Number of test cases to be executed for different benchmarking test.
+# Given below is the total count from each test case.
+BESMAN_NUM_TEST_CASES_MITRE: 1000
+BESMAN_NUM_TEST_CASES_AUTOCOMPLETE: 1916
+BESMAN_NUM_TEST_CASES_INSTRUCT: 1916
+BESMAN_NUM_TEST_CASES_FRR: 750
+BESMAN_NUM_TEST_CASES_INTERPRETER: 500
+BESMAN_NUM_TEST_CASES_PROMPT_INJECTION: 252
+BESMAN_NUM_TEST_CASES_SPEAR_PHISHING: 856
 
 
