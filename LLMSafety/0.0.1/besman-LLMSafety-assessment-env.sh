@@ -31,7 +31,7 @@ function __besman_install {
     cd "$BESMAN_TOOL_PATH" || { __besman_echo_red "Could not move to $BESMAN_TOOL_PATH" && return 1; }
     git checkout "$BESMAN_TOOL_BRANCH"
     pip3 install -r CybersecurityBenchmarks/requirements.txt
-    python3 -m pip install torch boto3
+    python3 -m pip install torch boto3 transformers
     [[ $? -ne 0 ]] && __besman_echo_red "Failed to install CybersecurityBenchmarks" && return 1
     deactivate
 
@@ -70,9 +70,6 @@ function __besman_install {
             __besman_echo_white "ollama is already installed."
         fi
         __besman_echo_green "ollama installed successfully"
-    elif  [[ "$BESMAN_ARTIFACT_PROVIDER" == "transformers" ]] 
-    then
-        python3 -m pip install transformers
     fi
 }
 
