@@ -3271,7 +3271,7 @@
             ]
         },
         {
-            "name": "openbas-RT-env",
+            "name": "Llama3-assessment-env",
             "version": {
                 "tag": "0.0.1",
                 "release_date": ""
@@ -3280,40 +3280,35 @@
                 "name": "Be-Secure",
                 "type": "Organization"
             },
-            "date_of_creation": "2025-04-02T18:10:48",
-            "last_update_date": "2025-04-02T18:10:48",
+            "date_of_creation": "2025-03-28T11:15:20",
+            "last_update_date": "2025-03-28T11:15:20",
             "last_execution": {
                 "name": "Be-Secure",
                 "type": "Organization",
                 "status": "Success",
-                "timestamp": "2025-04-02T18:10:48"
+                "timestamp": "2025-03-28T11:15:20"
             },
-            "compatible_playbooks": [
-                {
-                    "name": "sonarqube",
-                    "version": [
-                        "0.0.1"
-                    ]
-                },
-                {
-                    "name": "scorecard",
-                    "version": [
-                        "0.0.1"
-                    ]
-                },
-                {
-                    "name": "criticality_score",
-                    "version": [
-                        "0.0.1"
-                    ]
-                },
-                {
-                    "name": "spdx-sbom-generator",
-                    "version": [
-                        "0.0.1"
-                    ]
-                }
-            ]
+            "compatible_playbooks": []
+        },
+        {
+            "name": "LLMSafety-assessment-env",
+            "version": {
+                "tag": "0.0.1",
+                "release_date": ""
+            },
+            "author": {
+                "name": "Be-Secure",
+                "type": "Organization"
+            },
+            "date_of_creation": "2025-04-06T21:29:56",
+            "last_update_date": "2025-04-06T21:29:56",
+            "last_execution": {
+                "name": "Be-Secure",
+                "type": "Organization",
+                "status": "Success",
+                "timestamp": "2025-04-06T21:29:56"
+            },
+            "compatible_playbooks": []
         }
     ]
 }
