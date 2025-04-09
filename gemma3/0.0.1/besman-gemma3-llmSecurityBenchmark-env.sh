@@ -100,8 +100,8 @@ function __besman_install {
     # setup CybersecurityBenchmarks using PurpleLlama
     __besman_echo_white "Installing Cybersecurity Benchmarks using PurpleLlama."
     # creating virtual environments
-    python3 -m venv ~/.venvs/cyberseceval
-    source ~/.venvs/cyberseceval/bin/activate
+    python3 -m venv ~/.venvs/CybersecurityBenchmarks
+    source ~/.venvs/CybersecurityBenchmarks/bin/activate
     cd "$BESMAN_TOOL_PATH" || { __besman_echo_red "Could not move to $BESMAN_TOOL_PATH" && return 1; }
     pip3 install -r CybersecurityBenchmarks/requirements.txt
 
@@ -129,8 +129,8 @@ function __besman_uninstall {
     __besman_echo_white "[INFO] Removing PurpleLlama repo..."
     rm -rf "$BESMAN_TOOL_PATH/PurpleLlama"
 
-    __besman_echo_white "[INFO] Removing CyberSecEval virtual environment..."
-    rm -rf ~/.venvs/cyberseceval
+    __besman_echo_white "[INFO] Removing CybersecurityBenchmarks virtual environment..."
+    rm -rf ~/.venvs/CybersecurityBenchmarks
 
     __besman_echo_red "[UNINSTALL COMPLETE]"
 }
@@ -171,9 +171,9 @@ function __besman_update {
     fi
 
     # Reinstall/Upgrade requirements inside venv
-    if [[ -d ~/.venvs/cyberseceval ]]; then
-        __besman_echo_white "[INFO] Updating dependencies inside cyberseceval venv..."
-        source ~/.venvs/cyberseceval/bin/activate
+    if [[ -d ~/.venvs/CybersecurityBenchmarks ]]; then
+        __besman_echo_white "[INFO] Updating dependencies inside CybersecurityBenchmarks venv..."
+        source ~/.venvs/CybersecurityBenchmarks/bin/activate
         pip install --upgrade -r "$BESMAN_TOOL_PATH/CybersecurityBenchmarks/requirements.txt"
         deactivate
         __besman_echo_green "[SUCCESS] CybersecurityBenchmarks dependencies updated."
@@ -258,14 +258,14 @@ function __besman_validate {
     fi
 
     # Validate Python venv
-    if [[ ! -d ~/.venvs/cyberseceval ]]; then
-        __besman_echo_red "[ERROR] Python virtual environment for CyberSecEval is missing."
-        missing_dependencies+=("cyberseceval-venv")
+    if [[ ! -d ~/.venvs/CybersecurityBenchmarks ]]; then
+        __besman_echo_red "[ERROR] Python virtual environment for CybersecurityBenchmarks is missing."
+        missing_dependencies+=("CybersecurityBenchmarks-venv")
     else
-        __besman_echo_green "[OK] Python virtual environment for CyberSecEval exists."
+        __besman_echo_green "[OK] Python virtual environment for CybersecurityBenchmarks exists."
 
         # Validate venv requirements
-        source ~/.venvs/cyberseceval/bin/activate
+        source ~/.venvs/CybersecurityBenchmarks/bin/activate
         missing_requirements=0
         while read -r pkg; do
             pkg_name=$(echo "$pkg" | cut -d= -f1)
