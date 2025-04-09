@@ -32,7 +32,7 @@ BESMAN_ENV_NAME: gemma3-llmSecurityBenchmark-env #***
 BESMAN_ARTIFACT_DIR: $HOME/$BESMAN_ARTIFACT_NAME #***
 
 # The path where we download the assessment and other required tools during installation.
-BESMAN_TOOL_PATH: $HOME/tmp/PurpleLlama
+BESMAN_TOOL_PATH: $HOME/PurpleLlama
 
 # Organization/lab/individual.
 BESMAN_LAB_TYPE: Organization #***

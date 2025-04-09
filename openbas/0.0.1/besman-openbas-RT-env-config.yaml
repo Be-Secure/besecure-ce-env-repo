@@ -10,13 +10,13 @@
 BESMAN_ORG: Be-Secure #***
 
 # project/ml model/training dataset
-BESMAN_ARTIFACT_TYPE: #***
+BESMAN_ARTIFACT_TYPE: project
 
 # Name of the artifact under assessment.
-BESMAN_ARTIFACT_NAME: openbas #***
+BESMAN_ARTIFACT_NAME: openbas
 
 # Version of the artifact under assessment.
-BESMAN_ARTIFACT_VERSION: #***
+BESMAN_ARTIFACT_VERSION: 1.14.1 #***
 
 # Source code url of the artifact under assessment.
 BESMAN_ARTIFACT_URL: https://github.com/Be-Secure/openbas #***
@@ -43,29 +43,5 @@ BESMAN_ASSESSMENT_DATASTORE_DIR: $HOME/besecure-assessment-datastore #***
 # The remote repo where we store the assessment reports.
 BESMAN_ASSESSMENT_DATASTORE_URL: https://github.com/Be-Secure/besecure-assessment-datastore #***
 
-# The path where we download the ansible role of the assessment tools and other utilities
-BESMAN_ANSIBLE_ROLES_PATH: $BESMAN_DIR/tmp/$BESMAN_ARTIFACT_NAME/roles #***
-
-# The list of tools you wish to install. The tools are installed using ansible roles.
-# To get the list of ansible roles run 
-#   $ bes list --role
-#add the roles here. format - <Github id>/<repo name>,<Github id>/<repo name>,<Github id>/<repo name>,... #***
-BESMAN_ANSIBLE_ROLES: 
-
-# sets the path of the playbook with which we run the ansible roles.
-# Default path is ~/.besman/tmp/<artifact name dir>/
-BESMAN_ARTIFACT_TRIGGER_PLAYBOOK_PATH: $BESMAN_DIR/tmp/$BESMAN_ARTIFACT_NAME #***
-
-# Name of the trigger playbook which runs the ansible roles.
-BESMAN_ARTIFACT_TRIGGER_PLAYBOOK: besman-$BESMAN_ARTIFACT_NAME-RT-trigger-playbook.yaml #***
-
-# If the users likes to display all the skipped steps, set it to true.
-# Default value is false
-BESMAN_DISPLAY_SKIPPED_ANSIBLE_HOSTS: false #***
-
-# The default values of the ansible roles will be present in their respective repos.
-# You can go to https://github.com/Be-Secure/<repo of the ansible role>/blob/main/defaults/main.yml.
-# If you wish to change the default values copy the variable from the https://github.com/Be-Secure/<repo of the ansible role>/blob/main/defaults/main.yml
-# and paste it here and change the value.
-# Format is <variable name>: <value> 
-# Eg: openjdk_version: 11
+# Add a comma seperated list of tools that needs to be installed to assess this project.
+BESMAN_ASSESSMENT_TOOLS: scorecard,criticality_score,sonarqube,spdx-sbom-generator
