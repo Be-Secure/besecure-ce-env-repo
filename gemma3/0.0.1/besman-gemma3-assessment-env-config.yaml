@@ -6,38 +6,38 @@
 # BESMAN_<var name>: <value>
 # If you are not using any particular value, remove it or comment it(#).
 #*** - These variables should not be removed, nor left empty.
+# used to mention where you should clone the repo from, default value is Be-Secure
+BESMAN_ORG: Be-Secure #***
 
-BESMAN_ORG: "Be-Secure"
-
-# project/model/training dataset
+# project/ml model/training dataset
 BESMAN_ARTIFACT_TYPE: model
 
-# BESMAN_ARTIFACT_NAME - name of the artifact under assessment.
-BESMAN_ARTIFACT_NAME: CodeLlama #***
+# Model provider
+BESMAN_ARTIFACT_PROVIDER: Ollama
+
+# Name of the artifact under assessment.
+BESMAN_ARTIFACT_NAME: gemma3 #***
+
+# Artifact URL.
+BESMAN_ARTIFACT_URL: https://ollama.com/library/gemma3:1b
 
 # Version of the artifact under assessment.
-BESMAN_ARTIFACT_VERSION: 7b
-
-# Name of the model provider: ollama/huggingface
-BESMAN_ARTIFACT_PROVIDER: ollama
-
-# Source code url of the artifact under assessment.
-BESMAN_ARTIFACT_URL: https://ollama.com/library/codellama #***
+BESMAN_ARTIFACT_VERSION: 1b
 
 # This variable stores the name of the environment file.
-BESMAN_ENV_NAME: CodeLlama-assessment-env #***
+BESMAN_ENV_NAME: gemma3-llmSecurityBenchmark-env #***
 
 # The path where you wish to clone the source code of the artifact under assessment.
 # If you wish to change the clone path, provide the complete path.
-# BESMAN_ARTIFACT_DIR: $HOME/$BESMAN_ARTIFACT_NAME #***
+BESMAN_ARTIFACT_DIR: $HOME/$BESMAN_ARTIFACT_NAME #***
 
 # The path where we download the assessment and other required tools during installation.
-BESMAN_TOOL_PATH: "$HOME/PurpleLlama" #***
+BESMAN_TOOL_PATH: $HOME/PurpleLlama
 
-# This variable indicates the individual's lab affiliation
+# Organization/lab/individual.
 BESMAN_LAB_TYPE: Organization #***
 
-# Name of the lab. Default is Be-Secure. This variable indicates the individual's lab affiliation
+# Name of the owner of the lab. Default is Be-Secure.
 BESMAN_LAB_NAME: Be-Secure #***
 
 # This is the local dir where we store the assessment reports. Default is home.
@@ -46,14 +46,8 @@ BESMAN_ASSESSMENT_DATASTORE_DIR: $HOME/besecure-ml-assessment-datastore #***
 # The remote repo where we store the assessment reports.
 BESMAN_ASSESSMENT_DATASTORE_URL: https://github.com/Be-Secure/besecure-ml-assessment-datastore #***
 
-# Path to results and logs
-BESMAN_RESULTS_PATH: "$BESMAN_TOOL_PATH/CybersecurityBenchmarks/executions/$BESMAN_ARTIFACT_NAME:$BESMAN_ARTIFACT_VERSION"
-
-# Path to the dataset used for the assessment.
 BESMAN_CYBERSECEVAL_DATASETS: "$BESMAN_TOOL_PATH/CybersecurityBenchmarks/datasets"
 
-# Number of test cases to be executed for different benchmarking test.
-# Given below is the total count from each test case.
 BESMAN_NUM_TEST_CASES_MITRE: 1000
 BESMAN_NUM_TEST_CASES_AUTOCOMPLETE: 1916
 BESMAN_NUM_TEST_CASES_INSTRUCT: 1916
@@ -61,3 +55,5 @@ BESMAN_NUM_TEST_CASES_FRR: 750
 BESMAN_NUM_TEST_CASES_INTERPRETER: 500
 BESMAN_NUM_TEST_CASES_PROMPT_INJECTION: 252
 BESMAN_NUM_TEST_CASES_SPEAR_PHISHING: 856
+
+BESMAN_RESULTS_PATH: "$BESMAN_TOOL_PATH/CybersecurityBenchmarks/executions/$BESMAN_ARTIFACT_NAME:$BESMAN_ARTIFACT_VERSION"
