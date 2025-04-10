@@ -15,8 +15,7 @@ function __besman_install {
         [[ -z $(which python3) ]] && __besman_echo_red "Python3 installation failed" && return 1
     fi
 
-    if [[ -z $(which pip) ]] 
-    then
+    if [[ -z $(which pip) ]]; then
         __besman_echo_white "Installing pip"
         sudo apt install python3-pip -y
         [[ -z $(which pip) ]] && __besman_echo_red "Python3 installation failed" && return 1
@@ -38,7 +37,6 @@ function __besman_install {
     if [[ -n "$BESMAN_RESULTS_PATH" ]] && [[ ! -d "$BESMAN_RESULTS_PATH" ]]; then
         __besman_echo_white "Creating results directory at $BESMAN_RESULTS_PATH"
         mkdir -p "$BESMAN_RESULTS_PATH"
-        
     else
         __besman_echo_white "Could not created Results directory. Check if path already exists."
     fi
@@ -56,8 +54,7 @@ function __besman_install {
     deactivate
     cd "$HOME"
 
-    if [[ "$BESMAN_ARTIFACT_PROVIDER" == "ollama" ]] 
-    then
+    if [[ "$BESMAN_ARTIFACT_PROVIDER" == "ollama" ]]; then
         # Installing ollama
         __besman_echo_white "Installing ollama..."
         if [[ -z $(which ollama) ]]; then
@@ -172,8 +169,7 @@ function __besman_validate {
         flag="true"
     fi
 
-    if [[ "$flag" == "true" ]] 
-    then
+    if [[ "$flag" == "true" ]]; then
         __besman_echo_green "Validation successful. All tools and folders are present."
     else
         __besman_echo_red "Validation done with errors"
