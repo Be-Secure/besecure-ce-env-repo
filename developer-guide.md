@@ -101,9 +101,7 @@ Learn about the branching strategy that we follow from [here](./CONTRIBUTING.md#
 
             bes create -env fastjson-RT-env -V 0.0.1
 
-The create command will ask for the local path to clone the env repo locally and would create a new env folder and environment template files to the newly cloned repo.
-
-\[Note:\] : The "Environment Name" should not contain any underscore, hyphen or space. Any occurence of these character should be replaced with camel case format.
+The create command will ask for the path of locally cloned project \(The repo is supposed to be cloned locally already by developer\) and would create a new env folder and environment template files into that.
 
 4. Update the code in enviroment template files as required.
 
