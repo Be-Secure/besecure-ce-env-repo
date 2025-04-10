@@ -37,7 +37,6 @@ function __besman_install {
     if [[ -n "$BESMAN_RESULTS_PATH" ]] && [[ ! -d "$BESMAN_RESULTS_PATH" ]]; then
         __besman_echo_white "Creating results directory at $BESMAN_RESULTS_PATH"
         mkdir -p "$BESMAN_RESULTS_PATH"
-
     else
         __besman_echo_white "Could not created Results directory. Check if path already exists."
     fi
