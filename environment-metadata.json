@@ -3308,7 +3308,119 @@
                 "status": "Success",
                 "timestamp": "2025-04-06T21:29:56"
             },
-            "compatible_playbooks": []
+            "compatible_playbooks": [
+                
+            ]
+        },
+        {
+            "name": "Llama3.1-assessment-env",
+            "version": {
+                "tag": "0.0.1",
+                "release_date": ""
+            },
+            "author": {
+                "name": "Be-Secure",
+                "type": "Organization"
+            },
+            "date_of_creation": "2025-04-09T19:27:41",
+            "last_update_date": "2025-04-09T19:27:41",
+            "last_execution": {
+                "name": "Be-Secure",
+                "type": "Organization",
+                "status": "Success",
+                "timestamp": "2025-04-09T19:27:41"
+            },
+            "compatible_playbooks": [
+                
+            ]
+        },
+        {
+            "name": "granite-code-assessment-env",
+            "version": {
+                "tag": "0.0.1",
+                "release_date": ""
+            },
+            "author": {
+                "name": "Be-Secure",
+                "type": "Organization"
+            },
+            "date_of_creation": "2025-04-09T19:27:41",
+            "last_update_date": "2025-04-09T19:27:41",
+            "last_execution": {
+                "name": "Be-Secure",
+                "type": "Organization",
+                "status": "Success",
+                "timestamp": "2025-04-09T19:27:41"
+            },
+            "compatible_playbooks": [
+                
+            ]
+        },
+        {
+            "name": "granite3.2-assessment-env",
+            "version": {
+                "tag": "0.0.1",
+                "release_date": ""
+            },
+            "author": {
+                "name": "Be-Secure",
+                "type": "Organization"
+            },
+            "date_of_creation": "2025-04-09T19:27:41",
+            "last_update_date": "2025-04-09T19:27:41",
+            "last_execution": {
+                "name": "Be-Secure",
+                "type": "Organization",
+                "status": "Success",
+                "timestamp": "2025-04-09T19:27:41"
+            },
+            "compatible_playbooks": [
+                
+            ]
+        },
+        {
+            "name": "phi4-assessment-env",
+            "version": {
+                "tag": "0.0.1",
+                "release_date": ""
+            },
+            "author": {
+                "name": "Be-Secure",
+                "type": "Organization"
+            },
+            "date_of_creation": "2025-04-09T19:27:41",
+            "last_update_date": "2025-04-09T19:27:41",
+            "last_execution": {
+                "name": "Be-Secure",
+                "type": "Organization",
+                "status": "Success",
+                "timestamp": "2025-04-09T19:27:41"
+            },
+            "compatible_playbooks": [
+                
+            ]
+        },
+        {
+            "name": "mistral-assessment-env",
+            "version": {
+                "tag": "0.0.1",
+                "release_date": ""
+            },
+            "author": {
+                "name": "Be-Secure",
+                "type": "Organization"
+            },
+            "date_of_creation": "2025-04-09T19:27:41",
+            "last_update_date": "2025-04-09T19:27:41",
+            "last_execution": {
+                "name": "Be-Secure",
+                "type": "Organization",
+                "status": "Success",
+                "timestamp": "2025-04-09T19:27:41"
+            },
+            "compatible_playbooks": [
+                
+            ]
         }
     ]
 }
