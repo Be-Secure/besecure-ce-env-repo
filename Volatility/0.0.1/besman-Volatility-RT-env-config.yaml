@@ -1,0 +1,31 @@
+---
+tools:
+  - name: Semgrep
+    repository: https://github.com/returntocorp/semgrep
+  - name: CodeQL
+    repository: https://github.com/github/codeql
+  - name: Bandit
+    repository: https://github.com/PyCQA/bandit
+  - name: FindSecBugs
+    repository: https://github.com/find-sec-bugs/find-sec-bugs
+  - name: OWASP
+    repository: https://github.com/OWASP/owasp-maven-plugin
+  - name: Syft
+    repository: https://github.com/anchore/syft
+  - name: Grype
+    repository: https://github.com/anchore/grype
+  - name: Trivy
+    repository: https://github.com/aquasecurity/trivy
+  - name: CycloneDX CLI
+    repository: https://github.com/CycloneDX/cyclonedx-cli
+  - name: ScanCode ToolKit
+    repository: https://github.com/nexB/scancode-toolkit
+  - name: SPDX tool
+    repository: https://github.com/spdx/tools
+dependencies:
+  - git
+  - python3
+  - pip
+  - java
+  - maven
+  - volatility
