@@ -3271,26 +3271,6 @@
             ]
         },
         {
-            "name": "Llama3-assessment-env",
-            "version": {
-                "tag": "0.0.1",
-                "release_date": ""
-            },
-            "author": {
-                "name": "Be-Secure",
-                "type": "Organization"
-            },
-            "date_of_creation": "2025-03-28T11:15:20",
-            "last_update_date": "2025-03-28T11:15:20",
-            "last_execution": {
-                "name": "Be-Secure",
-                "type": "Organization",
-                "status": "Success",
-                "timestamp": "2025-03-28T11:15:20"
-            },
-            "compatible_playbooks": []
-        },
-        {
             "name": "LLMSafety-assessment-env",
             "version": {
                 "tag": "0.0.1",
@@ -3417,28 +3397,6 @@
                 "type": "Organization",
                 "status": "Success",
                 "timestamp": "2025-04-09T19:27:41"
-            },
-            "compatible_playbooks": [
-                
-            ]
-        },
-        {
-            "name": "Llama3-assessment-env",
-            "version": {
-                "tag": "0.0.1",
-                "release_date": ""
-            },
-            "author": {
-                "name": "Be-Secure",
-                "type": "Organization"
-            },
-            "date_of_creation": "2025-03-28T11:15:20",
-            "last_update_date": "2025-03-28T11:15:20",
-            "last_execution": {
-                "name": "Be-Secure",
-                "type": "Organization",
-                "status": "Success",
-                "timestamp": "2025-03-28T11:15:20"
             },
             "compatible_playbooks": [
                 
