@@ -13,7 +13,7 @@ BESMAN_ORG: "Be-Secure"
 BESMAN_ARTIFACT_TYPE: model
 
 # BESMAN_ARTIFACT_NAME - name of the artifact under assessment.
-BESMAN_ARTIFACT_NAME:bloom #***
+BESMAN_ARTIFACT_NAME: bloom #***
 
 # Version of the artifact under assessment.
 # BESMAN_ARTIFACT_VERSION: #***
