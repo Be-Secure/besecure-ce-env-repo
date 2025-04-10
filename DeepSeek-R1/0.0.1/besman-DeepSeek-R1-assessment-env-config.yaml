@@ -24,6 +24,7 @@ BESMAN_ARTIFACT_URL: https://ollama.com/library/deepseek-r1 #***
 
 # This variable stores the name of the environment file.
 BESMAN_ENV_NAME: DeepSeek-R1-assessment-env #***
+BESMAN_TOOL_BRANCH: "Be-Secure"
 
 # The branch of the repo to be used for the assessment.
 BESMAN_TOOL_BRANCH: "Be-Secure"
