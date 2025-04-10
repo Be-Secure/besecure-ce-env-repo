@@ -15,17 +15,13 @@ function __besman_install {
         [[ -z $(which python3) ]] && __besman_echo_red "Python3 installation failed" && return 1
     fi
 
-<<<<<<< HEAD
-=======
-    if [[ -z $(which pip) ]] 
-    then
+    if [[ -z $(which pip) ]]; then
         __besman_echo_white "Installing pip"
         sudo apt install python3-pip -y
         [[ -z $(which pip) ]] && __besman_echo_red "Python3 installation failed" && return 1
 
     fi
 
->>>>>>> upstream/develop
     __besman_repo_clone "$BESMAN_ORG" "PurpleLlama" "$BESMAN_TOOL_PATH" || return 1
     sudo apt install python3-venv -y
     __besman_echo_white "Installing Cybersecurity Benchmarks..."
@@ -34,19 +30,14 @@ function __besman_install {
     cd "$BESMAN_TOOL_PATH" || { __besman_echo_red "Could not move to $BESMAN_TOOL_PATH" && return 1; }
     git checkout "$BESMAN_TOOL_BRANCH"
     pip3 install -r CybersecurityBenchmarks/requirements.txt
-<<<<<<< HEAD
-    python3 -m pip install transformers torch boto3
-    git 
-=======
     python3 -m pip install torch boto3 transformers
->>>>>>> upstream/develop
     [[ $? -ne 0 ]] && __besman_echo_red "Failed to install CybersecurityBenchmarks" && return 1
     deactivate
 
     if [[ -n "$BESMAN_RESULTS_PATH" ]] && [[ ! -d "$BESMAN_RESULTS_PATH" ]]; then
         __besman_echo_white "Creating results directory at $BESMAN_RESULTS_PATH"
         mkdir -p "$BESMAN_RESULTS_PATH"
-        
+
     else
         __besman_echo_white "Could not created Results directory. Check if path already exists."
     fi
@@ -64,8 +55,7 @@ function __besman_install {
     deactivate
     cd "$HOME"
 
-    if [[ "$BESMAN_ARTIFACT_PROVIDER" == "ollama" ]] 
-    then
+    if [[ "$BESMAN_ARTIFACT_PROVIDER" == "ollama" ]]; then
         # Installing ollama
         __besman_echo_white "Installing ollama..."
         if [[ -z $(which ollama) ]]; then
@@ -158,12 +148,8 @@ function __besman_validate {
 
     # Validate CybersecurityBenchmarks venv folder
     if [[ ! -d ~/.venvs/CybersecurityBenchmarks ]]; then
-<<<<<<< HEAD
-        __besman_echo_red "CybersecurityBenchmarks venv folder missing." && return 1
-=======
         __besman_echo_red "CybersecurityBenchmarks venv folder missing."
         flag="true"
->>>>>>> upstream/develop
     fi
 
     # Validate codeshield venv folder
@@ -184,8 +170,7 @@ function __besman_validate {
         flag="true"
     fi
 
-    if [[ "$flag" == "true" ]] 
-    then
+    if [[ "$flag" == "true" ]]; then
         __besman_echo_green "Validation successful. All tools and folders are present."
     else
         __besman_echo_red "Validation done with errors"
