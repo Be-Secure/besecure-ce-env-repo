@@ -43,8 +43,7 @@ Here are the types of environments
 
 - **Red Team environemnts(RT env)** - The env installs all the tools/utilities required for a security analyst to perform vulnerability assessment, create exploits etc.
 - **Blue Team environment(BT env)** - The env would contain the instruction to install the tools required for a security professional to perform BT activities such as vulnerability remediation and patching.
-- **Assessment environment** - The assessment environment is a common environment that is used to perform assessments on a wide range of projects.
-
+- **Assessment environment** - The assessment environment is environment that is used to perform assessments only.
 
 [Learn more](./README.md)
 
@@ -102,6 +101,13 @@ Learn about the branching strategy that we follow from [here](./CONTRIBUTING.md#
 
             bes create -env fastjson-RT-env -V 0.0.1
 
+The create command will ask for the path of locally cloned project \(The repo is supposed to be cloned locally already by developer\) and would create a new env folder and environment template files into that.
+
+4. Update the code in enviroment template files as required.
+
+5. Test the changes locally. Once changes are done push the changes to github repo forked in your namespace.
+
+6. Raise a PR to get the repo merged to develop branch of Be-Secure environments repo.
 
 ## Explaining the environment script(ansible role based)
 
