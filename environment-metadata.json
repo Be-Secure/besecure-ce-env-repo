@@ -3288,9 +3288,7 @@
                 "status": "Success",
                 "timestamp": "2025-04-06T21:29:56"
             },
-            "compatible_playbooks": [
-                
-            ]
+            "compatible_playbooks": []
         },
         {
             "name": "Llama3.1-assessment-env",
@@ -3310,9 +3308,7 @@
                 "status": "Success",
                 "timestamp": "2025-04-09T19:27:41"
             },
-            "compatible_playbooks": [
-                
-            ]
+            "compatible_playbooks": []
         },
         {
             "name": "granite-code-assessment-env",
@@ -3332,9 +3328,7 @@
                 "status": "Success",
                 "timestamp": "2025-04-09T19:27:41"
             },
-            "compatible_playbooks": [
-                
-            ]
+            "compatible_playbooks": []
         },
         {
             "name": "granite3.2-assessment-env",
@@ -3354,9 +3348,7 @@
                 "status": "Success",
                 "timestamp": "2025-04-09T19:27:41"
             },
-            "compatible_playbooks": [
-                
-            ]
+            "compatible_playbooks": []
         },
         {
             "name": "phi4-assessment-env",
@@ -3376,9 +3368,7 @@
                 "status": "Success",
                 "timestamp": "2025-04-09T19:27:41"
             },
-            "compatible_playbooks": [
-                
-            ]
+            "compatible_playbooks": []
         },
         {
             "name": "mistral-assessment-env",
@@ -3398,9 +3388,7 @@
                 "status": "Success",
                 "timestamp": "2025-04-09T19:27:41"
             },
-            "compatible_playbooks": [
-                
-            ]
+            "compatible_playbooks": []
         },
         {
             "name": "LLMSafety-assessment-env",
@@ -3420,8 +3408,39 @@
                 "status": "Success",
                 "timestamp": "2025-04-06T21:29:56"
             },
+            "compatible_playbooks": []
+        },
+        {
+            "name": "cogito-assessment-env",
+            "version": {
+                "tag": "0.0.1",
+                "release_date": ""
+            },
+            "author": {
+                "name": "Be-Secure",
+                "type": "Organization"
+            },
+            "date_of_creation": "2025-04-11T10:14:07",
+            "last_update_date": "2025-04-11T10:14:07",
+            "last_execution": {
+                "name": "Be-Secure",
+                "type": "Organization",
+                "status": "Success",
+                "timestamp": "2025-04-11T10:14:07"
+            },
             "compatible_playbooks": [
-                
+                {
+                    "name": "counterfit",
+                    "version": [
+                        "0.0.1"
+                    ]
+                },
+                {
+                    "name": "llmSecurityBenchmark-frr",
+                    "version": [
+                        "0.0.1"
+                    ]
+                }
             ]
         }
     ]

@@ -16,16 +16,16 @@ BESMAN_ARTIFACT_TYPE: model
 BESMAN_ARTIFACT_PROVIDER: Ollama
 
 # Name of the artifact under assessment.
-BESMAN_ARTIFACT_NAME: gemma3 #***
+BESMAN_ARTIFACT_NAME: cogito #***
 
 # Artifact URL.
-BESMAN_ARTIFACT_URL: https://ollama.com/library/gemma3:1b
+BESMAN_ARTIFACT_URL: https://ollama.com/library/cogito
 
 # Version of the artifact under assessment.
-BESMAN_ARTIFACT_VERSION: 1b
+BESMAN_ARTIFACT_VERSION: 3b
 
 # This variable stores the name of the environment file.
-BESMAN_ENV_NAME: gemma3-assessment-env #***
+BESMAN_ENV_NAME: cogito-assessment-env #***
 
 # The path where you wish to clone the source code of the artifact under assessment.
 # If you wish to change the clone path, provide the complete path.
