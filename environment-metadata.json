@@ -3257,13 +3257,43 @@
             },
             "compatible_playbooks": [
                 {
-                    "name": "counterfit",
+                    "name": "LLMSecFalseRefusalRate-cyberseceval",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "llmSecurityBenchmark-frr",
+                    "name": "LLMSecAutocomplete-cyberseceval",
+                    "version": [
+                        "0.0.1"
+                    ]
+                },
+                {
+                    "name": "LLMSecCodeInterpreter-cyberseceval",
+                    "version": [
+                        "0.0.1"
+                    ]
+                },
+                {
+                    "name": "LLMSecInstruct-cyberseceval",
+                    "version": [
+                        "0.0.1"
+                    ]
+                },
+                {
+                    "name": "LLMSecMitre-cyberseceval",
+                    "version": [
+                        "0.0.1"
+                    ]
+                },
+                {
+                    "name": "LLMSecPromptInjection-cyberseceval",
+                    "version": [
+                        "0.0.1"
+                    ]
+                },
+                {
+                    "name": "LLMSecSpearPhishing-cyberseceval",
                     "version": [
                         "0.0.1"
                     ]
