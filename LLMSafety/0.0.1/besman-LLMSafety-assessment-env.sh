@@ -132,7 +132,7 @@ function __besman_install {
     __besman_echo_green "Garak installed successfully"
     __besman_echo_no_colour ""
     conda deactivate
-
+    cd "$HOME"
     #==============Ollama installation========================
     if [[ "$BESMAN_ARTIFACT_PROVIDER" == "ollama" ]]; then
         # Installing ollama
