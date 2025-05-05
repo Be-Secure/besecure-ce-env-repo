@@ -86,7 +86,7 @@ function __besman_install {
     fi
 
     which poetry || { __besman_echo_red "Poetry installation failed" && return 1; }
-    __besman_repo_clone "$BESMAN_ORG" "modelbench" "$BESMAN_TOOL_PATH/modelbench" || return 1
+    __besman_repo_clone "$BESMAN_ORG" "modelbench" "$BESMAN_TOOL_PATH/modelbench"
     cd "$BESMAN_TOOL_PATH/modelbench" || { __besman_echo_red "Could not move to $BESMAN_TOOL_PATH/modelbench" && return 1; }
     source ~/.venvs/modelbench_env/bin/activate
     poetry lock
@@ -121,7 +121,7 @@ function __besman_install {
     __besman_echo_white "Creating conda environment for garak"
     conda create --name garak "python>=3.10,<=3.12"
     conda activate garak
-    __besman_repo_clone "$BESMAN_ORG" "garak" "$BESMAN_TOOL_PATH/garak" || return 1
+    __besman_repo_clone "$BESMAN_ORG" "garak" "$BESMAN_TOOL_PATH/garak"
     cd "$BESMAN_TOOL_PATH/garak" || { __besman_echo_red "Could not move to $BESMAN_TOOL_PATH" && return 1; }
     python3 -m pip install -e .
     garak --list_probes
