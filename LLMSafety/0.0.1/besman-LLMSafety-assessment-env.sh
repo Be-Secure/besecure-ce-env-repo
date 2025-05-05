@@ -1,6 +1,8 @@
 #!/bin/bash
 
 function __besman_install {
+
+    trap 'rm -rf ~/.venvs/CybersecurityBenchmarks ~/.venvs/codeshield_env ~/.venvs/modelbench_env' ERR
     # Checks if GitHub CLI is present or not.
     __besman_check_vcs_exist || return 1
 
@@ -37,7 +39,7 @@ function __besman_install {
     fi
     # ======================cyberseceval installation========================
 
-    [[ ! -d "$BESMAN_TOOL_PATH/PurpleLlama" ]] && { __besman_repo_clone "$BESMAN_ORG" "PurpleLlama" "$BESMAN_TOOL_PATH/PurpleLlama" || return 1 }
+    [[ ! -d "$BESMAN_TOOL_PATH/PurpleLlama" ]] && { __besman_repo_clone "$BESMAN_ORG" "PurpleLlama" "$BESMAN_TOOL_PATH/PurpleLlama" || return 1; }
     __besman_echo_white "Installing Cybersecurity Benchmarks..."
     python3 -m venv ~/.venvs/CybersecurityBenchmarks
     source ~/.venvs/CybersecurityBenchmarks/bin/activate
@@ -87,7 +89,7 @@ function __besman_install {
     fi
 
     which poetry || { __besman_echo_red "Poetry installation failed" && return 1; }
-    [[ ! -d "$BESMAN_TOOL_PATH/modelbench" ]] && { __besman_repo_clone "$BESMAN_ORG" "modelbench" "$BESMAN_TOOL_PATH/modelbench" || return 1 }
+    [[ ! -d "$BESMAN_TOOL_PATH/modelbench" ]] && { __besman_repo_clone "$BESMAN_ORG" "modelbench" "$BESMAN_TOOL_PATH/modelbench" || return 1; }
     cd "$BESMAN_TOOL_PATH/modelbench" || { __besman_echo_red "Could not move to $BESMAN_TOOL_PATH/modelbench" && return 1; }
     source ~/.venvs/modelbench_env/bin/activate
     poetry lock
@@ -121,7 +123,7 @@ function __besman_install {
     __besman_echo_white "Creating conda environment for garak"
     conda create --name garak "python>=3.10,<=3.12" -y
     conda activate garak
-    [[ ! -d "$BESMAN_TOOL_PATH/garak" ]] && __besman_repo_clone "$BESMAN_ORG" "garak" "$BESMAN_TOOL_PATH/garak" || return 1
+    [[ ! -d "$BESMAN_TOOL_PATH/garak" ]] && { __besman_repo_clone "$BESMAN_ORG" "garak" "$BESMAN_TOOL_PATH/garak" || return 1; }
     cd "$BESMAN_TOOL_PATH/garak" || { __besman_echo_red "Could not move to $BESMAN_TOOL_PATH" && return 1; }
     python3 -m pip install -e .
     garak --list_probes
@@ -163,7 +165,7 @@ function __besman_install {
     __besman_echo_white "    source ~/.venvs/modelbench_env/bin/activate"
     __besman_echo_no_colour ""
 
-    [[ "BESMAN_ARTIFACT_PROVIDER" == "ollama" ]] && {
+    [[ "$BESMAN_ARTIFACT_PROVIDER" == "ollama" ]] && {
         __besman_echo_white "You can run the following command to pull down and run the model from ollama"
         __besman_echo_no_colour ""
         __besman_echo_yellow "ollama run $BESMAN_ARTIFACT_NAME:$BESMAN_ARTIFACT_VERSION"
@@ -329,7 +331,7 @@ function __besman_validate {
 
 
 
-    if [[ "$flag" == "true" ]]; then
+    if [[ "$flag" == "false" ]]; then
         __besman_echo_green "Validation successful. All tools and folders are present."
     else
         __besman_echo_red "Validation done with errors"
