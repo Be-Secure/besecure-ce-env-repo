@@ -113,7 +113,6 @@ function __besman_install {
     else
         __besman_echo_white "Conda is already installed."
     fi
-    [[ -z $(which conda) ]] && __besman_echo_red "Conda installation failed" && return 1
     source /opt/conda/etc/profile.d/conda.sh
     conda -V
     [[ $? -ne 0 ]] && __besman_echo_red "Conda installation failed" && return 1
