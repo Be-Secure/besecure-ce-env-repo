@@ -40,6 +40,8 @@ function __besman_install {
 
     [[ ! -d "$BESMAN_ASSESSMENT_DATASTORE_DIR" ]] && { __besman_repo_clone "$BESMAN_USER_NAMESPACE" "besecure-ml-assessment-datastore" "BESMAN_ASSESSMENT_DATASTORE_DIR" || return 1;}
 
+    [[ ! -d "$BESMAN_RESULTS_PATH" ]] && mkdir -p "$BESMAN_RESULTS_PATH"
+
     # ======================cyberseceval installation========================
 
     [[ ! -d "$BESMAN_TOOL_PATH/PurpleLlama" ]] && { __besman_repo_clone "$BESMAN_ORG" "PurpleLlama" "$BESMAN_TOOL_PATH/PurpleLlama" || return 1; }
