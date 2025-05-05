@@ -36,7 +36,8 @@ function __besman_install {
         __besman_echo_white "python3-venv found"
     fi
     # ======================cyberseceval installation========================
-    __besman_repo_clone "$BESMAN_ORG" "PurpleLlama" "$BESMAN_TOOL_PATH/PurpleLlama"
+
+    [[ ! -d "$BESMAN_TOOL_PATH/PurpleLlama" ]] && __besman_repo_clone "$BESMAN_ORG" "PurpleLlama" "$BESMAN_TOOL_PATH/PurpleLlama" || return 1
     __besman_echo_white "Installing Cybersecurity Benchmarks..."
     python3 -m venv ~/.venvs/CybersecurityBenchmarks
     source ~/.venvs/CybersecurityBenchmarks/bin/activate
@@ -86,7 +87,7 @@ function __besman_install {
     fi
 
     which poetry || { __besman_echo_red "Poetry installation failed" && return 1; }
-    __besman_repo_clone "$BESMAN_ORG" "modelbench" "$BESMAN_TOOL_PATH/modelbench"
+    [[! -d "$BESMAN_TOOL_PATH/modelbench" ]] && __besman_repo_clone "$BESMAN_ORG" "modelbench" "$BESMAN_TOOL_PATH/modelbench" || return 1
     cd "$BESMAN_TOOL_PATH/modelbench" || { __besman_echo_red "Could not move to $BESMAN_TOOL_PATH/modelbench" && return 1; }
     source ~/.venvs/modelbench_env/bin/activate
     poetry lock
@@ -120,7 +121,7 @@ function __besman_install {
     __besman_echo_white "Creating conda environment for garak"
     conda create --name garak "python>=3.10,<=3.12"
     conda activate garak
-    __besman_repo_clone "$BESMAN_ORG" "garak" "$BESMAN_TOOL_PATH/garak"
+    [[ ! -d "$BESMAN_TOOL_PATH/garak" ]] && __besman_repo_clone "$BESMAN_ORG" "garak" "$BESMAN_TOOL_PATH/garak" || return 1
     cd "$BESMAN_TOOL_PATH/garak" || { __besman_echo_red "Could not move to $BESMAN_TOOL_PATH" && return 1; }
     python3 -m pip install -e .
     garak --list_probes
@@ -145,6 +146,30 @@ function __besman_install {
         fi
         __besman_echo_green "ollama installed successfully"
     fi
+
+    __besman_echo_white "Note down the following virtual environments for each tool"
+    __besman_echo_no_colour ""
+    __besman_echo_yellow "Cyberseceval for LLM Security Benchmarking"
+    __besman_echo_no_colour "----------------------------------------------"
+    __besman_echo_white "source ~/.venvs/CybersecurityBenchmarks/bin/activate"
+    __besman_echo_no_colour ""
+    __besman_echo_yellow "Garak for LLM Vulnerability Analysis"
+    __besman_echo_no_colour "----------------------------------------------"
+    __besman_echo_white "source /opt/conda/etc/profile.d/conda.sh"
+    __besman_echo_white "conda activate garak"
+    __besman_echo_no_colour ""
+    __besman_echo_yellow "Modelbench for LLM Safety Benchmarking"
+    __besman_echo_no_colour "----------------------------------------------"
+    __besman_echo_white "    source ~/.venvs/modelbench_env/bin/activate"
+    __besman_echo_no_colour ""
+
+    [[ "BESMAN_ARTIFACT_PROVIDER" == "ollama" ]] && {
+        __besman_echo_white "You can run the following command to pull down and run the model from ollama"
+        __besman_echo_no_colour ""
+        __besman_echo_yellow "ollama run $BESMAN_ARTIFACT_NAME:$BESMAN_ARTIFACT_VERSION"
+
+
+
 }
 
 function __besman_uninstall {
