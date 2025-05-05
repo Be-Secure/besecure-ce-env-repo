@@ -168,7 +168,7 @@ function __besman_install {
         __besman_echo_no_colour ""
         __besman_echo_yellow "ollama run $BESMAN_ARTIFACT_NAME:$BESMAN_ARTIFACT_VERSION"
 
-
+    }
 
 }
 
