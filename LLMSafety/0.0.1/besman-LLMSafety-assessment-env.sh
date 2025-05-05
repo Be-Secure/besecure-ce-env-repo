@@ -37,6 +37,9 @@ function __besman_install {
     else
         __besman_echo_white "python3-venv found"
     fi
+
+    [[ ! -d "$BESMAN_ASSESSMENT_DATASTORE_DIR" ]] && { __besman_repo_clone "$BESMAN_USER_NAMESPACE" "besecure-ml-assessment-datastore" "BESMAN_ASSESSMENT_DATASTORE_DIR" || return 1;}
+
     # ======================cyberseceval installation========================
 
     [[ ! -d "$BESMAN_TOOL_PATH/PurpleLlama" ]] && { __besman_repo_clone "$BESMAN_ORG" "PurpleLlama" "$BESMAN_TOOL_PATH/PurpleLlama" || return 1; }
