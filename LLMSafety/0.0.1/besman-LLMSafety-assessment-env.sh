@@ -38,9 +38,8 @@ function __besman_install {
         __besman_echo_white "python3-venv found"
     fi
 
-    [[ ! -d "$BESMAN_ASSESSMENT_DATASTORE_DIR" ]] && { __besman_repo_clone "$BESMAN_USER_NAMESPACE" "besecure-ml-assessment-datastore" "BESMAN_ASSESSMENT_DATASTORE_DIR" || return 1;}
+    [[ ! -d "$BESMAN_ASSESSMENT_DATASTORE_DIR" ]] && { __besman_repo_clone "$BESMAN_USER_NAMESPACE" "besecure-ml-assessment-datastore" "$BESMAN_ASSESSMENT_DATASTORE_DIR" || return 1;}
 
-    [[ ! -d "$BESMAN_RESULTS_PATH" ]] && mkdir -p "$BESMAN_RESULTS_PATH"
 
     # ======================cyberseceval installation========================
 
