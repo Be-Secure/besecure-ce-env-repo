@@ -165,8 +165,8 @@ function __besman_install {
     __besman_echo_white "    source ~/.venvs/modelbench_env/bin/activate"
     __besman_echo_no_colour ""
 
-    [[ "$BESMAN_ARTIFACT_PROVIDER" == "ollama" ]] && {
-        __besman_echo_white "You can run the following command to pull down and run the model from ollama"
+    [[ "$BESMAN_ARTIFACT_PROVIDER" == "Ollama" ]] && {
+        __besman_echo_white "You can run the following command to pull down and run the model from Ollama"
         __besman_echo_no_colour ""
         __besman_echo_yellow "ollama run $BESMAN_ARTIFACT_NAME:$BESMAN_ARTIFACT_VERSION"
 
