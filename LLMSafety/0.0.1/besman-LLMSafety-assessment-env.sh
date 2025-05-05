@@ -184,7 +184,7 @@ function __besman_uninstall {
     __besman_echo_white "Uninstalling CybersecurityBenchmarks..."
     source ~/.venvs/CybersecurityBenchmarks/bin/activate
     cd "$BESMAN_TOOL_PATH/PurpleLlama" || { __besman_echo_red "Could not move to $BESMAN_TOOL_PATH/PurpleLlama" && return 1; }
-    pip3 uninstall -y -r CybersecurityBenchmarks/requirements.txt
+    python3 -m pip uninstall -y -r CybersecurityBenchmarks/requirements.txt
     [[ $? -ne 0 ]] && __besman_echo_red "Failed to uninstall CybersecurityBenchmarks" && return 1
     python3 -m pip uninstall torch boto3 transformers -y
     deactivate
