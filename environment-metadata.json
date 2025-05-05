@@ -3318,7 +3318,50 @@
                 "status": "Success",
                 "timestamp": "2025-04-06T21:29:56"
             },
-            "compatible_playbooks": []
+            "compatible_playbooks": [
+                {
+                    "name": "LLMSecFalseRefusalRate-cyberseceval",
+                    "version": [
+                        "0.0.1"
+                    ]
+                },
+                {
+                    "name": "LLMSecAutocomplete-cyberseceval",
+                    "version": [
+                        "0.0.1"
+                    ]
+                },
+                {
+                    "name": "LLMSecCodeInterpreter-cyberseceval",
+                    "version": [
+                        "0.0.1"
+                    ]
+                },
+                {
+                    "name": "LLMSecInstruct-cyberseceval",
+                    "version": [
+                        "0.0.1"
+                    ]
+                },
+                {
+                    "name": "LLMSecMitre-cyberseceval",
+                    "version": [
+                        "0.0.1"
+                    ]
+                },
+                {
+                    "name": "LLMSecPromptInjection-cyberseceval",
+                    "version": [
+                        "0.0.1"
+                    ]
+                },
+                {
+                    "name": "LLMSecSpearPhishing-cyberseceval",
+                    "version": [
+                        "0.0.1"
+                    ]
+                }
+            ]
         },
         {
             "name": "Llama3.1-assessment-env",
