@@ -33,7 +33,7 @@ BESMAN_TOOL_BRANCH: "Be-Secure"
 # BESMAN_ARTIFACT_DIR: $HOME/$BESMAN_ARTIFACT_NAME #***
 
 # The path where we download the assessment and other required tools during installation.
-BESMAN_TOOL_PATH: "$HOME/PurpleLlama" #***
+BESMAN_TOOL_PATH: "$HOME" #***
 
 # This variable indicates the individual's lab affiliation
 BESMAN_LAB_TYPE: Organization #***
@@ -49,10 +49,10 @@ BESMAN_ASSESSMENT_DATASTORE_URL: https://github.com/Be-Secure/besecure-ml-assess
 
 
 # Path to results and logs
-BESMAN_RESULTS_PATH: "$BESMAN_TOOL_PATH/CybersecurityBenchmarks/executions/$BESMAN_ARTIFACT_NAME:$BESMAN_ARTIFACT_VERSION"
+BESMAN_RESULTS_PATH: "$BESMAN_TOOL_PATH/PurpleLlama/CybersecurityBenchmarks/executions/$BESMAN_ARTIFACT_NAME:$BESMAN_ARTIFACT_VERSION"
 
 # Path to the dataset used for the assessment.
-BESMAN_CYBERSECEVAL_DATASETS: "$BESMAN_TOOL_PATH/CybersecurityBenchmarks/datasets"
+BESMAN_CYBERSECEVAL_DATASETS: "$BESMAN_TOOL_PATH/PurpleLlama/CybersecurityBenchmarks/datasets"
 
 # Provider of the model under assessment: ollama | huggingface
 BESMAN_ARTIFACT_PROVIDER: ollama
