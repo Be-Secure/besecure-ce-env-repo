@@ -8,7 +8,7 @@ function __besman_install {
     if [[ -d $BESMAN_ASSESSMENT_DATASTORE_DIR ]]; then
         __besman_echo_white "Assessment datastore found at $BESMAN_ASSESSMENT_DATASTORE_DIR"
     else
-        __besman_echo_white "Cloning assessment datastore from $BESMAN_USER_NAMESPACE/besecure-ml-assessment-datastore"
+        __besman_echo_white "Cloning assessment datastore from $\BESMAN_USER_NAMESPACE/besecure-ml-assessment-datastore"
         __besman_repo_clone "$BESMAN_USER_NAMESPACE" "besecure-ml-assessment-datastore" "$BESMAN_ASSESSMENT_DATASTORE_DIR" || return 1
 
     fi
@@ -38,7 +38,7 @@ function __besman_install {
         sudo apt update && sudo apt install -y jq
     fi
 
-    # Step 4: Pull the Gemma 3B model
+    # Step 4: Pull the cogito model
     __besman_echo_white "[INFO] Pulling $BESMAN_ARTIFACT_NAME:$BESMAN_ARTIFACT_VERSION model..."
     if ollama pull $BESMAN_ARTIFACT_NAME:$BESMAN_ARTIFACT_VERSION; then
         __besman_echo_white "[SUCCESS] Model pulled successfully!"
@@ -100,19 +100,8 @@ function __besman_install {
     # setup CybersecurityBenchmarks using PurpleLlama
     __besman_echo_white "Installing Cybersecurity Benchmarks using PurpleLlama."
     # creating virtual environments
-    if [ ! -d ~/.venvs/CybersecurityBenchmarks ]; then
-        __besman_echo_white "[INFO] Creating Python virtual environment for CybersecurityBenchmarks..."
-        python3 -m venv ~/.venvs/CybersecurityBenchmarks
-    fi
-
-    #python3 -m venv ~/.venvs/CybersecurityBenchmarks
+    python3 -m venv ~/.venvs/CybersecurityBenchmarks
     source ~/.venvs/CybersecurityBenchmarks/bin/activate
-
-    # Install boto3
-    pip3 install --upgrade boto3
-    [[ $? -ne 0 ]] && __besman_echo_red "[ERROR] Failed to install boto3 inside venv." && return 1
-    __besman_echo_green "[SUCCESS] boto3 installed successfully inside venv."
-
     cd "$BESMAN_TOOL_PATH" || { __besman_echo_red "Could not move to $BESMAN_TOOL_PATH" && return 1; }
     pip3 install -r CybersecurityBenchmarks/requirements.txt
 

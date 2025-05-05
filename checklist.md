@@ -2,7 +2,7 @@
 |:----:|-----------|
 | **A** | <p align=center>**Naming Convention**</p> |
 |A.1|All Command files will have a prefix besman-XXXX.sh and  XXXX must be the command name|
-|A.2|All Environment files will have a prefix besman-XXXXX-YYYY-env.sh and XXXXX  must be the artifact name and YYYY should be the environment type|
+|A.2|All Environment files will have a prefix besman-XXXXX-YYYY-env.sh and XXXXX  must be the artifact name and YYYY should be the environment type \( one of RT \| BT \| Assessment\). <br> The Artificat names are derived as follows: /<name of the project/>-/<RT \| BT \| Assessment \>-env |
 |A.3|All Internal besman functions that will be called in other bes scripts must begin with __bes\_|
 |A.4|All function names should have meaningful names which denote what they are intended to do|
 |A.5|All besman  environment scripts should have standard set of functions included in them and follow the following naming convention <br> <br>__bes_XXXX() function  where XXXX is the corresponding command <br> <br> <br> __besman_install() <br> __besman_uninstall() <br> __besman_update() <br> __besman_reset() <br> __besman_validate() <br>|
