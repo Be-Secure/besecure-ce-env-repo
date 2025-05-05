@@ -119,7 +119,7 @@ function __besman_install {
     [[ $? -ne 0 ]] && __besman_echo_red "Conda installation failed" && return 1
 
     __besman_echo_white "Creating conda environment for garak"
-    conda create --name garak "python>=3.10,<=3.12"
+    conda create --name garak "python>=3.10,<=3.12" -y
     conda activate garak
     [[ ! -d "$BESMAN_TOOL_PATH/garak" ]] && __besman_repo_clone "$BESMAN_ORG" "garak" "$BESMAN_TOOL_PATH/garak" || return 1
     cd "$BESMAN_TOOL_PATH/garak" || { __besman_echo_red "Could not move to $BESMAN_TOOL_PATH" && return 1; }
@@ -179,7 +179,7 @@ function __besman_uninstall {
     cd "$BESMAN_TOOL_PATH/PurpleLlama" || { __besman_echo_red "Could not move to $BESMAN_TOOL_PATH/PurpleLlama" && return 1; }
     pip3 uninstall -y -r CybersecurityBenchmarks/requirements.txt
     [[ $? -ne 0 ]] && __besman_echo_red "Failed to uninstall CybersecurityBenchmarks" && return 1
-    python3 -m pip uninstall torch boto3 transformers
+    python3 -m pip uninstall torch boto3 transformers -y
     deactivate
     __besman_echo_no_colour ""
     __besman_echo_green "CybersecurityBenchmarks uninstalled successfully"
@@ -208,7 +208,7 @@ function __besman_uninstall {
     cd "$BESMAN_TOOL_PATH/garak" || { __besman_echo_red "Could not move to $BESMAN_TOOL_PATH/garak" && return 1; }
     python3 -m pip uninstall -y garak
     conda deactivate
-    conda env remove -n garak
+    conda env remove -n garak -y
     __besman_echo_green "garak uninstalled successfully"
     __besman_echo_no_colour ""
 
@@ -224,12 +224,12 @@ function __besman_uninstall {
     __besman_echo_no_colour ""
 
 
-    __besman_echo_white "Removing $BESMAN_TOOL_PATH"
-    rm -rf "$BESMAN_TOOL_PATH"
-    [[ $? -ne 0 ]] && __besman_echo_red "Failed to remove $BESMAN_TOOL_PATH"
-    __besman_echo_no_colour ""
-    __besman_echo_green "$BESMAN_TOOL_PATH removed successfully"
-    __besman_echo_no_colour ""
+    # __besman_echo_white "Removing $BESMAN_TOOL_PATH"
+    # rm -rf "$BESMAN_TOOL_PATH"
+    # [[ $? -ne 0 ]] && __besman_echo_red "Failed to remove $BESMAN_TOOL_PATH"
+    # __besman_echo_no_colour ""
+    # __besman_echo_green "$BESMAN_TOOL_PATH removed successfully"
+    # __besman_echo_no_colour ""
     __besman_echo_green "Uninstallation completed successfully"
     [[ -d ~/.venvs/codeshield_env ]] && rm -rf ~/.venvs/codeshield_env
     [[ -d ~/.venvs/CybersecurityBenchmarks ]] && rm -rf ~/.venvs/CybersecurityBenchmarks
