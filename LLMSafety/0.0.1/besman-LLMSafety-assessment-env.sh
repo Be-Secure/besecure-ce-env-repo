@@ -50,7 +50,7 @@ function __besman_install {
     cd "$BESMAN_TOOL_PATH/PurpleLlama" || { __besman_echo_red "Could not move to $BESMAN_TOOL_PATH" && return 1; }
     git checkout "$BESMAN_TOOL_BRANCH"
     pip3 install -r CybersecurityBenchmarks/requirements.txt
-    python3 -m pip install torch boto3 transformers
+    python3 -m pip install torch boto3 transformers openai
     [[ $? -ne 0 ]] && __besman_echo_red "Failed to install CybersecurityBenchmarks" && return 1
     deactivate
 
@@ -185,7 +185,7 @@ function __besman_uninstall {
     cd "$BESMAN_TOOL_PATH/PurpleLlama" || { __besman_echo_red "Could not move to $BESMAN_TOOL_PATH/PurpleLlama" && return 1; }
     python3 -m pip uninstall -y -r CybersecurityBenchmarks/requirements.txt
     [[ $? -ne 0 ]] && __besman_echo_red "Failed to uninstall CybersecurityBenchmarks" && return 1
-    python3 -m pip uninstall torch boto3 transformers -y
+    python3 -m pip uninstall torch boto3 transformers openai -y
     deactivate
     __besman_echo_no_colour ""
     __besman_echo_green "CybersecurityBenchmarks uninstalled successfully"
