@@ -22,6 +22,12 @@ function __besman_install {
 
     fi
 
+    if ! echo $PATH | grep -q "$HOME/.local/bin"
+    then
+        __besman_echo_no_colour "Adding $HOME/.local/bin to PATH var"
+        echo 'export PATH=$PATH:~/.local/bin' >> ~/.bashrc
+        source ~/.bashrc
+    fi
     # ======================cyberseceval installation========================
 
     __besman_repo_clone "$BESMAN_ORG" "PurpleLlama" "$BESMAN_TOOL_PATH/PurpleLlama" || return 1
