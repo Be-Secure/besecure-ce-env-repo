@@ -20,7 +20,7 @@ BESMAN_ARTIFACT_NAME:  #***
 BESMAN_ARTIFACT_VERSION: 
 
 # Source code url of the artifact under assessment.
-BESMAN_ARTIFACT_URL: https://ollama.com/library/deepseek-r1 #***
+BESMAN_ARTIFACT_URL: #***
 
 # This variable stores the name of the environment file.
 BESMAN_ENV_NAME: LLMSafetyAssessment-env #***
