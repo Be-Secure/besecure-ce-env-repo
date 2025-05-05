@@ -28,9 +28,15 @@ function __besman_install {
         echo 'export PATH=$PATH:~/.local/bin' >> ~/.bashrc
         source ~/.bashrc
     fi
+
+    if [[ -z $(which venv) ]]; then
+        __besman_echo_white "Installing python3-venv"
+        sudo apt install python3-venv -y
+    else
+        __besman_echo_white "python3-venv found"
+    fi
     # ======================cyberseceval installation========================
     __besman_repo_clone "$BESMAN_ORG" "PurpleLlama" "$BESMAN_TOOL_PATH/PurpleLlama"
-    sudo apt install python3-venv -y
     __besman_echo_white "Installing Cybersecurity Benchmarks..."
     python3 -m venv ~/.venvs/CybersecurityBenchmarks
     source ~/.venvs/CybersecurityBenchmarks/bin/activate
