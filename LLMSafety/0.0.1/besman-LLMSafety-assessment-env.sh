@@ -29,8 +29,7 @@ function __besman_install {
         source ~/.bashrc
     fi
     # ======================cyberseceval installation========================
-
-    __besman_repo_clone "$BESMAN_ORG" "PurpleLlama" "$BESMAN_TOOL_PATH/PurpleLlama" || return 1
+    __besman_repo_clone "$BESMAN_ORG" "PurpleLlama" "$BESMAN_TOOL_PATH/PurpleLlama"
     sudo apt install python3-venv -y
     __besman_echo_white "Installing Cybersecurity Benchmarks..."
     python3 -m venv ~/.venvs/CybersecurityBenchmarks
