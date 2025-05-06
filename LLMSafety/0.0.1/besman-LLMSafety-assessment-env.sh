@@ -241,6 +241,10 @@ function __besman_uninstall {
     __besman_echo_green "Uninstallation completed successfully"
     [[ -d ~/.venvs/codeshield_env ]] && rm -rf ~/.venvs/codeshield_env
     [[ -d ~/.venvs/CybersecurityBenchmarks ]] && rm -rf ~/.venvs/CybersecurityBenchmarks
+
+    [[ -d "$BESMAN_TOOL_PATH/modelbench" ]] && rm -rf "$BESMAN_TOOL_PATH/modelbench"
+    [[ -d "$BESMAN_TOOL_PATH/PurpleLlama" ]] && rm -rf "$BESMAN_TOOL_PATH/PurpleLlama"
+    [[ -d "$BESMAN_TOOL_PATH/garak" ]] && rm -rf "$BESMAN_TOOL_PATH/garak"
     cd "$HOME"
 }
 
