@@ -28,7 +28,9 @@ function __besman_install {
     then
         __besman_echo_no_colour "Adding $HOME/.local/bin to PATH var"
         echo 'export PATH=$PATH:~/.local/bin' >> ~/.bashrc
+        echo 'export BESMAN_DIR="$HOME/.besman" && if [[ -s "$HOME/.besman/bin/besman-init.sh" ]]; then source "$HOME/.besman/bin/besman-init.sh"; fi' >> ~/.bashrc
         source ~/.bashrc
+
     fi
 
     if [[ -z $(which venv) ]]; then
