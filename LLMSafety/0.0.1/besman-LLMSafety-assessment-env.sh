@@ -2,7 +2,6 @@
 
 function __besman_install {
 
-    trap 'rm -rf ~/.venvs/CybersecurityBenchmarks ~/.venvs/codeshield_env ~/.venvs/modelbench_env echo Removing....' ERR
     # Checks if GitHub CLI is present or not.
     __besman_check_vcs_exist || return 1
 
