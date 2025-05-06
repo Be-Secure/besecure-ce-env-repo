@@ -141,7 +141,7 @@ function __besman_install {
     conda deactivate
     cd "$HOME"
     #==============Ollama installation========================
-    if [[ "$BESMAN_ARTIFACT_PROVIDER" == "ollama" ]]; then
+    if [[ "$BESMAN_ARTIFACT_PROVIDER" == "Ollama" ]]; then
         # Installing ollama
         __besman_echo_white "Installing ollama..."
         if [[ -z $(which ollama) ]]; then
