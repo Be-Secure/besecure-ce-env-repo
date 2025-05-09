@@ -371,6 +371,13 @@ function __besman_validate {
         __besman_echo_red "garak conda environment missing."
         flag="true"
     fi
+    source /opt/conda/etc/profile.d/conda.sh
+    conda activate garak
+    garak --help > /dev/null 2>&1
+    if [[ $? -ne 0 ]]; then
+        __besman_echo_red "Garak is not installed."
+        flag="true"
+    fi
 
     # Validate poetry installation
     if [[ -z $(which poetry) ]]; then
