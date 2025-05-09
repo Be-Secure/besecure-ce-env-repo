@@ -252,6 +252,12 @@ function __besman_update {
     __besman_echo_white "Updating CybersecurityBenchmarks..."
     cd "$BESMAN_TOOL_PATH/PurpleLlama" || { __besman_echo_red "Could not move to $BESMAN_TOOL_PATH/PurpleLlama" && return 1; }
     git pull origin main || { __besman_echo_red "Failed to update CybersecurityBenchmarks" && return 1; }
+    source ~/.venvs/CybersecurityBenchmarks/bin/activate
+    git checkout "$BESMAN_TOOL_BRANCH"
+    python3 -m pip install --upgrade -r CybersecurityBenchmarks/requirements.txt
+    python3 -m pip install --upgrade torch boto3 transformers openai
+    [[ $? -ne 0 ]] && __besman_echo_red "Failed to update CybersecurityBenchmarks" && return 1
+    __besman_echo_no_colour ""
     __besman_echo_green "CybersecurityBenchmarks updated successfully"
     __besman_echo_no_colour ""
     __besman_echo_white "Updating codeshield..."
@@ -311,15 +317,48 @@ function __besman_validate {
     fi
 
     # Validate BESMAN_TOOL_PATH folder
-    if [[ ! -d "$BESMAN_TOOL_PATH" ]]; then
-        __besman_echo_red "$BESMAN_TOOL_PATH does not exist."
+    if [[ ! -d "$BESMAN_TOOL_PATH/PurpleLlama" ]]; then
+        __besman_echo_red "$BESMAN_TOOL_PATH/PurpleLlama does not exist."
         flag="true"
     fi
 
-    # Validate ollama installation
-    if [[ -z $(which ollama) ]]; then
-        __besman_echo_red "ollama is not installed."
+    if [[ ! -d "$BESMAN_TOOL_PATH/garak" ]]; then
+        __besman_echo_red "$BESMAN_TOOL_PATH/garak does not exist."
         flag="true"
+    fi
+
+    if [[ ! -d "$BESMAN_TOOL_PATH/modelbench" ]]; then
+        __besman_echo_red "$BESMAN_TOOL_PATH/modelbench does not exist."
+        flag="true"
+    fi
+
+    source ~/.venvs/CybersecurityBenchmarks/bin/activate
+
+    # Validate CybersecurityBenchmarks installation
+    if ! python3 -m pip show torch > /dev/null 2>&1; then
+        __besman_echo_red "torch is not installed."
+        flag="true"
+    fi
+
+    if ! python3 -m pip show boto3 > /dev/null 2>&1; then
+        __besman_echo_red "boto3 is not installed."
+        flag="true"
+    fi
+    if [[ "$BESMAN_ARTIFACT_PROVIDER" == "HuggingFace" ]] 
+    then
+        if ! python3 -m pip show transformers > /dev/null 2>&1; then
+            __besman_echo_red "transformers is not installed."
+            flag="true"
+        fi
+    fi
+    deactivate
+    if [[ "$BESMAN_ARTIFACT_PROVIDER" == "Ollama" ]]
+    then
+        # Validate ollama installation
+        if [[ -z $(which ollama) ]]; then
+            __besman_echo_red "ollama is not installed."
+            flag="true"
+        fi
     fi
 
     if [[ ! -d ~/.venvs/modelbench_env ]]; then
