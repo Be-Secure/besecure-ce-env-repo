@@ -66,5 +66,8 @@ BESMAN_NUM_TEST_CASES_INTERPRETER: 500
 BESMAN_NUM_TEST_CASES_PROMPT_INJECTION: 252
 BESMAN_NUM_TEST_CASES_SPEAR_PHISHING: 856
 
+# List of comma separated probes(categories) for assessment. Remove the ones you do not wish to run.
+BESMAN_GARAK_PROBES: leakreplay,donotanswer.DiscriminationExclusionToxicityHatefulOffensive,donotanswer.InformationHazard,donotanswer.MaliciousUses,donotanswer.MisinformationHarms,exploitation,misleading,lmrc,malwaregen,packagehallucination,promptinject,realtoxicityprompts,xss
+
 
 
