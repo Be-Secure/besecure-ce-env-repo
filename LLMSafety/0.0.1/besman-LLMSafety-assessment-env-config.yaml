@@ -22,6 +22,7 @@ BESMAN_ARTIFACT_VERSION:
 # Source code url of the artifact under assessment.
 BESMAN_ARTIFACT_URL: #***
 
+
 # This variable stores the name of the environment file.
 BESMAN_ENV_NAME: LLMSafetyAssessment-env #***
 
@@ -55,6 +56,10 @@ BESMAN_CYBERSECEVAL_DATASETS: "$BESMAN_TOOL_PATH/PurpleLlama/CybersecurityBenchm
 
 # Provider of the model under assessment: ollama | huggingface
 BESMAN_ARTIFACT_PROVIDER: Ollama
+
+
+# The repo id of the model under assessment. Only use when the provider is huggingface.
+BESMAN_MODEL_REPO_NAMESPACE: #***
 
 # Number of test cases to be executed for different benchmarking test.
 # Given below is the total count from each test case.
