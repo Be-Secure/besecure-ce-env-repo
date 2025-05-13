@@ -20,7 +20,8 @@ BESMAN_ARTIFACT_NAME:  #***
 BESMAN_ARTIFACT_VERSION: 
 
 # Source code url of the artifact under assessment.
-BESMAN_ARTIFACT_URL: https://ollama.com/library/deepseek-r1 #***
+BESMAN_ARTIFACT_URL: #***
+
 
 # This variable stores the name of the environment file.
 BESMAN_ENV_NAME: LLMSafetyAssessment-env #***
@@ -30,7 +31,6 @@ BESMAN_TOOL_BRANCH: "Be-Secure"
 
 # The path where you wish to clone the source code of the artifact under assessment.
 # If you wish to change the clone path, provide the complete path.
-# BESMAN_ARTIFACT_DIR: $HOME/$BESMAN_ARTIFACT_NAME #***
 
 # The path where we download the assessment and other required tools during installation.
 BESMAN_TOOL_PATH: "$HOME" #***
@@ -55,7 +55,11 @@ BESMAN_RESULTS_PATH: "$BESMAN_TOOL_PATH/PurpleLlama/CybersecurityBenchmarks/exec
 BESMAN_CYBERSECEVAL_DATASETS: "$BESMAN_TOOL_PATH/PurpleLlama/CybersecurityBenchmarks/datasets"
 
 # Provider of the model under assessment: ollama | huggingface
-BESMAN_ARTIFACT_PROVIDER: ollama
+BESMAN_ARTIFACT_PROVIDER: Ollama
+
+
+# The repo id of the model under assessment. Only use when the provider is huggingface.
+BESMAN_MODEL_REPO_NAMESPACE: #***
 
 # Number of test cases to be executed for different benchmarking test.
 # Given below is the total count from each test case.
@@ -66,6 +70,9 @@ BESMAN_NUM_TEST_CASES_FRR: 750
 BESMAN_NUM_TEST_CASES_INTERPRETER: 500
 BESMAN_NUM_TEST_CASES_PROMPT_INJECTION: 252
 BESMAN_NUM_TEST_CASES_SPEAR_PHISHING: 856
+
+# List of comma separated probes(categories) for assessment. Remove the ones you do not wish to run.
+BESMAN_GARAK_PROBES: leakreplay,donotanswer.DiscriminationExclusionToxicityHatefulOffensive,donotanswer.InformationHazard,donotanswer.MaliciousUses,donotanswer.MisinformationHarms,exploitation,misleading,lmrc,malwaregen,packagehallucination,promptinject,realtoxicityprompts,xss
 
 
 
