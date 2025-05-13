@@ -21,25 +21,25 @@
             },
             "compatible_playbooks": [
                 {
-                    "name": "spdx-sbom-generator",
+                    "name": "SBOM-SpdxSbomGenerator",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "criticality_score",
+                    "name": "PIA-CriticalityScore",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "sonarqube",
+                    "name": "SAST-sonarqube",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "scorecard",
+                    "name": "RIP-scorecard",
                     "version": [
                         "0.0.1"
                     ]
@@ -66,25 +66,25 @@
             },
             "compatible_playbooks": [
                 {
-                    "name": "spdx-sbom-generator",
+                    "name": "SBOM-SpdxSbomGenerator",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "criticality_score",
+                    "name": "PIA-CriticalityScore",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "sonarqube",
+                    "name": "SAST-sonarqube",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "scorecard",
+                    "name": "RIP-scorecard",
                     "version": [
                         "0.0.1"
                     ]
@@ -111,25 +111,25 @@
             },
             "compatible_playbooks": [
                 {
-                    "name": "spdx-sbom-generator",
+                    "name": "SBOM-SpdxSbomGenerator",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "criticality_score",
+                    "name": "PIA-CriticalityScore",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "sonarqube",
+                    "name": "SAST-sonarqube",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "scorecard",
+                    "name": "RIP-scorecard",
                     "version": [
                         "0.0.1"
                     ]
@@ -156,25 +156,25 @@
             },
             "compatible_playbooks": [
                 {
-                    "name": "spdx-sbom-generator",
+                    "name": "SBOM-SpdxSbomGenerator",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "criticality_score",
+                    "name": "PIA-CriticalityScore",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "sonarqube",
+                    "name": "SAST-sonarqube",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "scorecard",
+                    "name": "RIP-scorecard",
                     "version": [
                         "0.0.1"
                     ]
@@ -201,25 +201,25 @@
             },
             "compatible_playbooks": [
                 {
-                    "name": "spdx-sbom-generator",
+                    "name": "SBOM-SpdxSbomGenerator",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "criticality_score",
+                    "name": "PIA-CriticalityScore",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "sonarqube",
+                    "name": "SAST-sonarqube",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "scorecard",
+                    "name": "RIP-scorecard",
                     "version": [
                         "0.0.1"
                     ]
@@ -279,25 +279,25 @@
             },
             "compatible_playbooks": [
                 {
-                    "name": "spdx-sbom-generator",
+                    "name": "SBOM-SpdxSbomGenerator",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "criticality_score",
+                    "name": "PIA-CriticalityScore",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "sonarqube",
+                    "name": "SAST-sonarqube",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "scorecard",
+                    "name": "RIP-scorecard",
                     "version": [
                         "0.0.1"
                     ]
@@ -324,25 +324,25 @@
             },
             "compatible_playbooks": [
                 {
-                    "name": "spdx-sbom-generator",
+                    "name": "SBOM-SpdxSbomGenerator",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "criticality_score",
+                    "name": "PIA-CriticalityScore",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "sonarqube",
+                    "name": "SAST-sonarqube",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "scorecard",
+                    "name": "RIP-scorecard",
                     "version": [
                         "0.0.1"
                     ]
@@ -369,25 +369,25 @@
             },
             "compatible_playbooks": [
                 {
-                    "name": "spdx-sbom-generator",
+                    "name": "SBOM-SpdxSbomGenerator",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "criticality_score",
+                    "name": "PIA-CriticalityScore",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "sonarqube",
+                    "name": "SAST-sonarqube",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "scorecard",
+                    "name": "RIP-scorecard",
                     "version": [
                         "0.0.1"
                     ]
@@ -414,25 +414,25 @@
             },
             "compatible_playbooks": [
                 {
-                    "name": "spdx-sbom-generator",
+                    "name": "SBOM-SpdxSbomGenerator",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "criticality_score",
+                    "name": "PIA-CriticalityScore",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "sonarqube",
+                    "name": "SAST-sonarqube",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "scorecard",
+                    "name": "RIP-scorecard",
                     "version": [
                         "0.0.1"
                     ]
@@ -459,25 +459,25 @@
             },
             "compatible_playbooks": [
                 {
-                    "name": "spdx-sbom-generator",
+                    "name": "SBOM-SpdxSbomGenerator",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "criticality_score",
+                    "name": "PIA-CriticalityScore",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "sonarqube",
+                    "name": "SAST-sonarqube",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "scorecard",
+                    "name": "RIP-scorecard",
                     "version": [
                         "0.0.1"
                     ]
@@ -504,25 +504,25 @@
             },
             "compatible_playbooks": [
                 {
-                    "name": "spdx-sbom-generator",
+                    "name": "SBOM-SpdxSbomGenerator",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "criticality_score",
+                    "name": "PIA-CriticalityScore",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "sonarqube",
+                    "name": "SAST-sonarqube",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "scorecard",
+                    "name": "RIP-scorecard",
                     "version": [
                         "0.0.1"
                     ]
@@ -549,25 +549,25 @@
             },
             "compatible_playbooks": [
                 {
-                    "name": "spdx-sbom-generator",
+                    "name": "SBOM-SpdxSbomGenerator",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "criticality_score",
+                    "name": "PIA-CriticalityScore",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "sonarqube",
+                    "name": "SAST-sonarqube",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "scorecard",
+                    "name": "RIP-scorecard",
                     "version": [
                         "0.0.1"
                     ]
@@ -594,25 +594,25 @@
             },
             "compatible_playbooks": [
                 {
-                    "name": "spdx-sbom-generator",
+                    "name": "SBOM-SpdxSbomGenerator",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "criticality_score",
+                    "name": "PIA-CriticalityScore",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "sonarqube",
+                    "name": "SAST-sonarqube",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "scorecard",
+                    "name": "RIP-scorecard",
                     "version": [
                         "0.0.1"
                     ]
@@ -639,25 +639,25 @@
             },
             "compatible_playbooks": [
                 {
-                    "name": "spdx-sbom-generator",
+                    "name": "SBOM-SpdxSbomGenerator",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "criticality_score",
+                    "name": "PIA-CriticalityScore",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "sonarqube",
+                    "name": "SAST-sonarqube",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "scorecard",
+                    "name": "RIP-scorecard",
                     "version": [
                         "0.0.1"
                     ]
@@ -684,25 +684,25 @@
             },
             "compatible_playbooks": [
                 {
-                    "name": "spdx-sbom-generator",
+                    "name": "SBOM-SpdxSbomGenerator",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "criticality_score",
+                    "name": "PIA-CriticalityScore",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "sonarqube",
+                    "name": "SAST-sonarqube",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "scorecard",
+                    "name": "RIP-scorecard",
                     "version": [
                         "0.0.1"
                     ]
@@ -729,25 +729,25 @@
             },
             "compatible_playbooks": [
                 {
-                    "name": "spdx-sbom-generator",
+                    "name": "SBOM-SpdxSbomGenerator",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "criticality_score",
+                    "name": "PIA-CriticalityScore",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "sonarqube",
+                    "name": "SAST-sonarqube",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "scorecard",
+                    "name": "RIP-scorecard",
                     "version": [
                         "0.0.1"
                     ]
@@ -774,25 +774,25 @@
             },
             "compatible_playbooks": [
                 {
-                    "name": "spdx-sbom-generator",
+                    "name": "SBOM-SpdxSbomGenerator",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "criticality_score",
+                    "name": "PIA-CriticalityScore",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "sonarqube",
+                    "name": "SAST-sonarqube",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "scorecard",
+                    "name": "RIP-scorecard",
                     "version": [
                         "0.0.1"
                     ]
@@ -839,25 +839,25 @@
             },
             "compatible_playbooks": [
                 {
-                    "name": "spdx-sbom-generator",
+                    "name": "SBOM-SpdxSbomGenerator",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "criticality_score",
+                    "name": "PIA-CriticalityScore",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "sonarqube",
+                    "name": "SAST-sonarqube",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "scorecard",
+                    "name": "RIP-scorecard",
                     "version": [
                         "0.0.1"
                     ]
@@ -884,25 +884,25 @@
             },
             "compatible_playbooks": [
                 {
-                    "name": "spdx-sbom-generator",
+                    "name": "SBOM-SpdxSbomGenerator",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "criticality_score",
+                    "name": "PIA-CriticalityScore",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "sonarqube",
+                    "name": "SAST-sonarqube",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "scorecard",
+                    "name": "RIP-scorecard",
                     "version": [
                         "0.0.1"
                     ]
@@ -929,25 +929,25 @@
             },
             "compatible_playbooks": [
                 {
-                    "name": "spdx-sbom-generator",
+                    "name": "SBOM-SpdxSbomGenerator",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "criticality_score",
+                    "name": "PIA-CriticalityScore",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "sonarqube",
+                    "name": "SAST-sonarqube",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "scorecard",
+                    "name": "RIP-scorecard",
                     "version": [
                         "0.0.1"
                     ]
@@ -974,25 +974,25 @@
             },
             "compatible_playbooks": [
                 {
-                    "name": "spdx-sbom-generator",
+                    "name": "SBOM-SpdxSbomGenerator",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "criticality_score",
+                    "name": "PIA-CriticalityScore",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "sonarqube",
+                    "name": "SAST-sonarqube",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "scorecard",
+                    "name": "RIP-scorecard",
                     "version": [
                         "0.0.1"
                     ]
@@ -1019,25 +1019,25 @@
             },
             "compatible_playbooks": [
                 {
-                    "name": "spdx-sbom-generator",
+                    "name": "SBOM-SpdxSbomGenerator",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "criticality_score",
+                    "name": "PIA-CriticalityScore",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "sonarqube",
+                    "name": "SAST-sonarqube",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "scorecard",
+                    "name": "RIP-scorecard",
                     "version": [
                         "0.0.1"
                     ]
@@ -1064,25 +1064,25 @@
             },
             "compatible_playbooks": [
                 {
-                    "name": "spdx-sbom-generator",
+                    "name": "SBOM-SpdxSbomGenerator",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "criticality_score",
+                    "name": "PIA-CriticalityScore",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "sonarqube",
+                    "name": "SAST-sonarqube",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "scorecard",
+                    "name": "RIP-scorecard",
                     "version": [
                         "0.0.1"
                     ]
@@ -1109,25 +1109,25 @@
             },
             "compatible_playbooks": [
                 {
-                    "name": "spdx-sbom-generator",
+                    "name": "SBOM-SpdxSbomGenerator",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "criticality_score",
+                    "name": "PIA-CriticalityScore",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "sonarqube",
+                    "name": "SAST-sonarqube",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "scorecard",
+                    "name": "RIP-scorecard",
                     "version": [
                         "0.0.1"
                     ]
@@ -1154,25 +1154,25 @@
             },
             "compatible_playbooks": [
                 {
-                    "name": "spdx-sbom-generator",
+                    "name": "SBOM-SpdxSbomGenerator",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "criticality_score",
+                    "name": "PIA-CriticalityScore",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "sonarqube",
+                    "name": "SAST-sonarqube",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "scorecard",
+                    "name": "RIP-scorecard",
                     "version": [
                         "0.0.1"
                     ]
@@ -1199,25 +1199,25 @@
             },
             "compatible_playbooks": [
                 {
-                    "name": "spdx-sbom-generator",
+                    "name": "SBOM-SpdxSbomGenerator",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "criticality_score",
+                    "name": "PIA-CriticalityScore",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "sonarqube",
+                    "name": "SAST-sonarqube",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "scorecard",
+                    "name": "RIP-scorecard",
                     "version": [
                         "0.0.1"
                     ]
@@ -1244,25 +1244,25 @@
             },
             "compatible_playbooks": [
                 {
-                    "name": "spdx-sbom-generator",
+                    "name": "SBOM-SpdxSbomGenerator",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "criticality_score",
+                    "name": "PIA-CriticalityScore",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "sonarqube",
+                    "name": "SAST-sonarqube",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "scorecard",
+                    "name": "RIP-scorecard",
                     "version": [
                         "0.0.1"
                     ]
@@ -1289,25 +1289,25 @@
             },
             "compatible_playbooks": [
                 {
-                    "name": "spdx-sbom-generator",
+                    "name": "SBOM-SpdxSbomGenerator",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "criticality_score",
+                    "name": "PIA-CriticalityScore",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "sonarqube",
+                    "name": "SAST-sonarqube",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "scorecard",
+                    "name": "RIP-scorecard",
                     "version": [
                         "0.0.1"
                     ]
@@ -1334,19 +1334,19 @@
             },
             "compatible_playbooks": [
                 {
-                    "name": "criticality_score",
+                    "name": "PIA-CriticalityScore",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "sonarqube",
+                    "name": "SAST-sonarqube",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "scorecard",
+                    "name": "RIP-scorecard",
                     "version": [
                         "0.0.1"
                     ]
@@ -1373,19 +1373,19 @@
             },
             "compatible_playbooks": [
                 {
-                    "name": "criticality_score",
+                    "name": "PIA-CriticalityScore",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "sonarqube",
+                    "name": "SAST-sonarqube",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "scorecard",
+                    "name": "RIP-scorecard",
                     "version": [
                         "0.0.1"
                     ]
@@ -1412,19 +1412,19 @@
             },
             "compatible_playbooks": [
                 {
-                    "name": "criticality_score",
+                    "name": "PIA-CriticalityScore",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "sonarqube",
+                    "name": "SAST-sonarqube",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "scorecard",
+                    "name": "RIP-scorecard",
                     "version": [
                         "0.0.1"
                     ]
@@ -1451,19 +1451,19 @@
             },
             "compatible_playbooks": [
                 {
-                    "name": "criticality_score",
+                    "name": "PIA-CriticalityScore",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "scorecard",
+                    "name": "RIP-scorecard",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "sonarqube",
+                    "name": "SAST-sonarqube",
                     "version": [
                         "0.0.1"
                     ]
@@ -1490,19 +1490,19 @@
             },
             "compatible_playbooks": [
                 {
-                    "name": "criticality_score",
+                    "name": "PIA-CriticalityScore",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "scorecard",
+                    "name": "RIP-scorecard",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "sonarqube",
+                    "name": "SAST-sonarqube",
                     "version": [
                         "0.0.1"
                     ]
@@ -1529,19 +1529,19 @@
             },
             "compatible_playbooks": [
                 {
-                    "name": "criticality_score",
+                    "name": "PIA-CriticalityScore",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "scorecard",
+                    "name": "RIP-scorecard",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "sonarqube",
+                    "name": "SAST-sonarqube",
                     "version": [
                         "0.0.1"
                     ]
@@ -1568,19 +1568,19 @@
             },
             "compatible_playbooks": [
                 {
-                    "name": "criticality_score",
+                    "name": "PIA-CriticalityScore",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "sonarqube",
+                    "name": "SAST-sonarqube",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "scorecard",
+                    "name": "RIP-scorecard",
                     "version": [
                         "0.0.1"
                     ]
@@ -1607,19 +1607,19 @@
             },
             "compatible_playbooks": [
                 {
-                    "name": "criticality_score",
+                    "name": "PIA-CriticalityScore",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "sonarqube",
+                    "name": "SAST-sonarqube",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "scorecard",
+                    "name": "RIP-scorecard",
                     "version": [
                         "0.0.1"
                     ]
@@ -1646,19 +1646,19 @@
             },
             "compatible_playbooks": [
                 {
-                    "name": "criticality_score",
+                    "name": "PIA-CriticalityScore",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "sonarqube",
+                    "name": "SAST-sonarqube",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "scorecard",
+                    "name": "RIP-scorecard",
                     "version": [
                         "0.0.1"
                     ]
@@ -1685,19 +1685,19 @@
             },
             "compatible_playbooks": [
                 {
-                    "name": "criticality_score",
+                    "name": "PIA-CriticalityScore",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "sonarqube",
+                    "name": "SAST-sonarqube",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "scorecard",
+                    "name": "RIP-scorecard",
                     "version": [
                         "0.0.1"
                     ]
@@ -1724,19 +1724,19 @@
             },
             "compatible_playbooks": [
                 {
-                    "name": "criticality_score",
+                    "name": "PIA-CriticalityScore",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "sonarqube",
+                    "name": "SAST-sonarqube",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "scorecard",
+                    "name": "RIP-scorecard",
                     "version": [
                         "0.0.1"
                     ]
@@ -1763,19 +1763,19 @@
             },
             "compatible_playbooks": [
                 {
-                    "name": "criticality_score",
+                    "name": "PIA-CriticalityScore",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "sonarqube",
+                    "name": "SAST-sonarqube",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "scorecard",
+                    "name": "RIP-scorecard",
                     "version": [
                         "0.0.1"
                     ]
@@ -1802,19 +1802,19 @@
             },
             "compatible_playbooks": [
                 {
-                    "name": "criticality_score",
+                    "name": "PIA-CriticalityScore",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "sonarqube",
+                    "name": "SAST-sonarqube",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "scorecard",
+                    "name": "RIP-scorecard",
                     "version": [
                         "0.0.1"
                     ]
@@ -1841,19 +1841,19 @@
             },
             "compatible_playbooks": [
                 {
-                    "name": "criticality_score",
+                    "name": "PIA-CriticalityScore",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "sonarqube",
+                    "name": "SAST-sonarqube",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "scorecard",
+                    "name": "RIP-scorecard",
                     "version": [
                         "0.0.1"
                     ]
@@ -1880,19 +1880,19 @@
             },
             "compatible_playbooks": [
                 {
-                    "name": "criticality_score",
+                    "name": "PIA-CriticalityScore",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "sonarqube",
+                    "name": "SAST-sonarqube",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "scorecard",
+                    "name": "RIP-scorecard",
                     "version": [
                         "0.0.1"
                     ]
@@ -1919,19 +1919,19 @@
             },
             "compatible_playbooks": [
                 {
-                    "name": "criticality_score",
+                    "name": "PIA-CriticalityScore",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "sonarqube",
+                    "name": "SAST-sonarqube",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "scorecard",
+                    "name": "RIP-scorecard",
                     "version": [
                         "0.0.1"
                     ]
@@ -1958,19 +1958,19 @@
             },
             "compatible_playbooks": [
                 {
-                    "name": "criticality_score",
+                    "name": "PIA-CriticalityScore",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "sonarqube",
+                    "name": "SAST-sonarqube",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "scorecard",
+                    "name": "RIP-scorecard",
                     "version": [
                         "0.0.1"
                     ]
@@ -1997,25 +1997,25 @@
             },
             "compatible_playbooks": [
                 {
-                    "name": "spdx-sbom-generator",
+                    "name": "SBOM-SpdxSbomGenerator",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "criticality_score",
+                    "name": "PIA-CriticalityScore",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "sonarqube",
+                    "name": "SAST-sonarqube",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "scorecard",
+                    "name": "RIP-scorecard",
                     "version": [
                         "0.0.1"
                     ]
@@ -2042,19 +2042,19 @@
             },
             "compatible_playbooks": [
                 {
-                    "name": "criticality_score",
+                    "name": "PIA-CriticalityScore",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "sonarqube",
+                    "name": "SAST-sonarqube",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "scorecard",
+                    "name": "RIP-scorecard",
                     "version": [
                         "0.0.1"
                     ]
@@ -2062,7 +2062,7 @@
             ]
         },
         {
-            "name": "criticality_score-RT-env",
+            "name": "PIA-CriticalityScore-RT-env",
             "version": {
                 "tag": "0.0.1",
                 "release_date": ""
@@ -2081,19 +2081,19 @@
             },
             "compatible_playbooks": [
                 {
-                    "name": "criticality_score",
+                    "name": "PIA-CriticalityScore",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "sonarqube",
+                    "name": "SAST-sonarqube",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "scorecard",
+                    "name": "RIP-scorecard",
                     "version": [
                         "0.0.1"
                     ]
@@ -2120,25 +2120,25 @@
             },
             "compatible_playbooks": [
                 {
-                    "name": "spdx-sbom-generator",
+                    "name": "SBOM-SpdxSbomGenerator",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "criticality_score",
+                    "name": "PIA-CriticalityScore",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "sonarqube",
+                    "name": "SAST-sonarqube",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "scorecard",
+                    "name": "RIP-scorecard",
                     "version": [
                         "0.0.1"
                     ]
@@ -2165,25 +2165,25 @@
             },
             "compatible_playbooks": [
                 {
-                    "name": "spdx-sbom-generator",
+                    "name": "SBOM-SpdxSbomGenerator",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "criticality_score",
+                    "name": "PIA-CriticalityScore",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "sonarqube",
+                    "name": "SAST-sonarqube",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "scorecard",
+                    "name": "RIP-scorecard",
                     "version": [
                         "0.0.1"
                     ]
@@ -2210,25 +2210,25 @@
             },
             "compatible_playbooks": [
                 {
-                    "name": "spdx-sbom-generator",
+                    "name": "SBOM-SpdxSbomGenerator",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "criticality_score",
+                    "name": "PIA-CriticalityScore",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "sonarqube",
+                    "name": "SAST-sonarqube",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "scorecard",
+                    "name": "RIP-scorecard",
                     "version": [
                         "0.0.1"
                     ]
@@ -2255,25 +2255,25 @@
             },
             "compatible_playbooks": [
                 {
-                    "name": "spdx-sbom-generator",
+                    "name": "SBOM-SpdxSbomGenerator",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "criticality_score",
+                    "name": "PIA-CriticalityScore",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "sonarqube",
+                    "name": "SAST-sonarqube",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "scorecard",
+                    "name": "RIP-scorecard",
                     "version": [
                         "0.0.1"
                     ]
@@ -2300,19 +2300,19 @@
             },
             "compatible_playbooks": [
                 {
-                    "name": "criticality_score",
+                    "name": "PIA-CriticalityScore",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "sonarqube",
+                    "name": "SAST-sonarqube",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "scorecard",
+                    "name": "RIP-scorecard",
                     "version": [
                         "0.0.1"
                     ]
@@ -2320,7 +2320,7 @@
             ]
         },
         {
-            "name": "sonarqube-RT-env",
+            "name": "SAST-sonarqube-RT-env",
             "version": {
                 "tag": "0.0.1",
                 "release_date": ""
@@ -2339,19 +2339,19 @@
             },
             "compatible_playbooks": [
                 {
-                    "name": "criticality_score",
+                    "name": "PIA-CriticalityScore",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "sonarqube",
+                    "name": "SAST-sonarqube",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "scorecard",
+                    "name": "RIP-scorecard",
                     "version": [
                         "0.0.1"
                     ]
@@ -2359,7 +2359,7 @@
             ]
         },
         {
-            "name": "spdx-sbom-generator-RT-env",
+            "name": "SBOM-SpdxSbomGenerator-RT-env",
             "version": {
                 "tag": "0.0.1",
                 "release_date": ""
@@ -2378,19 +2378,19 @@
             },
             "compatible_playbooks": [
                 {
-                    "name": "criticality_score",
+                    "name": "PIA-CriticalityScore",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "sonarqube",
+                    "name": "SAST-sonarqube",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "scorecard",
+                    "name": "RIP-scorecard",
                     "version": [
                         "0.0.1"
                     ]
@@ -2437,25 +2437,25 @@
             },
             "compatible_playbooks": [
                 {
-                    "name": "spdx-sbom-generator",
+                    "name": "SBOM-SpdxSbomGenerator",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "criticality_score",
+                    "name": "PIA-CriticalityScore",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "sonarqube",
+                    "name": "SAST-sonarqube",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "scorecard",
+                    "name": "RIP-scorecard",
                     "version": [
                         "0.0.1"
                     ]
@@ -2482,25 +2482,25 @@
             },
             "compatible_playbooks": [
                 {
-                    "name": "spdx-sbom-generator",
+                    "name": "SBOM-SpdxSbomGenerator",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "criticality_score",
+                    "name": "PIA-CriticalityScore",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "sonarqube",
+                    "name": "SAST-sonarqube",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "scorecard",
+                    "name": "RIP-scorecard",
                     "version": [
                         "0.0.1"
                     ]
@@ -2527,25 +2527,25 @@
             },
             "compatible_playbooks": [
                 {
-                    "name": "spdx-sbom-generator",
+                    "name": "SBOM-SpdxSbomGenerator",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "criticality_score",
+                    "name": "PIA-CriticalityScore",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "sonarqube",
+                    "name": "SAST-sonarqube",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "scorecard",
+                    "name": "RIP-scorecard",
                     "version": [
                         "0.0.1"
                     ]
@@ -2572,25 +2572,25 @@
             },
             "compatible_playbooks": [
                 {
-                    "name": "spdx-sbom-generator",
+                    "name": "SBOM-SpdxSbomGenerator",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "criticality_score",
+                    "name": "PIA-CriticalityScore",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "sonarqube",
+                    "name": "SAST-sonarqube",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "scorecard",
+                    "name": "RIP-scorecard",
                     "version": [
                         "0.0.1"
                     ]
@@ -2617,25 +2617,25 @@
             },
             "compatible_playbooks": [
                 {
-                    "name": "spdx-sbom-generator",
+                    "name": "SBOM-SpdxSbomGenerator",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "criticality_score",
+                    "name": "PIA-CriticalityScore",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "sonarqube",
+                    "name": "SAST-sonarqube",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "scorecard",
+                    "name": "RIP-scorecard",
                     "version": [
                         "0.0.1"
                     ]
@@ -2662,25 +2662,25 @@
             },
             "compatible_playbooks": [
                 {
-                    "name": "spdx-sbom-generator",
+                    "name": "SBOM-SpdxSbomGenerator",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "criticality_score",
+                    "name": "PIA-CriticalityScore",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "sonarqube",
+                    "name": "SAST-sonarqube",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "scorecard",
+                    "name": "RIP-scorecard",
                     "version": [
                         "0.0.1"
                     ]
@@ -2707,25 +2707,25 @@
             },
             "compatible_playbooks": [
                 {
-                    "name": "spdx-sbom-generator",
+                    "name": "SBOM-SpdxSbomGenerator",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "criticality_score",
+                    "name": "PIA-CriticalityScore",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "sonarqube",
+                    "name": "SAST-sonarqube",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "scorecard",
+                    "name": "RIP-scorecard",
                     "version": [
                         "0.0.1"
                     ]
@@ -2752,25 +2752,25 @@
             },
             "compatible_playbooks": [
                 {
-                    "name": "spdx-sbom-generator",
+                    "name": "SBOM-SpdxSbomGenerator",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "criticality_score",
+                    "name": "PIA-CriticalityScore",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "sonarqube",
+                    "name": "SAST-sonarqube",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "scorecard",
+                    "name": "RIP-scorecard",
                     "version": [
                         "0.0.1"
                     ]
@@ -2797,25 +2797,25 @@
             },
             "compatible_playbooks": [
                 {
-                    "name": "spdx-sbom-generator",
+                    "name": "SBOM-SpdxSbomGenerator",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "criticality_score",
+                    "name": "PIA-CriticalityScore",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "sonarqube",
+                    "name": "SAST-sonarqube",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "scorecard",
+                    "name": "RIP-scorecard",
                     "version": [
                         "0.0.1"
                     ]
@@ -2842,25 +2842,25 @@
             },
             "compatible_playbooks": [
                 {
-                    "name": "spdx-sbom-generator",
+                    "name": "SBOM-SpdxSbomGenerator",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "criticality_score",
+                    "name": "PIA-CriticalityScore",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "sonarqube",
+                    "name": "SAST-sonarqube",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "scorecard",
+                    "name": "RIP-scorecard",
                     "version": [
                         "0.0.1"
                     ]
@@ -2887,25 +2887,25 @@
             },
             "compatible_playbooks": [
                 {
-                    "name": "spdx-sbom-generator",
+                    "name": "SBOM-SpdxSbomGenerator",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "criticality_score",
+                    "name": "PIA-CriticalityScore",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "sonarqube",
+                    "name": "SAST-sonarqube",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "scorecard",
+                    "name": "RIP-scorecard",
                     "version": [
                         "0.0.1"
                     ]
@@ -2932,25 +2932,25 @@
             },
             "compatible_playbooks": [
                 {
-                    "name": "spdx-sbom-generator",
+                    "name": "SBOM-SpdxSbomGenerator",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "criticality_score",
+                    "name": "PIA-CriticalityScore",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "sonarqube",
+                    "name": "SAST-sonarqube",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "scorecard",
+                    "name": "RIP-scorecard",
                     "version": [
                         "0.0.1"
                     ]
@@ -2977,25 +2977,25 @@
             },
             "compatible_playbooks": [
                 {
-                    "name": "spdx-sbom-generator",
+                    "name": "SBOM-SpdxSbomGenerator",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "criticality_score",
+                    "name": "PIA-CriticalityScore",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "sonarqube",
+                    "name": "SAST-sonarqube",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "scorecard",
+                    "name": "RIP-scorecard",
                     "version": [
                         "0.0.1"
                     ]
@@ -3022,25 +3022,25 @@
             },
             "compatible_playbooks": [
                 {
-                    "name": "spdx-sbom-generator",
+                    "name": "SBOM-SpdxSbomGenerator",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "criticality_score",
+                    "name": "PIA-CriticalityScore",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "sonarqube",
+                    "name": "SAST-sonarqube",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "scorecard",
+                    "name": "RIP-scorecard",
                     "version": [
                         "0.0.1"
                     ]
@@ -3048,7 +3048,7 @@
             ]
         },
         {
-            "name": "scorecard-RT-env",
+            "name": "RIP-scorecard-RT-env",
             "version": {
                 "tag": "0.0.1",
                 "release_date": ""
@@ -3067,25 +3067,25 @@
             },
             "compatible_playbooks": [
                 {
-                    "name": "spdx-sbom-generator",
+                    "name": "SBOM-SpdxSbomGenerator",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "criticality_score",
+                    "name": "PIA-CriticalityScore",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "sonarqube",
+                    "name": "SAST-sonarqube",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "scorecard",
+                    "name": "RIP-scorecard",
                     "version": [
                         "0.0.1"
                     ]
@@ -3172,25 +3172,25 @@
             },
             "compatible_playbooks": [
                 {
-                    "name": "criticality_score",
+                    "name": "PIA-CriticalityScore",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "sonarqube",
+                    "name": "SAST-sonarqube",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "scorecard",
+                    "name": "RIP-scorecard",
                     "version": [
                         "0.0.1"
                     ]
                 },
                 {
-                    "name": "spdx-sbom-generator",
+                    "name": "SBOM-SpdxSbomGenerator",
                     "version": [
                         "0.0.1"
                     ]
