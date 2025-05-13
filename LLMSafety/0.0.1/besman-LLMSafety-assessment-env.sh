@@ -1,6 +1,7 @@
 #!/bin/bash
 
 function __besman_install {
+
     # Checks if GitHub CLI is present or not.
     __besman_check_vcs_exist || return 1
 
@@ -22,17 +23,36 @@ function __besman_install {
 
     fi
 
+    if ! echo $PATH | grep -q "$HOME/.local/bin"
+    then
+        __besman_echo_no_colour "Adding $HOME/.local/bin to PATH var"
+        echo 'export PATH=$PATH:$HOME/.local/bin' >> ~/.bashrc
+        echo 'export BESMAN_DIR="$HOME/.besman"' >> ~/.bashrc
+        echo '[[ -s "$HOME/.besman/bin/besman-init.sh" ]] && source "$HOME/.besman/bin/besman-init.sh"' >> ~/.bashrc
+        source ~/.bashrc
+
+    fi
+
+    if [[ -z $(which venv) ]]; then
+        __besman_echo_white "Installing python3-venv"
+        sudo apt install python3-venv -y
+    else
+        __besman_echo_white "python3-venv found"
+    fi
+
+    [[ ! -d "$BESMAN_ASSESSMENT_DATASTORE_DIR" ]] && { __besman_repo_clone "$BESMAN_USER_NAMESPACE" "besecure-ml-assessment-datastore" "$BESMAN_ASSESSMENT_DATASTORE_DIR" || return 1;}
+
+
     # ======================cyberseceval installation========================
 
-    __besman_repo_clone "$BESMAN_ORG" "PurpleLlama" "$BESMAN_TOOL_PATH" || return 1
-    sudo apt install python3-venv -y
+    [[ ! -d "$BESMAN_TOOL_PATH/PurpleLlama" ]] && { __besman_repo_clone "$BESMAN_ORG" "PurpleLlama" "$BESMAN_TOOL_PATH/PurpleLlama" || return 1; }
     __besman_echo_white "Installing Cybersecurity Benchmarks..."
     python3 -m venv ~/.venvs/CybersecurityBenchmarks
     source ~/.venvs/CybersecurityBenchmarks/bin/activate
     cd "$BESMAN_TOOL_PATH/PurpleLlama" || { __besman_echo_red "Could not move to $BESMAN_TOOL_PATH" && return 1; }
     git checkout "$BESMAN_TOOL_BRANCH"
     pip3 install -r CybersecurityBenchmarks/requirements.txt
-    python3 -m pip install torch boto3 transformers
+    python3 -m pip install torch boto3 transformers openai
     [[ $? -ne 0 ]] && __besman_echo_red "Failed to install CybersecurityBenchmarks" && return 1
     deactivate
 
@@ -75,8 +95,8 @@ function __besman_install {
     fi
 
     which poetry || { __besman_echo_red "Poetry installation failed" && return 1; }
-    __besman_repo_clone "$BESMAN_ORG" "modelbench" "$BESMAN_TOOL_PATH/modelbench" || return 1
-    cd "$BESMAN_TOOL_PATH/modelbench" || { __besman_echo_red "Could not move to $BESMAN_TOOL_PATH" && return 1; }
+    [[ ! -d "$BESMAN_TOOL_PATH/modelbench" ]] && { __besman_repo_clone "$BESMAN_ORG" "modelbench" "$BESMAN_TOOL_PATH/modelbench" || return 1; }
+    cd "$BESMAN_TOOL_PATH/modelbench" || { __besman_echo_red "Could not move to $BESMAN_TOOL_PATH/modelbench" && return 1; }
     source ~/.venvs/modelbench_env/bin/activate
     poetry lock
     poetry install
@@ -102,15 +122,14 @@ function __besman_install {
     else
         __besman_echo_white "Conda is already installed."
     fi
-    [[ -z $(which conda) ]] && __besman_echo_red "Conda installation failed" && return 1
     source /opt/conda/etc/profile.d/conda.sh
     conda -V
     [[ $? -ne 0 ]] && __besman_echo_red "Conda installation failed" && return 1
 
     __besman_echo_white "Creating conda environment for garak"
-    conda create --name garak "python>=3.10,<=3.12"
+    conda create --name garak "python>=3.10,<=3.12" -y
     conda activate garak
-    __besman_repo_clone "$BESMAN_ORG" "garak" "$BESMAN_TOOL_PATH/garak" || return 1
+    [[ ! -d "$BESMAN_TOOL_PATH/garak" ]] && { __besman_repo_clone "$BESMAN_ORG" "garak" "$BESMAN_TOOL_PATH/garak" || return 1; }
     cd "$BESMAN_TOOL_PATH/garak" || { __besman_echo_red "Could not move to $BESMAN_TOOL_PATH" && return 1; }
     python3 -m pip install -e .
     garak --list_probes
@@ -119,9 +138,9 @@ function __besman_install {
     __besman_echo_green "Garak installed successfully"
     __besman_echo_no_colour ""
     conda deactivate
-
+    cd "$HOME"
     #==============Ollama installation========================
-    if [[ "$BESMAN_ARTIFACT_PROVIDER" == "ollama" ]]; then
+    if [[ "$BESMAN_ARTIFACT_PROVIDER" == "Ollama" ]]; then
         # Installing ollama
         __besman_echo_white "Installing ollama..."
         if [[ -z $(which ollama) ]]; then
@@ -135,6 +154,32 @@ function __besman_install {
         fi
         __besman_echo_green "ollama installed successfully"
     fi
+
+    __besman_echo_white "Note down the following virtual environments for each tool"
+    __besman_echo_no_colour ""
+    __besman_echo_yellow "Cyberseceval for LLM Security Benchmarking"
+    __besman_echo_no_colour "----------------------------------------------"
+    __besman_echo_white "source ~/.venvs/CybersecurityBenchmarks/bin/activate"
+    __besman_echo_no_colour ""
+    __besman_echo_yellow "Garak for LLM Vulnerability Analysis"
+    __besman_echo_no_colour "----------------------------------------------"
+    __besman_echo_white "source /opt/conda/etc/profile.d/conda.sh"
+    __besman_echo_white "conda activate garak"
+    __besman_echo_no_colour ""
+    __besman_echo_yellow "Modelbench for LLM Safety Benchmarking"
+    __besman_echo_no_colour "----------------------------------------------"
+    __besman_echo_white "    source ~/.venvs/modelbench_env/bin/activate"
+    __besman_echo_no_colour ""
+
+    if [[ "$BESMAN_ARTIFACT_PROVIDER" == "Ollama" ]]
+    then
+        __besman_echo_white "You can run the following command to pull down and run the model from Ollama"
+        __besman_echo_no_colour ""
+        __besman_echo_yellow "  ollama run $BESMAN_ARTIFACT_NAME:$BESMAN_ARTIFACT_VERSION"
+        __besman_echo_no_colour ""
+
+    fi
+
 }
 
 function __besman_uninstall {
@@ -142,9 +187,9 @@ function __besman_uninstall {
     __besman_echo_white "Uninstalling CybersecurityBenchmarks..."
     source ~/.venvs/CybersecurityBenchmarks/bin/activate
     cd "$BESMAN_TOOL_PATH/PurpleLlama" || { __besman_echo_red "Could not move to $BESMAN_TOOL_PATH/PurpleLlama" && return 1; }
-    pip3 uninstall -y -r CybersecurityBenchmarks/requirements.txt
+    python3 -m pip uninstall -y -r CybersecurityBenchmarks/requirements.txt
     [[ $? -ne 0 ]] && __besman_echo_red "Failed to uninstall CybersecurityBenchmarks" && return 1
-    python3 -m pip uninstall torch boto3 transformers
+    python3 -m pip uninstall torch boto3 transformers openai -y
     deactivate
     __besman_echo_no_colour ""
     __besman_echo_green "CybersecurityBenchmarks uninstalled successfully"
@@ -173,7 +218,7 @@ function __besman_uninstall {
     cd "$BESMAN_TOOL_PATH/garak" || { __besman_echo_red "Could not move to $BESMAN_TOOL_PATH/garak" && return 1; }
     python3 -m pip uninstall -y garak
     conda deactivate
-    conda env remove -n garak
+    conda env remove -n garak -y
     __besman_echo_green "garak uninstalled successfully"
     __besman_echo_no_colour ""
 
@@ -189,15 +234,19 @@ function __besman_uninstall {
     __besman_echo_no_colour ""
 
 
-    __besman_echo_white "Removing $BESMAN_TOOL_PATH"
-    rm -rf "$BESMAN_TOOL_PATH"
-    [[ $? -ne 0 ]] && __besman_echo_red "Failed to remove $BESMAN_TOOL_PATH"
-    __besman_echo_no_colour ""
-    __besman_echo_green "$BESMAN_TOOL_PATH removed successfully"
-    __besman_echo_no_colour ""
+    # __besman_echo_white "Removing $BESMAN_TOOL_PATH"
+    # rm -rf "$BESMAN_TOOL_PATH"
+    # [[ $? -ne 0 ]] && __besman_echo_red "Failed to remove $BESMAN_TOOL_PATH"
+    # __besman_echo_no_colour ""
+    # __besman_echo_green "$BESMAN_TOOL_PATH removed successfully"
+    # __besman_echo_no_colour ""
     __besman_echo_green "Uninstallation completed successfully"
     [[ -d ~/.venvs/codeshield_env ]] && rm -rf ~/.venvs/codeshield_env
     [[ -d ~/.venvs/CybersecurityBenchmarks ]] && rm -rf ~/.venvs/CybersecurityBenchmarks
+
+    [[ -d "$BESMAN_TOOL_PATH/modelbench" ]] && rm -rf "$BESMAN_TOOL_PATH/modelbench"
+    [[ -d "$BESMAN_TOOL_PATH/PurpleLlama" ]] && rm -rf "$BESMAN_TOOL_PATH/PurpleLlama"
+    [[ -d "$BESMAN_TOOL_PATH/garak" ]] && rm -rf "$BESMAN_TOOL_PATH/garak"
     cd "$HOME"
 }
 
@@ -205,6 +254,12 @@ function __besman_update {
     __besman_echo_white "Updating CybersecurityBenchmarks..."
     cd "$BESMAN_TOOL_PATH/PurpleLlama" || { __besman_echo_red "Could not move to $BESMAN_TOOL_PATH/PurpleLlama" && return 1; }
     git pull origin main || { __besman_echo_red "Failed to update CybersecurityBenchmarks" && return 1; }
+    source ~/.venvs/CybersecurityBenchmarks/bin/activate
+    git checkout "$BESMAN_TOOL_BRANCH"
+    python3 -m pip install --upgrade -r CybersecurityBenchmarks/requirements.txt
+    python3 -m pip install --upgrade torch boto3 transformers openai
+    [[ $? -ne 0 ]] && __besman_echo_red "Failed to update CybersecurityBenchmarks" && return 1
+    __besman_echo_no_colour ""
     __besman_echo_green "CybersecurityBenchmarks updated successfully"
     __besman_echo_no_colour ""
     __besman_echo_white "Updating codeshield..."
@@ -264,15 +319,48 @@ function __besman_validate {
     fi
 
     # Validate BESMAN_TOOL_PATH folder
-    if [[ ! -d "$BESMAN_TOOL_PATH" ]]; then
-        __besman_echo_red "$BESMAN_TOOL_PATH does not exist."
+    if [[ ! -d "$BESMAN_TOOL_PATH/PurpleLlama" ]]; then
+        __besman_echo_red "$BESMAN_TOOL_PATH/PurpleLlama does not exist."
         flag="true"
     fi
 
-    # Validate ollama installation
-    if [[ -z $(which ollama) ]]; then
-        __besman_echo_red "ollama is not installed."
+    if [[ ! -d "$BESMAN_TOOL_PATH/garak" ]]; then
+        __besman_echo_red "$BESMAN_TOOL_PATH/garak does not exist."
         flag="true"
+    fi
+
+    if [[ ! -d "$BESMAN_TOOL_PATH/modelbench" ]]; then
+        __besman_echo_red "$BESMAN_TOOL_PATH/modelbench does not exist."
+        flag="true"
+    fi
+
+    source ~/.venvs/CybersecurityBenchmarks/bin/activate
+
+    # Validate CybersecurityBenchmarks installation
+    if ! python3 -m pip show torch > /dev/null 2>&1; then
+        __besman_echo_red "torch is not installed."
+        flag="true"
+    fi
+
+    if ! python3 -m pip show boto3 > /dev/null 2>&1; then
+        __besman_echo_red "boto3 is not installed."
+        flag="true"
+    fi
+    if [[ "$BESMAN_ARTIFACT_PROVIDER" == "HuggingFace" ]] 
+    then
+        if ! python3 -m pip show transformers > /dev/null 2>&1; then
+            __besman_echo_red "transformers is not installed."
+            flag="true"
+        fi
+    fi
+    deactivate
+    if [[ "$BESMAN_ARTIFACT_PROVIDER" == "Ollama" ]]
+    then
+        # Validate ollama installation
+        if [[ -z $(which ollama) ]]; then
+            __besman_echo_red "ollama is not installed."
+            flag="true"
+        fi
     fi
 
     if [[ ! -d ~/.venvs/modelbench_env ]]; then
@@ -285,6 +373,13 @@ function __besman_validate {
         __besman_echo_red "garak conda environment missing."
         flag="true"
     fi
+    source /opt/conda/etc/profile.d/conda.sh
+    conda activate garak
+    garak --help > /dev/null 2>&1
+    if [[ $? -ne 0 ]]; then
+        __besman_echo_red "Garak is not installed."
+        flag="true"
+    fi
 
     # Validate poetry installation
     if [[ -z $(which poetry) ]]; then
@@ -294,7 +389,7 @@ function __besman_validate {
 
 
 
-    if [[ "$flag" == "true" ]]; then
+    if [[ "$flag" == "false" ]]; then
         __besman_echo_green "Validation successful. All tools and folders are present."
     else
         __besman_echo_red "Validation done with errors"
