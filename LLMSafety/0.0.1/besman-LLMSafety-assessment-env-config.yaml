@@ -15,13 +15,41 @@ BESMAN_ARTIFACT_TYPE: model
 # BESMAN_ARTIFACT_NAME - name of the artifact under assessment.
 BESMAN_ARTIFACT_NAME:  #***
 
-
 # Version of the artifact under assessment/parameter size of model.
 BESMAN_ARTIFACT_VERSION: 
 
 # Source code url of the artifact under assessment.
 BESMAN_ARTIFACT_URL: #***
 
+# Provider of the model under assessment: Ollama | HuggingFace
+BESMAN_ARTIFACT_PROVIDER: Ollama
+
+# The repo id of the LLM under assessment. Only use when the BESMAN_ARTIFACT_PROVIDER is huggingface.
+BESMAN_MODEL_REPO_NAMESPACE: #***
+
+# Name of the provider of Judge LLM: AWSBedrock | Ollama | HuggingFace
+BESMAN_JUDGE_LLM_PROVIDER: AWSBedrock
+
+# Name of the judge llm
+BESMAN_JUDGE_LLM_NAME: mistral
+
+# Version of the judge llm
+BESMAN_JUDGE_LLM_VERSION: "mistral-7b-instruct-v0:2"
+
+# The repo id of the judge llm. Use only when when the BESMAN_JUDGE_LLM_PROVIDER is HuggingFace
+BESMAN_JUDGE_MODEL_REPO_NAMESPACE:
+
+# Name of the expansion llm
+BESMAN_EXPANSION_LLM_NAME: mistral
+
+# Version/parameter size of the expansion llm"
+BESMAN_EXPANSION_LLM_VERSION: "mistral-7b-instruct-v0:2"
+
+# Expansion llm provider: AWSBedrock | Ollama | HuggingFace
+BESMAN_EXPANSION_LLM_PROVIDER: AWSBedrock
+
+# Repo id of expansion llm. Use only when when the BESMAN_EXPANSION_LLM_PROVIDER is HuggingFace
+BESMAN_EXPANSION_LLM_REPO_NAMESPACE:
 
 # This variable stores the name of the environment file.
 BESMAN_ENV_NAME: LLMSafetyAssessment-env #***
@@ -53,13 +81,6 @@ BESMAN_RESULTS_PATH: "$BESMAN_TOOL_PATH/PurpleLlama/CybersecurityBenchmarks/exec
 
 # Path to the dataset used for the assessment.
 BESMAN_CYBERSECEVAL_DATASETS: "$BESMAN_TOOL_PATH/PurpleLlama/CybersecurityBenchmarks/datasets"
-
-# Provider of the model under assessment: ollama | huggingface
-BESMAN_ARTIFACT_PROVIDER: Ollama
-
-
-# The repo id of the model under assessment. Only use when the provider is huggingface.
-BESMAN_MODEL_REPO_NAMESPACE: #***
 
 # Number of test cases to be executed for different benchmarking test.
 # Given below is the total count from each test case.
