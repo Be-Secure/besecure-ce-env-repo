@@ -130,7 +130,7 @@ function __besman_install {
 
                 # Create fossology-docker container
                 __besman_echo_white "creating fossology container for env - $BESMAN_ARTIFACT_NAME ..."
-                docker create --name fossology-$BESMAN_ARTIFACT_NAME -p 8081:80 fossology/fossology
+                docker create --name fossology-$BESMAN_ARTIFACT_NAME -p 9001:80 fossology/fossology
                 docker start fossology-$BESMAN_ARTIFACT_NAME
 
                 __besman_echo_white "fossology installation is done & $BESMAN_ARTIFACT_NAME container is up"
