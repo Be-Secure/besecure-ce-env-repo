@@ -94,6 +94,24 @@ function __besman_install {
             __besman_echo_white "installling tool - $tool : version - $tool_version"
 
             case $tool_name in
+            scorecard)
+               __besman_echo_white "Installing scorecard..."
+                if [ "$(docker ps -aq -f name=scorecard-$BESMAN_ARTIFACT_NAME)" ]; then
+                    # If a container exists, stop and remove it
+                    __besman_echo_white "Removing existing container 'scorecard-$BESMAN_ARTIFACT_NAME'..."
+                    docker stop scorecard-$BESMAN_ARTIFACT_NAME
+                    docker container rm --force scorecard-$BESMAN_ARTIFACT_NAME
+                fi
+                # Create sonarqube-docker container
+                __besman_echo_white "creating scorecard container for env - $BESMAN_ARTIFACT_NAME ..."
+                docker images |  grep -i scorecard
+                [[ xx"$?" != xx"0" ]] && docker pull gcr.io/openssf/scorecard:stable
+
+                docker create --name scorecard-$BESMAN_ARTIFACT_NAME scorecard
+                docker start scorecard-$BESMAN_ARTIFACT_NAME
+
+                __besman_echo_white "sonarqube installation is done & $BESMAN_ARTIFACT_NAME container is up"
+                ;;
             criticality_score)
                 __besman_echo_white "check for criticality_score"
                 if ! [ -x "$(command -v criticality_score)" ]; then
