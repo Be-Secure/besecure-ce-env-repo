@@ -251,6 +251,9 @@ BESMAN_LAB_TYPE: Organization
 # Name of the owner of the lab. Default is Be-Secure.
 BESMAN_LAB_NAME: Be-Secure
 
+# Mode for scorecard cli or github action.
+BESMAN_SCORECARD_ASSESSMENT_MODE: "github-action"
+
 # This is the local dir where we store the assessment reports. Default is home.
 BESMAN_ASSESSMENT_DATASTORE_DIR: $HOME/besecure-assessment-datastore
 
@@ -426,6 +429,9 @@ BESMAN_LAB_TYPE: Organization
 
 # Name of the owner of the lab. Default is Be-Secure.
 BESMAN_LAB_NAME: Be-Secure
+
+# Mode for scorecard cli or github action.
+BESMAN_SCORECARD_ASSESSMENT_MODE: "github-action"
 
 # This is the local dir where we store the assessment reports. Default is home.
 BESMAN_ASSESSMENT_DATASTORE_DIR: $HOME/besecure-assessment-datastore

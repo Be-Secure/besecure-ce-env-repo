@@ -18,6 +18,9 @@ BESMAN_ARTIFACT_NAME: dubbo #***
 # BESMAN_ARTIFACT_VERSION - version of the artifact under assessment.
 BESMAN_ARTIFACT_VERSION: 3.2.14_release #Enter the version of the artifact here. #***
 
+# Original source URL for the project under test.
+BESMAN_ARTIFACT_ORIGIN_URL: https://github.com/Be-Secure/dubbo
+
 # BESMAN_ARTIFACT_URL - Source code url of the artifact under assessment.
 BESMAN_ARTIFACT_URL: https://github.com/Be-Secure/dubbo #***
 

@@ -21,6 +21,9 @@ BESMAN_ARTIFACT_VERSION: 7b
 # Name of the model provider: ollama/huggingface
 BESMAN_ARTIFACT_PROVIDER: ollama
 
+# Original source URL for the project under test.
+BESMAN_ARTIFACT_ORIGIN_URL: https://github.com/Be-Secure/codellama
+
 # Source code url of the artifact under assessment.
 BESMAN_ARTIFACT_URL: https://ollama.com/library/codellama #***
 

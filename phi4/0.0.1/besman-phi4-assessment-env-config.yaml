@@ -18,6 +18,9 @@ BESMAN_ARTIFACT_NAME: phi4 #***
 # Version of the artifact under assessment.
 BESMAN_ARTIFACT_VERSION: 14b
 
+# Original source URL for the project under test.
+BESMAN_ARTIFACT_ORIGIN_URL: https://github.com/Be-Secure/phi4
+
 # Source code url of the artifact under assessment.
 BESMAN_ARTIFACT_URL: https://ollama.com/library/phi4 #***
 

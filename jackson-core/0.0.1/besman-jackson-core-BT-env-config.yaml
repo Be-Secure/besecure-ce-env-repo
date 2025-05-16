@@ -18,6 +18,9 @@ BESMAN_ARTIFACT_NAME: jackson-core
 # Version of artifact under assessment.
 BESMAN_ARTIFACT_VERSION: jackson-core-2.16.1
 
+# Original source URL for the project under test.
+BESMAN_ARTIFACT_ORIGIN_URL: https://github.com/Be-Secure/jackson-core
+
 # Source code url of artifact under assessment.
 BESMAN_ARTIFACT_URL: https://github.com/Be-Secure/jackson-core
 

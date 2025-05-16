@@ -13,6 +13,9 @@ BESMAN_ORG: OSSVerse
 # Name of the marketplace ui source code repo.
 BESMAN_OIAB_BUYER_UI: OSSVerse-Buyer-App-ui
 
+# Original source URL for the project under test.
+BESMAN_ARTIFACT_ORIGIN_URL: https://github.com/Be-Secure/OSSVerse-Buyer-App
+
 # Name of the buyer app source code repo.
 BESMAN_OIAB_BUYER_APP: OSSVerse-Buyer-App
 
