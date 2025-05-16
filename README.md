@@ -12,10 +12,11 @@ A **BeS Environment Script** is file that contains instructions for setting up a
    
 ## Types of Environment
 
-BeS environments are categorized as following.
+BeS Environments for open source projects & models are categorized as following.
 
 1. **Red Teaming Environments(RT)**: Installs all the tools/utilities required for a security analyst to perform vulnerability assessment, create exploits etc.
 2. **Blue Teaming Environments(BT)**: Installs all the tools required for a security professional to perform BT activities such as vulnerability remediation and patching.
+
 
 ## Lifecycle Functions of BeS Environment Scripts
 
