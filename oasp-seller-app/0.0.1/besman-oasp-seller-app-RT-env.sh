@@ -200,7 +200,7 @@ function __besman_install {
 
                 # Create fossology-docker container
                 __besman_echo_white "creating fossology container for env - $BESMAN_ARTIFACT_NAME ..."
-                docker create --name fossology-$BESMAN_ARTIFACT_NAME -p 8081:80 fossology/fossology
+                docker create --name fossology-$BESMAN_ARTIFACT_NAME -p 9001:80 fossology/fossology
                 docker start fossology-$BESMAN_ARTIFACT_NAME
 
                 __besman_echo_white "fossology installation is done & $BESMAN_ARTIFACT_NAME container is up"
@@ -212,7 +212,7 @@ function __besman_install {
                 __besman_echo_white "Asset URL - $BESMAN_SPDX_SBOM_ASSET_URL"
                 # Download the asset
                 __besman_echo_white "Downloading the asset ..."
-                curl -L -o $BESMAN_ARTIFACT_DIR/spdx-sbom-generator-v0.0.15-linux-amd64.tar.gz "$BESMAN_SPDX_SBOM_ASSET_URL"
+                curl -L -o $BESMAN_TOOL_PATH/spdx-sbom-generator-v0.0.15-linux-amd64.tar.gz "$BESMAN_SPDX_SBOM_ASSET_URL"
 
                 # Check if the download was successful
                 if [ $? -eq 0 ]; then
@@ -220,7 +220,7 @@ function __besman_install {
 
                     # Extract the downloaded file
                     __besman_echo_white "Extracting the asset..."
-                    cd $BESMAN_ARTIFACT_DIR
+                    cd $BESMAN_TOOL_PATH
                     tar -xzf spdx-sbom-generator-v0.0.15-linux-amd64.tar.gz
                     __besman_echo_white "Extraction completed."
                     cd -
@@ -256,7 +256,7 @@ function __besman_install {
     fi
 
     # ******************** yarn run for test case execution *****************************
-    cd $BESMAN_ARTIFACT_DIR/seller
+    cd $BESMAN_TOOL_PATH/seller
     yarn install
     cd -
 
@@ -324,8 +324,8 @@ function __besman_uninstall {
                 __besman_echo_white "Uninstalling spdx-sbom-generator..."
 
                 # Remove the specific tar.gz file if it exists
-                if [[ -f $BESMAN_ARTIFACT_DIR/spdx-sbom-generator-v0.0.15-linux-amd64.tar.gz ]]; then
-                    rm -f "$BESMAN_ARTIFACT_DIR/spdx-sbom-generator-v0.0.15-linux-amd64.tar.gz"
+                if [[ -f $BESMAN_TOOL_PATH/spdx-sbom-generator-v0.0.15-linux-amd64.tar.gz ]]; then
+                    rm -f "$BESMAN_TOOL_PATH/spdx-sbom-generator-v0.0.15-linux-amd64.tar.gz"
                     __besman_echo_white "Removed spdx-sbom-generator-v0.0.15-linux-amd64.tar.gz file."
                 else
                     __besman_echo_white "spdx-sbom-generator-v0.0.15-linux-amd64.tar.gz file not found."
