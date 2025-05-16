@@ -143,7 +143,7 @@ function __besman_install {
                 __besman_echo_white "Asset URL - $BESMAN_SPDX_SBOM_ASSET_URL"
                 # Download the asset
                 __besman_echo_white "Downloading the asset ..."
-                curl -L -o $BESMAN_ARTIFACT_DIR/spdx-sbom-generator-v0.0.15-linux-amd64.tar.gz "$BESMAN_SPDX_SBOM_ASSET_URL"
+                curl -L -o $BESMAN_TOOL_PATH/spdx-sbom-generator-v0.0.15-linux-amd64.tar.gz "$BESMAN_SPDX_SBOM_ASSET_URL"
 
                 # Check if the download was successful
                 if [ $? -eq 0 ]; then
@@ -151,7 +151,7 @@ function __besman_install {
 
                     # Extract the downloaded file
                     __besman_echo_white "Extracting the asset..."
-                    cd $BESMAN_ARTIFACT_DIR
+                    cd $BESMAN_TOOL_PATH
                     tar -xzf spdx-sbom-generator-v0.0.15-linux-amd64.tar.gz
                     __besman_echo_white "Extraction completed."
                     cd -
@@ -234,8 +234,8 @@ function __besman_uninstall {
                 __besman_echo_white "Asset URL - $BESMAN_SPDX_SBOM_ASSET_URL"
                 # Download the asset
                 __besman_echo_white "Downloading the asset ..."
-                curl -L -o $BESMAN_ARTIFACT_DIR/spdx-sbom-generator-v0.0.15-linux-amd64.tar.gz "$BESMAN_SPDX_SBOM_ASSET_URL"
-                [[ -f $BESMAN_ARTIFACT_DIR/spdx-sbom-generator-v0.0.15-linux-amd64.tar.gz]] && rm -f $BESMAN_ARTIFACT_DIR/spdx-sbom-generator-v0.0.15-linux-amd64.tar.gz
+                curl -L -o $BESMAN_TOOL_PATH/spdx-sbom-generator-v0.0.15-linux-amd64.tar.gz "$BESMAN_SPDX_SBOM_ASSET_URL"
+                [[ -f $BESMAN_TOOL_PATH/spdx-sbom-generator-v0.0.15-linux-amd64.tar.gz]] && rm -f $BESMAN_TOOL_PATH/spdx-sbom-generator-v0.0.15-linux-amd64.tar.gz
                 [[ -d $BESMAN_ARTIFACT_DIR/spdx-sbom-generator* ]] && rm -rf $BESMAN_ARTIFACT_DIR/spdx-sbom-generator*
 
                 __besman_echo_white "spdx-sbom-generator uninstallation is done."
