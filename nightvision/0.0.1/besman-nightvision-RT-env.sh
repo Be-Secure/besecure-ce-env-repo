@@ -94,6 +94,13 @@ function __besman_install {
             __besman_echo_white "installling tool - $tool : version - $tool_version"
 
             case $tool_name in
+            scorecard)
+               __besman_echo_white "Installing scorecard..."
+                # Create sonarqube-docker container
+                __besman_echo_white "creating scorecard container for env - $BESMAN_ARTIFACT_NAME ..."
+                docker pull gcr.io/openssf/scorecard:stable
+                __besman_echo_white "sonarqube installation is done & $BESMAN_ARTIFACT_NAME container is up"
+                ;;
             criticality_score)
                 __besman_echo_white "check for criticality_score"
                 if ! [ -x "$(command -v criticality_score)" ]; then
@@ -194,11 +201,20 @@ function __besman_uninstall {
             __besman_echo_white "Uninstallling tool - $tool : version - $tool_version"
 
             case $tool_name in
+            scorecard)
+                __besman_echo_white "Uninstalling scorecard..."
+                if [ "$(docker ps -aq -f name=scorecard-$BESMAN_ARTIFACT_NAME)" ]; then
+                    # If a container exists, stop and remove it
+                    __besman_echo_white "Removing existing container 'scorecard-$BESMAN_ARTIFACT_NAME'..."
+                    scorecardimageid=`docker images | grep scorecard | grep stable | awk '{print $3}'`
+                    [[ ! -z $scorecardimageid ]] && docker rmi $scorecardimageid
+                fi
+                __besman_echo_white "scorecard uninstallation is done"
+                ;;
             criticality_score)
                 __besman_echo_white "check for criticality_score"
                 if [ -x "$(command -v criticality_score)" ]; then
-                    __besman_echo_white "uninstalling criticality_score ..."
-                    go install github.com/ossf/criticality_score/v2/cmd/criticality_score@none
+                    __besman_echo_white "uninstalling criticality_score ..."                    go install github.com/ossf/criticality_score/v2/cmd/criticality_score@none
 
 		    [[ -f $GOPATH/bin/criticality_score ]] && rm -rf $GOPATH/bin/criticality_score
 
