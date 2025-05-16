@@ -83,17 +83,13 @@ function __besman_install {
 
     __besman_echo_no_colour ""
     __besman_echo_white "Installing modelbench"
+    # source ~/.venvs/modelbench_env/bin/activate
     python3 -m venv ~/.venvs/modelbench_env
-    if [[ -z $(which poetry) ]]; then
-        __besman_echo_white "Installing Poetry"
-        python3 -m pip install poetry
-        if [[ $? -ne 0 ]]; then
-            __besman_echo_red "Poetry installation failed" && return 1
-        fi
-    else
-        __besman_echo_white "Poetry is already installed."
-    fi
-
+    __besman_echo_yellow "Installing pipx"
+    sudo apt update
+    sudo apt install pipx -y
+    pipx ensurepath
+    pipx install poetry
     which poetry || { __besman_echo_red "Poetry installation failed" && return 1; }
     [[ ! -d "$BESMAN_TOOL_PATH/modelbench" ]] && { __besman_repo_clone "$BESMAN_ORG" "modelbench" "$BESMAN_TOOL_PATH/modelbench" || return 1; }
     cd "$BESMAN_TOOL_PATH/modelbench" || { __besman_echo_red "Could not move to $BESMAN_TOOL_PATH/modelbench" && return 1; }

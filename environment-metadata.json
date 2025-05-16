@@ -2359,7 +2359,7 @@
             ]
         },
         {
-            "name": "SBOM-SpdxSbomGenerator-RT-env",
+            "name": "spdx-sbom-generator-RT-env",
             "version": {
                 "tag": "0.0.1",
                 "release_date": ""
