@@ -18,6 +18,9 @@ BESMAN_ARTIFACT_NAME: OSSVerse-Buyer-App #***
 # Version of the artifact under assessment.
 BESMAN_ARTIFACT_VERSION: 0.0.1 #***
 
+# Original source URL for the project under test.
+BESMAN_ARTIFACT_ORIGIN_URL: https://github.com/Be-Secure/OSSVerse-Buyer-App
+
 # Source code url of the artifact under assessment.
 BESMAN_ARTIFACT_URL: https://github.com/OSSVerse/OSSVerse-Buyer-App #***
 
@@ -36,6 +39,9 @@ BESMAN_LAB_TYPE: Organization #***
 
 # Name of the owner of the lab. Default is Be-Secure.
 BESMAN_LAB_NAME: Be-Secure #***
+
+# Mode for scorecard cli or github action.
+BESMAN_SCORECARD_ASSESSMENT_MODE: "github-action"
 
 # This is the local dir where we store the assessment reports. Default is home.
 BESMAN_ASSESSMENT_DATASTORE_DIR: $HOME/besecure-assessment-datastore #***

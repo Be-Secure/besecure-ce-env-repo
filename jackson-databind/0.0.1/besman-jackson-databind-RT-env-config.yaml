@@ -18,6 +18,9 @@ BESMAN_ARTIFACT_NAME: jackson-databind
 # Version of artifact under assessment.
 BESMAN_ARTIFACT_VERSION: jackson-databind-2.16.1_release
 
+# Original source URL for the project under test.
+BESMAN_ARTIFACT_ORIGIN_URL: https://github.com/Be-Secure/jackson-databind
+
 # Source code url of artifact under assessment.
 BESMAN_ARTIFACT_URL: https://github.com/Be-Secure/jackson-databind
 

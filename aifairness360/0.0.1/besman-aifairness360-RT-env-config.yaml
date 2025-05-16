@@ -18,8 +18,11 @@ BESMAN_ARTIFACT_NAME: aifairness360 #***
 # Version of the artifact under assessment.
 BESMAN_ARTIFACT_VERSION: #***
 
+# Original source URL for the project under test.
+BESMAN_ARTIFACT_ORIGIN_URL: https://github.com/Be-Secure/aifairness360
+
 # Source code url of the artifact under assessment.
-BESMAN_ARTIFACT_URL: https://github.com/Be-Secure/aifairness360 #***
+BESMAN_ARTIFACT_URL: https://github.com/Be-Secure/aifairness360
 
 # This variable stores the name of the environment file.
 BESMAN_ENV_NAME: aifairness360-RT-env #***
@@ -36,6 +39,9 @@ BESMAN_LAB_TYPE: Organization #***
 
 # Name of the owner of the lab. Default is Be-Secure.
 BESMAN_LAB_NAME: Be-Secure #***
+
+# Mode for scorecard cli or github action.
+BESMAN_SCORECARD_ASSESSMENT_MODE: "github-action"
 
 # This is the local dir where we store the assessment reports. Default is home.
 BESMAN_ASSESSMENT_DATASTORE_DIR: $HOME/besecure-assessment-datastore #***
