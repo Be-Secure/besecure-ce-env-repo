@@ -56,9 +56,9 @@ function __besman_install {
         sonarqube)
             container="sonarqube-$BESMAN_ARTIFACT_NAME"
             __besman_echo_white "Setting up SonarQube container: $container..."
-            sudo docker rm -f $container 2>/dev/null || true
-            # docker run -d --name $container -p ${BESMAN_SONARQUBE_PORT}:9000 sonarqube:latest
+            sudo docker rm -f "$container" 2>/dev/null || true
             sudo docker pull sonarqube:latest
+            docker run -d --name "$container" -p "${BESMAN_SONARQUBE_PORT}:9000" sonarqube:latest
             sudo curl -L "$BESMAN_SONAR_SCANNER_ASSET_URL" -o "$BESMAN_TOOL_PATH/sonar-scanner-cli.zip"
             sudo unzip "$BESMAN_TOOL_PATH/sonar-scanner-cli.zip" -d "$BESMAN_TOOL_PATH"
             sudo mv "$BESMAN_TOOL_PATH/sonar-scanner-$BESMAN_SONAR_SCANNER_VERSION-linux-x64" "$BESMAN_TOOL_PATH/sonar-scanner"
