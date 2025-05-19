@@ -122,6 +122,8 @@ function __besman_uninstall {
             container="sonarqube-$BESMAN_ARTIFACT_NAME"
             __besman_echo_white "Removing SonarQube container: $container..."
             sudo docker rm -f $container || true
+            sudo rm -rf "$BESMAN_TOOL_PATH/sonar-scanner-cli.zip"
+            sudo rm -rf "$BESMAN_TOOL_PATH/sonar-scanner"
             ;;
         fossology)
             container="fossology-$BESMAN_ARTIFACT_NAME"
