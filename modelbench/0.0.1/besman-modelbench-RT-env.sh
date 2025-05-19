@@ -205,6 +205,11 @@ function __besman_validate {
     if ! command -v docker &>/dev/null; then
         __besman_echo_error "Docker not found."
         status=1
+    else
+        __besman_echo_green "Docker is installed."
+        local docker_version
+        docker_version=$(sudo docker --version)
+        __besman_echo_yellow "$docker_version"
     fi
 
     # Validate containers
@@ -213,27 +218,64 @@ function __besman_validate {
         if ! sudo docker ps -a -q -f name=$name | grep -q .; then
             __besman_echo_error "Container $name is not running."
             status=1
+        else
+            __besman_echo_green "Container $name is running."
         fi
     done
-    [[ -z $(which sonar-scanner) ]] && __besman_echo_error "Sonar Scanner CLI not found." && status=1
-    [[ -z $(which criticality_score) ]] && __besman_echo_error "Criticality Score CLI not found." && status=1
+    if [[ -z $(which sonar-scanner) ]]; then
+        __besman_echo_error "Sonar Scanner CLI not found."
+        status=1
+    else
+        __besman_echo_green "Sonar Scanner CLI is installed."
+        local sonar_scanner_version
+        sonar_scanner_version=$(sonar-scanner --version | grep "SonarScanner" | awk '{print $5}')
+        __besman_echo_yellow "$sonar_scanner_version"
+    fi
+    if [[ -z $(which criticality_score) ]]; then
+        __besman_echo_error "Criticality Score CLI not found."
+        status=1
+    else
+        __besman_echo_green "Criticality Score CLI is installed."
+    fi 
+        
+    # fi[[ -z $(which sonar-scanner) ]] && __besman_echo_error "Sonar Scanner CLI not found." && status=1
+    # [[ -z $(which criticality_score) ]] && __besman_echo_error "Criticality Score CLI not found." && status=1
     # Validate Go CLI
     if ! command -v go &>/dev/null; then
         __besman_echo_error "Go not found."
         status=1
+    else
+        __besman_echo_green "Go is installed."
+        local go_version
+        go_version=$(go version)
+        __besman_echo_yellow "$go_version"
     fi
-    [[ -z $(which scorecard) ]] && __besman_echo_error "Scorecard CLI not found." && status=1
- 
-    # Validate Criticality Score
-    if ! command -v criticality_score &>/dev/null; then
-        __besman_echo_error "criticality_score CLI not found."
+    
+    if [[ -z $(which scorecard) ]] && [[ -z $(which scorecard-cli) ]]; then
+        __besman_echo_error "Scorecard CLI not found."
         status=1
-    fi
+    else
+        __besman_echo_green "Scorecard CLI is installed."
+        local scorecard_version
+        scorecard_version=$(scorecard version | grep GitVersion: | awk '{print $2}')
+        __besman_echo_yellow "$scorecard_version"
+    fi 
+
+ 
+    # # Validate Criticality Score
+    # if ! command -v criticality_score &>/dev/null; then
+    #     __besman_echo_error "criticality_score CLI not found."
+    #     status=1
+    # fi
 
     if [[ $status -eq 0 ]]; then
         __besman_echo_white "Validation succeeded."
+        unset status scorecard_version go_version sonar_scanner_version docker_version
+
     else
         __besman_echo_error "Validation failed."
+        unset status scorecard_version go_version sonar_scanner_version docker_version
+
         return 1
     fi
 }
