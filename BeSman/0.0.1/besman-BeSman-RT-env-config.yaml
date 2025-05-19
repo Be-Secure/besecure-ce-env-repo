@@ -16,7 +16,7 @@ BESMAN_ARTIFACT_TYPE: project
 BESMAN_ARTIFACT_NAME: BeSman #***
 
 # Version of the artifact under assessment.
-BESMAN_ARTIFACT_VERSION: v1.0.0
+BESMAN_ARTIFACT_VERSION: 0.5.0
 
 # Source code url of the artifact under assessment.
 BESMAN_ARTIFACT_URL: https://github.com/Be-Secure/BeSman
