@@ -46,6 +46,7 @@ function __besman_install {
             chmod +x "$HOME/scorecard"
             sudo mv "$HOME/scorecard" /usr/local/bin/
             [[ -f "$HOME/scorecard_5.1.1_linux_amd64.tar.gz" ]] && rm "$HOME/scorecard_5.1.1_linux_amd64.tar.gz"
+            [[ -z $(which scorecard) ]] && __besman_echo_error "Scorecard installation failed." && return 1
             ;;
         criticality_score)
             __besman_echo_white "Installing Criticality Score CLI..."
