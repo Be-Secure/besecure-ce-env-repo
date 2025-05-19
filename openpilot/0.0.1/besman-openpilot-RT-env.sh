@@ -97,7 +97,11 @@ function __besman_install {
                __besman_echo_white "Installing scorecard..."
                 # Create sonarqube-docker container
                 __besman_echo_white "creating scorecard container for env - $BESMAN_ARTIFACT_NAME ..."
-                docker pull gcr.io/openssf/scorecard:stable
+                curl -L -o "$HOME/scorecard_5.1.1_linux_amd64.tar.gz" "$BESMAN_SCORECARD_ASSET_URL"
+tar -xzf "$HOME/scorecard_5.1.1_linux_amd64.tar.gz"
+chmod +x "$HOME/scorecard"
+sudo mv "$HOME/scorecard" /usr/local/bin/
+[[ -f "$HOME/scorecard_5.1.1_linux_amd64.tar.gz" ]] && rm "$HOME/scorecard_5.1.1_linux_amd64.tar.gz"
                 __besman_echo_white "sonarqube installation is done & $BESMAN_ARTIFACT_NAME container is up"
                 ;;
             criticality_score)
@@ -202,12 +206,7 @@ function __besman_uninstall {
             case $tool_name in
             scorecard)
                 __besman_echo_white "Uninstalling scorecard..."
-                if [ "$(docker ps -aq -f name=scorecard-$BESMAN_ARTIFACT_NAME)" ]; then
-                    # If a container exists, stop and remove it
-                    __besman_echo_white "Removing existing container 'scorecard-$BESMAN_ARTIFACT_NAME'..."
-                    scorecardimageid=`docker images | grep scorecard | grep stable | awk '{print $3}'`
-                    [[ ! -z $scorecardimageid ]] && docker rmi $scorecardimageid
-                fi
+sudo rm /usr/local/bin/scorecard
                 __besman_echo_white "scorecard uninstallation is done"
                 ;;
             criticality_score)

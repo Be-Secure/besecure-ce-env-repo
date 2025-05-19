@@ -78,3 +78,7 @@ BESMAN_ASSESSMENT_TOOLS: scorecard,criticality_score,sonarqube,fossology,spdx-sb
 # Eg: openjdk_version: 11
 
 BESMAN_SPDX_SBOM_ASSET_URL: https://github.com/opensbom-generator/spdx-sbom-generator/releases/download/v0.0.15/spdx-sbom-generator-v0.0.15-linux-amd64.tar.gz
+
+#Scorecard binary url
+BESMAN_SCORECARD_ASSET_URL: "https://github.com/ossf/scorecard/releases/download/v5.1.1/scorecard_5.1.1_linux_amd64.tar.gz"
+
