@@ -2913,7 +2913,7 @@
             ]
         },
         {
-            "name": "besman-RT-env",
+            "name": "Besman-RT-env",
             "version": {
                 "tag": "0.0.1",
                 "release_date": ""
