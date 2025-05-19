@@ -1,5 +1,6 @@
 #!/bin/bash
 function __besman_install {
+    local container
     __besman_check_vcs_exist || return 1 # Checks if GitHub CLI is present or not.
     __besman_check_github_id || return 1 # checks whether the user github id has been populated or not under BESMAN_USER_NAMESPACE
     __besman_echo_white "==> Installing assessment environment..."
@@ -58,7 +59,7 @@ function __besman_install {
             __besman_echo_white "Setting up SonarQube container: $container..."
             sudo docker rm -f "$container" 2>/dev/null || true
             sudo docker pull sonarqube:latest
-            docker run -d --name "$container" -p "${BESMAN_SONARQUBE_PORT}:9000" sonarqube:latest
+            sudo docker run -d --name "$container" -p "${BESMAN_SONARQUBE_PORT}:9000" sonarqube:latest
             sudo curl -L "$BESMAN_SONAR_SCANNER_ASSET_URL" -o "$BESMAN_TOOL_PATH/sonar-scanner-cli.zip"
             sudo unzip "$BESMAN_TOOL_PATH/sonar-scanner-cli.zip" -d "$BESMAN_TOOL_PATH"
             sudo mv "$BESMAN_TOOL_PATH/sonar-scanner-$BESMAN_SONAR_SCANNER_VERSION-linux-x64" "$BESMAN_TOOL_PATH/sonar-scanner"
