@@ -52,15 +52,15 @@ function __besman_install {
         sonarqube)
             container="sonarqube-$BESMAN_ARTIFACT_NAME"
             __besman_echo_white "Setting up SonarQube container: $container..."
-            docker rm -f $container 2>/dev/null || true
+            sudo docker rm -f $container 2>/dev/null || true
             # docker run -d --name $container -p ${BESMAN_SONARQUBE_PORT}:9000 sonarqube:latest
-            docker pull sonarqube:latest
+            sudo docker pull sonarqube:latest
             ;;
         fossology)
             container="fossology-$BESMAN_ARTIFACT_NAME"
             __besman_echo_white "Setting up Fossology container: $container..."
-            docker rm -f $container 2>/dev/null || true
-            docker run -d --name $container -p ${BESMAN_FOSSOLOGY_PORT}:80 fossology/fossology:latest
+            sudo docker rm -f $container 2>/dev/null || true
+            sudo docker run -d --name $container -p ${BESMAN_FOSSOLOGY_PORT}:80 fossology/fossology:latest
             ;;
         spdx-sbom-generator)
             __besman_echo_white "Downloading SPDX SBOM Generator..."
@@ -111,12 +111,12 @@ function __besman_uninstall {
         sonarqube)
             container="sonarqube-$BESMAN_ARTIFACT_NAME"
             __besman_echo_white "Removing SonarQube container: $container..."
-            docker rm -f $container || true
+            sudo docker rm -f $container || true
             ;;
         fossology)
             container="fossology-$BESMAN_ARTIFACT_NAME"
             __besman_echo_white "Removing Fossology container: $container..."
-            docker rm -f $container || true
+            sudo docker rm -f $container || true
             ;;
         spdx-sbom-generator)
             __besman_echo_white "Removing SPDX SBOM Generator files..."
@@ -152,16 +152,16 @@ function __besman_update {
         sonarqube)
             container="sonarqube-$BESMAN_ARTIFACT_NAME"
             __besman_echo_white "Updating SonarQube container to latest..."
-            docker pull sonarqube:latest
-            docker rm -f $container 2>/dev/null || true
-            docker run -d --name $container -p ${BESMAN_SONARQUBE_PORT}:9000 sonarqube:latest
+            sudo docker pull sonarqube:latest
+            sudo docker rm -f $container 2>/dev/null || true
+            sudo docker run -d --name $container -p ${BESMAN_SONARQUBE_PORT}:9000 sonarqube:latest
             ;;
         fossology)
             container="fossology-$BESMAN_ARTIFACT_NAME"
             __besman_echo_white "Updating Fossology container to latest..."
-            docker pull fossology/fossology:latest
-            docker rm -f $container 2>/dev/null || true
-            docker run -d --name $container -p ${BESMAN_FOSSOLOGY_PORT}:80 fossology/fossology:latest
+            sudo docker pull fossology/fossology:latest
+            sudo docker rm -f $container 2>/dev/null || true
+            sudo docker run -d --name $container -p ${BESMAN_FOSSOLOGY_PORT}:80 fossology/fossology:latest
             ;;
         spdx-sbom-generator)
             __besman_echo_white "Updating SPDX SBOM Generator to version from URL..."
