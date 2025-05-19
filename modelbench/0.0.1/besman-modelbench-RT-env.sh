@@ -51,6 +51,7 @@ function __besman_install {
         criticality_score)
             __besman_echo_white "Installing Criticality Score CLI..."
             go install github.com/ossf/criticality_score/v2/cmd/criticality_score@latest
+            [[ -z $(which criticality_score) ]] && __besman_echo_error "criticality_score installation failed." && return 1
             ;;
         sonarqube)
             container="sonarqube-$BESMAN_ARTIFACT_NAME"
@@ -58,6 +59,12 @@ function __besman_install {
             sudo docker rm -f $container 2>/dev/null || true
             # docker run -d --name $container -p ${BESMAN_SONARQUBE_PORT}:9000 sonarqube:latest
             sudo docker pull sonarqube:latest
+            sudo curl -L "$BESMAN_SONAR_SCANNER_ASSET_URL" -o "$BESMAN_TOOL_PATH/sonar-scanner-cli.zip"
+            sudo unzip "$BESMAN_TOOL_PATH/sonar-scanner-cli.zip" -d "$BESMAN_TOOL_PATH"
+            sudo mv "$BESMAN_TOOL_PATH/sonar-scanner-$BESMAN_SONAR_SCANNER_VERSION-linux-x64" "$BESMAN_TOOL_PATH/sonar-scanner"
+            echo "export PATH='$PATH:$BESMAN_TOOL_PATH/sonar-scanner/bin'" >> ~/.bashrc
+            source ~/.bashrc
+            [[ -z $(which sonar-scanner) ]] && __besman_echo_error "sonar scanner installation failed." && return 1
             ;;
         fossology)
             container="fossology-$BESMAN_ARTIFACT_NAME"
@@ -198,18 +205,15 @@ function __besman_validate {
             status=1
         fi
     done
-
+    [[ -z $(which sonar-scanner) ]] && __besman_echo_error "Sonar Scanner CLI not found." && status=1
+    [[ -z $(which criticality_score) ]] && __besman_echo_error "Criticality Score CLI not found." && status=1
     # Validate Go CLI
     if ! command -v go &>/dev/null; then
         __besman_echo_error "Go not found."
         status=1
     fi
-
-    if ! /usr.local/bin/scorecard --version &>/dev/null; then
-        __besman_echo_error "Scorecard CLI not found."
-        status=1
-    fi 
-        
+    [[ -z $(which scorecard) ]] && __besman_echo_error "Scorecard CLI not found." && status=1
+ 
     # Validate Criticality Score
     if ! command -v criticality_score &>/dev/null; then
         __besman_echo_error "criticality_score CLI not found."
