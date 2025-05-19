@@ -3548,12 +3548,17 @@
             ]
         },
         {
+<<<<<<< HEAD
             "name": "BeSLighthouse-RT-env",
+=======
+            "name": "garak-RT-env",
+>>>>>>> 5ec4db8 (Added garak RT env)
             "version": {
                 "tag": "0.0.1",
                 "release_date": ""
             },
             "author": {
+<<<<<<< HEAD
                 "name": "Be-Secure",
                 "type": "Lab"
             },
@@ -3564,6 +3569,18 @@
                 "type": "Lab",
                 "status": "Success",
                 "timestamp": "2025-05-18T17:36:58"
+=======
+                "name": "BeSLab",
+                "type": "Lab"
+            },
+            "date_of_creation": "2025-05-19T20:56:33",
+            "last_update_date": "2025-05-19T20:56:33",
+            "last_execution": {
+                "name": "BeSLab",
+                "type": "Lab",
+                "status": "Success",
+                "timestamp": "2025-05-19T20:56:33"
+>>>>>>> 5ec4db8 (Added garak RT env)
             },
             "compatible_playbooks": [
                 {
@@ -3589,12 +3606,15 @@
                     "version": [
                         "0.0.1"
                     ]
+<<<<<<< HEAD
                 },
                 {
                     "name": "LC-fossology",
                     "version": [
                         "0.0.1"
                     ]
+=======
+>>>>>>> 5ec4db8 (Added garak RT env)
                 }
             ]
         }
