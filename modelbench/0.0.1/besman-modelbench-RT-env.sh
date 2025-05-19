@@ -132,14 +132,22 @@ function __besman_uninstall {
             ;;
         spdx-sbom-generator)
             __besman_echo_white "Removing SPDX SBOM Generator files..."
-            rm -f "$BESMAN_TOOL_PATH/spdx-sbom-generator.tar.gz"
-            rm -rf "$BESMAN_TOOL_PATH/spdx-sbom-generator"
+            sudo rm -f "$BESMAN_TOOL_PATH/spdx-sbom-generator.tar.gz"
+            sudo rm -rf "$BESMAN_TOOL_PATH/spdx-sbom-generator"
             ;;
         *)
             __besman_echo_warn "Unknown tool: $t"
             ;;
         esac
     done
+
+    if [[ -d $BESMAN_ARTIFACT_DIR ]]; then
+        __besman_echo_white "Removing source code repo at $BESMAN_ARTIFACT_DIR"
+        rm -rf "$BESMAN_ARTIFACT_DIR"
+    else
+        __besman_echo_white "Source code repo not found at $BESMAN_ARTIFACT_DIR, not removing"
+    fi
+        
 
     __besman_echo_white "Uninstallation complete."
 }
@@ -177,9 +185,9 @@ function __besman_update {
             ;;
         spdx-sbom-generator)
             __besman_echo_white "Updating SPDX SBOM Generator to version from URL..."
-            curl -L -o "$BESMAN_TOOL_PATH/spdx-sbom-generator-latest.tar.gz" "$BESMAN_SPDX_SBOM_ASSET_URL"
-            rm -rf "$BESMAN_TOOL_PATH/spdx-sbom-generator"
-            tar -xzf "$BESMAN_TOOL_PATH/spdx-sbom-generator-latest.tar.gz" -C "$BESMAN_TOOL_PATH"
+            sudo curl -L -o "$BESMAN_TOOL_PATH/spdx-sbom-generator-latest.tar.gz" "$BESMAN_SPDX_SBOM_ASSET_URL"
+            sudo rm -rf "$BESMAN_TOOL_PATH/spdx-sbom-generator"
+            sudo tar -xzf "$BESMAN_TOOL_PATH/spdx-sbom-generator-latest.tar.gz" -C "$BESMAN_TOOL_PATH"
             ;;
         *)
             __besman_echo_warn "Unknown tool: $t"
@@ -202,7 +210,7 @@ function __besman_validate {
     # Validate containers
     for svc in sonarqube fossology; do
         name="$svc-$BESMAN_ARTIFACT_NAME"
-        if ! docker ps -q -f name=$name | grep -q .; then
+        if ! sudo docker ps -a -q -f name=$name | grep -q .; then
             __besman_echo_error "Container $name is not running."
             status=1
         fi
@@ -226,7 +234,7 @@ function __besman_validate {
         __besman_echo_white "Validation succeeded."
     else
         __besman_echo_error "Validation failed."
-        exit 1
+        return 1
     fi
 }
 
