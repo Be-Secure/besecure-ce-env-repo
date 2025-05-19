@@ -39,7 +39,11 @@ function __besman_install {
         case $t in
         scorecard)
             __besman_echo_white "Pulling Scorecard image..."
-            docker pull gcr.io/openssf/scorecard:stable
+            curl -L -o "$HOME/scorecard_5.1.1_linux_amd64.tar.gz" "$BESMAN_SCORECARD_ASSET_URL"
+            tar -xzf "$HOME/scorecard_5.1.1_linux_amd64.tar.gz"
+            chmod +x "$HOME/scorecard"
+            sudo mv "$HOME/scorecard" /usr/local/bin/
+            [[ -f "$HOME/scorecard_5.1.1_linux_amd64.tar.gz" ]] && rm "$HOME/scorecard_5.1.1_linux_amd64.tar.gz"
             ;;
         criticality_score)
             __besman_echo_white "Installing Criticality Score CLI..."
@@ -49,7 +53,8 @@ function __besman_install {
             container="sonarqube-$BESMAN_ARTIFACT_NAME"
             __besman_echo_white "Setting up SonarQube container: $container..."
             docker rm -f $container 2>/dev/null || true
-            docker run -d --name $container -p ${BESMAN_SONARQUBE_PORT}:9000 sonarqube:latest
+            # docker run -d --name $container -p ${BESMAN_SONARQUBE_PORT}:9000 sonarqube:latest
+            docker pull sonarqube:latest
             ;;
         fossology)
             container="fossology-$BESMAN_ARTIFACT_NAME"
@@ -59,8 +64,8 @@ function __besman_install {
             ;;
         spdx-sbom-generator)
             __besman_echo_white "Downloading SPDX SBOM Generator..."
-            curl -L -o "$BESMAN_TOOL_PATH/spdx-sbom-generator.tar.gz" "$BESMAN_SPDX_SBOM_ASSET_URL"
-            tar -xzf "$BESMAN_TOOL_PATH/spdx-sbom-generator.tar.gz" -C "$BESMAN_TOOL_PATH"
+            sudo curl -L -o "$BESMAN_TOOL_PATH/spdx-sbom-generator.tar.gz" "$BESMAN_SPDX_SBOM_ASSET_URL"
+            sudo tar -xzf "$BESMAN_TOOL_PATH/spdx-sbom-generator.tar.gz" -C "$BESMAN_TOOL_PATH"
             ;;
         *)
             __besman_echo_warn "Unknown tool: $t"
@@ -96,8 +101,8 @@ function __besman_uninstall {
     for t in "${tools[@]}"; do
         case $t in
         scorecard)
-            __besman_echo_white "Removing Scorecard image..."
-            docker rmi gcr.io/openssf/scorecard:stable || true
+            __besman_echo_white "Removing Scorecard..."
+            sudo rm /usr/local/bin/scorecard
             ;;
         criticality_score)
             __besman_echo_white "Uninstalling Criticality Score CLI..."
@@ -134,7 +139,11 @@ function __besman_update {
         case $t in
         scorecard)
             __besman_echo_white "Updating Scorecard image to stable..."
-            docker pull gcr.io/openssf/scorecard:stable
+            curl -L -o "$HOME/scorecard_5.1.1_linux_amd64.tar.gz" "$BESMAN_SCORECARD_ASSET_URL"
+            tar -xzf "$HOME/scorecard_5.1.1_linux_amd64.tar.gz"
+            chmod +x "$HOME/scorecard"
+            sudo mv "$HOME/scorecard" /usr/local/bin/
+            [[ -f "$HOME/scorecard_5.1.1_linux_amd64.tar.gz" ]] && rm "$HOME/scorecard_5.1.1_linux_amd64.tar.gz"
             ;;
         criticality_score)
             __besman_echo_white "Updating Criticality Score CLI to latest..."
@@ -193,6 +202,11 @@ function __besman_validate {
         status=1
     fi
 
+    if ! /usr.local/bin/scorecard --version &>/dev/null; then
+        __besman_echo_error "Scorecard CLI not found."
+        status=1
+    fi 
+        
     # Validate Criticality Score
     if ! command -v criticality_score &>/dev/null; then
         __besman_echo_error "criticality_score CLI not found."
