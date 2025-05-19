@@ -104,11 +104,11 @@ function __besman_uninstall {
         case $t in
         scorecard)
             __besman_echo_white "Removing Scorecard..."
-            sudo rm /usr/local/bin/scorecard
+            [[ -f "/usr/local/bin/scorecard" ]] && sudo rm /usr/local/bin/scorecard
             ;;
         criticality_score)
             __besman_echo_white "Uninstalling Criticality Score CLI..."
-            rm -f "$(go env GOPATH)/bin/criticality_score"
+            [[ -f "$(go env GOPATH)/bin/criticality_score" ]] && rm -f "$(go env GOPATH)/bin/criticality_score"
             ;;
         sonarqube)
             container="sonarqube-$BESMAN_ARTIFACT_NAME"
