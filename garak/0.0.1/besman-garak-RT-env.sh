@@ -125,13 +125,13 @@ function __besman_uninstall {
             sudo docker rm -f $container || true
             sudo rm -rf "$BESMAN_TOOL_PATH/sonar-scanner-cli.zip"
             sudo rm -rf "$BESMAN_TOOL_PATH/sonar-scanner"
-            sudo docker rmi sonarqube || true
+            sudo docker rmi -f sonarqube || true
             ;;
         fossology)
             container="fossology-$BESMAN_ARTIFACT_NAME"
             __besman_echo_white "Removing Fossology container: $container..."
             sudo docker rm -f $container || true
-            sudo docker rmi fossology/fossology || true
+            sudo docker rmi -f fossology/fossology || true
             ;;
         spdx-sbom-generator)
             __besman_echo_white "Removing SPDX SBOM Generator files..."

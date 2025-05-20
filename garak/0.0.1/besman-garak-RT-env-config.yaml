@@ -16,7 +16,7 @@ BESMAN_ARTIFACT_TYPE: project
 BESMAN_ARTIFACT_NAME: garak #***
 
 # Version of the artifact under assessment.
-BESMAN_ARTIFACT_VERSION: v1.0.0
+BESMAN_ARTIFACT_VERSION: v0.10.3.1
 
 # Source code url of the artifact under assessment.
 BESMAN_ARTIFACT_URL: https://github.com/Be-Secure/garak
