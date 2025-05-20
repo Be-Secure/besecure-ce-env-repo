@@ -41,7 +41,7 @@ function __besman_install {
     for t in "${tools[@]}"; do
         case $t in
         scorecard)
-            __besman_echo_white "Pulling Scorecard image..."
+            __besman_echo_white "Downloading scorecard from $BESMAN_SCORECARD_ASSET_URL"
             curl -L -o "$HOME/scorecard_5.1.1_linux_amd64.tar.gz" "$BESMAN_SCORECARD_ASSET_URL"
             tar -xzf "$HOME/scorecard_5.1.1_linux_amd64.tar.gz"
             chmod +x "$HOME/scorecard"
