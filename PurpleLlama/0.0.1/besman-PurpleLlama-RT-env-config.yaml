@@ -13,16 +13,16 @@ BESMAN_ORG: Be-Secure #***
 BESMAN_ARTIFACT_TYPE: project
 
 # Name of the artifact under assessment.
-BESMAN_ARTIFACT_NAME: BESMAN #***
+BESMAN_ARTIFACT_NAME: PurpleLlama #***
 
 # Version of the artifact under assessment.
-BESMAN_ARTIFACT_VERSION: 0.0.1
+BESMAN_ARTIFACT_VERSION: Be-Secure
 
 # Source code url of the artifact under assessment.
-BESMAN_ARTIFACT_URL: https://github.com/Be-Secure/BESMAN
+BESMAN_ARTIFACT_URL: https://github.com/Be-Secure/PurpleLlama
 
 # Using this variable for scorecard and criticality_score
-BESMAN_ARTIFACT_ORIGIN_URL: https://github.com/Be-Secure/BESMAN
+BESMAN_ARTIFACT_ORIGIN_URL: https://github.com/Be-Secure/PurpleLlama
 
 # This variable stores the name of the environment file.
 BESMAN_ENV_NAME: BESMAN-RT-env #***
