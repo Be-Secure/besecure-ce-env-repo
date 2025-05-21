@@ -1,70 +1,70 @@
 ---
 # If you wish to update the default configuration values, copy this file and place it under your home dir, under the same name.
 # These variables are used to drive the installation of the environment script.
-# The variables that start with PurpleLlama_ are converted to environment vars.
+# The variables that start with BESMAN_ are converted to environment vars.
 # If you wish to add any other vars that should be used globally, add the var using the below format.
-# PurpleLlama_<var name>: <value>
+# BESMAN_<var name>: <value>
 # If you are not using any particular value, remove it or comment it(#).
 #*** - These variables should not be removed, nor left empty.
 # used to mention where you should clone the repo from, default value is Be-Secure
-PurpleLlama_ORG: Be-Secure #***
+BESMAN_ORG: Be-Secure #***
 
 # project/ml model/training dataset
-PurpleLlama_ARTIFACT_TYPE: project
+BESMAN_ARTIFACT_TYPE: project
 
 # Name of the artifact under assessment.
-PurpleLlama_ARTIFACT_NAME: PurpleLlama #***
+BESMAN_ARTIFACT_NAME: BESMAN #***
 
 # Version of the artifact under assessment.
-PurpleLlama_ARTIFACT_VERSION: 0.0.1
+BESMAN_ARTIFACT_VERSION: 0.0.1
 
 # Source code url of the artifact under assessment.
-PurpleLlama_ARTIFACT_URL: https://github.com/Be-Secure/PurpleLlama
+BESMAN_ARTIFACT_URL: https://github.com/Be-Secure/BESMAN
 
 # Using this variable for scorecard and criticality_score
-PurpleLlama_ARTIFACT_ORIGIN_URL: https://github.com/Be-Secure/PurpleLlama
+BESMAN_ARTIFACT_ORIGIN_URL: https://github.com/Be-Secure/BESMAN
 
 # This variable stores the name of the environment file.
-PurpleLlama_ENV_NAME: PurpleLlama-RT-env #***
+BESMAN_ENV_NAME: BESMAN-RT-env #***
 
 # The path where you wish to clone the source code of the artifact under assessment.
 # If you wish to change the clone path, provide the complete path.
-PurpleLlama_ARTIFACT_DIR: $HOME/$PurpleLlama_ARTIFACT_NAME #***
+BESMAN_ARTIFACT_DIR: $HOME/$BESMAN_ARTIFACT_NAME #***
 
 # The path where we download the assessment and other required tools during installation.
-PurpleLlama_TOOL_PATH: /opt #***
+BESMAN_TOOL_PATH: /opt #***
 
 # Organization/lab/individual.
-PurpleLlama_LAB_TYPE: Lab #***
+BESMAN_LAB_TYPE: Lab #***
 
 # Name of the owner of the lab. Default is Be-Secure.
-PurpleLlama_LAB_NAME: BeSLab #***
+BESMAN_LAB_NAME: BeSLab #***
 
 # This is the local dir where we store the assessment reports. Default is home.
-PurpleLlama_ASSESSMENT_DATASTORE_DIR: $HOME/besecure-assessment-datastore #***
+BESMAN_ASSESSMENT_DATASTORE_DIR: $HOME/besecure-assessment-datastore #***
 
 # The remote repo where we store the assessment reports.
-PurpleLlama_ASSESSMENT_DATASTORE_URL: https://github.com/Be-Secure/besecure-assessment-datastore #***
+BESMAN_ASSESSMENT_DATASTORE_URL: https://github.com/Be-Secure/besecure-assessment-datastore #***
 
 # Comma-separated list of tools to manage (e.g., scorecard,criticality_score,sonarqube,fossology,spdx-sbom-generator)
-PurpleLlama_ASSESSMENT_TOOLS: "scorecard,criticality_score,sonarqube,fossology,spdx-sbom-generator"
+BESMAN_ASSESSMENT_TOOLS: "scorecard,criticality_score,sonarqube,fossology,spdx-sbom-generator"
 
 # Mode for scorecard cli or github action.
-PurpleLlama_SCORECARD_ASSESSMENT_MODE: cli
+BESMAN_SCORECARD_ASSESSMENT_MODE: cli
 
 # Ports for containerized tools
-PurpleLlama_SONARQUBE_PORT: 9000
-PurpleLlama_FOSSOLOGY_PORT: 9001
+BESMAN_SONARQUBE_PORT: 9000
+BESMAN_FOSSOLOGY_PORT: 9001
 
 # SPDX SBOM Generator release asset URL (GitHub or other source)
-PurpleLlama_SPDX_SBOM_ASSET_URL: "https://github.com/opensbom-generator/spdx-sbom-generator/releases/download/v0.0.15/spdx-sbom-generator-v0.0.15-linux-amd64.tar.gz"
+BESMAN_SPDX_SBOM_ASSET_URL: "https://github.com/opensbom-generator/spdx-sbom-generator/releases/download/v0.0.15/spdx-sbom-generator-v0.0.15-linux-amd64.tar.gz"
 
 # Scorecard binary url
-PurpleLlama_SCORECARD_ASSET_URL: "https://github.com/ossf/scorecard/releases/download/v5.1.1/scorecard_5.1.1_linux_amd64.tar.gz"
+BESMAN_SCORECARD_ASSET_URL: "https://github.com/ossf/scorecard/releases/download/v5.1.1/scorecard_5.1.1_linux_amd64.tar.gz"
 
 # Version of sonar scanner
-PurpleLlama_SONAR_SCANNER_VERSION: "7.1.0.4889"
+BESMAN_SONAR_SCANNER_VERSION: "7.1.0.4889"
 
 # Sonar scanner binary url
-PurpleLlama_SONAR_SCANNER_ASSET_URL: "https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-$PurpleLlama_SONAR_SCANNER_VERSION-linux-x64.zip?_gl=1*yhd721*_gcl_au*MTc0NjUwODg1Ny4xNzQ3NjI3MDMy*_ga*MTU3MTQ2MDE3MC4xNzQ3NjI3MDMx*_ga_9JZ0GZ5TC6*czE3NDc2NjA0NDckbzMkZzEkdDE3NDc2NjA0NTYkajUyJGwwJGgwJGQ4RzFONHBmRWk2OHRLakdUYl9QU1JON1p5RU1xUnNsSHhB"
+BESMAN_SONAR_SCANNER_ASSET_URL: "https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-$BESMAN_SONAR_SCANNER_VERSION-linux-x64.zip?_gl=1*yhd721*_gcl_au*MTc0NjUwODg1Ny4xNzQ3NjI3MDMy*_ga*MTU3MTQ2MDE3MC4xNzQ3NjI3MDMx*_ga_9JZ0GZ5TC6*czE3NDc2NjA0NDckbzMkZzEkdDE3NDc2NjA0NTYkajUyJGwwJGgwJGQ4RzFONHBmRWk2OHRLakdUYl9QU1JON1p5RU1xUnNsSHhB"
 
