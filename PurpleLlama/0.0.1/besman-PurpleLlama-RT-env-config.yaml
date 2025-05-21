@@ -25,7 +25,7 @@ BESMAN_ARTIFACT_URL: https://github.com/Be-Secure/PurpleLlama
 BESMAN_ARTIFACT_ORIGIN_URL: https://github.com/Be-Secure/PurpleLlama
 
 # This variable stores the name of the environment file.
-BESMAN_ENV_NAME: BESMAN-RT-env #***
+BESMAN_ENV_NAME: PurpleLlama-RT-env #***
 
 # The path where you wish to clone the source code of the artifact under assessment.
 # If you wish to change the clone path, provide the complete path.
