@@ -13,19 +13,19 @@ BESMAN_ORG: Be-Secure #***
 BESMAN_ARTIFACT_TYPE: project
 
 # Name of the artifact under assessment.
-BESMAN_ARTIFACT_NAME: garak #***
+BESMAN_ARTIFACT_NAME: BeSman #***
 
 # Version of the artifact under assessment.
-BESMAN_ARTIFACT_VERSION: v0.10.3.1
+BESMAN_ARTIFACT_VERSION: 0.5.0
 
 # Source code url of the artifact under assessment.
-BESMAN_ARTIFACT_URL: https://github.com/Be-Secure/garak
+BESMAN_ARTIFACT_URL: https://github.com/Be-Secure/BeSman
 
 # Using this variable for scorecard and criticality_score
-BESMAN_ARTIFACT_ORIGIN_URL: https://github.com/Be-Secure/garak
+BESMAN_ARTIFACT_ORIGIN_URL: https://github.com/Be-Secure/BeSman
 
 # This variable stores the name of the environment file.
-BESMAN_ENV_NAME: garak-RT-env #***
+BESMAN_ENV_NAME: BeSman-RT-env #***
 
 # The path where you wish to clone the source code of the artifact under assessment.
 # If you wish to change the clone path, provide the complete path.
