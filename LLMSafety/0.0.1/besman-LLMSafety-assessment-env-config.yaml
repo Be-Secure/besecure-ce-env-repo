@@ -38,6 +38,7 @@ BESMAN_JUDGE_LLM_NAME: mistral
 BESMAN_JUDGE_LLM_VERSION: "mistral-7b-instruct-v0:2"
 
 # The repo id of the judge llm. Use only when when the BESMAN_JUDGE_LLM_PROVIDER is HuggingFace
+# Otherwise comment it.
 BESMAN_JUDGE_MODEL_REPO_NAMESPACE:
 
 # Name of the expansion llm
