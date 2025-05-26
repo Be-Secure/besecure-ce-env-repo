@@ -401,9 +401,10 @@ function __besman_validate {
                         __besman_echo_red "transformers is not installed."
                         flag="true"
                     fi
-                    [[ "$flag" == "false" ]] && __besman_echo_green "cyberseceval installed"
-                    deactivate
+
                 fi
+                [[ "$flag" == "false" ]] && __besman_echo_green "cyberseceval installed"
+                deactivate
             fi
 
             ;;
