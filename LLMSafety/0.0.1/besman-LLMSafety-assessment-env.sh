@@ -233,7 +233,7 @@ function __besman_uninstall {
             __besman_echo_white "Uninstalling modelbench..."
             source ~/.venvs/modelbench_env/bin/activate
             cd "$BESMAN_TOOL_PATH/modelbench" || { __besman_echo_red "Could not move to $BESMAN_TOOL_PATH/modelbench" && return 1; }
-            poetry uninstall
+            rm poetry.lock
             deactivate
             [[ -d ~/.venvs/modelbench_env ]] && rm -rf ~/.venvs/modelbench_env
             __besman_echo_green "modelbench uninstalled successfully"
