@@ -428,11 +428,12 @@ function __besman_validate {
                 __besman_echo_red "$BESMAN_TOOL_PATH/garak does not exist."
                 flag="true"
             fi
+            source /opt/conda/etc/profile.d/conda.sh
+
             if ! conda env list | grep -q "garak"; then
                 __besman_echo_red "garak conda environment missing."
                 flag="true"
             else
-                source /opt/conda/etc/profile.d/conda.sh
                 conda activate garak
                 if [[ -z $(command -v garak) ]]; then
                     __besman_echo_error "Garak not installed" && flag="true"
