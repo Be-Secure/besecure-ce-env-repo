@@ -3153,6 +3153,26 @@
             "compatible_playbooks": []
         },
         {
+            "name": "Falcon-assessment-env",
+            "version": {
+                "tag": "0.0.1",
+                "release_date": ""
+            },
+            "author": {
+                "name": "BeSLab",
+                "type": "Lab"
+            },
+            "date_of_creation": "2025-01-02T15:28:56",
+            "last_update_date": "2025-01-02T15:28:56",
+            "last_execution": {
+                "name": "BeSLab",
+                "type": "Lab",
+                "status": "Success",
+                "timestamp": "2025-01-02T15:28:56"
+            },
+            "compatible_playbooks": []
+        },
+        {
             "name": "shell_gpt-RT-env",
             "version": {
                 "tag": "0.0.1",
