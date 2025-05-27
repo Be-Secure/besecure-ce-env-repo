@@ -55,7 +55,7 @@ BESMAN_EXPANSION_LLM_PROVIDER: AWSBedrock
 # BESMAN_EXPANSION_LLM_REPO_NAMESPACE:
 
 # This variable stores the name of the environment file.
-BESMAN_ENV_NAME: Falcon-assessment-env
+BESMAN_ENV_NAME: falcon-assessment-env
 
 # The branch of the repo to be used for the assessment.
 BESMAN_TOOL_BRANCH: "Be-Secure"
