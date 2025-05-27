@@ -3153,7 +3153,7 @@
             "compatible_playbooks": []
         },
         {
-            "name": "Falcon-assessment-env",
+            "name": "falcon-assessment-env",
             "version": {
                 "tag": "0.0.1",
                 "release_date": ""
@@ -3170,7 +3170,56 @@
                 "status": "Success",
                 "timestamp": "2025-01-02T15:28:56"
             },
-            "compatible_playbooks": []
+            "compatible_playbooks": [
+                {
+                    "name": "LLMSecFalseRefusalRate-cyberseceval",
+                    "version": [
+                        "0.0.1"
+                    ]
+                },
+                {
+                    "name": "LLMSecAutocomplete-cyberseceval",
+                    "version": [
+                        "0.0.1"
+                    ]
+                },
+                {
+                    "name": "LLMSecCodeInterpreter-cyberseceval",
+                    "version": [
+                        "0.0.1"
+                    ]
+                },
+                {
+                    "name": "LLMSecInstruct-cyberseceval",
+                    "version": [
+                        "0.0.1"
+                    ]
+                },
+                {
+                    "name": "LLMSecMitre-cyberseceval",
+                    "version": [
+                        "0.0.1"
+                    ]
+                },
+                {
+                    "name": "LLMSecPromptInjection-cyberseceval",
+                    "version": [
+                        "0.0.1"
+                    ]
+                },
+                {
+                    "name": "LLMSecSpearPhishing-cyberseceval",
+                    "version": [
+                        "0.0.1"
+                    ]
+                },
+                {
+                    "name": "LLMVulnScan-garak",
+                    "version": [
+                        "0.0.1"
+                    ]
+                }
+            ]
         },
         {
             "name": "shell_gpt-RT-env",
