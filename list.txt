@@ -77,3 +77,4 @@ Be-Secure/besecure-ce-env-repo/gemma3-llmSecurityBenchmark-env,0.0.1
 Be-Secure/besecure-ce-env-repo/cogito-assessment-env,0.0.1
 Be-Secure/besecure-ce-env-repo/modelbench-RT-env,0.0.1
 Be-Secure/besecure-ce-env-repo/garak-RT-env,0.0.1
+Be-Secure/besecure-ce-env-repo/gitlabhq-RT-env,0.0.1
