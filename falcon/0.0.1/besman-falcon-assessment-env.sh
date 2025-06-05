@@ -149,7 +149,6 @@ function __besman_install_modelbench {
     poetry lock && poetry install || return 1
     deactivate
     __besman_echo_green "Modelbench installed successfully"
-    deactivate
     cd "$HOME"
     return 0
 }
@@ -178,6 +177,10 @@ function __besman_install_garak {
     conda create --name garak "python>=3.10,<=3.12" -y || return 1
     conda activate garak
 
+    echo "-------------------------------------------------------------------------------------------------------"
+    echo "$BESMAN_TOOL_PATH/garak"
+    echo "$BESMAN_VCS"
+    echo "-------------------------------------------------------------------------------------------------------"
     if [[ ! -d "$BESMAN_TOOL_PATH/garak" && "$BESMAN_VCS" == "git" ]]; then
         git clone "$BESMAN_GARAK_URL" "$BESMAN_TOOL_PATH/garak"
         [[ $? -ne 0 ]] && __besman_echo_red "Failed to clone the repo" && return 1
