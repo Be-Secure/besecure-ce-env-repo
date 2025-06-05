@@ -37,7 +37,7 @@ BESMAN_LAB_TYPE: Organization #***
 # Name of the owner of the lab. Default is Be-Secure.
 BESMAN_LAB_NAME: Be-Secure #***
 
-# Mode for scorecard cli or github action.
+# Mode for scorecard (cli) or (github-action).
 BESMAN_SCORECARD_ASSESSMENT_MODE: "cli"
 # Ports for containerized tools
 BESMAN_SONARQUBE_PORT: 9000
@@ -59,7 +59,7 @@ BESMAN_SONAR_SCANNER_ASSET_URL: "https://binaries.sonarsource.com/Distribution/s
 BESMAN_ASSESSMENT_DATASTORE_DIR: $HOME/besecure-assessment-datastore #***
 
 # The remote repo where we store the assessment reports.
-BESMAN_ASSESSMENT_DATASTORE_URL: https://github.com/NeerajK007/besecure-assessment-datastore #***
+BESMAN_ASSESSMENT_DATASTORE_URL: https://github.com/Be-Secure/besecure-assessment-datastore #***
 
 # Add a comma seperated list of tools that needs to be installed to assess this project.
 BESMAN_ASSESSMENT_TOOLS: criticality_score,sonarqube,spdx-sbom-generator,fossology
