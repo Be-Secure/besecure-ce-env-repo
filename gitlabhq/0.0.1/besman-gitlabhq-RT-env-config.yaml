@@ -38,7 +38,7 @@ BESMAN_LAB_TYPE: Organization #***
 BESMAN_LAB_NAME: Be-Secure #***
 
 # Mode for scorecard (cli) or (github-action).
-BESMAN_SCORECARD_ASSESSMENT_MODE: "cli"
+BESMAN_SCORECARD_ASSESSMENT_MODE: "github-action"
 # Ports for containerized tools
 BESMAN_SONARQUBE_PORT: 9000
 BESMAN_FOSSOLOGY_PORT: 9001
