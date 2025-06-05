@@ -94,7 +94,7 @@ function __besman_install_cyberseceval {
     python3 -m venv ~/.venvs/CybersecurityBenchmarks
     source ~/.venvs/CybersecurityBenchmarks/bin/activate
     cd "$BESMAN_TOOL_PATH/PurpleLlama" || {
-        __besman_echo_red "Could not move to $BESMAN_TOOL_PATH"
+        __besman_echo_red "Could not move to PurpleLlama: $BESMAN_TOOL_PATH"
         return 1
     }
     git checkout "$BESMAN_TOOL_BRANCH"
@@ -144,7 +144,7 @@ function __besman_install_modelbench {
         __besman_echo_yellow "gh is not supported in this env. Please clone this url manually - $BESMAN_MODELBENCH_URL"
     fi
 
-    cd "$BESMAN_TOOL_PATH/modelbench" || { __besman_echo_red "Could not move to $BESMAN_TOOL_PATH/modelbench" && return 1; }
+    cd "$BESMAN_TOOL_PATH/modelbench" || { __besman_echo_red "Could not move to modelbench: $BESMAN_TOOL_PATH/modelbench" && return 1; }
     source ~/.venvs/modelbench_env/bin/activate
     poetry lock && poetry install || return 1
     deactivate
@@ -185,7 +185,7 @@ function __besman_install_garak {
         __besman_echo_yellow "gh is not supported in this env. Please clone this url manually - $BESMAN_GARAK_URL"
     fi
 
-    cd "$BESMAN_TOOL_PATH/garak" || { __besman_echo_red "Could not move to $BESMAN_TOOL_PATH" && return 1; }
+    cd "$BESMAN_TOOL_PATH/garak" || { __besman_echo_red "Could not move to garak: $BESMAN_TOOL_PATH" && return 1; }
     python3 -m pip install -e . || return 1
     garak --list_probes || return 1
     conda deactivate
@@ -241,7 +241,7 @@ function __besman_uninstall {
         cyberseceval)
             __besman_echo_white "Uninstalling CybersecurityBenchmarks..."
             source ~/.venvs/CybersecurityBenchmarks/bin/activate
-            cd "$BESMAN_TOOL_PATH/PurpleLlama" || { __besman_echo_red "Could not move to $BESMAN_TOOL_PATH/PurpleLlama" && return 1; }
+            cd "$BESMAN_TOOL_PATH/PurpleLlama" || { __besman_echo_red "Could not move to PurpleLlama: $BESMAN_TOOL_PATH/PurpleLlama" && return 1; }
             python3 -m pip uninstall -y -r CybersecurityBenchmarks/requirements.txt
             [[ $? -ne 0 ]] && __besman_echo_red "Failed to uninstall CybersecurityBenchmarks" && return 1
             python3 -m pip uninstall torch boto3 transformers openai -y
@@ -263,7 +263,7 @@ function __besman_uninstall {
         modelbench)
             __besman_echo_white "Uninstalling modelbench..."
             source ~/.venvs/modelbench_env/bin/activate
-            cd "$BESMAN_TOOL_PATH/modelbench" || { __besman_echo_red "Could not move to $BESMAN_TOOL_PATH/modelbench" && return 1; }
+            cd "$BESMAN_TOOL_PATH/modelbench" || { __besman_echo_red "Could not move to modelbench: $BESMAN_TOOL_PATH/modelbench" && return 1; }
             rm poetry.lock
             deactivate
             [[ -d ~/.venvs/modelbench_env ]] && rm -rf ~/.venvs/modelbench_env
@@ -274,7 +274,7 @@ function __besman_uninstall {
             __besman_echo_white "Uninstalling garak..."
             source /opt/conda/etc/profile.d/conda.sh
             conda activate garak
-            cd "$BESMAN_TOOL_PATH/garak" || { __besman_echo_red "Could not move to $BESMAN_TOOL_PATH/garak" && return 1; }
+            cd "$BESMAN_TOOL_PATH/garak" || { __besman_echo_red "Could not move to garak: $BESMAN_TOOL_PATH/garak" && return 1; }
             python3 -m pip uninstall -y garak
             conda deactivate
             conda env remove -n garak -y
@@ -315,7 +315,7 @@ function __besman_update {
         case $t in
         cyberseceval)
             __besman_echo_white "Updating CybersecurityBenchmarks..."
-            cd "$BESMAN_TOOL_PATH/PurpleLlama" || { __besman_echo_red "Could not move to $BESMAN_TOOL_PATH/PurpleLlama" && return 1; }
+            cd "$BESMAN_TOOL_PATH/PurpleLlama" || { __besman_echo_red "Could not move to PurpleLlama: $BESMAN_TOOL_PATH/PurpleLlama" && return 1; }
             git checkout "$BESMAN_TOOL_BRANCH"
             if [[ "$BESMAN_VCS" == "git" ]]; then
                 git checkout "$BESMAN_TOOL_BRANCH"
@@ -345,7 +345,7 @@ function __besman_update {
         modelbench)
             cd "$HOME"
             __besman_echo_white "Updating modelbench..."
-            cd "$BESMAN_TOOL_PATH/modelbench" || { __besman_echo_red "Could not move to $BESMAN_TOOL_PATH/modelbench" && return 1; }
+            cd "$BESMAN_TOOL_PATH/modelbench" || { __besman_echo_red "Could not move to modelbench: $BESMAN_TOOL_PATH/modelbench" && return 1; }
             if [[ "$BESMAN_VCS" == "git" ]]; then
                 git pull origin main
                 [[ $? -ne 0 ]] && __besman_echo_error "Failed to update modelbench" && return 1
@@ -363,7 +363,7 @@ function __besman_update {
             if [[ "$BESMAN_VCS" == "git" ]]; then
 
                 __besman_echo_white "Updating garak..."
-                cd "$BESMAN_TOOL_PATH/garak" || { __besman_echo_red "Could not move to $BESMAN_TOOL_PATH/garak" && return 1; }
+                cd "$BESMAN_TOOL_PATH/garak" || { __besman_echo_red "Could not move to garak: $BESMAN_TOOL_PATH/garak" && return 1; }
                 git pull origin main
                 [[ $? -ne 0 ]] && __besman_echo_red "Failed to update garak" && return 1
                 source /opt/conda/etc/profile.d/conda.sh
