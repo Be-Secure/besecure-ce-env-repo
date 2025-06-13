@@ -17,13 +17,13 @@ BESMAN_ARTIFACT_TYPE: project
 BESMAN_ARTIFACT_NAME: BeSLighthouse
 
 # Version of the artifact under assessment.
-BESMAN_ARTIFACT_VERSION: v0.28.5
+BESMAN_ARTIFACT_VERSION: 0.28.7
 
 # Original source URL for the project under test.
 BESMAN_ARTIFACT_ORIGIN_URL: https://github.com/Be-Secure/BeSLighthouse
 
 # Source code url of the artifact under assessment.
-BESMAN_ARTIFACT_URL: https://github.com/Be-Secure/BeSLighthouse
+BESMAN_ARTIFACT_URL: https://github.com/NeerajK007/BeSLighthouse
 
 # This variable stores the name of the environment file.
 BESMAN_ENV_NAME: BeSLighthouse-RT-env
@@ -63,9 +63,9 @@ BESMAN_SONAR_SCANNER_ASSET_URL: "https://binaries.sonarsource.com/Distribution/s
 BESMAN_ASSESSMENT_DATASTORE_DIR: $HOME/besecure-assessment-datastore
 
 # The remote repo where we store the assessment reports.
-BESMAN_ASSESSMENT_DATASTORE_URL: https://github.com/Be-Secure/besecure-assessment-datastore
+BESMAN_ASSESSMENT_DATASTORE_URL: https://github.com/NeerajK007/besecure-assessment-datastore
 
 # Add a comma seperated list of tools that needs to be installed to assess this project.
-BESMAN_ASSESSMENT_TOOLS: scorecard,criticality_score,sonarqube,spdx-sbom-generator,fossology
+BESMAN_ASSESSMENT_TOOLS: scorecard,criticality_score,sonarqube,spdx-sbom-generator,fossology,cyclonedx-sbom-generator
 
 # 
