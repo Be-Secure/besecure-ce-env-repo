@@ -19,7 +19,7 @@ BESMAN_ARTIFACT_NAME: ollama #***
 BESMAN_ARTIFACT_VERSION: v0.9.0 #***
 
 # Source code url of the artifact under assessment.
-BESMAN_ARTIFACT_URL: https://github.com/NeerajK007/ollama #***
+BESMAN_ARTIFACT_URL: https://github.com/Be-Secure/ollama #***
 
 # This variable stores the name of the environment file.
 BESMAN_ENV_NAME: ollama-RT-env #***
@@ -34,7 +34,7 @@ BESMAN_TOOL_PATH: /opt #***
 # Organization/lab/individual.
 BESMAN_LAB_TYPE: Organization #***
 
-# Name of the owner of the lab. Default is NeerajK007.
+# Name of the owner of the lab. Default is Be-Secure.
 BESMAN_LAB_NAME: Be-Secure #***
 
 # Mode for scorecard (cli) or (github-action).
@@ -60,6 +60,6 @@ BESMAN_SONAR_SCANNER_ASSET_URL: "https://binaries.sonarsource.com/Distribution/s
 BESMAN_ASSESSMENT_DATASTORE_DIR: $HOME/besecure-assessment-datastore #***
 
 # The remote repo where we store the assessment reports.
-BESMAN_ASSESSMENT_DATASTORE_URL: https://github.com/NeerajK007/besecure-assessment-datastore #***
+BESMAN_ASSESSMENT_DATASTORE_URL: https://github.com/Be-Secure/besecure-assessment-datastore #***
 
 BESMAN_ASSESSMENT_TOOLS: scorecard,criticality_score,sonarqube,spdx-sbom-generator,fossology,cyclonedx-sbom-generator
