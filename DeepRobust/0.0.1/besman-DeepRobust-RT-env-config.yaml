@@ -1,0 +1,47 @@
+---
+# If you wish to update the default configuration values, copy this file and place it under your home dir, under the same name.
+# These variables are used to drive the installation of the environment script.
+# The variables that start with BESMAN_ are converted to environment vars.
+# If you wish to add any other vars that should be used globally, add the var using the below format.
+# BESMAN_<var name>: <value>
+# If you are not using any particular value, remove it or comment it(#).
+#*** - These variables should not be removed, nor left empty.
+# used to mention where you should clone the repo from, default value is Be-Secure
+---
+BESMAN_ORG: Be-Secure #***
+
+BESMAN_ARTIFACT_TYPE: project #***
+
+BESMAN_ARTIFACT_NAME: DeepRobust #***
+
+BESMAN_ARTIFACT_VERSION: master #***
+
+BESMAN_ARTIFACT_URL: https://github.com/Be-Secure/DeepRobust #***
+
+BESMAN_ENV_NAME: DeepRobust-RT-env #***
+
+BESMAN_ARTIFACT_DIR: $HOME/DeepRobust #***
+
+BESMAN_TOOL_PATH: /opt #***
+
+BESMAN_LAB_TYPE: Organization #***
+
+BESMAN_LAB_NAME: Be-Secure #***
+
+BESMAN_SCORECARD_ASSESSMENT_MODE: "cli"
+
+BESMAN_SONARQUBE_PORT: 9000
+BESMAN_FOSSOLOGY_PORT: 9001
+
+BESMAN_SPDX_SBOM_ASSET_URL: "https://github.com/opensbom-generator/spdx-sbom-generator/releases/download/v0.0.15/spdx-sbom-generator-v0.0.15-linux-amd64.tar.gz"
+
+BESMAN_SCORECARD_ASSET_URL: "https://github.com/ossf/scorecard/releases/download/v5.1.1/scorecard_5.1.1_linux_amd64.tar.gz"
+
+BESMAN_SONAR_SCANNER_VERSION: "7.1.0.4889"
+BESMAN_SONAR_SCANNER_ASSET_URL: "https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-$BESMAN_SONAR_SCANNER_VERSION-linux-x64.zip"
+
+BESMAN_ASSESSMENT_DATASTORE_DIR: $HOME/besecure-assessment-datastore #***
+
+BESMAN_ASSESSMENT_DATASTORE_URL: https://github.com/Be-Secure/besecure-assessment-datastore #***
+
+BESMAN_ASSESSMENT_TOOLS: scorecard,criticality_score,sonarqube,spdx-sbom-generator,fossology,cyclonedx-sbom-generator
