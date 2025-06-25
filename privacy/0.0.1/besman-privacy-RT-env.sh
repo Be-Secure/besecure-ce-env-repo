@@ -265,32 +265,30 @@ function __besman_uninstall {
         __besman_echo_yellow "Could not find dir $BESMAN_ARTIFACT_DIR"
     fi
 
-   # Please add the rest of the code here for uninstallation
-    if [ ! -z $ASSESSMENT_TOOLS ]; then
+    # Uninstall assessment tools
+    if [ ! -z "$ASSESSMENT_TOOLS" ]; then
         for tool in ${ASSESSMENT_TOOLS[*]}; do
             if [[ $tool == *:* ]]; then
-                tool_name=${tool%%:*}    # Get the tool name
-                tool_version=${tool##*:} # Get the tool version
+                tool_name=${tool%%:*}
+                tool_version=${tool##*:}
             else
-                tool_name=$tool # Get the tool name
-                tool_version="" # No version specified
+                tool_name=$tool
+                tool_version=""
             fi
 
-            __besman_echo_white "Uninstallling tool - $tool : version - $tool_version"
+            __besman_echo_white "Uninstalling tool - $tool : version - $tool_version"
 
             case $tool_name in
             scorecard)
                 __besman_echo_white "Uninstalling scorecard..."
-                sudo rm /usr/local/bin/scorecard
+                sudo rm -f /usr/local/bin/scorecard
                 __besman_echo_white "scorecard uninstallation is done"
                 ;;
             criticality_score)
-                __besman_echo_white "check for criticality_score"
                 if [ -x "$(command -v criticality_score)" ]; then
-                    __besman_echo_white "uninstalling criticality_score ..."
-                    [[ -f $GOPATH/bin/criticality_score ]] && rm -rf $GOPATH/bin/criticality_score
-
-                    __besman_echo_white "criticality_score is uninstalled\n"
+                    __besman_echo_white "Uninstalling criticality_score..."
+                    [[ -f $GOPATH/bin/criticality_score ]] && rm -rf "$GOPATH/bin/criticality_score"
+                    __besman_echo_white "criticality_score is uninstalled"
                 else
                     __besman_echo_white "criticality_score is not installed"
                 fi
@@ -298,8 +296,6 @@ function __besman_uninstall {
             sonarqube)
                 __besman_echo_white "Uninstalling sonarqube..."
                 if [ "$(docker ps -aq -f name=sonarqube-$BESMAN_ARTIFACT_NAME)" ]; then
-                    # If a container exists, stop and remove it
-                    __besman_echo_white "Removing existing container 'sonarqube-$BESMAN_ARTIFACT_NAME'..."
                     docker stop sonarqube-$BESMAN_ARTIFACT_NAME
                     docker container rm --force sonarqube-$BESMAN_ARTIFACT_NAME
                 fi
@@ -307,10 +303,7 @@ function __besman_uninstall {
                 ;;
             fossology)
                 __besman_echo_white "Uninstalling fossology..."
-                __besman_echo_white "check for fossology-docker container"
                 if [ "$(docker ps -aq -f name=fossology-$BESMAN_ARTIFACT_NAME)" ]; then
-                    # If a container exists, stop and remove it
-                    __besman_echo_white "Removing existing container 'fossology-$BESMAN_ARTIFACT_NAME'..."
                     docker stop fossology-$BESMAN_ARTIFACT_NAME
                     docker container rm --force fossology-$BESMAN_ARTIFACT_NAME
                 fi
@@ -318,39 +311,20 @@ function __besman_uninstall {
                 ;;
             spdx-sbom-generator)
                 __besman_echo_white "Uninstalling spdx-sbom-generator..."
-
-                # Remove the specific tar.gz file if it exists
-                if [[ -f $BESMAN_TOOL_PATH/spdx-sbom-generator-v0.0.15-linux-amd64.tar.gz ]]; then
-                    rm -f "$BESMAN_TOOL_PATH/spdx-sbom-generator-v0.0.15-linux-amd64.tar.gz"
-                    __besman_echo_white "Removed spdx-sbom-generator-v0.0.15-linux-amd64.tar.gz file."
-                else
-                    __besman_echo_white "spdx-sbom-generator-v0.0.15-linux-amd64.tar.gz file not found."
-                fi
-
-                # Remove the extracted directory (matching any version)
-                if [[ -d $BESMAN_ARTIFACT_DIR/spdx-sbom-generator* ]]; then
-                    rm -rf "$BESMAN_ARTIFACT_DIR/spdx-sbom-generator*"
-                    __besman_echo_white "Removed spdx-sbom-generator directory."
-                else
-                    __besman_echo_white "Directory not found."
-                fi
-
+                rm -f "$BESMAN_TOOL_PATH/spdx-sbom-generator-v0.0.15-linux-amd64.tar.gz"
+                rm -rf "$BESMAN_ARTIFACT_DIR"/spdx-sbom-generator*
                 __besman_echo_white "spdx-sbom-generator uninstallation is done."
                 ;;
             cyclonedx-sbom-generator)
-                __besman_echo_white "Checking if cdxgen is installed before uninstalling..."
+                __besman_echo_white "Checking if cdxgen is installed..."
                 if which cdxgen >/dev/null; then
-                    __besman_echo_white "cdxgen is installed. Proceeding with uninstallation..."
                     sudo npm uninstall -g @cyclonedx/cdxgen
                     sudo npm cache clean --force
-                    __besman_echo_white "cdxgen has been successfully uninstalled."
-
+                    __besman_echo_white "cdxgen has been uninstalled."
                 else
-                    __besman_echo_white "cdxgen is not installed. Skipping uninstallation."
+                    __besman_echo_white "cdxgen is not installed."
                 fi
-                if [ -f /opt/cyclonedx-sbom-generator ]; then
-                    sudo rm -rf /opt/cyclonedx-sbom-generator
-                fi
+                sudo rm -rf /opt/cyclonedx-sbom-generator
                 ;;
             *)
                 echo "No uninstallation steps found for $tool_name."
@@ -360,68 +334,45 @@ function __besman_uninstall {
         echo "bes assessment tools uninstallation done"
     fi
 
-    # check docker & containers
+    # Uninstall Docker
     if command -v docker &>/dev/null; then
-
-        # Remove Docker Engine
-        # Purge Docker packages and dependencies
         echo "Removing Docker ..."
         sudo apt purge -y docker-ce docker-ce-cli containerd.io
-
-        # Remove Docker’s data and configuration files
-        sudo rm -rf /var/lib/docker
-        sudo rm -rf /var/lib/containerd
-
-        # Remove Docker GPG key and repository
+        sudo rm -rf /var/lib/docker /var/lib/containerd
         sudo rm -rf /usr/share/keyrings/docker-archive-keyring.gpg
         sudo rm -f /etc/apt/sources.list.d/docker.list
-
-        # Remove Docker group
         sudo deluser $USER docker
         sudo groupdel docker
-
         sudo apt update
         echo "Docker removed successfully"
-
     fi
 
-    # Check go
+    # Uninstall Go
     if command -v go &>/dev/null; then
         __besman_echo_white "Removing go..."
-        # Remove go
         sudo snap remove go -y
         __besman_echo_white "Go removed successfully."
     fi
 
-    # Check Node & NPM
+    # Uninstall Node & NPM
     if command -v node &>/dev/null; then
         __besman_echo_white "Removing Node & NPM"
         sudo apt purge -y nodejs npm
         rm -rf ~/.npm
-
     fi
 
-    # Check if pip is installed
+    # Uninstall pip
     if command -v pip3 &>/dev/null; then
         __besman_echo_white "Uninstalling pip..."
         sudo apt purge -y python3-pip
         __besman_echo_white "pip uninstalled successfully."
     fi
 
-    # Function to uninstall Python and pip
+    # Uninstall Python
     if command -v python3 &>/dev/null; then
         __besman_echo_white "Uninstalling Python..."
-        # Remove Python
-        sudo apt purge -y python3
-        # Remove pip
-        sudo apt purge -y python3-pip
+        sudo apt purge -y python3 python3-pip
         __besman_echo_white "Python uninstalled successfully."
-    # Check go
-    if command -v go &>/dev/null; then
-        __besman_echo_white "Removing go..."
-        # Remove go
-        sudo snap remove go -y
-        __besman_echo_white "Go removed successfully."
     fi
 
     # Clean up unused packages
