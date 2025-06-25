@@ -281,7 +281,7 @@ function __besman_uninstall {
             case $tool_name in
             scorecard)
                 __besman_echo_white "Uninstalling scorecard..."
-sudo rm /usr/local/bin/scorecard
+                sudo rm /usr/local/bin/scorecard
                 __besman_echo_white "scorecard uninstallation is done"
                 ;;
             criticality_score)
