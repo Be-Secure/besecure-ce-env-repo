@@ -1,0 +1,57 @@
+---
+# If you wish to update the default configuration values, copy this file and place it under your home dir, under the same name.
+# These variables are used to drive the installation of the environment script.
+# The variables that start with BESMAN_ are converted to environment vars.
+# If you wish to add any other vars that should be used globally, add the var using the below format.
+# BESMAN_<var name>: <value>
+# If you are not using any particular value, remove it or comment it(#).
+#*** - These variables should not be removed, nor left empty.
+
+# Used to mention where you should clone the repo from, default value is Be-Secure
+BESMAN_ORG: Be-Secure
+
+#  project/ml model/training dataset
+BESMAN_ARTIFACT_TYPE: project
+
+# Name of the artifact under assessment.
+BESMAN_ARTIFACT_NAME: net-snmp
+
+# Version of the artifact under assessment.
+BESMAN_ARTIFACT_VERSION: 5.9.1
+
+# Source code url of the artifact under assessment.
+BESMAN_ARTIFACT_URL: https://github.com/net-snmp/net-snmp
+
+# This variable stores the name of the environment file.
+BESMAN_ENV_NAME: net-snmp-RT-env
+
+# The path where you wish to clone the source code of the artifact under assessment.
+# If you wish to change the clone path, provide the complete path.
+BESMAN_ARTIFACT_DIR: $HOME/$BESMAN_ARTIFACT_NAME
+
+# The path where we download the assessment and other required tools during installation.
+BESMAN_TOOL_PATH: /opt
+
+# Organization/lab/individual.
+BESMAN_LAB_TYPE: Organization
+
+# Name of the owner of the lab. Default is Be-Secure.
+BESMAN_LAB_NAME: Be-Secure
+
+# This is the local dir where we store the assessment reports. Default is home.
+BESMAN_ASSESSMENT_DATASTORE_DIR: $HOME/besecure-assessment-datastore
+
+# The remote repo where we store the assessment reports.
+BESMAN_ASSESSMENT_DATASTORE_URL: https://github.com/Be-Secure
+
+# config.yaml
+besman:
+  # Version of the artifact under assessment.
+  BESMAN_ARTIFACT_VERSION: 5.9.1
+
+  # Source code url of the artifact under assessment.
+  BESMAN_ARTIFACT_URL: https://github.com/net-snmp/net-snmp
+  spdx_sbom_asset_url: "https://example.com/spdx-sbom-generator.tar.gz"
+  codeql_asset_url: "https://example.com/codeql.zip"
+  dependency_check_asset_url: "https://example.com/dependency-check.zip"
+  critical_score_url: "github.com/ossf/criticality_score/v2/cmd/criticality_score@latest"
