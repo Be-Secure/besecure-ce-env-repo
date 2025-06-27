@@ -10,13 +10,13 @@
 BESMAN_ORG: Be-Secure
 
 # project/ml model/training dataset
-BESMAN_ARTIFACT_TYPE: alpha
+BESMAN_ARTIFACT_TYPE: project
 
 # Name of the artifact under assessment.
 BESMAN_ARTIFACT_NAME: babyagi
 
 # Version of the artifact under assessment.
-BESMAN_ARTIFACT_VERSION:
+BESMAN_ARTIFACT_VERSION: alpha
 
 # Source code url of the artifact under assessment.
 BESMAN_ARTIFACT_URL: https://github.com/Be-Secure/babyagi
