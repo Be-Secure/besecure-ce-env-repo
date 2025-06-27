@@ -81,3 +81,4 @@ Be-Secure/besecure-ce-env-repo/gitlabhq-RT-env,0.0.1
 Be-Secure/besecure-ce-env-repo/ollama-RT-env,0.0.1
 Be-Secure/besecure-ce-env-repo/privacy-RT-env,0.0.1
 Be-Secure/besecure-ce-env-repo/dioptra-RT-env,0.0.1
+Be-Secure/besecure-ce-env-repo/crewAI,0.0.1
