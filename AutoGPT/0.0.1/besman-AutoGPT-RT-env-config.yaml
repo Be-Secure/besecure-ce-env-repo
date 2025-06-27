@@ -13,17 +13,16 @@ BESMAN_ORG: Be-Secure
 BESMAN_ARTIFACT_TYPE: project
 
 # Name of the artifact under assessment.
-BESMAN_ARTIFACT_NAME: crewAI
+BESMAN_ARTIFACT_NAME: AutoGPT
 
 # Version of the artifact under assessment.
-BESMAN_ARTIFACT_VERSION: v0.119.0
+BESMAN_ARTIFACT_VERSION: v0.4.7
 
 # Source code url of the artifact under assessment.
-BESMAN_ARTIFACT_URL: https://github.com/Be-Secure/crewAI
+BESMAN_ARTIFACT_URL: https://github.com/Be-Secure/AutoGPT
 
 # This variable stores the name of the environment file.
-BESMAN_ENV_NAME: crewAI-RT-env
-
+BESMAN_ENV_NAME: AutoGPT-RT-env
 
 # The path where you wish to clone the source code of the artifact under assessment.
 # If you wish to change the clone path, provide the complete path.

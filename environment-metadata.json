@@ -4029,6 +4029,57 @@
                     ]
                 }
             ]
+        },
+        {
+            "name": "AutoGPT-RT-env",
+            "version": {
+                "tag": "0.0.1",
+                "release_date": ""
+            },
+            "author": {
+                "name": "BeSLab",
+                "type": "Lab"
+            },
+            "date_of_creation": "2025-06-27T11:41:35",
+            "last_update_date": "2025-06-27T11:41:35",
+            "last_execution": {
+                "name": "BeSLab",
+                "type": "Lab",
+                "status": "Success",
+                "timestamp": "2025-06-27T11:41:35"
+            },
+            "compatible_playbooks": [
+                {
+                    "name": "SBOM-SpdxSbomGenerator",
+                    "version": [
+                        "0.0.1"
+                    ]
+                },
+                {
+                    "name": "PIA-CriticalityScore",
+                    "version": [
+                        "0.0.1"
+                    ]
+                },
+                {
+                    "name": "SAST-sonarqube",
+                    "version": [
+                        "0.0.1"
+                    ]
+                },
+                {
+                    "name": "RIP-scorecard",
+                    "version": [
+                        "0.0.1"
+                    ]
+                },
+                {
+                    "name": "SBOM-CyclonedxSbomGenerator",
+                    "version": [
+                        "0.0.1"
+                    ]
+                }
+            ]
         }
     ]
 }
