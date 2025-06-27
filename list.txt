@@ -84,3 +84,4 @@ Be-Secure/besecure-ce-env-repo/dioptra-RT-env,0.0.1
 Be-Secure/besecure-ce-env-repo/crewAI,0.0.1
 Be-Secure/besecure-ce-env-repo/AutoGPT,0.0.1
 Be-Secure/besecure-ce-env-repo/babyagi,0.0.1
+Be-Secure/besecure-ce-env-repo/semantic-kernel,0.0.1
