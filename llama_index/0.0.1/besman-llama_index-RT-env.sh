@@ -25,6 +25,24 @@ function __besman_install {
 
     # ************************* env dependency *********************************
 
+    # Check if Python is installed
+    if ! command -v python3 &>/dev/null; then
+        __besman_echo_white "Python is not installed. Installing Python..."
+        sudo apt update
+        sudo apt install python3 -y
+    else
+        __besman_echo_white "Python is already there to use."
+    fi
+
+    # Check if pip is installed
+    if ! command -v pip3 &>/dev/null; then
+        __besman_echo_white "pip is not installed. Installing pip..."
+        sudo apt update
+        sudo apt install python3-pip -y
+    else
+        __besman_echo_white "pip is already there is use."
+    fi
+
     ## Name:docker
     __besman_echo_white "Check if docker is installed or not"
     if [ ! -x "$(command -v docker)" ]; then
@@ -38,8 +56,9 @@ function __besman_install {
         sudo apt install -y docker-ce docker-ce-cli containerd.io
 
         # sudo groupadd -f docker
-        sudo usermod -aG docker $USER
         sudo systemctl restart docker
+        sudo groupadd -f docker # Uncomment this line
+        sudo usermod -aG docker $USER
         # newgrp docker
 
         #sudo su - $USER
@@ -77,6 +96,36 @@ function __besman_install {
         __besman_echo_white "go is already available"
     fi
 
+    ## Name:CycloneDX SBOM prerequisites - NPM
+    __besman_echo_white "Checking if Node.js is installed..."
+    if ! command -v node &>/dev/null; then
+        __besman_echo_white "Node.js is not installed. Installing Node.js and npm..."
+
+        # Update package index
+        sudo apt update -y
+
+        # Install Node.js and npm
+        curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+        sudo apt install -y nodejs
+
+        # Verify installation
+        if command -v node &>/dev/null && command -v npm &>/dev/null; then
+            __besman_echo_white "Node.js and npm installed successfully."
+        else
+            __besman_echo_yellow "Failed to install Node.js and npm."
+            exit 1
+        fi
+    else
+        __besman_echo_white "Node.js is already installed. Version: $(node -v)"
+        __besman_echo_white "Checking npm..."
+        if ! command -v npm &>/dev/null; then
+            __besman_echo_yellow "npm is not installed. Installing npm..."
+            sudo apt install -y npm
+        else
+            __besman_echo_white "npm is already installed. Version: $(npm -v)"
+        fi
+    fi
+
     # ********************** Assessment tools ********************************
 
     [[ ! -z $BESMAN_ASSESSMENT_TOOLS ]] && readarray -d ',' -t ASSESSMENT_TOOLS <<<"$BESMAN_ASSESSMENT_TOOLS"
@@ -95,14 +144,14 @@ function __besman_install {
 
             case $tool_name in
             scorecard)
-               __besman_echo_white "Installing scorecard..."
+                __besman_echo_white "Installing scorecard..."
                 # Create sonarqube-docker container
                 __besman_echo_white "creating scorecard container for env - $BESMAN_ARTIFACT_NAME ..."
                 curl -L -o "$HOME/scorecard_5.1.1_linux_amd64.tar.gz" "$BESMAN_SCORECARD_ASSET_URL"
-tar -xzf "$HOME/scorecard_5.1.1_linux_amd64.tar.gz"
-chmod +x "$HOME/scorecard"
-sudo mv "$HOME/scorecard" /usr/local/bin/
-[[ -f "$HOME/scorecard_5.1.1_linux_amd64.tar.gz" ]] && rm "$HOME/scorecard_5.1.1_linux_amd64.tar.gz"
+                tar -xzf "$HOME/scorecard_5.1.1_linux_amd64.tar.gz"
+                chmod +x "$HOME/scorecard"
+                sudo mv "$HOME/scorecard" /usr/local/bin/
+                [[ -f "$HOME/scorecard_5.1.1_linux_amd64.tar.gz" ]] && rm "$HOME/scorecard_5.1.1_linux_amd64.tar.gz"
                 __besman_echo_white "sonarqube installation is done & $BESMAN_ARTIFACT_NAME container is up"
                 ;;
             criticality_score)
@@ -172,6 +221,23 @@ sudo mv "$HOME/scorecard" /usr/local/bin/
 
                 __besman_echo_white "spdx-sbom-generator installation is done."
                 ;;
+            cyclonedx-sbom-generator)
+                __besman_echo_white "Checking if cdxgen is already installed..."
+                if ! which cdxgen >/dev/null; then
+                    __besman_echo_white "cdxgen not found. Installing cyclonedx-sbom-generator..."
+                    sudo npm install -g @cyclonedx/cdxgen
+                    __besman_echo_white "moving cdxgen to /opt folder"
+                    sudo cp /usr/bin/cdxgen /opt/cyclonedx-sbom-generator
+                else
+                    if [ ! -f /opt/cyclonedx-sbom-generator ]; then
+                        sudo cp /usr/bin/cdxgen /opt/cyclonedx-sbom-generator
+                        __besman_echo_white "cdxgen is already installed, moved to /opt folder"
+                    else
+                        __besman_echo_white "cdxgen is already installed, skipping installation."
+                    fi
+
+                fi
+                ;;
             *)
                 echo "No installation steps found for $tool_name."
                 ;;
@@ -179,6 +245,14 @@ sudo mv "$HOME/scorecard" /usr/local/bin/
         done
         echo "bes assessment tools installation done"
     fi
+
+    cd $BESMAN_TOOL_PATH
+    pip install .
+    ## test dep pytest-cov
+    pip install pytest-cov
+    ./run_tests.sh
+
+    __besman_echo_white "===== Install completed =="
 
 }
 
@@ -190,34 +264,30 @@ function __besman_uninstall {
         __besman_echo_yellow "Could not find dir $BESMAN_ARTIFACT_DIR"
     fi
 
-    # Please add the rest of the code here for uninstallation
-
-    if [ ! -z $ASSESSMENT_TOOLS ]; then
+    # Uninstall assessment tools
+    if [ ! -z "$ASSESSMENT_TOOLS" ]; then
         for tool in ${ASSESSMENT_TOOLS[*]}; do
             if [[ $tool == *:* ]]; then
-                tool_name=${tool%%:*}    # Get the tool name
-                tool_version=${tool##*:} # Get the tool version
+                tool_name=${tool%%:*}
+                tool_version=${tool##*:}
             else
-                tool_name=$tool # Get the tool name
-                tool_version="" # No version specified
+                tool_name=$tool
+                tool_version=""
             fi
 
-            __besman_echo_white "Uninstallling tool - $tool : version - $tool_version"
+            __besman_echo_white "Uninstalling tool - $tool : version - $tool_version"
 
             case $tool_name in
             scorecard)
                 __besman_echo_white "Uninstalling scorecard..."
-sudo rm /usr/local/bin/scorecard
+                sudo rm -f /usr/local/bin/scorecard
                 __besman_echo_white "scorecard uninstallation is done"
                 ;;
             criticality_score)
-                __besman_echo_white "check for criticality_score"
                 if [ -x "$(command -v criticality_score)" ]; then
-                    __besman_echo_white "uninstalling criticality_score ..."                    go install github.com/ossf/criticality_score/v2/cmd/criticality_score@none
-
-		    [[ -f $GOPATH/bin/criticality_score ]] && rm -rf $GOPATH/bin/criticality_score
-
-                    __besman_echo_white "criticality_score is uninstalled\n"
+                    __besman_echo_white "Uninstalling criticality_score..."
+                    [[ -f $GOPATH/bin/criticality_score ]] && rm -rf "$GOPATH/bin/criticality_score"
+                    __besman_echo_white "criticality_score is uninstalled"
                 else
                     __besman_echo_white "criticality_score is not installed"
                 fi
@@ -225,8 +295,6 @@ sudo rm /usr/local/bin/scorecard
             sonarqube)
                 __besman_echo_white "Uninstalling sonarqube..."
                 if [ "$(docker ps -aq -f name=sonarqube-$BESMAN_ARTIFACT_NAME)" ]; then
-                    # If a container exists, stop and remove it
-                    __besman_echo_white "Removing existing container 'sonarqube-$BESMAN_ARTIFACT_NAME'..."
                     docker stop sonarqube-$BESMAN_ARTIFACT_NAME
                     docker container rm --force sonarqube-$BESMAN_ARTIFACT_NAME
                 fi
@@ -234,10 +302,7 @@ sudo rm /usr/local/bin/scorecard
                 ;;
             fossology)
                 __besman_echo_white "Uninstalling fossology..."
-                __besman_echo_white "check for fossology-docker container"
                 if [ "$(docker ps -aq -f name=fossology-$BESMAN_ARTIFACT_NAME)" ]; then
-                    # If a container exists, stop and remove it
-                    __besman_echo_white "Removing existing container 'fossology-$BESMAN_ARTIFACT_NAME'..."
                     docker stop fossology-$BESMAN_ARTIFACT_NAME
                     docker container rm --force fossology-$BESMAN_ARTIFACT_NAME
                 fi
@@ -245,15 +310,20 @@ sudo rm /usr/local/bin/scorecard
                 ;;
             spdx-sbom-generator)
                 __besman_echo_white "Uninstalling spdx-sbom-generator..."
-                # URL of the asset
-                __besman_echo_white "Asset URL - $BESMAN_SPDX_SBOM_ASSET_URL"
-                # Download the asset
-                __besman_echo_white "Downloading the asset ..."
-                curl -L -o $BESMAN_TOOL_PATH/spdx-sbom-generator-v0.0.15-linux-amd64.tar.gz "$BESMAN_SPDX_SBOM_ASSET_URL"
-                [[ -f $BESMAN_TOOL_PATH/spdx-sbom-generator-v0.0.15-linux-amd64.tar.gz]] && rm -f $BESMAN_TOOL_PATH/spdx-sbom-generator-v0.0.15-linux-amd64.tar.gz
-                [[ -d $BESMAN_ARTIFACT_DIR/spdx-sbom-generator* ]] && rm -rf $BESMAN_ARTIFACT_DIR/spdx-sbom-generator*
-
+                rm -f "$BESMAN_TOOL_PATH/spdx-sbom-generator-v0.0.15-linux-amd64.tar.gz"
+                rm -rf "$BESMAN_ARTIFACT_DIR"/spdx-sbom-generator*
                 __besman_echo_white "spdx-sbom-generator uninstallation is done."
+                ;;
+            cyclonedx-sbom-generator)
+                __besman_echo_white "Checking if cdxgen is installed..."
+                if which cdxgen >/dev/null; then
+                    sudo npm uninstall -g @cyclonedx/cdxgen
+                    sudo npm cache clean --force
+                    __besman_echo_white "cdxgen has been uninstalled."
+                else
+                    __besman_echo_white "cdxgen is not installed."
+                fi
+                sudo rm -rf /opt/cyclonedx-sbom-generator
                 ;;
             *)
                 echo "No uninstallation steps found for $tool_name."
@@ -263,37 +333,45 @@ sudo rm /usr/local/bin/scorecard
         echo "bes assessment tools uninstallation done"
     fi
 
-    # check docker & containers
+    # Uninstall Docker
     if command -v docker &>/dev/null; then
-
-        # Remove Docker Engine
-        # Purge Docker packages and dependencies
         echo "Removing Docker ..."
         sudo apt purge -y docker-ce docker-ce-cli containerd.io
-
-        # Remove Docker’s data and configuration files
-        sudo rm -rf /var/lib/docker
-        sudo rm -rf /var/lib/containerd
-
-        # Remove Docker GPG key and repository
+        sudo rm -rf /var/lib/docker /var/lib/containerd
         sudo rm -rf /usr/share/keyrings/docker-archive-keyring.gpg
         sudo rm -f /etc/apt/sources.list.d/docker.list
-
-        # Remove Docker group
         sudo deluser $USER docker
         sudo groupdel docker
-
         sudo apt update
         echo "Docker removed successfully"
-
     fi
 
-    # Check go
+    # Uninstall Go
     if command -v go &>/dev/null; then
         __besman_echo_white "Removing go..."
-        # Remove go
         sudo snap remove go -y
         __besman_echo_white "Go removed successfully."
+    fi
+
+    # Uninstall Node & NPM
+    if command -v node &>/dev/null; then
+        __besman_echo_white "Removing Node & NPM"
+        sudo apt purge -y nodejs npm
+        rm -rf ~/.npm
+    fi
+
+    # Uninstall pip
+    if command -v pip3 &>/dev/null; then
+        __besman_echo_white "Uninstalling pip..."
+        sudo apt purge -y python3-pip
+        __besman_echo_white "pip uninstalled successfully."
+    fi
+
+    # Uninstall Python
+    if command -v python3 &>/dev/null; then
+        __besman_echo_white "Uninstalling Python..."
+        sudo apt purge -y python3 python3-pip
+        __besman_echo_white "Python uninstalled successfully."
     fi
 
     # Clean up unused packages
@@ -301,7 +379,6 @@ sudo rm /usr/local/bin/scorecard
 }
 
 function __besman_update {
-
     # Please add the rest of the code here for update
     __besman_echo_white "update"
 
@@ -355,6 +432,26 @@ function __besman_validate {
         fi
     fi
 
+    # Validate CycloneDX-SBOM-Generation installation
+    if ! which cdxgen >/dev/null; then
+        __besman_echo_white "CycloneDX is not installed."
+        validationStatus=0
+        errors+=("CycloneDX is missing")
+    else
+        if [ ! -f /opt/cyclonedx-sbom-generator ]; then
+            __besman_echo_white "CycloneDX is installed but executable is not present in /opt directory."
+        else
+            __besman_echo_white "CycloneDX is properly installed and executable is present in /opt directory."
+        fi
+    fi
+
+    # validate Node & npm installation
+    if ! command -v npm &>/dev/null; then
+        __besman_echo_white "npm is not installed."
+        validationStatus=0
+        errors+=("npm is missing")
+    fi
+
     # validate snap installation
     if ! command -v snap &>/dev/null; then
         __besman_echo_white "snap is not installed."
@@ -374,6 +471,20 @@ function __besman_validate {
         __besman_echo_white "criticality_score is not installed."
         validationStatus=0
         errors+=("criticality_score is missing")
+    fi
+
+    # Check if Python is installed
+    if ! command -v python3 &>/dev/null; then
+        __besman_echo_white "python is not installed."
+        validationStatus=0
+        errors+=("python is missing")
+    fi
+
+    # Check if pip is installed
+    if ! command -v pip3 &>/dev/null; then
+        __besman_echo_white "pip is not installed."
+        validationStatus=0
+        errors+=("pip is missing")
     fi
 
     __besman_echo_white "errors: " ${errors[@]}
