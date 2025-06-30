@@ -80,3 +80,4 @@ Be-Secure/besecure-ce-env-repo/garak-RT-env,0.0.1
 Be-Secure/besecure-ce-env-repo/gitlabhq-RT-env,0.0.1
 Be-Secure/besecure-ce-env-repo/ollama-RT-env,0.0.1
 Be-Secure/besecure-ce-env-repo/OpenAgents-RT-env,0.0.1
+Be-Secure/besecure-ce-env-repo/EvoAgentX-RT-env,0.0.1

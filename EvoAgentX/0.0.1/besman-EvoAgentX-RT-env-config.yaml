@@ -13,19 +13,19 @@ BESMAN_ORG: Be-Secure #***
 BESMAN_ARTIFACT_TYPE: project
 
 # Name of the artifact under assessment.
-BESMAN_ARTIFACT_NAME: OpenAgents #***
+BESMAN_ARTIFACT_NAME: EvoAgentX #***
 
 # Version of the artifact under assessment.
 BESMAN_ARTIFACT_VERSION: v0.10.3.1
 
 # Source code url of the artifact under assessment.
-BESMAN_ARTIFACT_URL: https://github.com/Be-Secure/OpenAgents
+BESMAN_ARTIFACT_URL: https://github.com/Be-Secure/EvoAgentX
 
 # Using this variable for scorecard and criticality_score
-BESMAN_ARTIFACT_ORIGIN_URL: https://github.com/Be-Secure/OpenAgents
+BESMAN_ARTIFACT_ORIGIN_URL: https://github.com/Be-Secure/EvoAgentX
 
 # This variable stores the name of the environment file.
-BESMAN_ENV_NAME: OpenAgents-RT-env #***
+BESMAN_ENV_NAME: EvoAgentX-RT-env #***
 
 # The path where you wish to clone the source code of the artifact under assessment.
 # If you wish to change the clone path, provide the complete path.
