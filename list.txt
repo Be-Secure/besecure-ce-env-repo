@@ -29,7 +29,6 @@ Be-Secure/besecure-ce-env-repo/open_evse-RT-env,0.0.1
 Be-Secure/besecure-ce-env-repo/busmaster-RT-env,0.0.1
 Be-Secure/besecure-ce-env-repo/kubernetes-RT-env,0.0.1
 Be-Secure/besecure-ce-env-repo/cilium-RT-env,0.0.1
-Be-Secure/besecure-ce-env-repo/guardrails-RT-env,0.0.1
 Be-Secure/besecure-ce-env-repo/threat-dragon-RT-env,0.0.1
 Be-Secure/besecure-ce-env-repo/grype-RT-env,0.0.1
 Be-Secure/besecure-ce-env-repo/sqlmap-RT-env,0.0.1
@@ -85,3 +84,4 @@ Be-Secure/besecure-ce-env-repo/crewAI,0.0.1
 Be-Secure/besecure-ce-env-repo/AutoGPT,0.0.1
 Be-Secure/besecure-ce-env-repo/babyagi,0.0.1
 Be-Secure/besecure-ce-env-repo/semantic-kernel,0.0.1
+Be-Secure/besecure-ce-env-repo/guardrails,0.0.1

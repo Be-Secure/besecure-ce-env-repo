@@ -37,54 +37,35 @@ BESMAN_LAB_TYPE: Organization
 # Name of the owner of the lab. Default is Be-Secure.
 BESMAN_LAB_NAME: Be-Secure
 
-
-# The path where you wish to clone the source code of the artifact under assessment.
-# If you wish to change the clone path, provide the complete path.
-BESMAN_ARTIFACT_DIR: $HOME/$BESMAN_ARTIFACT_NAME
-
-# The path where we download the assessment and other required tools during installation.
-BESMAN_TOOL_PATH: /opt
-
-# Organization/lab/individual.
-BESMAN_LAB_TYPE: Organization
-
-# Name of the owner of the lab. Default is Be-Secure.
-BESMAN_LAB_NAME: Be-Secure
-
 # This is the local dir where we store the assessment reports. Default is home.
 BESMAN_ASSESSMENT_DATASTORE_DIR: $HOME/besecure-assessment-datastore
 
 # The remote repo where we store the assessment reports.
 BESMAN_ASSESSMENT_DATASTORE_URL: https://github.com/Be-Secure/besecure-assessment-datastore
 
-# Mode for scorecard cli or github action.
-BESMAN_SCORECARD_ASSESSMENT_MODE: "cli"         
-# Ports for containerized tools
-BESMAN_SONARQUBE_PORT: 9000
-BESMAN_FOSSOLOGY_PORT: 9001
- 
-# SPDX SBOM Generator release asset URL (GitHub or other source)
-BESMAN_SPDX_SBOM_ASSET_URL: "https://github.com/opensbom-generator/spdx-sbom-generator/releases/download/v0.0.15/spdx-sbom-generator-v0.0.15-linux-amd64.tar.gz"
- 
-# Scorecard binary url
-BESMAN_SCORECARD_ASSET_URL: "https://github.com/ossf/scorecard/releases/download/v5.1.1/scorecard_5.1.1_linux_amd64.tar.gz"
- 
-# Version of sonar scanner
-BESMAN_SONAR_SCANNER_VERSION: "7.1.0.4889"
- 
-# Sonar scanner binary url
-BESMAN_SONAR_SCANNER_ASSET_URL: "https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-$BESMAN_SONAR_SCANNER_VERSION-linux-x64.zip?_gl=1*yhd721*_gcl_au*MTc0NjUwODg1Ny4xNzQ3NjI3MDMy*_ga*MTU3MTQ2MDE3MC4xNzQ3NjI3MDMx*_ga_9JZ0GZ5TC6*czE3NDc2NjA0NDckbzMkZzEkdDE3NDc2NjA0NTYkajUyJGwwJGgwJGQ4RzFONHBmRWk2OHRLakdUYl9QU1JON1p5RU1xUnNsSHhB"
+# The path where we download the ansible role of the assessment tools and other utilities
+BESMAN_ANSIBLE_ROLES_PATH: $BESMAN_DIR/tmp/$BESMAN_ARTIFACT_NAME/roles
 
-# This is the local dir where we store the assessment reports. Default is home.
-BESMAN_ASSESSMENT_DATASTORE_DIR: $HOME/besecure-assessment-datastore
+# The list of tools you wish to install. The tools are installed using ansible roles.
+# To get the list of ansible roles run 
+#   $ bes list --role
+#add the roles here. format - <Github id>/<repo name>,<Github id>/<repo name>,<Github id>/<repo name>,...
+BESMAN_ANSIBLE_ROLES: 
 
-# The remote repo where we store the assessment reports.
-BESMAN_ASSESSMENT_DATASTORE_URL: https://github.com/Be-Secure/besecure-assessment-datastore
+# sets the path of the playbook with which we run the ansible roles.
+# Default path is ~/.besman/tmp/<artifact name dir>/
+BESMAN_ARTIFACT_TRIGGER_PLAYBOOK_PATH: $BESMAN_DIR/tmp/$BESMAN_ARTIFACT_NAME
 
-# Add a comma seperated list of tools that needs to be installed to assess this project.
-BESMAN_ASSESSMENT_TOOLS: scorecard,criticality_score,sonarqube,spdx-sbom-generator,fossology
-BESMAN_SPDX_SBOM_ASSET_URL: https://github.com/opensbom-generator/spdx-sbom-generator/releases/download/v0.0.15/spdx-sbom-generator-v0.0.15-linux-amd64.tar.gz
+# Name of the trigger playbook which runs the ansible roles.
+BESMAN_ARTIFACT_TRIGGER_PLAYBOOK: besman-$BESMAN_ARTIFACT_NAME-semantic-trigger-playbook.yaml
 
-#Scorecard binary url
-BESMAN_SCORECARD_ASSET_URL: "https://github.com/ossf/scorecard/releases/download/v5.1.1/scorecard_5.1.1_linux_amd64.tar.gz"
+# If the users likes to display all the skipped steps, set it to true.
+# Default value is false
+BESMAN_DISPLAY_SKIPPED_ANSIBLE_HOSTS: false
 
+# The default values of the ansible roles will be present in their respective repos.
+# You can go to https://github.com/Be-Secure/<repo of the ansible role>/blob/main/defaults/main.yml.
+# If you wish to change the default values copy the variable from the https://github.com/Be-Secure/<repo of the ansible role>/blob/main/defaults/main.yml
+# and paste it here and change the value.
+# Format is <variable name>: <value> 
+# Eg: openjdk_version: 11
