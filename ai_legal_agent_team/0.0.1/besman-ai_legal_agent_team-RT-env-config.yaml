@@ -5,6 +5,7 @@
 # If you wish to add any other vars that should be used globally, add the var using the below format.
 # BESMAN_<var name>: <value>
 # If you are not using any particular value, remove it or comment it(#).
+
 #*** - These variables should not be removed, nor left empty.
 
 # used to mention where you should clone the repo from, default value is Be-Secure
@@ -20,15 +21,16 @@ BESMAN_ARTIFACT_NAME: awesome-llm-apps #***
 BESMAN_ARTIFACT_VERSION: main #***
 
 # Source code url of the artifact under assessment.
-BESMAN_ARTIFACT_URL: https://github.com/NeerajK007/awesome-llm-apps #***
+BESMAN_ARTIFACT_URL: https://github.com/Be-Secure/awesome-llm-apps #***
 
 # This variable stores the name of the environment file.
-BESMAN_ENV_NAME: ai_domain_deep_research_agent-RT-env #***
+BESMAN_ENV_NAME: ai_legal_agent_team-RT-env #***
 
 # The path where you wish to clone the source code of the artifact under assessment.
 # If you wish to change the clone path, provide the complete path.
 BESMAN_ARTIFACT_DIR: $HOME/$BESMAN_ARTIFACT_NAME #***
-BESMAN_ARTIFACT_SUB_DIR: $HOME/$BESMAN_ARTIFACT_NAME/advanced_ai_agents/multi_agent_apps/ai_domain_deep_research_agent #***
+
+BESMAN_ARTIFACT_SUB_DIR: $HOME/$BESMAN_ARTIFACT_NAME/advanced_ai_agents/multi_agent_apps/agent_teams/ai_legal_agent_team #***
 
 # The path where we download the assessment and other required tools during installation.
 BESMAN_TOOL_PATH: /opt #***
@@ -37,7 +39,7 @@ BESMAN_TOOL_PATH: /opt #***
 BESMAN_LAB_TYPE: Organization #***
 
 # Name of the owner of the lab. Default is Be-Secure.
-BESMAN_LAB_NAME: Be-Secure #***
+BESMAN_LAB_NAME: BesLab #***
 
 # Mode for scorecard (cli) or (github-action).
 BESMAN_SCORECARD_ASSESSMENT_MODE: "cli"
@@ -56,13 +58,13 @@ BESMAN_SCORECARD_ASSET_URL: "https://github.com/ossf/scorecard/releases/download
 BESMAN_SONAR_SCANNER_VERSION: "7.1.0.4889"
 
 # Sonar scanner binary url
-BESMAN_SONAR_SCANNER_ASSET_URL: "https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-$BESMAN_SONAR_SCANNER_VERSION-linux-x64.zip"
+BESMAN_SONAR_SCANNER_ASSET_URL: "https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-$BESMAN_SONAR_SCANNER_VERSION-linux-x64.zip?_gl=1*yhd721*_gcl_au*MTc0NjUwODg1Ny4xNzQ3NjI3MDMy*_ga*MTU3MTQ2MDE3MC4xNzQ3NjI3MDMx*_ga_9JZ0GZ5TC6*czE3NDc2NjA0NDckbzMkZzEkdDE3NDc2NjA0NTYkajUyJGwwJGgwJGQ4RzFONHBmRWk2OHRLakdUYl9QU1JON1p5RU1xUnNsSHhB"
 
 # This is the local dir where we store the assessment reports. Default is home.
 BESMAN_ASSESSMENT_DATASTORE_DIR: $HOME/besecure-assessment-datastore #***
 
 # The remote repo where we store the assessment reports.
-BESMAN_ASSESSMENT_DATASTORE_URL: https://github.com/NeerajK007/besecure-assessment-datastore #***
+BESMAN_ASSESSMENT_DATASTORE_URL: https://github.com/Be-Secure/besecure-assessment-datastore #***
 
-# List of security/compliance tools used for assessment
+# Assessment tools to install (comma-separated)
 BESMAN_ASSESSMENT_TOOLS: scorecard,criticality_score,sonarqube,spdx-sbom-generator,fossology,cyclonedx-sbom-generator
