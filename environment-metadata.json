@@ -3410,6 +3410,31 @@
           "version": ["0.0.1"]
         }
       ]
+    },
+    {
+      "name": "MLAssessment-RT-env",
+      "version": {
+        "tag": "0.0.1",
+        "release_date": ""
+      },
+      "author": {
+        "name": "Be-Secure",
+        "type": "Lab"
+      },
+      "date_of_creation": "2025-07-02T10:36:58",
+      "last_update_date": "2025-07-02T10:36:58",
+      "last_execution": {
+        "name": "Be-Secure",
+        "type": "Lab",
+        "status": "Success",
+        "timestamp": "2025-07-02T10:36:58"
+      },
+      "compatible_playbooks": [
+        {
+          "name": "SAST-watchtower",
+          "version": ["0.0.1"]
+        }
+      ]
     }
   ]
 }
