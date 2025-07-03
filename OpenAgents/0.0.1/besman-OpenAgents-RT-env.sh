@@ -31,7 +31,6 @@ function __besman_install {
         __besman_echo_white "Installing Go..."
         sudo snap install go --classic
         echo "export PATH=\$PATH:$HOME/go/bin" >> ~/.bashrc
-        source ~/.bashrc
     else
         __besman_echo_white "Go already installed."
     fi
@@ -120,6 +119,8 @@ function __besman_install {
 
     fi
     __besman_echo_white "Installation complete."
+    #moving this down so it doesnt interrupt the execution
+    source ~/.bashrc
 }
 
 function __besman_uninstall {
