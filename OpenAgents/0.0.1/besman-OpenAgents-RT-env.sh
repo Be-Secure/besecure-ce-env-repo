@@ -30,7 +30,11 @@ function __besman_install {
     if ! command -v go &>/dev/null; then
         __besman_echo_white "Installing Go..."
         sudo snap install go --classic
-        echo "export PATH=\$PATH:$HOME/go/bin" >> ~/.bashrc
+        if ! grep "go/bin" ~/.bashrc 
+        then
+            __besman_echo_info "Adding go path .bashrc"
+            echo "export PATH=\$PATH:$HOME/go/bin" >> ~/.bashrc
+        fi
     else
         __besman_echo_white "Go already installed."
     fi
