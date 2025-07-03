@@ -32,7 +32,7 @@ function __besman_install {
         sudo snap install go --classic
         if ! grep "go/bin" ~/.bashrc 
         then
-            __besman_echo_info "Adding go path .bashrc"
+            __besman_echo_white "Adding go path .bashrc"
             echo "export PATH=\$PATH:$HOME/go/bin" >> ~/.bashrc
         fi
     else
