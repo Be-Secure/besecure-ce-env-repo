@@ -34,6 +34,9 @@ function __besman_install {
         then
             __besman_echo_white "Adding go path .bashrc"
             echo "export PATH=\$PATH:$HOME/go/bin" >> ~/.bashrc
+            __besman_echo_white "Sourcing .bashrc to update PATH"
+            source ~/.bashrc
+
         fi
     else
         __besman_echo_white "Go already installed."
@@ -125,7 +128,6 @@ function __besman_install {
     fi
     __besman_echo_white "Installation complete."
     #moving this down so it doesnt interrupt the execution
-    source ~/.bashrc
 }
 
 function __besman_uninstall {
