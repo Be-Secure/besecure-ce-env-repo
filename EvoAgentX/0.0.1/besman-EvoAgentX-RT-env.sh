@@ -43,7 +43,7 @@ function __besman_install {
         scorecard)
             __besman_echo_white "Downloading scorecard from $BESMAN_SCORECARD_ASSET_URL"
             curl -L -o "$HOME/scorecard_5.1.1_linux_amd64.tar.gz" "$BESMAN_SCORECARD_ASSET_URL"
-            tar -xzf "$HOME/scorecard_5.1.1_linux_amd64.tar.gz"
+            tar -xzf "$HOME/scorecard_5.1.1_linux_amd64.tar.gz" -C "$HOME"
             chmod +x "$HOME/scorecard"
             sudo mv "$HOME/scorecard" /usr/local/bin/
             [[ -f "$HOME/scorecard_5.1.1_linux_amd64.tar.gz" ]] && rm "$HOME/scorecard_5.1.1_linux_amd64.tar.gz"
