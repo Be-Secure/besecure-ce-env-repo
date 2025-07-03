@@ -10,19 +10,32 @@
 BESMAN_ORG: Be-Secure
 
 # project/ml model/training dataset
-BESMAN_ARTIFACT_TYPE: project
+BESMAN_ARTIFACT_TYPE: Project
 
 # Name of the artifact under assessment.
-BESMAN_ARTIFACT_NAME: milvus
+BESMAN_ARTIFACT_NAME: qdrant
 
 # Version of the artifact under assessment.
-BESMAN_ARTIFACT_VERSION: v2.5.14
+BESMAN_ARTIFACT_VERSION: v1.14.1
 
 # Source code url of the artifact under assessment.
-BESMAN_ARTIFACT_URL: https://github.com/Be-Secure/milvus
+BESMAN_ARTIFACT_URL: https://github.com/Be-Secure/qdrant
 
 # This variable stores the name of the environment file.
-BESMAN_ENV_NAME: milvus-RT-env
+BESMAN_ENV_NAME: qdrant-RT-env
+
+# The path where you wish to clone the source code of the artifact under assessment.
+# If you wish to change the clone path, provide the complete path.
+BESMAN_ARTIFACT_DIR: $HOME/$BESMAN_ARTIFACT_NAME
+
+# The path where we download the assessment and other required tools during installation.
+BESMAN_TOOL_PATH: /opt
+
+# Organization/lab/individual.
+BESMAN_LAB_TYPE: Organization
+
+# Name of the owner of the lab. Default is Be-Secure.
+BESMAN_LAB_NAME: Be-Secure
 
 # The path where you wish to clone the source code of the artifact under assessment.
 # If you wish to change the clone path, provide the complete path.

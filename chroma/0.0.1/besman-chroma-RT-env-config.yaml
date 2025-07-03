@@ -13,29 +13,16 @@ BESMAN_ORG: Be-Secure
 BESMAN_ARTIFACT_TYPE: project
 
 # Name of the artifact under assessment.
-BESMAN_ARTIFACT_NAME: milvus
+BESMAN_ARTIFACT_NAME: chroma
 
 # Version of the artifact under assessment.
-BESMAN_ARTIFACT_VERSION: v2.5.14
+BESMAN_ARTIFACT_VERSION: cli-1.1.4
 
 # Source code url of the artifact under assessment.
-BESMAN_ARTIFACT_URL: https://github.com/Be-Secure/milvus
+BESMAN_ARTIFACT_URL: https://github.com/Be-Secure/chroma
 
 # This variable stores the name of the environment file.
-BESMAN_ENV_NAME: milvus-RT-env
-
-# The path where you wish to clone the source code of the artifact under assessment.
-# If you wish to change the clone path, provide the complete path.
-BESMAN_ARTIFACT_DIR: $HOME/$BESMAN_ARTIFACT_NAME
-
-# The path where we download the assessment and other required tools during installation.
-BESMAN_TOOL_PATH: /opt
-
-# Organization/lab/individual.
-BESMAN_LAB_TYPE: Organization
-
-# Name of the owner of the lab. Default is Be-Secure.
-BESMAN_LAB_NAME: Be-Secure
+BESMAN_ENV_NAME: chroma-RT-env
 
 # This is the local dir where we store the assessment reports. Default is home.
 BESMAN_ASSESSMENT_DATASTORE_DIR: $HOME/besecure-assessment-datastore

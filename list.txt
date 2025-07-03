@@ -87,3 +87,6 @@ Be-Secure/besecure-ce-env-repo/semantic-kernel,0.0.1
 Be-Secure/besecure-ce-env-repo/guardrails,0.0.1
 Be-Secure/besecure-ce-env-repo/llama_index,0.0.1
 Be-Secure/besecure-ce-env-repo/milvus,0.0.1
+Be-Secure/besecure-ce-env-repo/qdrant,0.0.1
+Be-Secure/besecure-ce-env-repo/weaviate,0.0.1
+Be-Secure/besecure-ce-env-repo/chroma,0.0.1
