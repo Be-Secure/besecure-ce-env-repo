@@ -85,7 +85,36 @@ function __besman_install {
             sudo tar -xzf "$BESMAN_TOOL_PATH/spdx-sbom-generator.tar.gz" -C "$BESMAN_TOOL_PATH"
             ;;
          cyclonedx-sbom-generator)
-                __besman_echo_white "Checking if cdxgen is already installed..."
+                ## Name:CycloneDX SBOM prerequisites - NPM
+                __besman_echo_white "Checking if Node.js is installed..."
+                if ! command -v node &>/dev/null; then
+                    __besman_echo_white "Node.js is not installed. Installing Node.js and npm..."
+
+                    # Update package index
+                    sudo apt update -y
+
+                    # Install Node.js and npm
+                    curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+                    sudo apt install -y nodejs
+
+                    # Verify installation
+                    if command -v node &>/dev/null && command -v npm &>/dev/null; then
+                        __besman_echo_white "Node.js and npm installed successfully."
+                    else
+                        __besman_echo_yellow "Failed to install Node.js and npm."
+                        exit 1
+                    fi
+                else
+                    __besman_echo_white "Node.js is already installed. Version: $(node -v)"
+                    __besman_echo_white "Checking npm..."
+                    if ! command -v npm &>/dev/null; then
+                        __besman_echo_yellow "npm is not installed. Installing npm..."
+                        sudo apt install -y npm
+                    else
+                        __besman_echo_white "npm is already installed. Version: $(npm -v)"
+                    fi
+                fi
+                            __besman_echo_white "Checking if cdxgen is already installed..."
                 if ! which cdxgen >/dev/null; then
                     __besman_echo_white "cdxgen not found. Installing cyclonedx-sbom-generator..."
                     sudo npm install -g @cyclonedx/cdxgen
