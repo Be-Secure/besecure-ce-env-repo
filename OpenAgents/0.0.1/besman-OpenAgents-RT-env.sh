@@ -156,6 +156,21 @@ function __besman_uninstall {
             sudo rm -f "$BESMAN_TOOL_PATH/spdx-sbom-generator.tar.gz"
             sudo rm -rf "$BESMAN_TOOL_PATH/spdx-sbom-generator"
             ;;
+        cyclonedx-sbom-generator)
+            __besman_echo_white "Checking if cdxgen is installed before uninstalling..."
+            if which cdxgen >/dev/null; then
+                __besman_echo_white "cdxgen is installed. Proceeding with uninstallation..."
+                sudo npm uninstall -g @cyclonedx/cdxgen
+                sudo npm cache clean --force
+                __besman_echo_white "cdxgen has been successfully uninstalled."
+
+            else
+                __besman_echo_white "cdxgen is not installed. Skipping uninstallation."
+            fi
+            if [ -f /opt/cyclonedx-sbom-generator ]; then
+                sudo rm -rf /opt/cyclonedx-sbom-generator
+            fi
+            ;;
         *)
             __besman_echo_warn "Unknown tool: $t"
             ;;
@@ -282,6 +297,17 @@ function __besman_validate {
         __besman_echo_yellow "$scorecard_version"
     fi 
 
+    if ! which cdxgen >/dev/null; then
+        __besman_echo_error "CycloneDX is not installed."
+        status=1
+        errors+=("CycloneDX is missing")
+    else
+        if [ ! -f /opt/cyclonedx-sbom-generator ]; then
+            __besman_echo_white "CycloneDX is installed but executable is not present in /opt directory."
+        else
+            __besman_echo_white "CycloneDX is properly installed and executable is present in /opt directory."
+        fi
+    fi
  
     # # Validate Criticality Score
     # if ! command -v criticality_score &>/dev/null; then
