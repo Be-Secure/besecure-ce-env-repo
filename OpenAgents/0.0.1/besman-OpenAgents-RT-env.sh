@@ -78,6 +78,23 @@ function __besman_install {
             sudo curl -L -o "$BESMAN_TOOL_PATH/spdx-sbom-generator.tar.gz" "$BESMAN_SPDX_SBOM_ASSET_URL"
             sudo tar -xzf "$BESMAN_TOOL_PATH/spdx-sbom-generator.tar.gz" -C "$BESMAN_TOOL_PATH"
             ;;
+         cyclonedx-sbom-generator)
+                __besman_echo_white "Checking if cdxgen is already installed..."
+                if ! which cdxgen >/dev/null; then
+                    __besman_echo_white "cdxgen not found. Installing cyclonedx-sbom-generator..."
+                    sudo npm install -g @cyclonedx/cdxgen
+                    __besman_echo_white "moving cdxgen to /opt folder"
+                    sudo cp /usr/bin/cdxgen /opt/cyclonedx-sbom-generator
+                else
+                    if [ ! -f /opt/cyclonedx-sbom-generator ]; then
+                        sudo cp /usr/bin/cdxgen /opt/cyclonedx-sbom-generator
+                        __besman_echo_white "cdxgen is already installed, moved to /opt folder"
+                    else
+                        __besman_echo_white "cdxgen is already installed, skipping installation."
+                    fi
+
+                fi
+            ;;
         *)
             __besman_echo_warn "Unknown tool: $t"
             ;;

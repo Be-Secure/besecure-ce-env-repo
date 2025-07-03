@@ -47,7 +47,7 @@ BESMAN_ASSESSMENT_DATASTORE_DIR: $HOME/besecure-assessment-datastore #***
 BESMAN_ASSESSMENT_DATASTORE_URL: https://github.com/Be-Secure/besecure-assessment-datastore #***
 
 # Comma-separated list of tools to manage (e.g., scorecard,criticality_score,sonarqube,fossology,spdx-sbom-generator)
-BESMAN_ASSESSMENT_TOOLS: "scorecard,criticality_score,sonarqube,fossology,spdx-sbom-generator"
+BESMAN_ASSESSMENT_TOOLS: "scorecard,criticality_score,sonarqube,fossology,cyclonedx-sbom-generator"
 
 # Mode for scorecard cli or github action.
 BESMAN_SCORECARD_ASSESSMENT_MODE: cli
