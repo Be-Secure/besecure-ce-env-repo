@@ -3913,7 +3913,14 @@
                     "version": [
                         "0.0.1"
                     ]
+                },
+                {
+                    "name": "SBOM-CyclonedxSbomGenerator",
+                    "version": [
+                        "0.0.1"
+                    ]
                 }
+
             ]
         },
         {
