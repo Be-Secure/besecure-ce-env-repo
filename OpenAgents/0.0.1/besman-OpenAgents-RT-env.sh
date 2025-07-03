@@ -109,7 +109,8 @@ function __besman_install {
         __besman_echo_white "The clone path already contains dir names $BESMAN_ARTIFACT_NAME"
     else
         __besman_echo_white "Cloning source code repo from $BESMAN_USER_NAMESPACE/$BESMAN_ARTIFACT_NAME"
-        __besman_repo_clone "$BESMAN_USER_NAMESPACE" "$BESMAN_ARTIFACT_NAME" "$BESMAN_ARTIFACT_DIR" || return 1
+        __besman_repo_clone "$BESMAN_USER_NAMESPACE" "$BESMAN_ARTIFACT_NAME" "$BESMAN_ARTIFACT_DIR"
+        [[ ! -d "$BESMAN_ARTIFACT_DIR" ]] && __besman_echo_warn "Could not clone $BESMAN_ARTIFACT_NAME from $BESMAN_USER_NAMESPACE" 
         cd "$BESMAN_ARTIFACT_DIR" && git checkout -b "$BESMAN_ARTIFACT_VERSION"_tavoss "$BESMAN_ARTIFACT_VERSION"
         cd "$HOME"
     fi
