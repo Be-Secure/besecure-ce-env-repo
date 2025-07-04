@@ -13,7 +13,7 @@ function __besman_install {
         sudo add-apt-repository -y "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
         sudo apt update
         sudo apt install -y docker-ce docker-ce-cli containerd.io
-        sudo usermod -aG docker $USER && newgrp docker
+        # sudo usermod -aG docker $USER && newgrp docker
     else
         __besman_echo_white "Docker already installed."
     fi
@@ -30,7 +30,14 @@ function __besman_install {
     if ! command -v go &>/dev/null; then
         __besman_echo_white "Installing Go..."
         sudo snap install go --classic
-        echo "export PATH=\$PATH:$HOME/go/bin" >> ~/.bashrc
+        if ! grep "go/bin" ~/.bashrc 
+        then
+            __besman_echo_white "Adding go path .bashrc"
+            echo "export PATH=\$PATH:$HOME/go/bin" >> ~/.bashrc
+            __besman_echo_white "Sourcing .bashrc to update PATH"
+            source ~/.bashrc
+
+        fi
     else
         __besman_echo_white "Go already installed."
     fi
@@ -77,6 +84,52 @@ function __besman_install {
             sudo curl -L -o "$BESMAN_TOOL_PATH/spdx-sbom-generator.tar.gz" "$BESMAN_SPDX_SBOM_ASSET_URL"
             sudo tar -xzf "$BESMAN_TOOL_PATH/spdx-sbom-generator.tar.gz" -C "$BESMAN_TOOL_PATH"
             ;;
+         cyclonedx-sbom-generator)
+                ## Name:CycloneDX SBOM prerequisites - NPM
+                __besman_echo_white "Checking if Node.js is installed..."
+                if ! command -v node &>/dev/null; then
+                    __besman_echo_white "Node.js is not installed. Installing Node.js and npm..."
+
+                    # Update package index
+                    sudo apt update -y
+
+                    # Install Node.js and npm
+                    curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+                    sudo apt install -y nodejs
+
+                    # Verify installation
+                    if command -v node &>/dev/null && command -v npm &>/dev/null; then
+                        __besman_echo_white "Node.js and npm installed successfully."
+                    else
+                        __besman_echo_yellow "Failed to install Node.js and npm."
+                        exit 1
+                    fi
+                else
+                    __besman_echo_white "Node.js is already installed. Version: $(node -v)"
+                    __besman_echo_white "Checking npm..."
+                    if ! command -v npm &>/dev/null; then
+                        __besman_echo_yellow "npm is not installed. Installing npm..."
+                        sudo apt install -y npm
+                    else
+                        __besman_echo_white "npm is already installed. Version: $(npm -v)"
+                    fi
+                fi
+                            __besman_echo_white "Checking if cdxgen is already installed..."
+                if ! which cdxgen >/dev/null; then
+                    __besman_echo_white "cdxgen not found. Installing cyclonedx-sbom-generator..."
+                    sudo npm install -g @cyclonedx/cdxgen
+                    __besman_echo_white "moving cdxgen to /opt folder"
+                    sudo cp /usr/bin/cdxgen /opt/cyclonedx-sbom-generator
+                else
+                    if [ ! -f /opt/cyclonedx-sbom-generator ]; then
+                        sudo cp /usr/bin/cdxgen /opt/cyclonedx-sbom-generator
+                        __besman_echo_white "cdxgen is already installed, moved to /opt folder"
+                    else
+                        __besman_echo_white "cdxgen is already installed, skipping installation."
+                    fi
+
+                fi
+            ;;
         *)
             __besman_echo_warn "Unknown tool: $t"
             ;;
@@ -88,9 +141,15 @@ function __besman_install {
         __besman_echo_white "The clone path already contains dir names $BESMAN_ARTIFACT_NAME"
     else
         __besman_echo_white "Cloning source code repo from $BESMAN_USER_NAMESPACE/$BESMAN_ARTIFACT_NAME"
-        __besman_repo_clone "$BESMAN_USER_NAMESPACE" "$BESMAN_ARTIFACT_NAME" "$BESMAN_ARTIFACT_DIR" || return 1
-        cd "$BESMAN_ARTIFACT_DIR" && git checkout -b "$BESMAN_ARTIFACT_VERSION"_tavoss "$BESMAN_ARTIFACT_VERSION"
-        cd "$HOME"
+        __besman_repo_clone "$BESMAN_USER_NAMESPACE" "$BESMAN_ARTIFACT_NAME" "$BESMAN_ARTIFACT_DIR"
+        if [[ ! -d "$BESMAN_ARTIFACT_DIR" ]]
+        then
+            __besman_echo_warn "Could not clone $BESMAN_ARTIFACT_NAME from $BESMAN_USER_NAMESPACE."
+            __besman_echo_yellow "Please clone it manually"
+        else
+            cd "$BESMAN_ARTIFACT_DIR" && git checkout -b "$BESMAN_ARTIFACT_VERSION"_tavoss "$BESMAN_ARTIFACT_VERSION"
+            cd "$HOME"
+        fi
     fi
 
     if [[ -d $BESMAN_ASSESSMENT_DATASTORE_DIR ]]; then
@@ -103,8 +162,6 @@ function __besman_install {
     fi
     __besman_echo_white "Installation complete."
     #moving this down so it doesnt interrupt the execution
-    source ~/.bashrc
-
 }
 
 function __besman_uninstall {
@@ -139,6 +196,21 @@ function __besman_uninstall {
             __besman_echo_white "Removing SPDX SBOM Generator files..."
             sudo rm -f "$BESMAN_TOOL_PATH/spdx-sbom-generator.tar.gz"
             sudo rm -rf "$BESMAN_TOOL_PATH/spdx-sbom-generator"
+            ;;
+        cyclonedx-sbom-generator)
+            __besman_echo_white "Checking if cdxgen is installed before uninstalling..."
+            if which cdxgen >/dev/null; then
+                __besman_echo_white "cdxgen is installed. Proceeding with uninstallation..."
+                sudo npm uninstall -g @cyclonedx/cdxgen
+                sudo npm cache clean --force
+                __besman_echo_white "cdxgen has been successfully uninstalled."
+
+            else
+                __besman_echo_white "cdxgen is not installed. Skipping uninstallation."
+            fi
+            if [ -f /opt/cyclonedx-sbom-generator ]; then
+                sudo rm -rf /opt/cyclonedx-sbom-generator
+            fi
             ;;
         *)
             __besman_echo_warn "Unknown tool: $t"
@@ -266,6 +338,17 @@ function __besman_validate {
         __besman_echo_yellow "$scorecard_version"
     fi 
 
+    if ! which cdxgen >/dev/null; then
+        __besman_echo_error "CycloneDX is not installed."
+        status=1
+        errors+=("CycloneDX is missing")
+    else
+        if [ ! -f /opt/cyclonedx-sbom-generator ]; then
+            __besman_echo_white "CycloneDX is installed but executable is not present in /opt directory."
+        else
+            __besman_echo_white "CycloneDX is properly installed and executable is present in /opt directory."
+        fi
+    fi
  
     # # Validate Criticality Score
     # if ! command -v criticality_score &>/dev/null; then
