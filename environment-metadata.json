@@ -3870,6 +3870,97 @@
                     ]
                 }
             ]
+        },
+        {
+            "name": "OpenAgents-RT-env",
+            "version": {
+                "tag": "0.0.1",
+                "release_date": ""
+            },
+            "author": {
+                "name": "BeSLab",
+                "type": "Lab"
+            },
+            "date_of_creation": "2025-06-30T10:35:08",
+            "last_update_date": "2025-06-30T10:35:08",
+            "last_execution": {
+                "name": "BeSLab",
+                "type": "Lab",
+                "status": "Success",
+                "timestamp": "2025-06-30T10:35:08"
+            },
+            "compatible_playbooks": [
+                {
+                    "name": "LC-fossology",
+                    "version": [
+                        "0.0.1"
+                    ]
+                },
+                {
+                    "name": "PIA-CriticalityScore",
+                    "version": [
+                        "0.0.1"
+                    ]
+                },
+                {
+                    "name": "SAST-sonarqube",
+                    "version": [
+                        "0.0.1"
+                    ]
+                },
+                {
+                    "name": "RIP-scorecard",
+                    "version": [
+                        "0.0.1"
+                    ]
+                },
+                {
+                    "name": "SBOM-CyclonedxSbomGenerator",
+                    "version": [
+                        "0.0.1"
+                    ]
+                }
+
+            ]
+        },
+        {
+            "name": "EvoAgentX-RT-env",
+            "version": {
+                "tag": "0.0.1",
+                "release_date": ""
+            },
+            "author": {
+                "name": "BeSLab",
+                "type": "Lab"
+            },
+            "date_of_creation": "2025-06-30T16:37:28",
+            "last_update_date": "2025-06-30T16:37:28",
+            "last_execution": {
+                "name": "BeSLab",
+                "type": "Lab",
+                "status": "Success",
+                "timestamp": "2025-06-30T16:37:28"
+            },
+            "compatible_playbooks": [
+                {
+                    "name": "PIA-CriticalityScore",
+                    "version": [
+                        "0.0.1"
+                    ]
+                },
+                {
+                    "name": "SAST-sonarqube",
+                    "version": [
+                        "0.0.1"
+                    ]
+                },
+                {
+                    "name": "RIP-scorecard",
+                    "version": [
+                        "0.0.1"
+                    ]
+                }
+            ]
         }
     ]
 }
