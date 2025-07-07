@@ -30,10 +30,12 @@ function __besman_install {
     check_and_install python3
     check_and_install python3-pip
     check_and_install python3-venv
+    check_and_install pytest
 
     # Create environment directory if missing
     __besman_echo_white "Preparing environment directory..."
     mkdir -p "$BESMAN_ENV_DIR"
+    mkdir -p "$BESMAN_TOOLS_DIR"
 
     # Create virtual environment
     __besman_echo_white "Creating virtual environment at: $BESMAN_ENV_DIR/$BESMAN_VENV_NAME"
@@ -55,31 +57,6 @@ function __besman_install {
     pip install ipykernel
     # Register kernel for Jupyter
     python -m ipykernel install --user --name "$BESMAN_VENV_NAME" --display-name "Python ($BESMAN_VENV_NAME)"
-
-    #-----------------------------------------------
-    # Tool - Watchtower
-    #-----------------------------------------------
-    __besman_echo_white "Cloning Watchtower from $BESMAN_WT_REPO..."
-    mkdir -p "$BESMAN_TOOLS_DIR"
-    cd "$BESMAN_TOOLS_DIR"
-
-    if [ ! -d "watchtower" ]; then
-        git clone "$BESMAN_WT_REPO"
-    else
-        __besman_echo_white "Watchtower repository already cloned."
-    fi
-
-    cd watchtower/src
-    pip install -r requirements.txt
-    cd ..
-
-    if [ -f "./install.sh" ]; then
-        __besman_echo_white "⚙️ Installing Watchtower dependencies..."
-        chmod +x install.sh
-        ./install.sh
-    else
-        __besman_echo_white "⚠️ No install.sh found in Watchtower repo."
-    fi
 
     #-----------------------------------------------
     # Tool - ART
@@ -118,11 +95,6 @@ function __besman_uninstall {
     fi
 
     # Optionally remove cloned repositories
-    if [ -d "$BESMAN_TOOLS_DIR/watchtower" ]; then
-        rm -rf "$BESMAN_TOOLS_DIR/watchtower"
-        __besman_echo_white "Watchtower repository removed."
-    fi
-
     if [ -d "$BESMAN_TOOLS_DIR/adversarial-robustness-toolbox" ]; then
         rm -rf "$BESMAN_TOOLS_DIR/adversarial-robustness-toolbox"
         __besman_echo_white "ART repository removed."
@@ -138,7 +110,7 @@ function __besman_update {
     __besman_echo_white "Updating environment..."
 
     # Example: Pull latest changes in repos
-    cd "$BESMAN_TOOLS_DIR/watchtower" && git pull
+    # cd "$BESMAN_TOOLS_DIR/watchtower" && git pull
     cd "$BESMAN_TOOLS_DIR/adversarial-robustness-toolbox" && git pull
 
     # Reinstall packages if needed
@@ -178,14 +150,6 @@ function __besman_validate {
         __besman_echo_white "Jupyter Notebook import successful."
     else
         __besman_echo_white "Jupyter Notebook not installed."
-        return 1
-    fi
-
-    # Check Watchtower folder
-    if [ -d "$BESMAN_TOOLS_DIR/watchtower" ]; then
-        __besman_echo_white "Watchtower repo exists."
-    else
-        __besman_echo_white "Watchtower repo missing."
         return 1
     fi
 

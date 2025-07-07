@@ -84,3 +84,4 @@ Be-Secure/besecure-ce-env-repo/product_launch_intelligence_agent-RT-env,0.0.1
 Be-Secure/besecure-ce-env-repo/ai_domain_deep_research_agent-RT-env,0.0.1
 Be-Secure/besecure-ce-env-repo/ai_legal_agent_team-RT-env,0.0.1
 Be-Secure/besecure-ce-env-repo/MLAssessment-RT-env,0.0.1
+Be-Secure/besecure-ce-env-repo/ai_recruitment_agent_team-RT-env,0.0.1
