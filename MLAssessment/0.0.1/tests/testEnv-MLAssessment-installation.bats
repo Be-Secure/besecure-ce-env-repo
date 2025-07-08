@@ -138,3 +138,16 @@ check_env_not_installed() {
 @test "Assessment datastore repo is cloned at expected path" {
   [ -d "$BESMAN_ASSESSMENT_DATASTORE_DIR/.git" ]
 }
+
+@test "bes playbook listing works after environment install" {
+  run bash -c 'source $HOME/.besman/bin/besman-init.sh && bes list -P'
+  [ "$status" -eq 0 ]
+  if [[ "$output" == *"[ERR]: Error while fetching playbook details"* ]]; then
+    echo "No playbooks found for MLAssessment-RT-env. Output:"
+    echo "$output"
+    false
+  else
+    [[ "$output" == *"Compatible playbooks for MLAssessment-RT-env"* ]]
+    [[ "$output" == *"SAST-watchtower"* ]]
+  fi
+}

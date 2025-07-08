@@ -3429,12 +3429,7 @@
         "status": "Success",
         "timestamp": "2025-07-02T10:36:58"
       },
-      "compatible_playbooks": [
-        {
-          "name": "SAST-watchtower",
-          "version": ["0.0.1"]
-        }
-      ]
+      "compatible_playbooks": []
     },
     {
       "name": "ai_recruitment_agent_team-RT-env",
