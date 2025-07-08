@@ -4,6 +4,7 @@
 # INSTALL
 #------------------------------------------
 function __besman_install {
+    set -x
 
     __besman_check_vcs_exist || return 1
     __besman_check_github_id || return 1
