@@ -4427,17 +4427,17 @@
                 "name": "BeSLab",
                 "type": "Lab"
             },
-            "date_of_creation": "2025-07-02T10:05:59",
-            "last_update_date": "2025-07-02T10:05:59",
+            "date_of_creation": "2025-07-09T08:37:37",
+            "last_update_date": "2025-07-09T08:37:37",
             "last_execution": {
                 "name": "BeSLab",
                 "type": "Lab",
                 "status": "Success",
-                "timestamp": "2025-07-02T10:05:59"
+                "timestamp": "2025-07-09T08:37:37"
             },
             "compatible_playbooks": [
                 {
-                    "name": "LC-fossology",
+                    "name": "PIA-CriticalityScore",
                     "version": [
                         "0.0.1"
                     ]
@@ -4449,7 +4449,7 @@
                     ]
                 },
                 {
-                    "name": "PIA-CriticalityScore",
+                    "name": "LC-fossology",
                     "version": [
                         "0.0.1"
                     ]
