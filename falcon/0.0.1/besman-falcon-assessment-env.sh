@@ -1,158 +1,76 @@
 #!/bin/bash
 
 function __besman_install {
+    __besman_pre_checks || return 1
+    __besman_setup_python_environment || return 1
+    __besman_clone_assessment_datastore || return 1
+    __besman_install_tools || return 1
+    __besman_install_ollama_if_required || return 1
+    __besman_display_env_instructions
+}
 
-    # Checks if GitHub CLI is present or not.
+function __besman_pre_checks {
     __besman_check_vcs_exist || return 1
-
-    # checks whether the user github id has been populated or not under BESMAN_USER_NAMESPACE
     __besman_check_github_id || return 1
+    return 0
+}
 
-    # check if python3 is installed if not install it.
+function __besman_setup_python_environment {
     if [[ -z $(which python3) ]]; then
-        __besman_echo_white "Python3 is not installed. Installing python3..."
-        sudo apt-get update
-        sudo apt-get install python3 -y
-        [[ -z $(which python3) ]] && __besman_echo_red "Python3 installation failed" && return 1
+        __besman_echo_white "Python3 not found. Installing..."
+        sudo apt-get update && sudo apt-get install python3 -y || {
+            __besman_echo_red "Python3 installation failed"
+            return 1
+        }
     fi
 
     if [[ -z $(which pip) ]]; then
-        __besman_echo_white "Installing pip"
-        sudo apt install python3-pip -y
-        [[ -z $(which pip) ]] && __besman_echo_red "Python3 installation failed" && return 1
-
+        __besman_echo_white "Installing pip..."
+        sudo apt install python3-pip -y || {
+            __besman_echo_red "pip installation failed"
+            return 1
+        }
     fi
 
     if ! echo $PATH | grep -q "$HOME/.local/bin"; then
-        __besman_echo_no_colour "Adding $HOME/.local/bin to PATH var"
-        echo 'export PATH=$PATH:$HOME/.local/bin' >>~/.bashrc
-        echo 'export BESMAN_DIR="$HOME/.besman"' >>~/.bashrc
-        echo '[[ -s "$HOME/.besman/bin/besman-init.sh" ]] && source "$HOME/.besman/bin/besman-init.sh"' >>~/.bashrc
+        __besman_echo_white "Adding $HOME/.local/bin to PATH var"
+        {
+            echo 'export PATH=$PATH:$HOME/.local/bin'
+            echo 'export BESMAN_DIR="$HOME/.besman"'
+            echo '[[ -s "$HOME/.besman/bin/besman-init.sh" ]] && source "$HOME/.besman/bin/besman-init.sh"'
+        } >>~/.bashrc
         source ~/.bashrc
-
     fi
 
-    if [[ -z $(which venv) ]]; then
-        __besman_echo_white "Installing python3-venv"
-        sudo apt install python3-venv -y
+    if [[ -z $(python3 -m venv --help 2>/dev/null) ]]; then
+        __besman_echo_white "Installing python3-venv..."
+        sudo apt install python3-venv -y || {
+            __besman_echo_red "python3-venv installation failed"
+            return 1
+        }
     else
-        __besman_echo_white "python3-venv found"
+        __besman_echo_white "python3-venv already available"
     fi
 
-    [[ ! -d "$BESMAN_ASSESSMENT_DATASTORE_DIR" ]] && { __besman_repo_clone "$BESMAN_USER_NAMESPACE" "besecure-ml-assessment-datastore" "$BESMAN_ASSESSMENT_DATASTORE_DIR" || return 1; }
-    OLD_IFS=$IFS
+    return 0
+}
+
+function __besman_clone_assessment_datastore {
+    [[ ! -d "$BESMAN_ASSESSMENT_DATASTORE_DIR" ]] && {
+        __besman_repo_clone "$BESMAN_USER_NAMESPACE" "besecure-ml-assessment-datastore" "$BESMAN_ASSESSMENT_DATASTORE_DIR" || return 1
+    }
+    return 0
+}
+
+function __besman_install_tools {
+    local OLD_IFS=$IFS
     IFS=',' read -r -a tools <<<"$BESMAN_ASSESSMENT_TOOLS"
     for t in "${tools[@]}"; do
-        case $t in
-        cyberseceval)
-            if [[ ! -d "$BESMAN_TOOL_PATH/PurpleLlama" && "$BESMAN_VCS" == "git" ]]; then
-                git clone "$BESMAN_PURPLELLAMA_URL" "$BESMAN_TOOL_PATH/PurpleLlama"
-                [[ $? -ne 0 ]] && __besman_echo_red "Failed to clone the repo" && return 1
-            elif [[ ! -d "$BESMAN_TOOL_PATH/PurpleLlama" && "$BESMAN_VCS" == "gh" ]]; then
-                __besman_echo_yellow "gh is not supported in this env. Please clone this url manually - $BESMAN_PURPLELLAMA_URL"
-            fi
-            __besman_echo_white "Installing Cybersecurity Benchmarks..."
-            python3 -m venv ~/.venvs/CybersecurityBenchmarks
-            source ~/.venvs/CybersecurityBenchmarks/bin/activate
-            cd "$BESMAN_TOOL_PATH/PurpleLlama" || { __besman_echo_red "Could not move to $BESMAN_TOOL_PATH" && return 1; }
-            git checkout "$BESMAN_TOOL_BRANCH"
-            pip3 install -r CybersecurityBenchmarks/requirements.txt
-            python3 -m pip install torch boto3 transformers openai
-            [[ $? -ne 0 ]] && __besman_echo_red "Failed to install CybersecurityBenchmarks" && return 1
-            deactivate
-
-            if [[ -n "$BESMAN_RESULTS_PATH" ]] && [[ ! -d "$BESMAN_RESULTS_PATH" ]]; then
-                __besman_echo_white "Creating results directory at $BESMAN_RESULTS_PATH"
-                mkdir -p "$BESMAN_RESULTS_PATH"
-
-            else
-                __besman_echo_white "Could not created Results directory. Check if path already exists."
-            fi
-
-            __besman_echo_no_colour ""
-            __besman_echo_green "CybersecurityBenchmarks installed successfully"
-            __besman_echo_no_colour ""
-            ;;
-        codeshield)
-            #============Codeshield installation========================
-            __besman_echo_white "Installing codeshield"
-            python3 -m venv ~/.venvs/codeshield_env
-            source ~/.venvs/codeshield_env/bin/activate
-            python3 -m pip install codeshield
-            [[ $? -ne 0 ]] && __besman_echo_red "Failed to install codeshield" && return 1
-            __besman_echo_no_colour ""
-            __besman_echo_green "codeshield installed successfully"
-            deactivate
-            cd "$HOME"
-            ;;
-        modelbench)
-            #============Modelbench installation========================
-            __besman_echo_no_colour ""
-            __besman_echo_white "Installing modelbench"
-            # source ~/.venvs/modelbench_env/bin/activate
-            python3 -m venv ~/.venvs/modelbench_env
-            __besman_echo_yellow "Installing pipx"
-            sudo apt update
-            sudo apt install pipx -y
-            pipx ensurepath
-            pipx install poetry
-            which poetry || { __besman_echo_red "Poetry installation failed" && return 1; }
-            if [[ ! -d "$BESMAN_TOOL_PATH/modelbench" && "$BESMAN_VCS" == "git" ]]; then
-                git clone "$BESMAN_MODELBENCH_URL" "$BESMAN_TOOL_PATH/modelbench"
-                [[ $? -ne 0 ]] && __besman_echo_red "Failed to clone the repo" && return 1
-            elif [[ ! -d "$BESMAN_TOOL_PATH/modelbench" && "$BESMAN_VCS" == "gh" ]]; then
-                __besman_echo_yellow "gh is not supported in this env. Please clone this url manually - $BESMAN_MODELBENCH_URL"
-            fi
-            cd "$BESMAN_TOOL_PATH/modelbench" || { __besman_echo_red "Could not move to $BESMAN_TOOL_PATH/modelbench" && return 1; }
-            source ~/.venvs/modelbench_env/bin/activate
-            poetry lock
-            poetry install
-            [[ $? -ne 0 ]] && __besman_echo_red "Failed to install modelbench" && return 1
-            __besman_echo_no_colour ""
-            __besman_echo_green "modelbench installed successfully"
-            deactivate
-            cd "$HOME"
-            ;;
-        garak)
-            # ============Garak installation========================
-            if [[ -z $(which conda) ]]; then
-                __besman_echo_white "Installing conda"
-                __besman_echo_no_colour "Install GPG keys"
-                curl https://repo.anaconda.com/pkgs/misc/gpgkeys/anaconda.asc | gpg --dearmor >conda.gpg
-                sudo install -o root -g root -m 644 conda.gpg /usr/share/keyrings/conda-archive-keyring.gpg
-                __besman_echo_no_colour "Verify GPG keys"
-                sudo gpg --keyring /usr/share/keyrings/conda-archive-keyring.gpg --no-default-keyring --fingerprint 34161F5BF5EB1D4BFBBB8F0A8AEB4F8B29D82806
-                __besman_echo_no_colour "Add to repo"
-                echo "deb [arch=amd64 signed-by=/usr/share/keyrings/conda-archive-keyring.gpg] https://repo.anaconda.com/pkgs/misc/debrepo/conda stable main" | sudo tee /etc/apt/sources.list.d/conda.list
-                __besman_echo_white "Installing conda"
-                sudo apt update && sudo apt install conda -y
-
-            else
-                __besman_echo_white "Conda is already installed."
-            fi
-            source /opt/conda/etc/profile.d/conda.sh
-            conda -V
-            [[ $? -ne 0 ]] && __besman_echo_red "Conda installation failed" && return 1
-
-            __besman_echo_white "Creating conda environment for garak"
-            conda create --name garak "python>=3.10,<=3.12" -y
-            conda activate garak
-            if [[ ! -d "$BESMAN_TOOL_PATH/garak" && "$BESMAN_VCS" == "git" ]]; then
-                git clone "$BESMAN_GARAK_URL" "$BESMAN_TOOL_PATH/garak"
-                [[ $? -ne 0 ]] && __besman_echo_red "Failed to clone the repo" && return 1
-            elif [[ ! -d "$BESMAN_TOOL_PATH/garak" && "$BESMAN_VCS" == "gh" ]]; then
-                __besman_echo_yellow "gh is not supported in this env. Please clone this url manually - $BESMAN_GARAK_URL"
-            fi
-            cd "$BESMAN_TOOL_PATH/garak" || { __besman_echo_red "Could not move to $BESMAN_TOOL_PATH" && return 1; }
-            python3 -m pip install -e .
-            garak --list_probes
-            [[ $? -ne 0 ]] && __besman_echo_red "Failed to install garak" && return 1
-            __besman_echo_no_colour ""
-            __besman_echo_green "Garak installed successfully"
-            __besman_echo_no_colour ""
-            conda deactivate
-            cd "$HOME"
-            ;;
+        case "$t" in
+        cyberseceval) __besman_install_cyberseceval || return 1 ;;
+        codeshield) __besman_install_codeshield || return 1 ;;
+        modelbench) __besman_install_modelbench || return 1 ;;
+        garak) __besman_install_garak || return 1 ;;
         *)
             __besman_echo_red "Invalid tool name: $t"
             return 1
@@ -160,22 +78,142 @@ function __besman_install {
         esac
     done
     IFS=$OLD_IFS
-    #==============Ollama installation========================
+    return 0
+}
+function __besman_install_cyberseceval {
+    __besman_echo_white "Installing Cybersecurity Benchmarks..."
+    if [[ ! -d "$BESMAN_TOOL_PATH/PurpleLlama" && "$BESMAN_VCS" == "git" ]]; then
+        git clone "$BESMAN_PURPLELLAMA_URL" "$BESMAN_TOOL_PATH/PurpleLlama" || {
+            __besman_echo_red "Failed to clone PurpleLlama"
+            return 1
+        }
+    elif [[ ! -d "$BESMAN_TOOL_PATH/PurpleLlama" && "$BESMAN_VCS" == "gh" ]]; then
+        __besman_echo_yellow "gh is not supported in this env. Please clone this url manually - $BESMAN_PURPLELLAMA_URL"
+    fi
+
+    python3 -m venv ~/.venvs/CybersecurityBenchmarks
+    source ~/.venvs/CybersecurityBenchmarks/bin/activate
+    cd "$BESMAN_TOOL_PATH/PurpleLlama" || {
+        __besman_echo_red "Could not move to PurpleLlama: $BESMAN_TOOL_PATH"
+        return 1
+    }
+    git checkout "$BESMAN_TOOL_BRANCH"
+    pip3 install -r CybersecurityBenchmarks/requirements.txt
+    python3 -m pip install torch boto3 transformers openai || return 1
+    deactivate
+
+    if [[ -n "$BESMAN_RESULTS_PATH" ]] && [[ ! -d "$BESMAN_RESULTS_PATH" ]]; then
+        __besman_echo_white "Creating results directory at $BESMAN_RESULTS_PATH"
+        mkdir -p "$BESMAN_RESULTS_PATH"
+
+    else
+        __besman_echo_white "Could not created Results directory. Check if path already exists."
+    fi
+
+    __besman_echo_green "CybersecurityBenchmarks installed successfully"
+    return 0
+}
+
+function __besman_install_codeshield {
+    __besman_echo_white "Installing Codeshield..."
+    python3 -m venv ~/.venvs/codeshield_env
+    source ~/.venvs/codeshield_env/bin/activate
+    python3 -m pip install codeshield || {
+        __besman_echo_red "Codeshield installation failed"
+        return 1
+    }
+    deactivate
+    cd "$HOME"
+    __besman_echo_green "Codeshield installed successfully"
+    return 0
+}
+
+function __besman_install_modelbench {
+    __besman_echo_white "Installing Modelbench..."
+    python3 -m venv ~/.venvs/modelbench_env
+    __besman_echo_yellow "Installing pipx"
+    sudo apt update
+    sudo apt install pipx -y && pipx ensurepath
+    pipx install poetry || return 1
+    which poetry || { __besman_echo_red "Poetry installation failed" && return 1; }
+
+    if [[ ! -d "$BESMAN_TOOL_PATH/modelbench" && "$BESMAN_VCS" == "git" ]]; then
+        git clone "$BESMAN_MODELBENCH_URL" "$BESMAN_TOOL_PATH/modelbench"
+        [[ $? -ne 0 ]] && __besman_echo_red "Failed to clone the repo" && return 1
+    elif [[ ! -d "$BESMAN_TOOL_PATH/modelbench" && "$BESMAN_VCS" == "gh" ]]; then
+        __besman_echo_yellow "gh is not supported in this env. Please clone this url manually - $BESMAN_MODELBENCH_URL"
+    fi
+
+    cd "$BESMAN_TOOL_PATH/modelbench" || { __besman_echo_red "Could not move to modelbench: $BESMAN_TOOL_PATH/modelbench" && return 1; }
+    source ~/.venvs/modelbench_env/bin/activate
+    poetry lock && poetry install || return 1
+    deactivate
+    __besman_echo_green "Modelbench installed successfully"
+    cd "$HOME"
+    return 0
+}
+
+function __besman_install_garak {
+    if [[ -z $(which conda) ]]; then
+        __besman_echo_white "Installing Conda..."
+        __besman_echo_no_colour "Install GPG keys"
+        curl https://repo.anaconda.com/pkgs/misc/gpgkeys/anaconda.asc | gpg --dearmor >conda.gpg
+        sudo install -o root -g root -m 644 conda.gpg /usr/share/keyrings/conda-archive-keyring.gpg
+        __besman_echo_no_colour "Verify GPG keys"
+        sudo gpg --keyring /usr/share/keyrings/conda-archive-keyring.gpg --no-default-keyring --fingerprint 34161F5BF5EB1D4BFBBB8F0A8AEB4F8B29D82806
+        __besman_echo_no_colour "Add to repo"
+        echo "deb [arch=amd64 signed-by=/usr/share/keyrings/conda-archive-keyring.gpg] https://repo.anaconda.com/pkgs/misc/debrepo/conda stable main" | sudo tee /etc/apt/sources.list.d/conda.list
+        __besman_echo_white "Installing conda"
+        sudo apt update && sudo apt install conda -y || return 1
+    else
+        __besman_echo_white "Conda is already installed."
+    fi
+
+    source /opt/conda/etc/profile.d/conda.sh
+    conda -V
+    [[ $? -ne 0 ]] && __besman_echo_red "Conda installation failed" && return 1
+
+    __besman_echo_white "Creating conda environment for garak"
+    conda create --name garak "python>=3.10,<=3.12" -y || return 1
+    conda activate garak
+
+    echo "-------------------------------------------------------------------------------------------------------"
+    echo "$BESMAN_TOOL_PATH/garak"
+    echo "$BESMAN_VCS"
+    echo "-------------------------------------------------------------------------------------------------------"
+    if [[ ! -d "$BESMAN_TOOL_PATH/garak" && "$BESMAN_VCS" == "git" ]]; then
+        git clone "$BESMAN_GARAK_URL" "$BESMAN_TOOL_PATH/garak"
+        [[ $? -ne 0 ]] && __besman_echo_red "Failed to clone the repo" && return 1
+    elif [[ ! -d "$BESMAN_TOOL_PATH/garak" && "$BESMAN_VCS" == "gh" ]]; then
+        __besman_echo_yellow "gh is not supported in this env. Please clone this url manually - $BESMAN_GARAK_URL"
+    fi
+
+    cd "$BESMAN_TOOL_PATH/garak" || { __besman_echo_red "Could not move to garak: $BESMAN_TOOL_PATH" && return 1; }
+    python3 -m pip install -e . || return 1
+    garak --list_probes || return 1
+    conda deactivate
+    cd "$HOME"
+    __besman_echo_green "Garak installed successfully"
+    return 0
+}
+
+function __besman_install_ollama_if_required {
     if [[ "$BESMAN_ARTIFACT_PROVIDER" == "Ollama" ]]; then
-        # Installing ollama
-        __besman_echo_white "Installing ollama..."
         if [[ -z $(which ollama) ]]; then
-            # Placeholder for actual ollama installation command.
-            curl -fsSL https://ollama.com/install.sh | sh
-            if [[ $? -ne 0 ]]; then
-                __besman_echo_red "ollama installation failed" && return 1
-            fi
+            __besman_echo_white "Installing Ollama..."
+            curl -fsSL https://ollama.com/install.sh | sh || {
+                __besman_echo_red "Ollama installation failed"
+                return 1
+            }
         else
             __besman_echo_white "ollama is already installed."
         fi
-        __besman_echo_green "ollama installed successfully"
+        __besman_echo_green "Ollama installed successfully"
     fi
+    return 0
+}
 
+function __besman_display_env_instructions {
     __besman_echo_white "Note down the following virtual environments for each tool"
     __besman_echo_no_colour ""
     __besman_echo_yellow "Cyberseceval for LLM Security Benchmarking"
@@ -193,13 +231,9 @@ function __besman_install {
     __besman_echo_no_colour ""
 
     if [[ "$BESMAN_ARTIFACT_PROVIDER" == "Ollama" ]]; then
-        __besman_echo_white "You can run the following command to pull down and run the model from Ollama"
-        __besman_echo_no_colour ""
+        __besman_echo_white "Run the following command to pull and run Ollama model"
         __besman_echo_yellow "  ollama run $BESMAN_ARTIFACT_NAME:$BESMAN_ARTIFACT_VERSION"
-        __besman_echo_no_colour ""
-
     fi
-
 }
 
 function __besman_uninstall {
@@ -210,7 +244,7 @@ function __besman_uninstall {
         cyberseceval)
             __besman_echo_white "Uninstalling CybersecurityBenchmarks..."
             source ~/.venvs/CybersecurityBenchmarks/bin/activate
-            cd "$BESMAN_TOOL_PATH/PurpleLlama" || { __besman_echo_red "Could not move to $BESMAN_TOOL_PATH/PurpleLlama" && return 1; }
+            cd "$BESMAN_TOOL_PATH/PurpleLlama" || { __besman_echo_red "Could not move to PurpleLlama: $BESMAN_TOOL_PATH/PurpleLlama" && return 1; }
             python3 -m pip uninstall -y -r CybersecurityBenchmarks/requirements.txt
             [[ $? -ne 0 ]] && __besman_echo_red "Failed to uninstall CybersecurityBenchmarks" && return 1
             python3 -m pip uninstall torch boto3 transformers openai -y
@@ -232,7 +266,7 @@ function __besman_uninstall {
         modelbench)
             __besman_echo_white "Uninstalling modelbench..."
             source ~/.venvs/modelbench_env/bin/activate
-            cd "$BESMAN_TOOL_PATH/modelbench" || { __besman_echo_red "Could not move to $BESMAN_TOOL_PATH/modelbench" && return 1; }
+            cd "$BESMAN_TOOL_PATH/modelbench" || { __besman_echo_red "Could not move to modelbench: $BESMAN_TOOL_PATH/modelbench" && return 1; }
             rm poetry.lock
             deactivate
             [[ -d ~/.venvs/modelbench_env ]] && rm -rf ~/.venvs/modelbench_env
@@ -243,7 +277,7 @@ function __besman_uninstall {
             __besman_echo_white "Uninstalling garak..."
             source /opt/conda/etc/profile.d/conda.sh
             conda activate garak
-            cd "$BESMAN_TOOL_PATH/garak" || { __besman_echo_red "Could not move to $BESMAN_TOOL_PATH/garak" && return 1; }
+            cd "$BESMAN_TOOL_PATH/garak" || { __besman_echo_red "Could not move to garak: $BESMAN_TOOL_PATH/garak" && return 1; }
             python3 -m pip uninstall -y garak
             conda deactivate
             conda env remove -n garak -y
@@ -284,7 +318,7 @@ function __besman_update {
         case $t in
         cyberseceval)
             __besman_echo_white "Updating CybersecurityBenchmarks..."
-            cd "$BESMAN_TOOL_PATH/PurpleLlama" || { __besman_echo_red "Could not move to $BESMAN_TOOL_PATH/PurpleLlama" && return 1; }
+            cd "$BESMAN_TOOL_PATH/PurpleLlama" || { __besman_echo_red "Could not move to PurpleLlama: $BESMAN_TOOL_PATH/PurpleLlama" && return 1; }
             git checkout "$BESMAN_TOOL_BRANCH"
             if [[ "$BESMAN_VCS" == "git" ]]; then
                 git checkout "$BESMAN_TOOL_BRANCH"
@@ -314,7 +348,7 @@ function __besman_update {
         modelbench)
             cd "$HOME"
             __besman_echo_white "Updating modelbench..."
-            cd "$BESMAN_TOOL_PATH/modelbench" || { __besman_echo_red "Could not move to $BESMAN_TOOL_PATH/modelbench" && return 1; }
+            cd "$BESMAN_TOOL_PATH/modelbench" || { __besman_echo_red "Could not move to modelbench: $BESMAN_TOOL_PATH/modelbench" && return 1; }
             if [[ "$BESMAN_VCS" == "git" ]]; then
                 git pull origin main
                 [[ $? -ne 0 ]] && __besman_echo_error "Failed to update modelbench" && return 1
@@ -332,7 +366,7 @@ function __besman_update {
             if [[ "$BESMAN_VCS" == "git" ]]; then
 
                 __besman_echo_white "Updating garak..."
-                cd "$BESMAN_TOOL_PATH/garak" || { __besman_echo_red "Could not move to $BESMAN_TOOL_PATH/garak" && return 1; }
+                cd "$BESMAN_TOOL_PATH/garak" || { __besman_echo_red "Could not move to garak: $BESMAN_TOOL_PATH/garak" && return 1; }
                 git pull origin main
                 [[ $? -ne 0 ]] && __besman_echo_red "Failed to update garak" && return 1
                 source /opt/conda/etc/profile.d/conda.sh

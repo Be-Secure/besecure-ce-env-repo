@@ -6,27 +6,23 @@
 # BESMAN_<var name>: <value>
 # If you are not using any particular value, remove it or comment it(#).
 #*** - These variables should not be removed, nor left empty.
-
-# Used to mention where you should clone the repo from, default value is Be-Secure
+# used to mention where you should clone the repo from, default value is Be-Secure
 BESMAN_ORG: Be-Secure
 
-#  project/ml model/training dataset
-BESMAN_ARTIFACT_TYPE: project 
+# project/ml model/training dataset
+BESMAN_ARTIFACT_TYPE: project
 
 # Name of the artifact under assessment.
-BESMAN_ARTIFACT_NAME: guardrails
+BESMAN_ARTIFACT_NAME: weaviate
 
 # Version of the artifact under assessment.
-BESMAN_ARTIFACT_VERSION: v0.5.9
-
-# Original source URL for the project under test.
-BESMAN_ARTIFACT_ORIGIN_URL: https://github.com/Be-Secure/guardrails
+BESMAN_ARTIFACT_VERSION: v1.32.0-rc.0
 
 # Source code url of the artifact under assessment.
-BESMAN_ARTIFACT_URL: https://github.com/Be-Secure/guardrails
+BESMAN_ARTIFACT_URL: https://github.com/Be-Secure/weaviate
 
 # This variable stores the name of the environment file.
-BESMAN_ENV_NAME: guardrails-RT-env
+BESMAN_ENV_NAME: weaviate-RT-env
 
 # The path where you wish to clone the source code of the artifact under assessment.
 # If you wish to change the clone path, provide the complete path.
@@ -41,13 +37,18 @@ BESMAN_LAB_TYPE: Organization
 # Name of the owner of the lab. Default is Be-Secure.
 BESMAN_LAB_NAME: Be-Secure
 
+# This is the local dir where we store the assessment reports. Default is home.
+BESMAN_ASSESSMENT_DATASTORE_DIR: $HOME/besecure-assessment-datastore
+
+# The remote repo where we store the assessment reports.
+BESMAN_ASSESSMENT_DATASTORE_URL: https://github.com/Be-Secure/besecure-assessment-datastore
+
 # Mode for scorecard cli or github action.
 BESMAN_SCORECARD_ASSESSMENT_MODE: "cli"         
 # Ports for containerized tools
 BESMAN_SONARQUBE_PORT: 9000
 BESMAN_FOSSOLOGY_PORT: 9001
-
-
+ 
 # SPDX SBOM Generator release asset URL (GitHub or other source)
 BESMAN_SPDX_SBOM_ASSET_URL: "https://github.com/opensbom-generator/spdx-sbom-generator/releases/download/v0.0.15/spdx-sbom-generator-v0.0.15-linux-amd64.tar.gz"
  

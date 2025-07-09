@@ -3870,6 +3870,609 @@
                     ]
                 }
             ]
+        },
+        {
+            "name": "privacy-RT-env",
+            "version": {
+                "tag": "0.0.1",
+                "release_date": ""
+            },
+            "author": {
+                "name": "BeSLab",
+                "type": "Lab"
+            },
+            "date_of_creation": "2025-06-25T10:47:41",
+            "last_update_date": "2025-06-25T10:47:41",
+            "last_execution": {
+                "name": "BeSLab",
+                "type": "Lab",
+                "status": "Success",
+                "timestamp": "2025-06-25T10:47:41"
+            },
+            "compatible_playbooks": [
+                {
+                    "name": "SBOM-SpdxSbomGenerator",
+                    "version": [
+                        "0.0.1"
+                    ]
+                },
+                {
+                    "name": "PIA-CriticalityScore",
+                    "version": [
+                        "0.0.1"
+                    ]
+                },
+                {
+                    "name": "SAST-sonarqube",
+                    "version": [
+                        "0.0.1"
+                    ]
+                },
+                {
+                    "name": "RIP-scorecard",
+                    "version": [
+                        "0.0.1"
+                    ]
+                },
+                {
+                    "name": "LC-fossology",
+                    "version": [
+                        "0.0.1"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "dioptra-RT-env",
+            "version": {
+                "tag": "0.0.1",
+                "release_date": ""
+            },
+            "author": {
+                "name": "BeSLab",
+                "type": "Lab"
+            },
+            "date_of_creation": "2025-06-27T06:57:42",
+            "last_update_date": "2025-06-27T06:57:42",
+            "last_execution": {
+                "name": "BeSLab",
+                "type": "Lab",
+                "status": "Success",
+                "timestamp": "2025-06-27T06:57:42"
+            },
+            "compatible_playbooks": [
+                {
+                    "name": "SAST-sonarqube",
+                    "version": [
+                        "0.0.1"
+                    ]
+                },
+                {
+                    "name": "PIA-CriticalityScore",
+                    "version": [
+                        "0.0.1"
+                    ]
+                },
+                {
+                    "name": "RIP-scorecard",
+                    "version": [
+                        "0.0.1"
+                    ]
+                },
+                {
+                    "name": "SBOM-CyclonedxSbomGenerator",
+                    "version": [
+                        "0.0.1"
+                    ]
+                },
+                {
+                    "name": "LC-fossology",
+                    "version": [
+                        "0.0.1"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "crewAI-RT-env",
+            "version": {
+                "tag": "0.0.1",
+                "release_date": ""
+            },
+            "author": {
+                "name": "BeSLab",
+                "type": "Lab"
+            },
+            "date_of_creation": "2025-06-27T10:44:00",
+            "last_update_date": "2025-06-27T10:44:00",
+            "last_execution": {
+                "name": "BeSLab",
+                "type": "Lab",
+                "status": "Success",
+                "timestamp": "2025-06-27T10:44:00"
+            },
+            "compatible_playbooks": [
+                {
+                    "name": "PIA-CriticalityScore",
+                    "version": [
+                        "0.0.1"
+                    ]
+                },
+                {
+                    "name": "SBOM-SpdxSbomGenerator",
+                    "version": [
+                        "0.0.1"
+                    ]
+                },
+                {
+                    "name": "LC-fossology",
+                    "version": [
+                        "0.0.1"
+                    ]
+                },
+                {
+                    "name": "SAST-sonarqube",
+                    "version": [
+                        "0.0.1"
+                    ]
+                },
+                {
+                    "name": "RIP-scorecard",
+                    "version": [
+                        "0.0.1"
+                    ]
+                },
+                {
+                    "name": "SBOM-CyclonedxSbomGenerator",
+                    "version": [
+                        "0.0.1"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "AutoGPT-RT-env",
+            "version": {
+                "tag": "0.0.1",
+                "release_date": ""
+            },
+            "author": {
+                "name": "BeSLab",
+                "type": "Lab"
+            },
+            "date_of_creation": "2025-06-27T11:41:35",
+            "last_update_date": "2025-06-27T11:41:35",
+            "last_execution": {
+                "name": "BeSLab",
+                "type": "Lab",
+                "status": "Success",
+                "timestamp": "2025-06-27T11:41:35"
+            },
+            "compatible_playbooks": [
+                {
+                    "name": "SBOM-SpdxSbomGenerator",
+                    "version": [
+                        "0.0.1"
+                    ]
+                },
+                {
+                    "name": "PIA-CriticalityScore",
+                    "version": [
+                        "0.0.1"
+                    ]
+                },
+                {
+                    "name": "SAST-sonarqube",
+                    "version": [
+                        "0.0.1"
+                    ]
+                },
+                {
+                    "name": "RIP-scorecard",
+                    "version": [
+                        "0.0.1"
+                    ]
+                },
+                {
+                    "name": "SBOM-CyclonedxSbomGenerator",
+                    "version": [
+                        "0.0.1"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "babyagi-RT-env",
+            "version": {
+                "tag": "0.0.1",
+                "release_date": ""
+            },
+            "author": {
+                "name": "BeSLab",
+                "type": "Lab"
+            },
+            "date_of_creation": "2025-06-27T12:36:49",
+            "last_update_date": "2025-06-27T12:36:49",
+            "last_execution": {
+                "name": "BeSLab",
+                "type": "Lab",
+                "status": "Success",
+                "timestamp": "2025-06-27T12:36:49"
+            },
+            "compatible_playbooks": [
+                {
+                    "name": "SBOM-SpdxSbomGenerator",
+                    "version": [
+                        "0.0.1"
+                    ]
+                },
+                {
+                    "name": "PIA-CriticalityScore",
+                    "version": [
+                        "0.0.1"
+                    ]
+                },
+                {
+                    "name": "SAST-sonarqube",
+                    "version": [
+                        "0.0.1"
+                    ]
+                },
+                {
+                    "name": "RIP-scorecard",
+                    "version": [
+                        "0.0.1"
+                    ]
+                },
+                {
+                    "name": "SBOM-CyclonedxSbomGenerator",
+                    "version": [
+                        "0.0.1"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "semantic-kernel-RT-env",
+            "version": {
+                "tag": "0.0.1",
+                "release_date": ""
+            },
+            "author": {
+                "name": "BeSLab",
+                "type": "Lab"
+            },
+            "date_of_creation": "2025-06-29T17:36:15",
+            "last_update_date": "2025-06-29T17:36:15",
+            "last_execution": {
+                "name": "BeSLab",
+                "type": "Lab",
+                "status": "Success",
+                "timestamp": "2025-06-29T17:36:15"
+            },
+            "compatible_playbooks": [
+                {
+                    "name": "LC-fossology",
+                    "version": [
+                        "0.0.1"
+                    ]
+                },
+                {
+                    "name": "SBOM-SpdxSbomGenerator",
+                    "version": [
+                        "0.0.1"
+                    ]
+                },
+                {
+                    "name": "PIA-CriticalityScore",
+                    "version": [
+                        "0.0.1"
+                    ]
+                },
+                {
+                    "name": "SAST-sonarqube",
+                    "version": [
+                        "0.0.1"
+                    ]
+                },
+                {
+                    "name": "RIP-scorecard",
+                    "version": [
+                        "0.0.1"
+                    ]
+                },
+                {
+                    "name": "SBOM-CyclonedxSbomGenerator",
+                    "version": [
+                        "0.0.1"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "llama_index-RT-env",
+            "version": {
+                "tag": "0.0.1",
+                "release_date": ""
+            },
+            "author": {
+                "name": "BeSLab",
+                "type": "Lab"
+            },
+            "date_of_creation": "2025-06-30T18:00:58",
+            "last_update_date": "2025-06-30T18:00:58",
+            "last_execution": {
+                "name": "BeSLab",
+                "type": "Lab",
+                "status": "Success",
+                "timestamp": "2025-06-30T18:00:58"
+            },
+            "compatible_playbooks": [
+                {
+                    "name": "LC-fossology",
+                    "version": [
+                        "0.0.1"
+                    ]
+                },
+                {
+                    "name": "SBOM-SpdxSbomGenerator",
+                    "version": [
+                        "0.0.1"
+                    ]
+                },
+                {
+                    "name": "PIA-CriticalityScore",
+                    "version": [
+                        "0.0.1"
+                    ]
+                },
+                {
+                    "name": "SAST-sonarqube",
+                    "version": [
+                        "0.0.1"
+                    ]
+                },
+                {
+                    "name": "RIP-scorecard",
+                    "version": [
+                        "0.0.1"
+                    ]
+                },
+                {
+                    "name": "SBOM-CyclonedxSbomGenerator",
+                    "version": [
+                        "0.0.1"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "milvus-RT-env",
+            "version": {
+                "tag": "0.0.1",
+                "release_date": ""
+            },
+            "author": {
+                "name": "BeSLab",
+                "type": "Lab"
+            },
+            "date_of_creation": "2025-07-01T14:51:44",
+            "last_update_date": "2025-07-01T14:51:44",
+            "last_execution": {
+                "name": "BeSLab",
+                "type": "Lab",
+                "status": "Success",
+                "timestamp": "2025-07-01T14:51:44"
+            },
+            "compatible_playbooks": [
+                {
+                    "name": "LC-fossology",
+                    "version": [
+                        "0.0.1"
+                    ]
+                },
+                {
+                    "name": "SBOM-SpdxSbomGenerator",
+                    "version": [
+                        "0.0.1"
+                    ]
+                },
+                {
+                    "name": "PIA-CriticalityScore",
+                    "version": [
+                        "0.0.1"
+                    ]
+                },
+                {
+                    "name": "SAST-sonarqube",
+                    "version": [
+                        "0.0.1"
+                    ]
+                },
+                {
+                    "name": "RIP-scorecard",
+                    "version": [
+                        "0.0.1"
+                    ]
+                },
+                {
+                    "name": "SBOM-CyclonedxSbomGenerator",
+                    "version": [
+                        "0.0.1"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "qdrant-RT-env",
+            "version": {
+                "tag": "0.0.1",
+                "release_date": ""
+            },
+            "author": {
+                "name": "BeSLab",
+                "type": "Lab"
+            },
+            "date_of_creation": "2025-07-02T10:04:22",
+            "last_update_date": "2025-07-02T10:04:22",
+            "last_execution": {
+                "name": "BeSLab",
+                "type": "Lab",
+                "status": "Success",
+                "timestamp": "2025-07-02T10:04:22"
+            },
+            "compatible_playbooks": [
+                {
+                    "name": "LC-fossology",
+                    "version": [
+                        "0.0.1"
+                    ]
+                },
+                {
+                    "name": "SBOM-SpdxSbomGenerator",
+                    "version": [
+                        "0.0.1"
+                    ]
+                },
+                {
+                    "name": "PIA-CriticalityScore",
+                    "version": [
+                        "0.0.1"
+                    ]
+                },
+                {
+                    "name": "SAST-sonarqube",
+                    "version": [
+                        "0.0.1"
+                    ]
+                },
+                {
+                    "name": "RIP-scorecard",
+                    "version": [
+                        "0.0.1"
+                    ]
+                },
+                {
+                    "name": "SBOM-CyclonedxSbomGenerator",
+                    "version": [
+                        "0.0.1"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "weaviate-RT-env",
+            "version": {
+                "tag": "0.0.1",
+                "release_date": ""
+            },
+            "author": {
+                "name": "BeSLab",
+                "type": "Lab"
+            },
+            "date_of_creation": "2025-07-02T10:04:59",
+            "last_update_date": "2025-07-02T10:04:59",
+            "last_execution": {
+                "name": "BeSLab",
+                "type": "Lab",
+                "status": "Success",
+                "timestamp": "2025-07-02T10:04:59"
+            },
+            "compatible_playbooks": [
+                {
+                    "name": "LC-fossology",
+                    "version": [
+                        "0.0.1"
+                    ]
+                },
+                {
+                    "name": "SBOM-SpdxSbomGenerator",
+                    "version": [
+                        "0.0.1"
+                    ]
+                },
+                {
+                    "name": "PIA-CriticalityScore",
+                    "version": [
+                        "0.0.1"
+                    ]
+                },
+                {
+                    "name": "SAST-sonarqube",
+                    "version": [
+                        "0.0.1"
+                    ]
+                },
+                {
+                    "name": "RIP-scorecard",
+                    "version": [
+                        "0.0.1"
+                    ]
+                },
+                {
+                    "name": "SBOM-CyclonedxSbomGenerator",
+                    "version": [
+                        "0.0.1"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "chroma-RT-env",
+            "version": {
+                "tag": "0.0.1",
+                "release_date": ""
+            },
+            "author": {
+                "name": "BeSLab",
+                "type": "Lab"
+            },
+            "date_of_creation": "2025-07-09T08:37:37",
+            "last_update_date": "2025-07-09T08:37:37",
+            "last_execution": {
+                "name": "BeSLab",
+                "type": "Lab",
+                "status": "Success",
+                "timestamp": "2025-07-09T08:37:37"
+            },
+            "compatible_playbooks": [
+                {
+                    "name": "PIA-CriticalityScore",
+                    "version": [
+                        "0.0.1"
+                    ]
+                },
+                {
+                    "name": "SBOM-SpdxSbomGenerator",
+                    "version": [
+                        "0.0.1"
+                    ]
+                },
+                {
+                    "name": "LC-fossology",
+                    "version": [
+                        "0.0.1"
+                    ]
+                },
+                {
+                    "name": "SAST-sonarqube",
+                    "version": [
+                        "0.0.1"
+                    ]
+                },
+                {
+                    "name": "RIP-scorecard",
+                    "version": [
+                        "0.0.1"
+                    ]
+                },
+                {
+                    "name": "SBOM-CyclonedxSbomGenerator",
+                    "version": [
+                        "0.0.1"
+                    ]
+                }
+            ]
         }
     ]
 }

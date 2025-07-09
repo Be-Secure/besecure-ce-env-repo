@@ -6,27 +6,23 @@
 # BESMAN_<var name>: <value>
 # If you are not using any particular value, remove it or comment it(#).
 #*** - These variables should not be removed, nor left empty.
-
-# Used to mention where you should clone the repo from, default value is Be-Secure
+# used to mention where you should clone the repo from, default value is Be-Secure
 BESMAN_ORG: Be-Secure
 
-#  project/ml model/training dataset
-BESMAN_ARTIFACT_TYPE: project 
+# project/ml model/training dataset
+BESMAN_ARTIFACT_TYPE: project
 
 # Name of the artifact under assessment.
-BESMAN_ARTIFACT_NAME: guardrails
+BESMAN_ARTIFACT_NAME: llama_index
 
 # Version of the artifact under assessment.
-BESMAN_ARTIFACT_VERSION: v0.5.9
-
-# Original source URL for the project under test.
-BESMAN_ARTIFACT_ORIGIN_URL: https://github.com/Be-Secure/guardrails
+BESMAN_ARTIFACT_VERSION: v0.12.44
 
 # Source code url of the artifact under assessment.
-BESMAN_ARTIFACT_URL: https://github.com/Be-Secure/guardrails
+BESMAN_ARTIFACT_URL: https://github.com/Be-Secure/llama_index
 
 # This variable stores the name of the environment file.
-BESMAN_ENV_NAME: guardrails-RT-env
+BESMAN_ENV_NAME: llama_index-RT-env
 
 # The path where you wish to clone the source code of the artifact under assessment.
 # If you wish to change the clone path, provide the complete path.
