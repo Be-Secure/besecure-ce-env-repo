@@ -18,6 +18,9 @@ BESMAN_ARTIFACT_NAME: HWC-API
 # Version of artifact under assessment.
 BESMAN_ARTIFACT_VERSION: develop
 
+# Original source URL for the project under test.
+BESMAN_ARTIFACT_ORIGIN_URL: https://github.com/Be-Secure/HWC-API
+
 # Source code url of artifact under assessment.
 BESMAN_ARTIFACT_URL: https://github.com/Be-Secure/HWC-API
 

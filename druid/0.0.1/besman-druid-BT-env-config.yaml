@@ -18,6 +18,9 @@ BESMAN_ARTIFACT_NAME: druid
 # Version of artifact under assessment.
 BESMAN_ARTIFACT_VERSION: druid-27.0.0
 
+# Original source URL for the project under test.
+BESMAN_ARTIFACT_ORIGIN_URL: https://github.com/Be-Secure/druid
+
 # Source code url of artifact under assessment.
 BESMAN_ARTIFACT_URL: https://github.com/Be-Secure/druid
 

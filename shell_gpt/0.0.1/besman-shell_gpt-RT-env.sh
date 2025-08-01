@@ -159,7 +159,7 @@ EOL
                 ;;
             fossology)
                 docker ps -aq -f name=fossology-$BESMAN_ARTIFACT_NAME && docker stop fossology-$BESMAN_ARTIFACT_NAME && docker rm -f fossology-$BESMAN_ARTIFACT_NAME
-                docker create --name fossology-$BESMAN_ARTIFACT_NAME -p 8081:80 fossology/fossology && docker start fossology-$BESMAN_ARTIFACT_NAME
+                docker create --name fossology-$BESMAN_ARTIFACT_NAME -p 9001:80 fossology/fossology && docker start fossology-$BESMAN_ARTIFACT_NAME
                 ;;
             spdx-sbom-generator)
                 curl -L -o $BESMAN_ARTIFACT_DIR/spdx-sbom-generator.tar.gz "$BESMAN_SPDX_SBOM_ASSET_URL"

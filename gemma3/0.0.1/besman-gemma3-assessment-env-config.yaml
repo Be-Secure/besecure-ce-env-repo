@@ -18,6 +18,9 @@ BESMAN_ARTIFACT_PROVIDER: Ollama
 # Name of the artifact under assessment.
 BESMAN_ARTIFACT_NAME: gemma3 #***
 
+# Original source URL for the project under test.
+BESMAN_ARTIFACT_ORIGIN_URL: https://github.com/Be-Secure/gemma3:1b
+
 # Artifact URL.
 BESMAN_ARTIFACT_URL: https://ollama.com/library/gemma3:1b
 
@@ -25,7 +28,7 @@ BESMAN_ARTIFACT_URL: https://ollama.com/library/gemma3:1b
 BESMAN_ARTIFACT_VERSION: 1b
 
 # This variable stores the name of the environment file.
-BESMAN_ENV_NAME: gemma3-llmSecurityBenchmark-env #***
+BESMAN_ENV_NAME: gemma3-assessment-env #***
 
 # The path where you wish to clone the source code of the artifact under assessment.
 # If you wish to change the clone path, provide the complete path.
@@ -48,6 +51,8 @@ BESMAN_ASSESSMENT_DATASTORE_URL: https://github.com/Be-Secure/besecure-ml-assess
 
 BESMAN_CYBERSECEVAL_DATASETS: "$BESMAN_TOOL_PATH/CybersecurityBenchmarks/datasets"
 
+BESMAN_RESULTS_PATH: "$BESMAN_TOOL_PATH/CybersecurityBenchmarks/executions/$BESMAN_ARTIFACT_NAME:$BESMAN_ARTIFACT_VERSION"
+
 BESMAN_NUM_TEST_CASES_MITRE: 1000
 BESMAN_NUM_TEST_CASES_AUTOCOMPLETE: 1916
 BESMAN_NUM_TEST_CASES_INSTRUCT: 1916
@@ -55,5 +60,3 @@ BESMAN_NUM_TEST_CASES_FRR: 750
 BESMAN_NUM_TEST_CASES_INTERPRETER: 500
 BESMAN_NUM_TEST_CASES_PROMPT_INJECTION: 252
 BESMAN_NUM_TEST_CASES_SPEAR_PHISHING: 856
-
-BESMAN_RESULTS_PATH: "$BESMAN_TOOL_PATH/CybersecurityBenchmarks/executions/$BESMAN_ARTIFACT_NAME:$BESMAN_ARTIFACT_VERSION"

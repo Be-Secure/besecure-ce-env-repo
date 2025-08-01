@@ -43,8 +43,7 @@ Here are the types of environments
 
 - **Red Team environemnts(RT env)** - The env installs all the tools/utilities required for a security analyst to perform vulnerability assessment, create exploits etc.
 - **Blue Team environment(BT env)** - The env would contain the instruction to install the tools required for a security professional to perform BT activities such as vulnerability remediation and patching.
-- **Assessment environment** - The assessment environment is a common environment that is used to perform assessments on a wide range of projects.
-
+- **Assessment environment** - The assessment environment is environment that is used to perform assessments only.
 
 [Learn more](./README.md)
 
@@ -102,6 +101,13 @@ Learn about the branching strategy that we follow from [here](./CONTRIBUTING.md#
 
             bes create -env fastjson-RT-env -V 0.0.1
 
+The create command will ask for the path of locally cloned project \(The repo is supposed to be cloned locally already by developer\) and would create a new env folder and environment template files into that.
+
+4. Update the code in enviroment template files as required.
+
+5. Test the changes locally. Once changes are done push the changes to github repo forked in your namespace.
+
+6. Raise a PR to get the repo merged to develop branch of Be-Secure environments repo.
 
 ## Explaining the environment script(ansible role based)
 
@@ -244,6 +250,24 @@ BESMAN_LAB_TYPE: Organization
 
 # Name of the owner of the lab. Default is Be-Secure.
 BESMAN_LAB_NAME: Be-Secure
+
+# Mode for scorecard cli or github action.
+BESMAN_SCORECARD_ASSESSMENT_MODE: "cli"         
+# Ports for containerized tools
+BESMAN_SONARQUBE_PORT: 9000
+BESMAN_FOSSOLOGY_PORT: 9001
+ 
+# SPDX SBOM Generator release asset URL (GitHub or other source)
+BESMAN_SPDX_SBOM_ASSET_URL: "https://github.com/opensbom-generator/spdx-sbom-generator/releases/download/v0.0.15/spdx-sbom-generator-v0.0.15-linux-amd64.tar.gz"
+ 
+# Scorecard binary url
+BESMAN_SCORECARD_ASSET_URL: "https://github.com/ossf/scorecard/releases/download/v5.1.1/scorecard_5.1.1_linux_amd64.tar.gz"
+ 
+# Version of sonar scanner
+BESMAN_SONAR_SCANNER_VERSION: "7.1.0.4889"
+ 
+# Sonar scanner binary url
+BESMAN_SONAR_SCANNER_ASSET_URL: "https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-$BESMAN_SONAR_SCANNER_VERSION-linux-x64.zip?_gl=1*yhd721*_gcl_au*MTc0NjUwODg1Ny4xNzQ3NjI3MDMy*_ga*MTU3MTQ2MDE3MC4xNzQ3NjI3MDMx*_ga_9JZ0GZ5TC6*czE3NDc2NjA0NDckbzMkZzEkdDE3NDc2NjA0NTYkajUyJGwwJGgwJGQ4RzFONHBmRWk2OHRLakdUYl9QU1JON1p5RU1xUnNsSHhB"
 
 # This is the local dir where we store the assessment reports. Default is home.
 BESMAN_ASSESSMENT_DATASTORE_DIR: $HOME/besecure-assessment-datastore
@@ -420,6 +444,24 @@ BESMAN_LAB_TYPE: Organization
 
 # Name of the owner of the lab. Default is Be-Secure.
 BESMAN_LAB_NAME: Be-Secure
+
+# Mode for scorecard cli or github action.
+BESMAN_SCORECARD_ASSESSMENT_MODE: "cli"         
+# Ports for containerized tools
+BESMAN_SONARQUBE_PORT: 9000
+BESMAN_FOSSOLOGY_PORT: 9001
+ 
+# SPDX SBOM Generator release asset URL (GitHub or other source)
+BESMAN_SPDX_SBOM_ASSET_URL: "https://github.com/opensbom-generator/spdx-sbom-generator/releases/download/v0.0.15/spdx-sbom-generator-v0.0.15-linux-amd64.tar.gz"
+ 
+# Scorecard binary url
+BESMAN_SCORECARD_ASSET_URL: "https://github.com/ossf/scorecard/releases/download/v5.1.1/scorecard_5.1.1_linux_amd64.tar.gz"
+ 
+# Version of sonar scanner
+BESMAN_SONAR_SCANNER_VERSION: "7.1.0.4889"
+ 
+# Sonar scanner binary url
+BESMAN_SONAR_SCANNER_ASSET_URL: "https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-$BESMAN_SONAR_SCANNER_VERSION-linux-x64.zip?_gl=1*yhd721*_gcl_au*MTc0NjUwODg1Ny4xNzQ3NjI3MDMy*_ga*MTU3MTQ2MDE3MC4xNzQ3NjI3MDMx*_ga_9JZ0GZ5TC6*czE3NDc2NjA0NDckbzMkZzEkdDE3NDc2NjA0NTYkajUyJGwwJGgwJGQ4RzFONHBmRWk2OHRLakdUYl9QU1JON1p5RU1xUnNsSHhB"
 
 # This is the local dir where we store the assessment reports. Default is home.
 BESMAN_ASSESSMENT_DATASTORE_DIR: $HOME/besecure-assessment-datastore

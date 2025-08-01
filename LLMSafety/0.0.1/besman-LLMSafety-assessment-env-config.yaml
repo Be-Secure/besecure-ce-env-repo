@@ -15,12 +15,44 @@ BESMAN_ARTIFACT_TYPE: model
 # BESMAN_ARTIFACT_NAME - name of the artifact under assessment.
 BESMAN_ARTIFACT_NAME:  #***
 
-
 # Version of the artifact under assessment/parameter size of model.
 BESMAN_ARTIFACT_VERSION: 
 
 # Source code url of the artifact under assessment.
-BESMAN_ARTIFACT_URL: https://ollama.com/library/deepseek-r1 #***
+BESMAN_ARTIFACT_URL: #***
+
+# Provider of the model under assessment: Ollama | HuggingFace
+BESMAN_ARTIFACT_PROVIDER: Ollama
+
+# The repo id of the LLM under assessment. Only use when the BESMAN_ARTIFACT_PROVIDER is huggingface.
+# Otherwise comment it.
+BESMAN_MODEL_REPO_NAMESPACE: #***
+
+# Name of the provider of Judge LLM: AWSBedrock | Ollama | HuggingFace
+BESMAN_JUDGE_LLM_PROVIDER: AWSBedrock
+
+# Name of the judge llm
+BESMAN_JUDGE_LLM_NAME: mistral
+
+# Version of the judge llm
+BESMAN_JUDGE_LLM_VERSION: "mistral-7b-instruct-v0:2"
+
+# The repo id of the judge llm. Use only when when the BESMAN_JUDGE_LLM_PROVIDER is HuggingFace
+# Otherwise comment it.
+BESMAN_JUDGE_MODEL_REPO_NAMESPACE:
+
+# Name of the expansion llm
+BESMAN_EXPANSION_LLM_NAME: mistral
+
+# Version/parameter size of the expansion llm"
+BESMAN_EXPANSION_LLM_VERSION: "mistral-7b-instruct-v0:2"
+
+# Expansion llm provider: AWSBedrock | Ollama | HuggingFace
+BESMAN_EXPANSION_LLM_PROVIDER: AWSBedrock
+
+# Repo id of expansion llm. Use only when when the BESMAN_EXPANSION_LLM_PROVIDER is HuggingFace.
+# Otherwise comment it.
+BESMAN_EXPANSION_LLM_REPO_NAMESPACE:
 
 # This variable stores the name of the environment file.
 BESMAN_ENV_NAME: LLMSafetyAssessment-env #***
@@ -28,12 +60,11 @@ BESMAN_ENV_NAME: LLMSafetyAssessment-env #***
 # The branch of the repo to be used for the assessment.
 BESMAN_TOOL_BRANCH: "Be-Secure"
 
-# The path where you wish to clone the source code of the artifact under assessment.
-# If you wish to change the clone path, provide the complete path.
-# BESMAN_ARTIFACT_DIR: $HOME/$BESMAN_ARTIFACT_NAME #***
+# The url from where you clone PurpleLlama to install
+BESMAN_PURPLELLAMA_URL: https://github.com/Be-Secure/PurpleLlama.git
 
 # The path where we download the assessment and other required tools during installation.
-BESMAN_TOOL_PATH: "$HOME/PurpleLlama" #***
+BESMAN_TOOL_PATH: "$HOME" #***
 
 # This variable indicates the individual's lab affiliation
 BESMAN_LAB_TYPE: Organization #***
@@ -47,15 +78,11 @@ BESMAN_ASSESSMENT_DATASTORE_DIR: $HOME/besecure-ml-assessment-datastore #***
 # The remote repo where we store the assessment reports.
 BESMAN_ASSESSMENT_DATASTORE_URL: https://github.com/Be-Secure/besecure-ml-assessment-datastore #***
 
-
 # Path to results and logs
-BESMAN_RESULTS_PATH: "$BESMAN_TOOL_PATH/CybersecurityBenchmarks/executions/$BESMAN_ARTIFACT_NAME:$BESMAN_ARTIFACT_VERSION"
+BESMAN_RESULTS_PATH: "$BESMAN_TOOL_PATH/PurpleLlama/CybersecurityBenchmarks/executions/$BESMAN_ARTIFACT_NAME:$BESMAN_ARTIFACT_VERSION"
 
 # Path to the dataset used for the assessment.
-BESMAN_CYBERSECEVAL_DATASETS: "$BESMAN_TOOL_PATH/CybersecurityBenchmarks/datasets"
-
-# Provider of the model under assessment: ollama | huggingface
-BESMAN_ARTIFACT_PROVIDER: ollama
+BESMAN_CYBERSECEVAL_DATASETS: "$BESMAN_TOOL_PATH/PurpleLlama/CybersecurityBenchmarks/datasets"
 
 # Number of test cases to be executed for different benchmarking test.
 # Given below is the total count from each test case.
@@ -67,5 +94,15 @@ BESMAN_NUM_TEST_CASES_INTERPRETER: 500
 BESMAN_NUM_TEST_CASES_PROMPT_INJECTION: 252
 BESMAN_NUM_TEST_CASES_SPEAR_PHISHING: 856
 
+# List of comma separated probes(categories) for assessment. Remove the ones you do not wish to run.
+BESMAN_GARAK_PROBES: leakreplay,donotanswer.DiscriminationExclusionToxicityHatefulOffensive,donotanswer.InformationHazard,donotanswer.MaliciousUses,donotanswer.MisinformationHarms,exploitation,misleading,lmrc,malwaregen,packagehallucination,promptinject,realtoxicityprompts,xss
 
+# List of comma separated tools for assessment. Remove the ones you do not wish to run.
+# Default - cyberseceval,modelbench,garak,codeshield
+BESMAN_ASSESSMENT_TOOLS: cyberseceval,modelbench,garak
 
+# Url from where we install the modelbench
+BESMAN_MODELBENCH_URL: https://github.com/Be-Secure/modelbench
+
+# Url from where we install the garak
+BESMAN_GARAK_URL: https://github.com/Be-Secure/garak

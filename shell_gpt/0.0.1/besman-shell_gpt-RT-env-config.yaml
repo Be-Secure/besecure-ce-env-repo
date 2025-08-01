@@ -18,6 +18,9 @@ BESMAN_ARTIFACT_NAME: shell_gpt
 # Version of artifact under assessment.
 BESMAN_ARTIFACT_VERSION: 1.4.4
 
+# Original source URL for the project under test.
+BESMAN_ARTIFACT_ORIGIN_URL: https://github.com/Be-Secure/shell_gpt
+
 # Source code URL of artifact under assessment.
 BESMAN_ARTIFACT_URL: https://github.com/Be-Secure/shell_gpt
 
@@ -47,3 +50,7 @@ BESMAN_ASSESSMENT_TOOLS: scorecard,criticality_score,sonarqube,spdx-sbom-generat
 
 # SPDX SBOM Asset URL
 BESMAN_SPDX_SBOM_ASSET_URL: https://github.com/opensbom-generator/spdx-sbom-generator/releases/download/v0.0.15/spdx-sbom-generator-v0.0.15-linux-amd64.tar.gz
+
+#Scorecard binary url
+BESMAN_SCORECARD_ASSET_URL: "https://github.com/ossf/scorecard/releases/download/v5.1.1/scorecard_5.1.1_linux_amd64.tar.gz"
+

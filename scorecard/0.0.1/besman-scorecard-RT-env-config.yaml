@@ -16,6 +16,9 @@ BESMAN_ARTIFACT_NAME: scorecard
 # Version of the artifact under assessment.
 BESMAN_ARTIFACT_VERSION: 5.0.0
 
+# Original source URL for the project under test.
+BESMAN_ARTIFACT_ORIGIN_URL: https://github.com/Be-Secure/scorecard
+
 # Source code url of the artifact under assessment.
 BESMAN_ARTIFACT_URL: https://github.com/Be-Secure/scorecard
 
@@ -34,6 +37,24 @@ BESMAN_LAB_TYPE: Organization
 
 # Name of the lab. Default is Be-Secure. This variable indicates the individual's lab affiliation
 BESMAN_LAB_NAME: Be-Secure
+
+# Mode for scorecard cli or github action.
+BESMAN_SCORECARD_ASSESSMENT_MODE: "cli"         
+# Ports for containerized tools
+BESMAN_SONARQUBE_PORT: 9000
+BESMAN_FOSSOLOGY_PORT: 9001
+ 
+# SPDX SBOM Generator release asset URL (GitHub or other source)
+BESMAN_SPDX_SBOM_ASSET_URL: "https://github.com/opensbom-generator/spdx-sbom-generator/releases/download/v0.0.15/spdx-sbom-generator-v0.0.15-linux-amd64.tar.gz"
+ 
+# Scorecard binary url
+BESMAN_SCORECARD_ASSET_URL: "https://github.com/ossf/scorecard/releases/download/v5.1.1/scorecard_5.1.1_linux_amd64.tar.gz"
+ 
+# Version of sonar scanner
+BESMAN_SONAR_SCANNER_VERSION: "7.1.0.4889"
+ 
+# Sonar scanner binary url
+BESMAN_SONAR_SCANNER_ASSET_URL: "https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-$BESMAN_SONAR_SCANNER_VERSION-linux-x64.zip?_gl=1*yhd721*_gcl_au*MTc0NjUwODg1Ny4xNzQ3NjI3MDMy*_ga*MTU3MTQ2MDE3MC4xNzQ3NjI3MDMx*_ga_9JZ0GZ5TC6*czE3NDc2NjA0NDckbzMkZzEkdDE3NDc2NjA0NTYkajUyJGwwJGgwJGQ4RzFONHBmRWk2OHRLakdUYl9QU1JON1p5RU1xUnNsSHhB"
 
 # This is the local dir where we store the assessment reports. Default is home.
 BESMAN_ASSESSMENT_DATASTORE_DIR: $HOME/besecure-assessment-datastore #***

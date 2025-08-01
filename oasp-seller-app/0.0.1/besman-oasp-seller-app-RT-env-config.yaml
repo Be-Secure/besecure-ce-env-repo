@@ -20,6 +20,9 @@ BESMAN_ARTIFACT_NAME: oasp-seller-app #***
 # BESMAN_ARTIFACT_VERSION - version of the artifact under assessment.
 BESMAN_ARTIFACT_VERSION: 0.0.1 #Enter the version of the artifact here. #***
 
+# Original source URL for the project under test.
+BESMAN_ARTIFACT_ORIGIN_URL: https://github.com/Be-Secure/oasp-seller-app
+
 # BESMAN_ARTIFACT_URL - Source code url of the artifact under assessment.
 BESMAN_ARTIFACT_URL: https://github.com/OSSVerse/oasp-seller-app #***
 
@@ -75,3 +78,7 @@ BESMAN_ASSESSMENT_TOOLS: scorecard,criticality_score,sonarqube,fossology,spdx-sb
 # Eg: openjdk_version: 11
 
 BESMAN_SPDX_SBOM_ASSET_URL: https://github.com/opensbom-generator/spdx-sbom-generator/releases/download/v0.0.15/spdx-sbom-generator-v0.0.15-linux-amd64.tar.gz
+
+#Scorecard binary url
+BESMAN_SCORECARD_ASSET_URL: "https://github.com/ossf/scorecard/releases/download/v5.1.1/scorecard_5.1.1_linux_amd64.tar.gz"
+

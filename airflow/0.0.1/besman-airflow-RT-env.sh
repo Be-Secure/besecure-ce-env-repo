@@ -96,6 +96,17 @@ function __besman_install {
             __besman_echo_white "installling tool - $tool : version - $tool_version"
 
             case $tool_name in
+            scorecard)
+               __besman_echo_white "Installing scorecard..."
+                # Create sonarqube-docker container
+                __besman_echo_white "creating scorecard container for env - $BESMAN_ARTIFACT_NAME ..."
+                curl -L -o "$HOME/scorecard_5.1.1_linux_amd64.tar.gz" "$BESMAN_SCORECARD_ASSET_URL"
+tar -xzf "$HOME/scorecard_5.1.1_linux_amd64.tar.gz"
+chmod +x "$HOME/scorecard"
+sudo mv "$HOME/scorecard" /usr/local/bin/
+[[ -f "$HOME/scorecard_5.1.1_linux_amd64.tar.gz" ]] && rm "$HOME/scorecard_5.1.1_linux_amd64.tar.gz"
+                __besman_echo_white "sonarqube installation is done & $BESMAN_ARTIFACT_NAME container is up"
+                ;;
             criticality_score)
                 __besman_echo_white "check for criticality_score"
                 if ! [ -x "$(command -v criticality_score)" ]; then
@@ -133,7 +144,7 @@ function __besman_install {
 
                 # Create fossology-docker container
                 __besman_echo_white "creating fossology container for env - $BESMAN_ARTIFACT_NAME ..."
-                docker create --name fossology-$BESMAN_ARTIFACT_NAME -p 8081:80 fossology/fossology
+                docker create --name fossology-$BESMAN_ARTIFACT_NAME -p 9001:80 fossology/fossology
                 docker start fossology-$BESMAN_ARTIFACT_NAME
 
                 __besman_echo_white "fossology installation is done & $BESMAN_ARTIFACT_NAME container is up"
@@ -145,7 +156,7 @@ function __besman_install {
                 __besman_echo_white "Asset URL - $BESMAN_SPDX_SBOM_ASSET_URL"
                 # Download the asset
                 __besman_echo_white "Downloading the asset ..."
-                curl -L -o $BESMAN_ARTIFACT_DIR/spdx-sbom-generator-v0.0.15-linux-amd64.tar.gz "$BESMAN_SPDX_SBOM_ASSET_URL"
+                curl -L -o $BESMAN_TOOL_PATH/spdx-sbom-generator-v0.0.15-linux-amd64.tar.gz "$BESMAN_SPDX_SBOM_ASSET_URL"
 
                 # Check if the download was successful
                 if [ $? -eq 0 ]; then
@@ -153,7 +164,7 @@ function __besman_install {
 
                     # Extract the downloaded file
                     __besman_echo_white "Extracting the asset..."
-                    cd $BESMAN_ARTIFACT_DIR
+                    cd $BESMAN_TOOL_PATH
                     tar -xzf spdx-sbom-generator-v0.0.15-linux-amd64.tar.gz
                     __besman_echo_white "Extraction completed."
                     cd -
@@ -197,11 +208,15 @@ function __besman_uninstall {
             __besman_echo_white "Uninstallling tool - $tool : version - $tool_version"
 
             case $tool_name in
+            scorecard)
+                __besman_echo_white "Uninstalling scorecard..."
+sudo rm /usr/local/bin/scorecard
+                __besman_echo_white "scorecard uninstallation is done"
+                ;;
             criticality_score)
                 __besman_echo_white "check for criticality_score"
                 if [ -x "$(command -v criticality_score)" ]; then
-                    __besman_echo_white "uninstalling criticality_score ..."
-                    go install github.com/ossf/criticality_score/v2/cmd/criticality_score@none
+                    __besman_echo_white "uninstalling criticality_score ..."                    go install github.com/ossf/criticality_score/v2/cmd/criticality_score@none
 
 		    [[ -f $GOPATH/bin/criticality_score ]] && rm -rf $GOPATH/bin/criticality_score
 
@@ -237,8 +252,8 @@ function __besman_uninstall {
                 __besman_echo_white "Asset URL - $BESMAN_SPDX_SBOM_ASSET_URL"
                 # Download the asset
                 __besman_echo_white "Downloading the asset ..."
-                curl -L -o $BESMAN_ARTIFACT_DIR/spdx-sbom-generator-v0.0.15-linux-amd64.tar.gz "$BESMAN_SPDX_SBOM_ASSET_URL"
-                [[ -f $BESMAN_ARTIFACT_DIR/spdx-sbom-generator-v0.0.15-linux-amd64.tar.gz]] && rm -f $BESMAN_ARTIFACT_DIR/spdx-sbom-generator-v0.0.15-linux-amd64.tar.gz
+                curl -L -o $BESMAN_TOOL_PATH/spdx-sbom-generator-v0.0.15-linux-amd64.tar.gz "$BESMAN_SPDX_SBOM_ASSET_URL"
+                [[ -f $BESMAN_TOOL_PATH/spdx-sbom-generator-v0.0.15-linux-amd64.tar.gz]] && rm -f $BESMAN_TOOL_PATH/spdx-sbom-generator-v0.0.15-linux-amd64.tar.gz
                 [[ -d $BESMAN_ARTIFACT_DIR/spdx-sbom-generator* ]] && rm -rf $BESMAN_ARTIFACT_DIR/spdx-sbom-generator*
 
                 __besman_echo_white "spdx-sbom-generator uninstallation is done."
