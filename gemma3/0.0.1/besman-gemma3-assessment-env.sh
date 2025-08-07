@@ -94,7 +94,7 @@ function __besman_install {
         __besman_echo_white "Cloning Repository PurpleLlama"
         __besman_repo_clone "$BESMAN_ORG" "PurpleLlama" "$BESMAN_TOOL_PATH" || return 1
     else
-        __besman_echo_green "Repository PurpleLlama already exists at $BESMAN_TOOL_PATH/PurpleLlama. Skipping clone."
+        __besman_echo_green "Repository PurpleLlama already exists at $BESMAN_TOOL_PATH/$BESMAN_LLM_SEC_BENCH. Skipping clone."
     fi
 
     # setup CybersecurityBenchmarks using PurpleLlama
@@ -138,7 +138,7 @@ function __besman_uninstall {
     rm -rf "$BESMAN_ASSESSMENT_DATASTORE_DIR"
 
     __besman_echo_white "[INFO] Removing PurpleLlama repo..."
-    rm -rf "$BESMAN_TOOL_PATH/PurpleLlama"
+    rm -rf "$BESMAN_TOOL_PATH/$BESMAN_LLM_SEC_BENCH"
 
     __besman_echo_white "[INFO] Removing CybersecurityBenchmarks virtual environment..."
     rm -rf ~/.venvs/CybersecurityBenchmarks
@@ -172,9 +172,9 @@ function __besman_update {
     __besman_echo_green "[SUCCESS] boto3 updated successfully."
 
     # Update PurpleLlama repo if it exists
-    if [[ -d "$BESMAN_TOOL_PATH/PurpleLlama" ]]; then
+    if [[ -d "$BESMAN_TOOL_PATH/$BESMAN_LLM_SEC_BENCH" ]]; then
         __besman_echo_white "[INFO] Updating PurpleLlama repository..."
-        cd "$BESMAN_TOOL_PATH/PurpleLlama" && git pull
+        cd "$BESMAN_TOOL_PATH/$BESMAN_LLM_SEC_BENCH" && git pull
         [[ $? -ne 0 ]] && __besman_echo_red "[ERROR] Failed to update PurpleLlama repo." && return 1
         __besman_echo_green "[SUCCESS] PurpleLlama updated successfully."
     else
@@ -261,7 +261,7 @@ function __besman_validate {
     fi
 
     # Validate PurpleLlama repo
-    if [[ ! -d "$BESMAN_TOOL_PATH/PurpleLlama" ]]; then
+    if [[ ! -d "$BESMAN_TOOL_PATH/$BESMAN_LLM_SEC_BENCH" ]]; then
         __besman_echo_red "[ERROR] PurpleLlama repository is missing."
         missing_dependencies+=("PurpleLlama")
     else

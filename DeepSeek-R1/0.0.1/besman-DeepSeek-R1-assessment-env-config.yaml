@@ -31,7 +31,10 @@ BESMAN_TOOL_BRANCH: "Be-Secure"
 # BESMAN_ARTIFACT_DIR: $HOME/$BESMAN_ARTIFACT_NAME #***
 
 # The path where we download the assessment and other required tools during installation.
-BESMAN_TOOL_PATH: "$HOME/PurpleLlama" #***
+BESMAN_TOOL_PATH: "$HOME"
+BESMAN_LLM_SEC_BENCH: "PurpleLlama"
+BESMAN_LLM_SAFETY_BENCH: "modelbench"
+BESMAN_LLM_VULN_BENCH: "garak"
 
 # This variable indicates the individual's lab affiliation
 BESMAN_LAB_TYPE: Organization #***

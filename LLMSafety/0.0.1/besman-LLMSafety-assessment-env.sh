@@ -45,16 +45,16 @@ function __besman_install {
     for t in "${tools[@]}"; do
         case $t in
         cyberseceval)
-            if [[ ! -d "$BESMAN_TOOL_PATH/PurpleLlama" && "$BESMAN_VCS" == "git" ]]; then
-                git clone "$BESMAN_PURPLELLAMA_URL" "$BESMAN_TOOL_PATH/PurpleLlama"
+            if [[ ! -d "$BESMAN_TOOL_PATH/$BESMAN_LLM_SEC_BENCH" && "$BESMAN_VCS" == "git" ]]; then
+                git clone "$BESMAN_PURPLELLAMA_URL" "$BESMAN_TOOL_PATH/$BESMAN_LLM_SEC_BENCH"
                 [[ $? -ne 0 ]] && __besman_echo_red "Failed to clone the repo" && return 1
-            elif [[ ! -d "$BESMAN_TOOL_PATH/PurpleLlama" && "$BESMAN_VCS" == "gh" ]]; then
+            elif [[ ! -d "$BESMAN_TOOL_PATH/$BESMAN_LLM_SEC_BENCH" && "$BESMAN_VCS" == "gh" ]]; then
                 __besman_echo_yellow "gh is not supported in this env. Please clone this url manually - $BESMAN_PURPLELLAMA_URL"
             fi
             __besman_echo_white "Installing Cybersecurity Benchmarks..."
             python3 -m venv ~/.venvs/CybersecurityBenchmarks
             source ~/.venvs/CybersecurityBenchmarks/bin/activate
-            cd "$BESMAN_TOOL_PATH/PurpleLlama" || { __besman_echo_red "Could not move to $BESMAN_TOOL_PATH" && return 1; }
+            cd "$BESMAN_TOOL_PATH/$BESMAN_LLM_SEC_BENCH" || { __besman_echo_red "Could not move to $BESMAN_TOOL_PATH" && return 1; }
             git checkout "$BESMAN_TOOL_BRANCH"
             pip3 install -r CybersecurityBenchmarks/requirements.txt
             python3 -m pip install torch boto3 transformers openai
@@ -97,13 +97,13 @@ function __besman_install {
             pipx ensurepath
             pipx install poetry
             which poetry || { __besman_echo_red "Poetry installation failed" && return 1; }
-            if [[ ! -d "$BESMAN_TOOL_PATH/modelbench" && "$BESMAN_VCS" == "git" ]]; then
-                git clone "$BESMAN_MODELBENCH_URL" "$BESMAN_TOOL_PATH/modelbench"
+            if [[ ! -d "$BESMAN_TOOL_PATH/$BESMAN_LLM_SAFETY_BENCH" && "$BESMAN_VCS" == "git" ]]; then
+                git clone "$BESMAN_MODELBENCH_URL" "$BESMAN_TOOL_PATH/$BESMAN_LLM_SAFETY_BENCH"
                 [[ $? -ne 0 ]] && __besman_echo_red "Failed to clone the repo" && return 1
-            elif [[ ! -d "$BESMAN_TOOL_PATH/modelbench" && "$BESMAN_VCS" == "gh" ]]; then
+            elif [[ ! -d "$BESMAN_TOOL_PATH/$BESMAN_LLM_SAFETY_BENCH" && "$BESMAN_VCS" == "gh" ]]; then
                 __besman_echo_yellow "gh is not supported in this env. Please clone this url manually - $BESMAN_MODELBENCH_URL"
             fi
-            cd "$BESMAN_TOOL_PATH/modelbench" || { __besman_echo_red "Could not move to $BESMAN_TOOL_PATH/modelbench" && return 1; }
+            cd "$BESMAN_TOOL_PATH/$BESMAN_LLM_SAFETY_BENCH" || { __besman_echo_red "Could not move to $BESMAN_TOOL_PATH/$BESMAN_LLM_SAFETY_BENCH" && return 1; }
             source ~/.venvs/modelbench_env/bin/activate
             poetry lock
             poetry install
@@ -137,13 +137,13 @@ function __besman_install {
             __besman_echo_white "Creating conda environment for garak"
             conda create --name garak "python>=3.10,<=3.12" -y
             conda activate garak
-            if [[ ! -d "$BESMAN_TOOL_PATH/garak" && "$BESMAN_VCS" == "git" ]]; then
-                git clone "$BESMAN_GARAK_URL" "$BESMAN_TOOL_PATH/garak"
+            if [[ ! -d "$BESMAN_TOOL_PATH/$BESMAN_LLM_VULN_BENCH" && "$BESMAN_VCS" == "git" ]]; then
+                git clone "$BESMAN_GARAK_URL" "$BESMAN_TOOL_PATH/$BESMAN_LLM_VULN_BENCH"
                 [[ $? -ne 0 ]] && __besman_echo_red "Failed to clone the repo" && return 1
-            elif [[ ! -d "$BESMAN_TOOL_PATH/garak" && "$BESMAN_VCS" == "gh" ]]; then
+            elif [[ ! -d "$BESMAN_TOOL_PATH/$BESMAN_LLM_VULN_BENCH" && "$BESMAN_VCS" == "gh" ]]; then
                 __besman_echo_yellow "gh is not supported in this env. Please clone this url manually - $BESMAN_GARAK_URL"
             fi
-            cd "$BESMAN_TOOL_PATH/garak" || { __besman_echo_red "Could not move to $BESMAN_TOOL_PATH" && return 1; }
+            cd "$BESMAN_TOOL_PATH/$BESMAN_LLM_VULN_BENCH" || { __besman_echo_red "Could not move to $BESMAN_TOOL_PATH" && return 1; }
             python3 -m pip install -e .
             garak --list_probes
             [[ $? -ne 0 ]] && __besman_echo_red "Failed to install garak" && return 1
@@ -210,7 +210,7 @@ function __besman_uninstall {
         cyberseceval)
             __besman_echo_white "Uninstalling CybersecurityBenchmarks..."
             source ~/.venvs/CybersecurityBenchmarks/bin/activate
-            cd "$BESMAN_TOOL_PATH/PurpleLlama" || { __besman_echo_red "Could not move to $BESMAN_TOOL_PATH/PurpleLlama" && return 1; }
+            cd "$BESMAN_TOOL_PATH/$BESMAN_LLM_SEC_BENCH" || { __besman_echo_red "Could not move to $BESMAN_TOOL_PATH/$BESMAN_LLM_SEC_BENCH" && return 1; }
             python3 -m pip uninstall -y -r CybersecurityBenchmarks/requirements.txt
             [[ $? -ne 0 ]] && __besman_echo_red "Failed to uninstall CybersecurityBenchmarks" && return 1
             python3 -m pip uninstall torch boto3 transformers openai -y
@@ -232,7 +232,7 @@ function __besman_uninstall {
         modelbench)
             __besman_echo_white "Uninstalling modelbench..."
             source ~/.venvs/modelbench_env/bin/activate
-            cd "$BESMAN_TOOL_PATH/modelbench" || { __besman_echo_red "Could not move to $BESMAN_TOOL_PATH/modelbench" && return 1; }
+            cd "$BESMAN_TOOL_PATH/$BESMAN_LLM_SAFETY_BENCH" || { __besman_echo_red "Could not move to $BESMAN_TOOL_PATH/$BESMAN_LLM_SAFETY_BENCH" && return 1; }
             rm poetry.lock
             deactivate
             [[ -d ~/.venvs/modelbench_env ]] && rm -rf ~/.venvs/modelbench_env
@@ -243,7 +243,7 @@ function __besman_uninstall {
             __besman_echo_white "Uninstalling garak..."
             source /opt/conda/etc/profile.d/conda.sh
             conda activate garak
-            cd "$BESMAN_TOOL_PATH/garak" || { __besman_echo_red "Could not move to $BESMAN_TOOL_PATH/garak" && return 1; }
+            cd "$BESMAN_TOOL_PATH/$BESMAN_LLM_VULN_BENCH" || { __besman_echo_red "Could not move to $BESMAN_TOOL_PATH/$BESMAN_LLM_VULN_BENCH" && return 1; }
             python3 -m pip uninstall -y garak
             conda deactivate
             conda env remove -n garak -y
@@ -271,9 +271,9 @@ function __besman_uninstall {
     [[ -d ~/.venvs/codeshield_env ]] && rm -rf ~/.venvs/codeshield_env
     [[ -d ~/.venvs/CybersecurityBenchmarks ]] && rm -rf ~/.venvs/CybersecurityBenchmarks
 
-    [[ -d "$BESMAN_TOOL_PATH/modelbench" ]] && rm -rf "$BESMAN_TOOL_PATH/modelbench"
-    [[ -d "$BESMAN_TOOL_PATH/PurpleLlama" ]] && rm -rf "$BESMAN_TOOL_PATH/PurpleLlama"
-    [[ -d "$BESMAN_TOOL_PATH/garak" ]] && rm -rf "$BESMAN_TOOL_PATH/garak"
+    [[ -d "$BESMAN_TOOL_PATH/$BESMAN_LLM_SAFETY_BENCH" ]] && rm -rf "$BESMAN_TOOL_PATH/$BESMAN_LLM_SAFETY_BENCH"
+    [[ -d "$BESMAN_TOOL_PATH/$BESMAN_LLM_SEC_BENCH" ]] && rm -rf "$BESMAN_TOOL_PATH/$BESMAN_LLM_SEC_BENCH"
+    [[ -d "$BESMAN_TOOL_PATH/$BESMAN_LLM_VULN_BENCH" ]] && rm -rf "$BESMAN_TOOL_PATH/$BESMAN_LLM_VULN_BENCH"
     cd "$HOME"
 }
 
@@ -284,7 +284,7 @@ function __besman_update {
         case $t in
         cyberseceval)
             __besman_echo_white "Updating CybersecurityBenchmarks..."
-            cd "$BESMAN_TOOL_PATH/PurpleLlama" || { __besman_echo_red "Could not move to $BESMAN_TOOL_PATH/PurpleLlama" && return 1; }
+            cd "$BESMAN_TOOL_PATH/$BESMAN_LLM_SEC_BENCH" || { __besman_echo_red "Could not move to $BESMAN_TOOL_PATH/$BESMAN_LLM_SEC_BENCH" && return 1; }
             git checkout "$BESMAN_TOOL_BRANCH"
             if [[ "$BESMAN_VCS" == "git" ]]; then
                 git checkout "$BESMAN_TOOL_BRANCH"
@@ -314,7 +314,7 @@ function __besman_update {
         modelbench)
             cd "$HOME"
             __besman_echo_white "Updating modelbench..."
-            cd "$BESMAN_TOOL_PATH/modelbench" || { __besman_echo_red "Could not move to $BESMAN_TOOL_PATH/modelbench" && return 1; }
+            cd "$BESMAN_TOOL_PATH/$BESMAN_LLM_SAFETY_BENCH" || { __besman_echo_red "Could not move to $BESMAN_TOOL_PATH/$BESMAN_LLM_SAFETY_BENCH" && return 1; }
             if [[ "$BESMAN_VCS" == "git" ]]; then
                 git pull origin main
                 [[ $? -ne 0 ]] && __besman_echo_error "Failed to update modelbench" && return 1
@@ -332,7 +332,7 @@ function __besman_update {
             if [[ "$BESMAN_VCS" == "git" ]]; then
 
                 __besman_echo_white "Updating garak..."
-                cd "$BESMAN_TOOL_PATH/garak" || { __besman_echo_red "Could not move to $BESMAN_TOOL_PATH/garak" && return 1; }
+                cd "$BESMAN_TOOL_PATH/$BESMAN_LLM_VULN_BENCH" || { __besman_echo_red "Could not move to $BESMAN_TOOL_PATH/$BESMAN_LLM_VULN_BENCH" && return 1; }
                 git pull origin main
                 [[ $? -ne 0 ]] && __besman_echo_red "Failed to update garak" && return 1
                 source /opt/conda/etc/profile.d/conda.sh
@@ -376,8 +376,8 @@ function __besman_validate {
     for t in "${tools[@]}"; do
         case $t in
         cyberseceval)
-            if [[ ! -d "$BESMAN_TOOL_PATH/PurpleLlama" ]]; then
-                __besman_echo_red "$BESMAN_TOOL_PATH/PurpleLlama does not exist."
+            if [[ ! -d "$BESMAN_TOOL_PATH/$BESMAN_LLM_SEC_BENCH" ]]; then
+                __besman_echo_red "$BESMAN_TOOL_PATH/$BESMAN_LLM_SEC_BENCH does not exist."
                 flag="true"
             fi
             # Validate CybersecurityBenchmarks venv folder
@@ -425,8 +425,8 @@ function __besman_validate {
             fi
             ;;
         garak)
-            if [[ ! -d "$BESMAN_TOOL_PATH/garak" ]]; then
-                __besman_echo_red "$BESMAN_TOOL_PATH/garak does not exist."
+            if [[ ! -d "$BESMAN_TOOL_PATH/$BESMAN_LLM_VULN_BENCH" ]]; then
+                __besman_echo_red "$BESMAN_TOOL_PATH/$BESMAN_LLM_VULN_BENCH does not exist."
                 flag="true"
             fi
             source /opt/conda/etc/profile.d/conda.sh
@@ -450,8 +450,8 @@ function __besman_validate {
                 __besman_echo_red "poetry is not installed."
                 flag="true"
             fi
-            if [[ ! -d "$BESMAN_TOOL_PATH/modelbench" ]]; then
-                __besman_echo_red "$BESMAN_TOOL_PATH/modelbench does not exist."
+            if [[ ! -d "$BESMAN_TOOL_PATH/$BESMAN_LLM_SAFETY_BENCH" ]]; then
+                __besman_echo_red "$BESMAN_TOOL_PATH/$BESMAN_LLM_SAFETY_BENCH does not exist."
                 flag="true"
             fi
             if [[ ! -f ~/.venvs/modelbench_env/bin/activate ]]; then

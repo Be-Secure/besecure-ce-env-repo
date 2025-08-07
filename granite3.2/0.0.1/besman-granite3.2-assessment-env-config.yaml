@@ -32,7 +32,10 @@ BESMAN_ENV_NAME: granite3.2-assessment-env #***
 # BESMAN_ARTIFACT_DIR: $HOME/$BESMAN_ARTIFACT_NAME #***
 
 # The path where we download the assessment and other required tools during installation.
-BESMAN_TOOL_PATH: "$HOME/PurpleLlama" #***
+BESMAN_TOOL_PATH: "$HOME"
+BESMAN_LLM_SEC_BENCH: "PurpleLlama"
+BESMAN_LLM_SAFETY_BENCH: "modelbench"
+BESMAN_LLM_VULN_BENCH: "garak"
 
 BESMAN_TOOL_BRANCH: "Be-Secure"
 
