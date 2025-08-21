@@ -13,7 +13,7 @@ BESMAN_ORG: Be-Secure #***
 BESMAN_ARTIFACT_TYPE: model
 
 # Model provider
-BESMAN_ARTIFACT_PROVIDER: ollama
+BESMAN_ARTIFACT_PROVIDER: Ollama
 
 # Name of the artifact under assessment.
 BESMAN_ARTIFACT_NAME: gemma3 #***

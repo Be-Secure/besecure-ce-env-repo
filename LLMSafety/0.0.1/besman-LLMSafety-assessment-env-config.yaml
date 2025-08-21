@@ -22,7 +22,7 @@ BESMAN_ARTIFACT_VERSION:
 BESMAN_ARTIFACT_URL: #***
 
 # Provider of the model under assessment: Ollama | HuggingFace
-BESMAN_ARTIFACT_PROVIDER: ollama
+BESMAN_ARTIFACT_PROVIDER: Ollama
 
 # The repo id of the LLM under assessment. Only use when the BESMAN_ARTIFACT_PROVIDER is huggingface.
 # Otherwise comment it.
