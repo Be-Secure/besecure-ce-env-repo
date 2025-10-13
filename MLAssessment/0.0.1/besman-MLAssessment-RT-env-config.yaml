@@ -47,5 +47,5 @@ BESMAN_LAB_NAME: Be-Secure #***
 BESMAN_ASSESSMENT_DATASTORE_DIR: $HOME/besecure-ml-assessment-datastore #***
 
 # The remote repo where we store the assessment reports.
-BESMAN_ASSESSMENT_DATASTORE_URL: https://github.com/Be-Secure/besecure-ml-assessment-datastore #***
+BESMAN_ASSESSMENT_DATASTORE_URL: https://github.com/NeerajK007/besecure-ml-assessment-datastore #***
 

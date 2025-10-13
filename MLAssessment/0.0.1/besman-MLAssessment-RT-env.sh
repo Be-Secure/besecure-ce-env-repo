@@ -89,7 +89,7 @@ function __besman_uninstall {
 
     # Remove virtual environment
     if [ -d "$BESMAN_ENV_DIR/$BESMAN_VENV_NAME" ]; then
-        rm -rf "$BESMAN_ENV_DIR/$BESMAN_VENV_NAME"
+       sudo rm -rf "$BESMAN_ENV_DIR/$BESMAN_VENV_NAME"
         __besman_echo_white "Virtual environment removed."
     else
         __besman_echo_white "Virtual environment does not exist."
