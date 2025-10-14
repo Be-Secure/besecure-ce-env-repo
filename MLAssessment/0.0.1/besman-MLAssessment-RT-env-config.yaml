@@ -10,16 +10,16 @@
 BESMAN_ORG: Be-Secure #***
 
 # project/ml model/training dataset
-BESMAN_ARTIFACT_TYPE: ml #***
+BESMAN_ARTIFACT_TYPE: ml model #***
 
 # Name of the artifact under assessment.
-BESMAN_ARTIFACT_NAME: ml-name #***
+BESMAN_ARTIFACT_NAME: mobilenet_v2 #***
 
 # Version of the artifact under assessment.
-BESMAN_ARTIFACT_VERSION: N/A #***
+BESMAN_ARTIFACT_VERSION: 1.0_224 #***
 
 # Source code url of the artifact under assessment.
-BESMAN_ARTIFACT_URL: ml-source-url #***
+BESMAN_ARTIFACT_URL: https://huggingface.co/google/mobilenet_v2_1.0_224
 
 # This variable stores the name of the environment file.
 BESMAN_ENV_NAME: MLAssessment-RT-env #***
@@ -31,7 +31,7 @@ BESMAN_ARTIFACT_DIR: $HOME/ml-assessment-env #***
 BESMAN_ENV_DIR: $HOME/ml-assessment-env
 BESMAN_VENV_NAME: ml-assessment-venv
 BESMAN_ART_REPO: https://github.com/NeerajK007/adversarial-robustness-toolbox.git
-BESMAN_WT_REPO: https://github.com/NeerajK007/watchtower.git
+BESMAN_WT_REPO: https://github.com/Be-Secure/watchtower.git
 BESMAN_TOOLS_DIR: $BESMAN_ENV_DIR/tools
 
 # The path where we download the assessment and other required tools during installation.
@@ -47,5 +47,5 @@ BESMAN_LAB_NAME: Be-Secure #***
 BESMAN_ASSESSMENT_DATASTORE_DIR: $HOME/besecure-ml-assessment-datastore #***
 
 # The remote repo where we store the assessment reports.
-BESMAN_ASSESSMENT_DATASTORE_URL: https://github.com/NeerajK007/besecure-ml-assessment-datastore #***
+BESMAN_ASSESSMENT_DATASTORE_URL: https://github.com/Be-Secure/besecure-ml-assessment-datastore #***
 

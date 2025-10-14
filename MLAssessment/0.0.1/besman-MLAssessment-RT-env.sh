@@ -33,6 +33,14 @@ function __besman_install {
     check_and_install python3-venv
     check_and_install pytest
 
+    
+    if [ ! -d $BESMAN_ASSESSMENT_DATASTORE_DIR ]; then
+        cd $HOME
+        git clone "$BESMAN_ASSESSMENT_DATASTORE_URL"
+    else
+        __besman_echo_white "ART repository already cloned."
+    fi
+
     # Create environment directory if missing
     __besman_echo_white "Preparing environment directory..."
     mkdir -p "$BESMAN_ENV_DIR"
@@ -58,6 +66,8 @@ function __besman_install {
     pip install ipykernel
     # Register kernel for Jupyter
     python -m ipykernel install --user --name "$BESMAN_VENV_NAME" --display-name "Python ($BESMAN_VENV_NAME)"
+    pip install packaging
+
 
     #-----------------------------------------------
     # Tool - ART

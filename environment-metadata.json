@@ -3429,7 +3429,12 @@
         "status": "Success",
         "timestamp": "2025-07-02T10:36:58"
       },
-      "compatible_playbooks": []
+      "compatible_playbooks": [
+        {
+          "name": "MLSecEvasion-ART",
+          "version": ["0.0.1"]
+        }
+      ]
     },
     {
       "name": "ai_recruitment_agent_team-RT-env",
