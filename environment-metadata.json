@@ -3890,6 +3890,12 @@
                 "timestamp": "2025-10-09T00:00:00"
             },
             "compatible_playbooks": [
+                {
+                    "name": "AgentRT-promptfoo",
+                    "version": [
+                        "0.0.1"
+                    ]
+                }
             ]
         }
     ]
