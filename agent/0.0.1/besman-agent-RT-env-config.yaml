@@ -1,0 +1,70 @@
+---
+# If you wish to update the default configuration values, copy this file and place it under your home dir, under the same name.
+# These variables are used to drive the installation of the environment script.
+# The variables that start with BESMAN_ are converted to environment vars.
+# If you wish to add any other vars that should be used globally, add the var using the below format.
+# BESMAN_<var name>: <value>
+# If you are not using any particular value, remove it or comment it(#).
+#*** - These variables should not be removed, nor left empty.
+
+BESMAN_ORG: "Be-Secure"
+
+# project/model/agent system
+BESMAN_ARTIFACT_TYPE: agent
+
+# BESMAN_ARTIFACT_NAME - name of the AI agent/system under red team assessment.
+BESMAN_ARTIFACT_NAME:  #***
+
+# Version of the AI agent/system under assessment. If not required comment it.
+BESMAN_ARTIFACT_VERSION: 
+
+# Source code url or endpoint of the AI agent/system under assessment.
+BESMAN_ARTIFACT_URL: #***
+
+
+# This variable stores the name of the environment file.
+BESMAN_ENV_NAME: agent-RT-env #***
+
+# The branch of the repo to be used for the assessment.
+BESMAN_TOOL_BRANCH: "main"
+
+# The url from where you clone promptfoo
+BESMAN_PROMPTFOO_URL: https://github.com/promptfoo/promptfoo.git
+
+# Node.js version to install via NVM
+BESMAN_NODE_VERSION: "v22.20.0"
+
+# NVM version to install
+BESMAN_NVM_VERSION: "v0.40.3"
+
+# The path where we download the assessment and other required tools during installation.
+BESMAN_TOOL_PATH: "$HOME" #***
+
+# The path where promptfoo config and results are stored
+BESMAN_PROMPTFOO_CONFIG_PATH: "$HOME" #***
+
+# This variable indicates the individual's lab affiliation
+BESMAN_LAB_TYPE: Organization #***
+
+# Name of the lab. Default is Be-Secure. This variable indicates the individual's lab affiliation
+BESMAN_LAB_NAME: Be-Secure #***
+
+# This is the local dir where we store the assessment reports. Default is home.
+BESMAN_ASSESSMENT_DATASTORE_DIR: $HOME/besecure-assessment-datastore #***
+
+# The remote repo where we store the assessment reports.
+BESMAN_ASSESSMENT_DATASTORE_URL: https://github.com/Be-Secure/besecure-assessment-datastore #***
+
+
+# Enable/disable automatic report generation (true/false)
+BESMAN_GENERATE_REPORTS: true
+
+# Report output format: json,pdf
+BESMAN_REPORT_FORMAT: json
+
+# Agent deployment type: local | api
+# Use 'local' for file-based or local model targets, 'api' for HTTP API endpoints
+BESMAN_AGENT_DEPLOYMENT_TYPE: local
+
+
+
