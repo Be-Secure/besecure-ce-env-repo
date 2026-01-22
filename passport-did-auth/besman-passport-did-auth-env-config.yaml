@@ -1,0 +1,57 @@
+tools:
+
+  - name: npm
+
+    install: "sudo apt install -y npm"
+
+    uninstall: "sudo apt remove -y npm"
+
+    update: "sudo apt upgrade -y npm"
+
+    validate: "npm -v"
+
+    reset: "npm cache clean --force"
+
+    command: "npm"
+
+  - name: Snyk
+
+    install: "npm install -g snyk"
+
+    uninstall: "npm uninstall -g snyk"
+
+    update: "npm update -g snyk"
+
+    validate: "snyk -v"
+
+    reset: "snyk auth"
+
+    command: "snyk"
+
+  - name: Retire.js
+
+    install: "npm install -g retire"
+
+    uninstall: "npm uninstall -g retire"
+
+    update: "npm update -g retire"
+
+    validate: "retire --version"
+
+    reset: "npm cache clean --force"
+
+    command: "retire"
+
+  - name: jq
+
+    install: "sudo apt install -y jq"
+
+    uninstall: "sudo apt remove -y jq"
+
+    update: "sudo apt upgrade -y jq"
+
+    validate: "jq --version"
+
+    reset: "sudo apt autoremove -y"
+
+    command: "jq"
