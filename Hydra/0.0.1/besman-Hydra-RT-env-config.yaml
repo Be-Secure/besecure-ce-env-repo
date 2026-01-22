@@ -1,0 +1,52 @@
+---
+# General settings
+BESMAN_ORG: Be-Secure
+BESMAN_ARTIFACT_TYPE: project
+BESMAN_ARTIFACT_NAME: Hydra
+BESMAN_ARTIFACT_VERSION: "9.2"
+BESMAN_ARTIFACT_URL: https://github.com/vanhauser-thc/thc-hydra.git
+BESMAN_ENV_NAME: hydra-security-env
+BESMAN_ARTIFACT_DIR: $HOME/Hydra
+BESMAN_TOOL_PATH: /opt
+BESMAN_LAB_TYPE: Organization
+BESMAN_LAB_NAME: Be-Secure
+BESMAN_ASSESSMENT_DATASTORE_DIR: $HOME/besecure-hydra-assessment-datastore
+BESMAN_ASSESSMENT_DATASTORE_URL: https://github.com/Be-Secure/besecure-assessment-datastore
+
+# Tool-specific settings
+BESMAN_SPDX_SBOM_ASSET_URL: "https://github.com/spdx/spdx-sbom-generator/releases/download/v0.0.3/spdx-sbom-generator-v0.0.3-linux-amd64.tar.gz"
+BESMAN_SONARQUBE_DOCKER_IMAGE: "sonarqube:latest"
+BESMAN_CRITICALITY_SCORE_URL: "https://github.com/ossf/criticality_score"
+BESMAN_SNYK_INSTALLATION_COMMAND: "npm install -g snyk"
+BESMAN_FOSSOLOGY_DOCKER_IMAGE: "fossology/fossology:latest"
+BESMAN_CODEQL_ASSET_URL: "https://github.com/github/codeql-cli-binaries/releases/download/v2.7.2/codeql-linux64.zip"
+BESMAN_OWASP_DEPENDENCY_CHECK_URL: "https://github.com/jeremylong/DependencyCheck/releases/download/v6.5.0/dependency-check-6.5.0-release.zip"
+BESMAN_SYFT_INSTALLATION_SCRIPT: "https://raw.githubusercontent.com/anchore/syft/main/install.sh"
+BESMAN_TRIVY_INSTALLATION_SCRIPT: "https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh"
+BESMAN_CYCLONEDX_CLI_ASSET_URL: "https://github.com/CycloneDX/cyclonedx-cli/releases/download/v0.20.0/cyclonedx-cli-linux-x64.zip"
+BESMAN_SCANCODE_TOOLKIT_URL: "https://github.com/nexB/scancode-toolkit/releases/download/v21.8.4/scancode-toolkit-21.8.4.zip"
+BESMAN_OPENSSF_SCORECARD_URL: "https://github.com/ossf/scorecard"
+
+# Additional configurations
+BESMAN_DISPLAY_SKIPPED_ANSIBLE_HOSTS: false
+
+# Ansible roles and playbook configurations
+BESMAN_ANSIBLE_ROLES_PATH: $BESMAN_DIR/tmp/$BESMAN_ARTIFACT_NAME/roles
+BESMAN_ANSIBLE_ROLES: Be-Secure/ansible-role-bes-java,Be-Secure/ansible-role-oah-maven,Be-Secure/ansible-role-oah-sonarQube,Be-Secure/ansible-role-oah-sbomGenerator,Be-Secure/ansible-role-oah-fossology,Be-Secure/ansible-role-oah-eclipse
+BESMAN_ARTIFACT_TRIGGER_PLAYBOOK_PATH: $BESMAN_DIR/tmp/$BESMAN_ARTIFACT_NAME
+BESMAN_ARTIFACT_TRIGGER_PLAYBOOK: besman-$BESMAN_ARTIFACT_NAME-RT-trigger-playbook.yaml
+
+# Custom configurations
+openjdk_version: 11
+vagrant_home: /home/vagrant
+java_tmp: "{{ home_dir }}/java_tmp"
+maven_version: 3.3.9
+eclipse_req_packages: snapd
+eclipse_tmp: "{{ home_dir }}/eclipse_tmp"
+eclipse_pin_fav: true
+sonar_download_url: "https://binaries.sonarsource.com/?prefix=Distribution/"
+release_link: "https://github.com/opensbom-generator/spdx-sbom-generator/"
+latest: spdx-sbom-generator-v0.0.15-linux-amd64.tar.gz
+fossology_repo_url: "https://github.com/fossology/fossology"
+fosslogy_install_from_docker: true
+fossology_install_from_source: false
